@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Konfigurator inwestycji — DEWAX</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#f6f4f1; --surface:#fff; --surface-2:#efece7; --surface-3:#e6e2db;
+  --ink:#171614; --ink-2:#4a4640; --ink-3:#655f57;
+  --line:#ddd8d1; --line-2:#c8c2b8;
+  --accent:#a8451f; --accent-2:#8a3818; --btn-ink:#fff; --accent-soft:#f6e8e1;
+  --good:#1f6b4a; --good-soft:#e4f0e9; --warn:#8a5a00; --warn-soft:#fbf0da;
+}
+@media (prefers-color-scheme:dark){
+  :root{--bg:#141312;--surface:#1c1b19;--surface-2:#232120;--surface-3:#2b2926;
+    --ink:#f0ece6;--ink-2:#b5aea5;--ink-3:#9c958b;--line:#302d2a;--line-2:#413d38;
+    --accent:#e08256;--accent-2:#f0a07a;--btn-ink:#141312;--accent-soft:#2e1c14;
+    --good:#6fc79b;--good-soft:#14291f;--warn:#dfae5c;--warn-soft:#2e2410;}
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);
+  font:17px/1.6 "IBM Plex Sans","Segoe UI",-apple-system,BlinkMacSystemFont,sans-serif;-webkit-font-smoothing:antialiased}
+.w{max-width:1120px;margin:0 auto;padding:0 20px}
+h1{font-size:38px;letter-spacing:-.02em;margin:0 0 10px;line-height:1.35}
+h2{font-size:17px;letter-spacing:-.01em;margin:0}
+.sub{color:var(--ink-2);max-width:62ch;margin:0 0 8px;font-size:17px}
+.proto{background:#1c1b19;color:#f0ece6;padding:12px 20px;font-size:13px;text-align:center}
+.proto b{color:#e08256}
+.head{padding:36px 0 26px}
+
+.layout{display:grid;gap:20px;padding-bottom:70px}
+@media(min-width:960px){.layout{grid-template-columns:1fr 380px;align-items:start}}
+
+.step{background:var(--surface);border:1px solid var(--line);border-radius:14px;
+  padding:22px 24px;margin-bottom:16px}
+.step-head{display:flex;align-items:center;gap:12px;margin-bottom:4px}
+.step-no{background:var(--accent);color:var(--btn-ink);width:26px;height:26px;border-radius:50%;
+  display:grid;place-items:center;font-size:13px;font-weight:700;flex-shrink:0}
+.step-desc{color:var(--ink-3);font-size:13px;margin:0 0 18px;padding-left:38px}
+@media(max-width:520px){.step-desc{padding-left:0}}
+
+.row{display:grid;gap:16px}
+@media(min-width:620px){.row.two{grid-template-columns:1fr 1fr}}
+label.f{display:block;font-size:13px;font-weight:650;margin-bottom:7px}
+select,input[type=number]{width:100%;padding:11px 12px;border:1.5px solid var(--line-2);
+  border-radius:8px;background:var(--bg);color:var(--ink);font-size:17px;font-family:inherit}
+select:focus,input:focus{outline:2px solid var(--accent);outline-offset:1px;border-color:transparent}
+.range-wrap{display:flex;align-items:center;gap:12px}
+input[type=range]{flex:1;accent-color:var(--accent);height:26px}
+.rv{font-weight:700;font-size:17px;min-width:78px;text-align:right;font-variant-numeric:tabular-nums}
+
+.need{background:var(--surface-2);border-radius:10px;padding:14px 16px;margin-top:18px;
+  display:grid;gap:12px}
+@media(min-width:520px){.need{grid-template-columns:1fr 1fr}}
+.need div span{display:block;font-size:13px;color:var(--ink-3)}
+.need div b{font-size:22px;font-variant-numeric:tabular-nums;letter-spacing:-.02em}
+
+.opts{display:grid;gap:9px;margin-top:4px}
+.opt{display:flex;gap:12px;align-items:flex-start;padding:13px 15px;border:1.5px solid var(--line);
+  border-radius:10px;cursor:pointer;background:var(--bg);transition:border-color .12s,background .12s}
+.opt:hover{border-color:var(--line-2)}
+.opt.sel{border-color:var(--accent);background:var(--accent-soft)}
+.opt input{margin-top:2px;width:17px;height:17px;accent-color:var(--accent);flex-shrink:0}
+.opt .t{flex:1;min-width:0}
+.opt .t b{display:block;font-size:17px;margin-bottom:1px}
+.opt .t span{font-size:13px;color:var(--ink-3);display:block}
+.opt .p{font-weight:700;font-size:17px;white-space:nowrap;font-variant-numeric:tabular-nums}
+
+.flag{border-radius:9px;padding:12px 14px;font-size:13px;margin-top:14px;line-height:1.5}
+.flag.ok{background:var(--good-soft);color:var(--good);border:1px solid var(--good)}
+.flag.no{background:var(--accent-soft);color:var(--accent-2);border:1px solid var(--accent)}
+.flag.warn{background:var(--warn-soft);color:var(--warn);border:1px solid var(--warn)}
+
+/* panel */
+.panel{background:var(--surface);border:1px solid var(--line);border-radius:14px;overflow:hidden}
+@media(min-width:960px){.panel{position:sticky;top:18px}}
+.panel-h{padding:18px 22px;border-bottom:1px solid var(--line);background:var(--surface-2)}
+.panel-h b{font-size:13px}
+.panel-b{padding:18px 22px}
+.li{display:flex;justify-content:space-between;gap:14px;padding:9px 0;font-size:17px;
+  border-bottom:1px dotted var(--line)}
+.li span{color:var(--ink-2)}
+.li b{font-variant-numeric:tabular-nums;white-space:nowrap}
+.li.off span,.li.off b{color:var(--ink-3);text-decoration:line-through}
+.sum{display:flex;justify-content:space-between;align-items:baseline;gap:14px;
+  padding:16px 0 6px;border-top:2px solid var(--ink);margin-top:8px}
+.sum span{font-size:13px;font-weight:650}
+.sum b{font-size:28px;letter-spacing:-.02em;font-variant-numeric:tabular-nums}
+.dot{display:flex;justify-content:space-between;gap:14px;padding:9px 0;font-size:17px;color:var(--good)}
+.dot b{font-variant-numeric:tabular-nums}
+.final{background:var(--accent-soft);border-radius:10px;padding:14px 16px;margin-top:14px}
+.final span{font-size:13px;color:var(--ink-3);display:block;margin-bottom:2px}
+.final b{font-size:28px;color:var(--accent);letter-spacing:-.02em;font-variant-numeric:tabular-nums}
+.btn{display:block;width:100%;text-align:center;background:var(--accent);color:var(--btn-ink);text-decoration:none;
+  padding:14px 20px;border-radius:8px;font-weight:650;font-size:17px;border:none;cursor:pointer;margin-top:16px}
+.btn:hover{background:var(--accent-2)}
+.note{font-size:13px;color:var(--ink-3);margin-top:14px;line-height:1.5}
+
+.cennik{background:var(--warn-soft);border:1px solid var(--line);border-radius:8px;
+  padding:16px 18px;margin-top:26px;font-size:13px;color:var(--ink-2);line-height:1.6}
+.cennik b{color:var(--ink)}
+.cennik code{background:var(--bg);border:1px solid var(--line);border-radius:4px;padding:1px 5px;font-size:13px}
+.bd{display:inline-block;background:var(--warn-soft);color:var(--warn);border:1px dashed var(--warn);
+  border-radius:5px;padding:1px 7px;font-size:13px;font-weight:700}
+@media(min-width:900px){section{padding:74px 20px}h1,.hero h1{font-size:50px}h2{font-size:34px}.hero{padding:66px 20px 56px}}
+</style>
+</head>
+<body>
+
+<div class="proto"><b>KONFIGURATOR — szkielet</b> &nbsp;Wszystkie ceny są zmyślonymi wartościami zastępczymi. Podmiana to jeden blok w kodzie, opisany na dole strony.</div>
+
+<div class="w head">
+  <h1>Policz swoją inwestycję</h1>
+  <p class="sub">Wybierz parametry, a zobaczysz cenę na bieżąco. Bez zostawiania numeru telefonu i bez czekania na handlowca.</p>
+</div>
+
+<div class="w layout">
+  <!-- LEWA KOLUMNA -->
+  <div>
+
+    <!-- 1. DOM -->
+    <div class="step">
+      <div class="step-head"><div class="step-no">1</div><h2>Twój dom</h2></div>
+      <p class="step-desc">Na tej podstawie wyliczymy, ile ciepła potrzebujesz i ile metrów odwiertu to oznacza.</p>
+      <div class="row two">
+        <div>
+          <label class="f" for="m2">Powierzchnia ogrzewana</label>
+          <div class="range-wrap"><input type="range" id="m2" min="70" max="400" step="10" value="170"><span class="rv" id="m2v">170 m²</span></div>
+        </div>
+        <div>
+          <label class="f" for="std">Standard budynku</label>
+          <select id="std">
+            <option value="100">Stary dom bez ocieplenia (ok. 100 W/m²)</option>
+            <option value="65">Ocieplony po remoncie (ok. 65 W/m²)</option>
+            <option value="30" selected>Standard WT 2021 (ok. 30 W/m²)</option>
+            <option value="25">WT 2021 z rekuperacją (ok. 25 W/m²)</option>
+          </select>
+        </div>
+      </div>
+      <div class="row two" style="margin-top:16px">
+        <div>
+          <label class="f" for="os">Ciepła woda dla ilu osób</label>
+          <select id="os"><option value="0.3">1–2 osoby</option><option value="0.5" selected>3–4 osoby</option><option value="0.8">5 osób i więcej</option></select>
+        </div>
+        <div>
+          <label class="f" for="grunt">Grunt na działce</label>
+          <select id="grunt">
+            <option value="25" selected>Nie wiem — liczymy najostrożniej</option>
+            <option value="25">Suchy piasek, żwir</option>
+            <option value="35">Glina, grunt wilgotny</option>
+            <option value="45">Skała, warstwy wodonośne</option>
+          </select>
+        </div>
+      </div>
+      <div class="need">
+        <div><span>Potrzebna moc grzewcza</span><b id="nMoc">—</b></div>
+        <div><span>Potrzebna długość odwiertu</span><b id="nMetry">—</b></div>
+      </div>
+    </div>
+
+    <!-- 2. POMPA -->
+    <div class="step">
+      <div class="step-head"><div class="step-no">2</div><h2>Pompa ciepła</h2></div>
+      <p class="step-desc">Podpowiadamy model dopasowany do wyliczonej mocy. Możesz wybrać inny — ale przewymiarowanie kosztuje podwójnie: droższe urządzenie i dłuższe odwierty.</p>
+      <div class="opts" id="pompy"></div>
+      <div id="flagPompa"></div>
+    </div>
+
+    <!-- 3. ODWIERTY -->
+    <div class="step">
+      <div class="step-head"><div class="step-no">3</div><h2>Odwierty</h2></div>
+      <p class="step-desc">Tę samą długość można rozłożyć na różną liczbę otworów. Głębsze otwory to mniej zjazdów wiertnicy, ale wyższa stawka za metr. Płytsze — odwrotnie.</p>
+      <div class="row two">
+        <div>
+          <label class="f" for="szt">Liczba odwiertów</label>
+          <div class="range-wrap"><input type="range" id="szt" min="1" max="8" step="1" value="2"><span class="rv" id="sztv">2</span></div>
+        </div>
+        <div>
+          <label class="f" for="gl">Głębokość każdego</label>
+          <div class="range-wrap"><input type="range" id="gl" min="60" max="180" step="5" value="90"><span class="rv" id="glv">90 m</span></div>
+        </div>
+      </div>
+      <div class="need">
+        <div><span>Łącznie wywiercone</span><b id="oMetry">—</b></div>
+        <div><span>Stawka w tym przedziale</span><b id="oStawka">—</b></div>
+      </div>
+      <div id="flagOdw"></div>
+    </div>
+
+    <!-- 4. RESZTA -->
+    <div class="step">
+      <div class="step-head"><div class="step-no">4</div><h2>Reszta instalacji</h2></div>
+      <p class="step-desc">To, co i tak trzeba zrobić, żeby całość działała. Odznacz, jeśli masz już swojego wykonawcę.</p>
+      <div class="opts" id="dodatki"></div>
+    </div>
+
+    <!-- 5. DOTACJA -->
+    <div class="step">
+      <div class="step-head"><div class="step-no">5</div><h2>Dofinansowanie</h2></div>
+      <p class="step-desc">Odejmiemy je od kwoty końcowej. Wybierz sytuację, która Cię dotyczy.</p>
+      <div class="opts" id="dotacje"></div>
+      <div id="flagDot"></div>
+    </div>
+  </div>
+
+  <!-- PRAWA KOLUMNA -->
+  <div>
+    <div class="panel">
+      <div class="panel-h"><b>Twoja inwestycja</b></div>
+      <div class="panel-b">
+        <div id="pozycje"></div>
+        <div class="sum"><span>Razem</span><b id="razem">—</b></div>
+        <div class="dot"><span id="dotNazwa">Dofinansowanie</span><b id="dotKwota">—</b></div>
+        <div class="final"><span>Zostaje do zapłaty</span><b id="koncowa">—</b></div>
+        <button class="btn" onclick="alert('Prototyp — wysyłka nieaktywna.')">Wyślij mi tę wycenę na maila</button>
+        <p class="note">Wycena orientacyjna, nie stanowi oferty w rozumieniu Kodeksu cywilnego. Ostateczna cena zależy od warunków na działce i powstaje po wizycie. Ceny brutto.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="w">
+  <div class="cennik">
+    <b>Dla wdrożenia — gdzie podmienić ceny.</b><br><br>
+    Cały cennik siedzi w jednym obiekcie <code>CENNIK</code> na początku skryptu. Nie trzeba dotykać niczego innego. Do uzupełnienia:<br><br>
+    <b>1.</b> <code>pompy</code> — lista modeli: nazwa, moc w kW, cena brutto. <span class="bd">[BRAK DANYCH — modele Thermokrafft i ceny]</span><br>
+    <b>2.</b> <code>stawki</code> — cena za metr bieżący w przedziałach głębokości. To są te dwa parametry, o których pisałeś: klient wybiera liczbę otworów i głębokość, a stawka schodzi z przedziału. <span class="bd">[BRAK DANYCH — Wasze stawki]</span><br>
+    <b>3.</b> <code>dodatki</code> — studzienka, montaż, bufor, formalności. <span class="bd">[BRAK DANYCH]</span><br>
+    <b>4.</b> <code>W_MB</code> — ile watów bierzecie z metra dla każdego typu gruntu. <span class="bd">[BRAK DANYCH — najważniejsze]</span><br><br>
+    Trzy rzeczy, które trzeba rozstrzygnąć, zanim to pójdzie na produkcję:<br><br>
+    <b>Netto czy brutto i jaki VAT.</b> Dziś wszystko liczy się jako brutto. Jeśli na odwierty poza bryłą budynku idzie 23%, a na resztę 8% — trzeba to rozbić, bo inaczej wycena rozjedzie się o kilkanaście tysięcy.<br><br>
+    <b>Czy stawka za metr faktycznie rośnie z głębokością.</b> Założyłem, że tak, bo tak działa większość firm wiertniczych. Jeśli u Was jest płasko — usunę przedziały i zostanie jedna liczba.<br><br>
+    <b>Co zrobić, gdy klient ustawi za mało metrów.</b> Dziś pokazuje się ostrzeżenie, ale cena i tak się liczy. Alternatywa: blokować wysyłkę wyceny. Skłaniam się do ostrzegania — blokada frustruje, a ostrzeżenie uczy.
+  </div>
+</div>
+
+<script>
+/* ==========================================================
+   CENNIK — JEDYNE MIEJSCE DO PODMIANY
+   Wszystkie wartości poniżej są ZMYŚLONE. Zastąpić danymi DEWAX.
+   ========================================================== */
+const CENNIK = {
+  // [BRAK DANYCH] modele i ceny brutto
+  pompy: [
+    {nazwa:'Pompa 6 kW',  moc:6,  cena:38000},
+    {nazwa:'Pompa 8 kW',  moc:8,  cena:44000},
+    {nazwa:'Pompa 10 kW', moc:10, cena:51000},
+    {nazwa:'Pompa 12 kW', moc:12, cena:58000},
+    {nazwa:'Pompa 16 kW', moc:16, cena:69000}
+  ],
+  // [BRAK DANYCH] stawka zł/mb w przedziałach głębokości otworu
+  stawki: [
+    {do:80,  zl:150},
+    {do:120, zl:170},
+    {do:150, zl:195},
+    {do:999, zl:230}
+  ],
+  // [BRAK DANYCH] pozycje dodatkowe
+  dodatki: [
+    {id:'studz', nazwa:'Studzienka i rury do budynku', opis:'Połączenie odwiertów, przejście przez ścianę', cena:6500,  dom:true},
+    {id:'mont',  nazwa:'Montaż i uruchomienie',        opis:'Podłączenie, napełnienie, regulacja parametrów', cena:9000, dom:true},
+    {id:'bufor', nazwa:'Zasobnik CWU i bufor',         opis:'Jeśli nie masz własnego', cena:7500,  dom:true},
+    {id:'form',  nazwa:'Formalności geologiczne',      opis:'Projekt robót i dokumentacja powykonawcza', cena:5000, dom:true},
+    {id:'chlod', nazwa:'Moduł chłodzenia pasywnego',   opis:'Chłodzenie latem z tego samego obiegu', cena:4500, dom:false}
+  ],
+  // [BRAK DANYCH — NAJWAŻNIEJSZE] uzysk ciepła z metra bieżącego
+  W_MB_OPIS: 'wartości w liście "Grunt na działce" — dziś ostrożne wartości z literatury',
+  COP: 4.3
+};
+
+const DOTACJE = [
+  {id:'brak', nazwa:'Bez dofinansowania',       opis:'Nie kwalifikuję się albo nie chcę składać wniosku', kwota:0},
+  {id:'mc',   nazwa:'Moje Ciepło — nowy dom',   opis:'30% kosztów, maks. 21 000 zł. Dom oddany po 1.01.2021', proc:0.30, max:21000},
+  {id:'cp',   nazwa:'Czyste Powietrze — dom istniejący', opis:'Kwota zależy od dochodu. Sprawdź poziom przed złożeniem wniosku', kwota:26000, weryf:true}
+];
+
+/* ========================================================== */
+const $=id=>document.getElementById(id);
+const fmt=n=>Math.round(n).toLocaleString('pl-PL')+' zł';
+let wybPompa=null, wybDot='brak', wybDod={};
+
+CENNIK.dodatki.forEach(d=>wybDod[d.id]=d.dom);
+
+function stawkaDla(gl){ for(const s of CENNIK.stawki){ if(gl<=s.do) return s.zl; } return CENNIK.stawki.at(-1).zl; }
+
+function potrzebne(){
+  const pow=+$('m2').value, wsk=+$('std').value, os=+$('os').value, wmb=+$('grunt').value;
+  const moc=Math.round((pow*wsk/1000+os)*2)/2;
+  const mocZr=moc*(1-1/CENNIK.COP);
+  const metry=Math.ceil((mocZr*1000/wmb)/10)*10;
+  return {moc,metry};
+}
+
+function rysujPompy(mocPotrzebna){
+  const sugest=CENNIK.pompy.find(p=>p.moc>=mocPotrzebna)||CENNIK.pompy.at(-1);
+  if(wybPompa===null) wybPompa=sugest.nazwa;
+  $('pompy').innerHTML=CENNIK.pompy.map(p=>{
+    const sel=p.nazwa===wybPompa;
+    const tag=p.nazwa===sugest.nazwa?' <span style="color:var(--good);font-weight:700">· dopasowana</span>':'';
+    return `<label class="opt${sel?' sel':''}"><input type="radio" name="p" ${sel?'checked':''} data-p="${p.nazwa}">
+      <span class="t"><b>${p.nazwa}${tag}</b><span>moc grzewcza ${p.moc} kW</span></span>
+      <span class="p">${fmt(p.cena)}</span></label>`;}).join('');
+  $('pompy').querySelectorAll('input').forEach(i=>i.onchange=()=>{wybPompa=i.dataset.p;przelicz();});
+
+  const p=CENNIK.pompy.find(x=>x.nazwa===wybPompa);
+  let f='';
+  if(p.moc>mocPotrzebna*1.35) f='<div class="flag warn">Ta pompa jest wyraźnie mocniejsza, niż wynika z obliczeń. Przewymiarowanie oznacza droższe urządzenie, dłuższe odwierty i częstsze włączanie się sprężarki — czyli gorszą sprawność. Chyba że planujesz rozbudowę domu.</div>';
+  else if(p.moc<mocPotrzebna*0.92) f='<div class="flag no">Ta pompa jest za słaba dla podanego domu. W mroźne dni będzie dogrzewać grzałką elektryczną, a to najdroższy prąd, jaki możesz kupić.</div>';
+  $('flagPompa').innerHTML=f;
+}
+
+function rysujDodatki(){
+  $('dodatki').innerHTML=CENNIK.dodatki.map(d=>{
+    const on=wybDod[d.id];
+    return `<label class="opt${on?' sel':''}"><input type="checkbox" ${on?'checked':''} data-d="${d.id}">
+      <span class="t"><b>${d.nazwa}</b><span>${d.opis}</span></span>
+      <span class="p">${fmt(d.cena)}</span></label>`;}).join('');
+  $('dodatki').querySelectorAll('input').forEach(i=>i.onchange=()=>{wybDod[i.dataset.d]=i.checked;przelicz();});
+}
+
+function rysujDotacje(){
+  $('dotacje').innerHTML=DOTACJE.map(d=>{
+    const sel=d.id===wybDot;
+    const kw=d.max?`do ${fmt(d.max)}`:(d.kwota?`ok. ${fmt(d.kwota)}`:'—');
+    return `<label class="opt${sel?' sel':''}"><input type="radio" name="dt" ${sel?'checked':''} data-t="${d.id}">
+      <span class="t"><b>${d.nazwa}</b><span>${d.opis}</span></span>
+      <span class="p">${kw}</span></label>`;}).join('');
+  $('dotacje').querySelectorAll('input').forEach(i=>i.onchange=()=>{wybDot=i.dataset.t;przelicz();});
+}
+
+function przelicz(){
+  const pow=+$('m2').value; $('m2v').textContent=pow+' m²';
+  const szt=+$('szt').value, gl=+$('gl').value;
+  $('sztv').textContent=szt; $('glv').textContent=gl+' m';
+
+  const {moc,metry}=potrzebne();
+  $('nMoc').textContent=moc.toFixed(1).replace('.',',')+' kW';
+  $('nMetry').textContent=metry.toLocaleString('pl-PL')+' m';
+
+  rysujPompy(moc); rysujDodatki(); rysujDotacje();
+
+  const metryReal=szt*gl, stawka=stawkaDla(gl);
+  $('oMetry').textContent=metryReal.toLocaleString('pl-PL')+' m';
+  $('oStawka').textContent=stawka+' zł/m';
+
+  let f='';
+  if(metryReal<metry) f=`<div class="flag no">Brakuje ${(metry-metryReal).toLocaleString('pl-PL')} m. Zbyt krótkie dolne źródło wychładza się z sezonu na sezon — pompa pracuje coraz drożej, a przy dużym mrozie może się wyłączyć. To najczęstszy błąd w instalacjach z pompami ciepła.</div>`;
+  else if(gl<80) f='<div class="flag warn">Otwory płytsze niż 80 m rzadko się opłacają — koszt zjazdu i rozstawienia wiertnicy jest prawie stały, więc lepiej wywiercić mniej, ale głębiej.</div>';
+  else if(metryReal>metry*1.25) f=`<div class="flag warn">Masz ${(metryReal-metry).toLocaleString('pl-PL')} m zapasu ponad obliczenia. To nie zaszkodzi instalacji, ale kosztuje. Zapas ma sens, jeśli grunt jest niepewny albo planujesz dobudowę.</div>`;
+  else f='<div class="flag ok">Ten układ pokrywa zapotrzebowanie z rozsądnym zapasem.</div>';
+  $('flagOdw').innerHTML=f;
+
+  const p=CENNIK.pompy.find(x=>x.nazwa===wybPompa);
+  const cenaOdw=metryReal*stawka;
+  let poz=[{n:p.nazwa,k:p.cena,on:true},{n:`Odwierty — ${szt} × ${gl} m`,k:cenaOdw,on:true}];
+  CENNIK.dodatki.forEach(d=>poz.push({n:d.nazwa,k:d.cena,on:wybDod[d.id]}));
+
+  $('pozycje').innerHTML=poz.map(x=>`<div class="li${x.on?'':' off'}"><span>${x.n}</span><b>${fmt(x.k)}</b></div>`).join('');
+  const razem=poz.filter(x=>x.on).reduce((s,x)=>s+x.k,0);
+  $('razem').textContent=fmt(razem);
+
+  const d=DOTACJE.find(x=>x.id===wybDot);
+  let dot=0;
+  if(d.max) dot=Math.min(d.max,razem*d.proc); else dot=d.kwota||0;
+  $('dotNazwa').textContent=d.id==='brak'?'Bez dofinansowania':'Dofinansowanie — '+d.nazwa.split(' — ')[0];
+  $('dotKwota').textContent=dot?'− '+fmt(dot):'—';
+  $('koncowa').textContent=fmt(razem-dot);
+
+  let fd='';
+  if(d.id==='mc') fd='<div class="flag warn">Wniosek składa się dopiero po zakończeniu budowy i odbiorze domu, a nabór trwa do 31 grudnia 2026. Jeśli dziś budujesz, sprawdź przede wszystkim, czy zdążysz z odbiorem.</div>';
+  if(d.id==='cp') fd='<div class="flag warn">Kwota zależy od dochodu na osobę i dzieli się na trzy poziomy. Wartość powyżej to poziom podstawowy — przy niższych dochodach może być wyraźnie wyższa. <span class="bd">[DO WERYFIKACJI w Załączniku nr 2]</span></div>';
+  $('flagDot').innerHTML=fd;
+}
+
+['m2','std','os','grunt','szt','gl'].forEach(id=>$(id).addEventListener('input',przelicz));
+przelicz();
+</script>
+</body>
+</html>

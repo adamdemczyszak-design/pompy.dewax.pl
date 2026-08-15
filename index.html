@@ -1,0 +1,601 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Odwierty i gruntowe pompy ciepła — DEWAX, Dobrzyca</title>
+<meta name="description" content="Wiercimy własną wiertnicą i montujemy gruntowe pompy ciepła. Jedna firma od projektu dolnego źródła do uruchomienia. Południowa Wielkopolska, Dobrzyca.">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#f6f4f1; --surface:#fff; --surface-2:#efece7;
+  --ink:#171614; --ink-2:#4a4640; --ink-3:#655f57;
+  --line:#ddd8d1; --line-2:#c8c2b8;
+  --accent:#a8451f; --accent-2:#8a3818; --btn-ink:#fff; --accent-soft:#f6e8e1;
+  --good:#1f6b4a; --warn:#8a5a00; --warn-soft:#fbf0da;
+}
+@media (prefers-color-scheme:dark){
+  :root{
+    --bg:#141312; --surface:#1c1b19; --surface-2:#232120;
+    --ink:#f0ece6; --ink-2:#b5aea5; --ink-3:#9c958b;
+    --line:#302d2a; --line-2:#413d38;
+    --accent:#e08256; --accent-2:#f0a07a; --btn-ink:#141312; --accent-soft:#2e1c14;
+    --good:#6fc79b; --warn:#dfae5c; --warn-soft:#2e2410;
+  }
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--ink);
+  font:17px/1.62 "IBM Plex Sans","Segoe UI",-apple-system,BlinkMacSystemFont,sans-serif;-webkit-font-smoothing:antialiased}
+.w{max-width:1080px;margin:0 auto;padding:0 20px}
+.narrow{max-width:780px}
+h1,h2,h3{letter-spacing:-.02em;line-height:1.35;margin:0}
+h2{font-size:30px;margin-bottom:10px}
+h3{font-size:22px;margin-bottom:6px}
+p{margin:0 0 14px}
+section{padding:48px 20px;border-top:1px solid var(--line)}
+
+.lead{font-size:22px;color:var(--ink-2);max-width:64ch}
+.bd{display:inline-block;background:var(--warn-soft);color:var(--warn);border:1px dashed var(--warn);
+  border-radius:5px;padding:1px 7px;font-size:13px;font-weight:700}
+header{position:sticky;top:0;z-index:50;background:color-mix(in srgb,var(--bg) 92%,transparent);
+  backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+.nav{display:flex;align-items:center;justify-content:space-between;height:62px;gap:16px}
+.logo{font-weight:800;letter-spacing:.14em;font-size:17px}.logo span{color:var(--accent)}
+.nav a.tel{font-weight:700;font-size:17px;text-decoration:none;color:var(--ink);white-space:nowrap}
+.nav .links{display:none;gap:22px}
+@media(min-width:920px){.nav .links{display:flex}}
+.nav .links a{color:var(--ink-2);text-decoration:none;font-size:17px}
+.nav .links a:hover{color:var(--accent)}
+.hero{padding:44px 20px 40px;border-top:none}
+.hero h1{font-size:38px;margin-bottom:18px;max-width:19ch}
+.hero .sub{font-size:28px;color:var(--ink-2);max-width:56ch;margin-bottom:26px}
+.cta-row{display:flex;flex-wrap:wrap;gap:12px;align-items:center}
+.btn{display:inline-block;background:var(--accent);color:var(--btn-ink);text-decoration:none;padding:15px 24px;
+  border-radius:8px;font-weight:650;font-size:17px;border:none;cursor:pointer;transition:background .15s}
+.btn:hover{background:var(--accent-2)}
+.btn-2{background:transparent;color:var(--ink);border:1.5px solid var(--line-2);padding:13.5px 22px}
+.btn-2:hover{background:var(--surface-2)}
+.cta-note{font-size:13px;color:var(--ink-3);margin-top:12px}
+.trust{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--line);border:1px solid var(--line);
+  border-radius:10px;overflow:hidden;margin-top:36px}
+@media(min-width:760px){.trust{grid-template-columns:repeat(4,1fr)}}
+.trust div{background:var(--surface);padding:16px 18px}
+.trust b{display:block;font-size:17px;margin-bottom:2px}.trust span{font-size:13px;color:var(--ink-3)}
+.grid{display:grid;gap:16px;margin-top:28px}
+@media(min-width:720px){.grid.c2{grid-template-columns:1fr 1fr}.grid.c3{grid-template-columns:repeat(3,1fr)}}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:22px}
+.card p:last-child{margin-bottom:0}
+
+ul.clean{list-style:none;padding:0;margin:14px 0 0}
+ul.clean li{padding-left:26px;position:relative;margin-bottom:10px;color:var(--ink-2)}
+ul.clean li::before{content:"";position:absolute;left:4px;top:9px;width:7px;height:7px;border-radius:2px;background:var(--accent)}
+ul.no li::before{background:var(--ink-3)}
+ul.yes li::before{background:var(--good)}
+.calc{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:24px;margin-top:26px}
+.calc-grid{display:grid;gap:18px}
+@media(min-width:720px){.calc-grid{grid-template-columns:1fr 1fr}}
+label.f{display:block;font-size:13px;font-weight:650;margin-bottom:7px}
+input[type=number],input[type=text],input[type=tel],input[type=email],select{width:100%;padding:12px 13px;
+  border:1.5px solid var(--line-2);border-radius:8px;background:var(--bg);color:var(--ink);font-size:17px;font-family:inherit}
+input:focus,select:focus{outline:2px solid var(--accent);outline-offset:1px;border-color:transparent}
+.range-wrap{display:flex;align-items:center;gap:12px}
+input[type=range]{flex:1;accent-color:var(--accent)}
+.range-val{font-weight:700;font-size:17px;min-width:76px;text-align:right;font-variant-numeric:tabular-nums}
+.calc-out{margin-top:24px;padding-top:22px;border-top:1px solid var(--line);display:grid;gap:14px}
+@media(min-width:640px){.calc-out{grid-template-columns:repeat(4,1fr)}}
+.out{background:var(--surface-2);border-radius:10px;padding:16px 18px}
+.out b{display:block;font-size:28px;letter-spacing:-.02em;font-variant-numeric:tabular-nums}
+.out span{font-size:13px;color:var(--ink-3)}
+.assum{font-size:13px;color:var(--ink-3);margin-top:18px;line-height:1.55;background:var(--warn-soft);
+  padding:13px 15px;border-radius:0 6px 6px 0}
+.alert{background:var(--accent-soft);border:1px solid var(--accent);border-radius:8px;padding:13px 15px;
+  margin-top:16px;font-size:13px;display:none}
+.deadline{background:var(--accent-soft);border:1px solid var(--accent);border-radius:12px;padding:22px 24px;margin-top:24px}
+.deadline b{color:var(--accent);font-size:17px}
+.dl-num{font-size:28px;font-weight:800;letter-spacing:-.03em;color:var(--accent);
+  line-height:1.35;margin:8px 0 6px;font-variant-numeric:tabular-nums}
+.tbl{width:100%;border-collapse:collapse;margin-top:20px;font-size:17px}
+.tbl th,.tbl td{text-align:left;padding:12px;border-bottom:1px solid var(--line);vertical-align:top}
+.tbl th{font-size:13px;text-transform:uppercase;letter-spacing:.08em;color:var(--ink-3);font-weight:700}
+.tbl td.n{text-align:right;font-variant-numeric:tabular-nums;font-weight:650;white-space:nowrap}
+.tbl-scroll{overflow-x:auto;-webkit-overflow-scrolling:touch}
+details{background:var(--surface);border:1px solid var(--line);border-radius:10px;margin-bottom:10px;overflow:hidden}
+summary{padding:17px 20px;cursor:pointer;font-weight:650;font-size:17px;list-style:none;display:flex;
+  justify-content:space-between;gap:14px;align-items:flex-start}
+summary::-webkit-details-marker{display:none}
+summary::after{content:"+";color:var(--accent);font-weight:700;font-size:22px;line-height:1.35;flex-shrink:0}
+details[open] summary::after{content:"−"}
+details .body{padding:0 20px 19px;color:var(--ink-2);font-size:17px}
+details .body p:last-child{margin-bottom:0}
+.timeline{margin-top:26px;display:grid;gap:1px;background:var(--line);border:1px solid var(--line);border-radius:12px;overflow:hidden}
+.tl{background:var(--surface);padding:18px 22px;display:grid;grid-template-columns:auto 1fr;gap:16px;align-items:start}
+.tl .when{font-size:13px;font-weight:700;color:var(--accent);letter-spacing:.06em;text-transform:uppercase;
+  min-width:88px;padding-top:2px}
+.tl h3{font-size:17px;margin-bottom:3px}.tl p{margin:0;color:var(--ink-2);font-size:17px}
+.formbox{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:26px}
+.fg{display:grid;gap:16px}
+@media(min-width:640px){.fg.two{grid-template-columns:1fr 1fr}}
+.check{display:flex;gap:11px;align-items:flex-start;font-size:13px;color:var(--ink-3);line-height:1.55}
+.check input{margin-top:3px;width:17px;height:17px;accent-color:var(--accent);flex-shrink:0}
+.radio-row{display:flex;gap:18px;flex-wrap:wrap;font-size:17px}
+.radio-row label{display:flex;gap:8px;align-items:center;cursor:pointer}
+.radio-row input{width:17px;height:17px;accent-color:var(--accent)}
+footer{border-top:1px solid var(--line);padding:40px 0;color:var(--ink-3);font-size:13px}
+.fgrid{display:grid;gap:26px}
+@media(min-width:720px){.fgrid{grid-template-columns:2fr 1fr 1fr}}
+footer a{color:var(--ink-2);text-decoration:none;display:block;margin-bottom:8px}
+footer a:hover{color:var(--accent)}
+.proto{background:#1c1b19;color:#f0ece6;padding:12px 20px;font-size:13px;text-align:center}
+.proto b{color:#e08256}
+@media(min-width:900px){section{padding:74px 20px}h1,.hero h1{font-size:50px}h2{font-size:34px}.hero{padding:66px 20px 56px}}
+</style>
+</head>
+<body>
+
+<div class="proto"><b>PROTOTYP v2</b> — po przeglądzie czerwonego zespołu. Miejsca <span style="color:#dfae5c">[BRAK DANYCH]</span> czekają na Wasze liczby.</div>
+
+<header>
+  <div class="w nav">
+    <div class="logo">DE<span>WAX</span></div>
+    <nav class="links">
+      <a href="#odwierty">Odwierty</a>
+      <a href="#koszt">Koszt</a>
+      <a href="#kalkulator">Ile metrów</a>
+      <a href="#harmonogram">Kiedy dzwonić</a>
+      <a href="#dotacje">Dotacje</a>
+      <a href="#faq">Pytania</a>
+    </nav>
+    <a class="tel" href="tel:627413227">62 741 32 27</a>
+  </div>
+</header>
+
+<section class="hero">
+  <div class="w">
+    <h1>Gruntowe pompy ciepła z odwiertem, który robimy własną wiertnicą</h1>
+    <p class="sub">Projektujemy dolne źródło, wiercimy, montujemy pompę i serwisujemy ją potem sami. Jedna firma od pierwszego metra do pierwszego ciepła. Siedziba w Dobrzycy, pracujemy w południowej Wielkopolsce.</p>
+    <div class="cta-row">
+      <a class="btn" href="#kalkulator">Policz, ile metrów potrzebuje Twój dom</a>
+      <a class="btn btn-2" href="#koszt">Zobacz, ile to kosztuje</a>
+    </div>
+    <p class="cta-note">Kalkulator liczy od razu, bez podawania numeru telefonu.</p>
+
+    <div class="trust">
+      <div><b><span class="bd">[BRAK DANYCH]</span></b><span>wykonanych odwiertów</span></div>
+      <div><b>DEWAX Sp. z o.o.</b><span>KRS 0000298299, Dobrzyca</span></div>
+      <div><b>Własne wiertnice</b><span><span class="bd">[BRAK — model i zdjęcia]</span></span></div>
+      <div><b>Odwiert i pompa</b><span>jedna gwarancja, jeden wykonawca</span></div>
+    </div>
+  </div>
+</section>
+
+<section id="dlaczego">
+  <div class="w">
+        <h2>Trzy powody, dla których ludzie wybierają grunt zamiast powietrza</h2>
+    <p class="lead">Nie piszemy tu o ekologii. Ludzie, którzy już mają gruntową, wymieniają co innego.</p>
+    <div class="grid c3">
+      <div class="card">
+        <h3>Cisza na zewnątrz</h3>
+        <p>Nie ma jednostki zewnętrznej. Nic nie stoi pod oknem sypialni, nic nie szumi na tarasie, nic nie przeszkadza sąsiadowi.</p>
+        <p style="font-size:13px;color:var(--ink-3)">Sprężarka pracuje w kotłowni i jest słyszalna z bliska — jak lodówka. Głośność podamy z karty urządzenia: <span class="bd">[BRAK DANYCH — dB(A)]</span></p>
+      </div>
+      <div class="card">
+        <h3>Mróz robi jej znacznie mniej</h3>
+        <p>Odwiert sięga kilkudziesięciu metrów w głąb, gdzie mróz nie dochodzi. Glikol wraca do pompy z temperaturą dodatnią nawet wtedy, gdy na dworze jest −20°C.</p>
+        <p style="font-size:13px;color:var(--ink-3)">Uczciwie: sprawność też spada w ciągu sezonu, bo grunt się wychładza — ale łagodnie i przewidywalnie. Pompa powietrzna w mrozie sięga po grzałkę, gruntowa nie musi.</p>
+      </div>
+      <div class="card">
+        <h3>Chłodzenie latem tanim kosztem</h3>
+        <p>Ten sam obieg, który zimą grzeje, latem odbiera ciepło z domu — bez uruchamiania sprężarki. Pracują tylko pompy obiegowe.</p>
+        <p style="font-size:13px;color:var(--ink-3)">Wymaga modułu chłodzenia w instalacji i ma ograniczoną moc — z podłogówki da się odebrać kilka stopni, nie zrobi z domu lodówki. Przy okazji latem regeneruje grunt przed zimą.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="pasuje" style="background:var(--surface-2)">
+  <div class="w narrow">
+        <h2>Kiedy gruntowa ma sens, a kiedy Was od niej odwiedziemy</h2>
+    <div class="grid c2">
+      <div class="card">
+        <h3 style="color:var(--good)">Ma sens, jeśli</h3>
+        <ul class="clean yes">
+          <li>Masz ogrzewanie podłogowe albo je planujesz</li>
+          <li>Dom jest ocieplony w standardzie WT 2021 lub po porządnym remoncie</li>
+          <li>Wiertnica ma jak wjechać — potrzebujemy <span class="bd">[BRAK — szerokość wjazdu, pole robocze]</span></li>
+          <li>Zależy Ci na ciszy i chłodzeniu latem</li>
+        </ul>
+      </div>
+      <div class="card">
+        <h3 style="color:var(--ink-2)">Odradzamy, jeśli</h3>
+        <ul class="clean no">
+          <li><b>Masz stare grzejniki i nie chcesz ich ruszać.</b> Policzymy je. Jeśli wyjdzie, że instalacja potrzebuje 55–60°C na zasilaniu, powiemy, żebyś tego nie robił — przy takich temperaturach pompa traci grubo ponad jedną trzecią sprawności.</li>
+          <li>Dom jest nieocieplony i nie planujesz tego zmieniać</li>
+          <li>Liczy się wyłącznie najniższy koszt na starcie — wtedy powietrzna będzie uczciwszym wyborem</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="koszt">
+  <div class="w">
+        <h2>Porównujecie niewłaściwe rzeczy</h2>
+    <p class="lead">Najczęstsze zdanie, jakie słyszymy: „gruntowa kosztuje dwa razy tyle co powietrzna". Kosztuje więcej — ale spora część tej różnicy to rzeczy, które trzeba zrobić przy każdym źródle ciepła.</p>
+
+    <div class="tbl-scroll">
+    <table class="tbl">
+      <tr><th>Składnik</th><th>Kwota</th><th>Czy zależy od wyboru pompy</th></tr>
+      <tr><td>Ogrzewanie podłogowe</td><td class="n">ok. 30 000 zł</td><td style="color:var(--ink-3)">Nie — robisz je tak samo przy gazie, powietrznej i gruntowej</td></tr>
+      <tr><td>Pompa ciepła z montażem</td><td class="n"><span class="bd">[BRAK DANYCH]</span></td><td style="color:var(--ink-3)">Częściowo</td></tr>
+      <tr><td>Odwierty i dolne źródło</td><td class="n"><span class="bd">[BRAK DANYCH]</span></td><td style="color:var(--ink-3)"><b>Tak — to jest realna różnica wobec powietrznej</b></td></tr>
+      <tr><td>Projekt robót geologicznych</td><td class="n">1 500–2 000 zł</td><td style="color:var(--ink-3)">Tak</td></tr>
+      <tr><td>Dokumentacja geologiczna powykonawcza do starostwa</td><td class="n">ok. 3 500 zł</td><td style="color:var(--ink-3)">Tak</td></tr>
+    </table>
+    </div>
+    <p style="font-size:13px;color:var(--ink-3);margin-top:14px">Kwoty formalności to stawki rynkowe podawane przez inwestorów na forach budowlanych, nie nasz cennik. <span class="bd">[BRAK DANYCH — 1 i 2] Nasza stawka za metr odwiertu oraz trzy gotowe pakiety: metraż → moc → metry → cena brutto.</span></p>
+
+    <div class="grid c2" style="margin-top:30px">
+      <div class="card">
+        <h3>Co jest w naszej cenie</h3>
+        <ul class="clean">
+          <li>Obliczenie zapotrzebowania budynku na ciepło — podstawa doboru mocy</li>
+          <li>Projekt dolnego źródła z jawnym założeniem W/mb <span class="bd">[BRAK — Wasze W/mb]</span></li>
+          <li>Odwierty naszą wiertnicą, z dziennikiem wiertniczym</li>
+          <li>Sondy, wypełnienie odwiertu, próba ciśnieniowa <span class="bd">[BRAK — sondy, materiał wypełnienia]</span></li>
+          <li>Studzienka rozdzielaczowa, rury do budynku, przejście przez ścianę</li>
+          <li>Montaż, uruchomienie i regulacja pompy</li>
+          <li><b>Dokumentacja techniczna dla Ciebie</b> — dziennik wiertniczy, profil gruntu, protokół próby ciśnieniowej</li>
+        </ul>
+      </div>
+      <div class="card">
+        <h3>Czego w cenie nie ma</h3>
+        <p style="font-size:17px;color:var(--ink-3)">Piszemy o tym od razu, bo to najczęstszy zarzut wobec wykonawców na forach budowlanych.</p>
+        <ul class="clean no">
+          <li>Ogrzewanie podłogowe i instalacja wewnętrzna</li>
+          <li>Projekt robót geologicznych — 1 500–2 000 zł</li>
+          <li><b>Dokumentacja geologiczna powykonawcza do starostwa</b> — ok. 3 500 zł. To inny dokument niż dokumentacja techniczna, którą dostajesz od nas.</li>
+          <li>Przywrócenie trawnika <span class="bd">[BRAK — czy w cenie]</span></li>
+        </ul>
+        <p style="font-size:13px;color:var(--ink-3);margin-top:14px"><b>VAT.</b> <span class="bd">[BRAK DANYCH] Jaką stawkę stosujecie na odwierty i od czego zależy — 8% czy 23%. To jedno z pytań, przy którym najczęściej dochodzi do sporu z wykonawcą.</span></p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="kalkulator" style="background:var(--surface-2)">
+  <div class="w">
+        <h2>Ile metrów odwiertu potrzebuje Twój dom</h2>
+    <p class="lead">Najczęstsze pytanie, jakie dostajemy. Licz sam, bez zostawiania numeru.</p>
+
+    <div class="calc">
+      <div class="calc-grid">
+        <div>
+          <label class="f" for="m2">Powierzchnia ogrzewana</label>
+          <div class="range-wrap">
+            <input type="range" id="m2" min="70" max="400" step="10" value="170">
+            <span class="range-val" id="m2v">170 m²</span>
+          </div>
+        </div>
+        <div>
+          <label class="f" for="std">Standard budynku</label>
+          <select id="std">
+            <option value="100">Stary dom bez ocieplenia (ok. 100 W/m²)</option>
+            <option value="65">Dom ocieplony po remoncie (ok. 65 W/m²)</option>
+            <option value="30" selected>Standard WT 2021 (ok. 30 W/m²)</option>
+            <option value="25">WT 2021 z rekuperacją (ok. 25 W/m²)</option>
+          </select>
+        </div>
+        <div>
+          <label class="f" for="cwu">Ciepła woda dla ilu osób</label>
+          <select id="cwu">
+            <option value="0.3">1–2 osoby</option>
+            <option value="0.5" selected>3–4 osoby</option>
+            <option value="0.8">5 osób i więcej</option>
+          </select>
+        </div>
+        <div>
+          <label class="f" for="grunt">Grunt na działce</label>
+          <select id="grunt">
+            <option value="25" selected>Nie wiem — liczymy najostrożniej</option>
+            <option value="25">Suchy piasek, żwir</option>
+            <option value="35">Glina, grunt wilgotny</option>
+            <option value="45">Skała, warstwy wodonośne</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="calc-out">
+        <div class="out"><b id="moc">—</b><span>moc pompy</span></div>
+        <div class="out"><b id="metry">—</b><span>metrów odwiertu</span></div>
+        <div class="out"><b id="odwierty">—</b><span>układ odwiertów</span></div>
+        <div class="out"><b id="cena">—</b><span>same odwierty, stawki rynkowe</span></div>
+      </div>
+
+      <div class="alert" id="alertMin">Przy tak małym zapotrzebowaniu gruntowa pompa ciepła zwykle nie ma uzasadnienia ekonomicznego — najmniejsze urządzenia zaczynają się w okolicach 5 kW. Zadzwońcie, powiemy wprost, czy warto.</div>
+      <div class="alert" id="alertMax">Powyżej 30 kW nie da się policzyć długości odwiertów tak prostą metodą — przy takiej mocy grunt trzeba modelować symulacją, a często wykonać test reakcji termicznej. Ten wynik traktujcie wyłącznie jako rząd wielkości.</div>
+
+      <div class="assum">
+        <b>Jak to policzyliśmy i czego temu wynikowi brakuje.</b>
+        Moc = powierzchnia × wskaźnik dla standardu budynku + zapas na ciepłą wodę. Dolne źródło musi oddać moc grzewczą pomniejszoną o pracę sprężarki (przyjmujemy COP 4,3). Metry = ta moc podzielona przez uzysk ciepła z metra bieżącego. Odwierty dzielimy tak, żeby żaden nie był krótszy niż 80 m ani dłuższy niż 150 m — krótsze otwory są nieopłacalne, bo koszt zjazdu i rozstawienia wiertnicy jest prawie stały.
+        <br><br>
+        <b>Cena dotyczy wyłącznie robót wiertniczych z sondą</b> i opiera się na stawkach rynkowych publikowanych dla Wielkopolski (ok. 165–275 zł za metr bieżący), a nie na naszym cenniku. <span class="bd">[BRAK DANYCH — 1] Podmienić na stawkę DEWAX.</span> Nie obejmuje pompy, montażu, studzienki ani formalności.
+        <br><br>
+        <b>Wartości W/mb</b> w liście gruntów są ostrożnymi wartościami z literatury branżowej. <span class="bd">[BRAK DANYCH — 5] Podmienić na to, co DEWAX realnie przyjmuje w projektach.</span> Świadomie nie ma tu opcji 50 W/mb — uważamy tę wartość za zbyt optymistyczną dla typowych gruntów w Wielkopolsce.
+        <br><br>
+        To wyliczenie zastępuje wizytę na działce w takim samym stopniu, w jakim mapa zastępuje spacer. Ostateczną liczbę metrów ustala projekt.
+      </div>
+
+      <div style="margin-top:22px;display:flex;gap:12px;flex-wrap:wrap">
+        <a class="btn" href="#wycena">Wyślij mi ten wynik i widełki cenowe</a>
+        <a class="btn btn-2" href="#harmonogram">Kiedy mam się odezwać</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="odwierty">
+  <div class="w">
+        <h2>Odwiert to nie dziura wyceniana za metr</h2>
+    <p class="lead">Pompę ciepła można wymienić w jeden dzień. Odwiertu nie poprawisz po zasypaniu — zostaje w ziemi na dziesiątki lat, taki, jaki go ktoś zrobił.</p>
+
+    <div class="card" style="margin-top:26px">
+      <p style="margin:0;font-size:17px">W badaniach niemieckiego instytutu Fraunhofer ISE nad rzeczywistą sprawnością zamontowanych pomp ciepła sporządzono listę najczęstszych błędów instalacyjnych. <b>Na pierwszym miejscu jest niedowymiarowane dolne źródło.</b></p>
+      <p style="margin:10px 0 0;font-size:13px;color:var(--ink-3)">Za: PORT PC, „Pompy ciepła — perspektywy wzrostu technologii i ich znaczenie w polskiej energetyce", 2013, s. 72. Badanie obejmowało instalacje z lat 2008–2012. <span class="bd">[BRAK — link do PDF]</span></p>
+    </div>
+
+    <div class="grid c2" style="margin-top:26px">
+      <div class="card">
+        <h3>Cztery rzeczy, o które warto zapytać każdego wykonawcę</h3>
+        <ul class="clean">
+          <li><b>Ile watów bierzesz z metra?</b> Krótsze odwierty to tańsza oferta i wychłodzone źródło po kilku sezonach. Jeśli usłyszysz 50 W/mb bez rozmowy o tym, co jest pod działką — to sygnał ostrzegawczy.</li>
+          <li><b>Czym wypełnisz otwór?</b> Sonda musi mieć kontakt cieplny z gruntem na całej długości. Wypełnienie podaje się od dna do góry, nie zasypuje z wierzchu.</li>
+          <li><b>Jak udowodnisz, że sonda jest szczelna?</b> Próba ciśnieniowa przed zasypaniem i protokół z niej.</li>
+          <li><b>Co dostanę na papierze?</b> Dziennik wiertniczy z profilem gruntu to jedyny dowód, ile metrów naprawdę jest pod trawnikiem.</li>
+        </ul>
+      </div>
+      <div class="card" style="background:var(--accent-soft);border-color:var(--accent)">
+        <h3>Dlaczego wiercimy sami</h3>
+        <p>Firma, która podzleca wiercenia, ma problem strukturalny: kiedy po dwóch sezonach źródło nie wyrabia, montażysta pokazuje na wiertacza, a wiertacz na projekt.</p>
+        <p>Mamy własne maszyny i własnych ludzi, więc nie ma kogo obwiniać. Odpowiedzialność zostaje u nas.</p>
+        <p style="margin-bottom:0"><span class="bd">[BRAK DANYCH — 10] Kto płaci, gdy trzeba wiercić głębiej, niż zakładała umowa? To pytanie zadaje sobie każdy inwestor i prawie nikt w Polsce na nie nie odpowiada.</span></p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="harmonogram" style="background:var(--surface-2)">
+  <div class="w">
+        <h2>Gdzie w harmonogramie budowy jesteśmy my</h2>
+    <p class="lead">Najczęstszy powód, przez który ludzie przegapiają sezon albo dotację: dzwonią za późno. Odwierty muszą powstać, zanim zagospodarujesz teren, a rury muszą wejść do budynku przed wylewkami.</p>
+
+    <div class="timeline">
+      <div class="tl"><div class="when">Krok 1</div><div><h3>Telefon i rozmowa</h3><p>Ustalamy metraż, standard budynku, rodzaj instalacji i to, czy gruntowa w ogóle ma sens. Jeśli nie ma — mówimy to od razu.</p></div></div>
+      <div class="tl"><div class="when">Krok 2</div><div><h3>Wizyta na działce</h3><p>Sprawdzamy dojazd dla wiertnicy, miejsce na odwierty i drogę rur do budynku. <span class="bd">[BRAK — ile dni od zgłoszenia]</span></p></div></div>
+      <div class="tl"><div class="when">Krok 3</div><div><h3>Projekt robót geologicznych i zgłoszenie</h3><p>Dokument trafia do starostwa. To etap, który trwa najdłużej i którego nie da się przyspieszyć. <span class="bd">[BRAK — ile trwa u Was]</span></p></div></div>
+      <div class="tl"><div class="when">Krok 4</div><div><h3>Wiercenie</h3><p>Wjazd, odwierty, sondy, próba ciśnieniowa, wypełnienie, studzienka, rury do budynku. <span class="bd">[BRAK — ile dni]</span></p></div></div>
+      <div class="tl"><div class="when">Krok 5</div><div><h3>Montaż i uruchomienie</h3><p>Pompa w kotłowni, podłączenie, regulacja parametrów, przekazanie dokumentacji.</p></div></div>
+    </div>
+    <p style="font-size:17px;color:var(--ink-3);margin-top:18px"><span class="bd">[BRAK DANYCH] Na jakim etapie budowy klient powinien zadzwonić najpóźniej i ile trwa cała procedura od telefonu do uruchomienia. To jedno zdanie ratuje ludziom sezon.</span></p>
+  </div>
+</section>
+
+<section id="dzien">
+  <div class="w">
+        <h2>Co się dzieje na Twojej działce w dniu wiercenia</h2>
+    <p class="lead">Będzie błoto — przy wierceniu leci woda z urobkiem i nie ma na to rady. Pytanie brzmi, co zostaje potem.</p>
+    <div class="card" style="margin-top:22px">
+      <p><span class="bd">[BRAK DANYCH — 13] Ile dni trwa robota, ile miejsca zajmuje wiertnica, co dzieje się z urobkiem, kto go wywozi, w jakim stanie zostawiacie teren i czy przywracacie trawnik.</span></p>
+      <p style="margin-bottom:0;font-size:17px;color:var(--ink-3)">Materiał do zrobienia w dowolny wtorek: jeden pełny dzień wiercenia nagrany telefonem, plus to samo miejsce trzy miesiące później z trawą.</p>
+    </div>
+  </div>
+</section>
+
+<section id="dotacje" style="background:var(--surface-2)">
+  <div class="w">
+        <h2>Ile realnie dostaniesz — zależnie od tego, czy budujesz, czy remontujesz</h2>
+    <p class="lead">To rozróżnienie jest kluczowe, bo większość dostępnych pieniędzy dotyczy tylko jednej z tych sytuacji.</p>
+
+    <div class="grid c2">
+      <div class="card">
+        <h3>Budujesz nowy dom</h3>
+        <p style="font-size:17px">Wchodzi wyłącznie <b>Moje Ciepło</b>: 30% kosztów kwalifikowanych, <b>maksymalnie 21 000 zł</b> (45% i do 21 000 zł dla posiadaczy Karty Dużej Rodziny).</p>
+        <ul class="clean">
+          <li>Dotyczy domów oddanych do użytku po 1 stycznia 2021</li>
+          <li>Budynek musi spełnić wymóg charakterystyki energetycznej</li>
+          <li><b>Wniosek składasz po zakończeniu inwestycji</b> — nie na etapie budowy</li>
+          <li>Czyste Powietrze Cię nie obejmuje</li>
+          <li><b>Ulga termomodernizacyjna też nie</b> — przysługuje wyłącznie na budynek już wybudowany</li>
+        </ul>
+      </div>
+      <div class="card">
+        <h3>Masz istniejący dom</h3>
+        <p style="font-size:17px">Wchodzi <b>Czyste Powietrze</b>, w trzech poziomach zależnych od dochodu, plus ulga podatkowa.</p>
+        <ul class="clean">
+          <li>Poziom podstawowy, podwyższony i najwyższy — kwoty zależą od dochodu na osobę</li>
+          <li>Dotacja to procent kosztów kwalifikowanych, nie kwota z automatu</li>
+          <li><b>Ulga termomodernizacyjna</b> — do 53 000 zł <i>odliczenia od dochodu</i>. Realna korzyść to 12% lub 32% tej kwoty, zależnie od progu podatkowego — czyli około 6 400 lub 17 000 zł zwrotu, a nie 53 000 zł w gotówce.</li>
+          <li>Części sfinansowanej dotacją nie odliczysz drugi raz w uldze</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="deadline">
+      <b>Moje Ciepło — nabór zamyka się 31 grudnia 2026</b>
+      <div class="dl-num" id="dni">—</div>
+      <p style="margin:0 0 10px;font-size:17px;color:var(--ink-2)">Następcy dla nowych domów jednorodzinnych nie ogłoszono. Nabór może zakończyć się wcześniej, jeśli wyczerpią się środki.</p>
+      <p style="margin:0;font-size:17px;color:var(--ink-3)"><b>Ale uwaga na to, co ten termin naprawdę znaczy dla Ciebie.</b> Wniosek składa się dopiero po zakończeniu inwestycji i odbiorze budynku. Jeśli dziś budujesz, prawdziwe pytanie nie brzmi „czy zdążę złożyć wniosek do grudnia", tylko „czy zdążę skończyć budowę, odebrać ją i mieć świadectwo energetyczne". Powiedzcie nam, na jakim etapie jesteście — policzymy, czy to realne.</p>
+    </div>
+
+    <div class="card" style="margin-top:20px">
+      <p style="margin:0;font-size:13px;color:var(--ink-3)"><span class="bd">[DO WERYFIKACJI] Szczegółowe kwoty jednostkowe Czystego Powietrza dla gruntowej pompy ciepła i dolnego źródła trzeba sprawdzić w aktualnym Załączniku nr 2 do programu przed publikacją. Źródła podają je rozbieżnie, a jedna nieprawdziwa liczba na tej stronie kosztuje więcej niż jej brak.</span></p>
+    </div>
+
+    <div class="card" style="margin-top:16px">
+      <h3>Czego nie zrobimy</h3>
+      <p style="margin-bottom:0">Nie weźmiemy od Ciebie pełnomocnictwa i nie będziemy „załatwiać dotacji za Ciebie". Po głośnych sprawach, w których ludzie dostawali wezwania do zwrotu dziesiątek tysięcy złotych za prace, których wykonawca nie wykonał, uważamy to za układ szkodliwy dla klienta. Przygotujemy dokumenty i wyjaśnimy, co gdzie złożyć — wniosek składasz sam, na swoje nazwisko.</p>
+    </div>
+  </div>
+</section>
+
+<section id="faq">
+  <div class="w narrow">
+        <h2>To, o co pytają, zanim zadzwonią</h2>
+    <div style="margin-top:26px">
+      <details open><summary>Czy odwiert się kiedyś wyczerpie?</summary><div class="body">
+        <p>Grunt oddaje ciepło zimą i regeneruje się latem — to cykl roczny, nie zasób, który się zużywa. Ale można go przeciążyć. Jeśli odwiertów jest za mało w stosunku do mocy pompy, glikol z sezonu na sezon schodzi coraz niżej, sprawność spada, a przy dużym mrozie pompa może się wyłączyć.</p>
+        <p>Przyczyną nie jest technologia, tylko projekt. Dlatego pytaj każdego wykonawcę, ile watów bierze z metra bieżącego.</p>
+      </div></details>
+
+      <details><summary>Skąd mam wiedzieć, że naprawdę wywierciliście tyle metrów, ile jest na fakturze?</summary><div class="body">
+        <p>Nie musisz nam wierzyć na słowo. <span class="bd">[BRAK DANYCH — 6] Lista dokumentów, jakie dostaje klient: dziennik wiertniczy, profil geologiczny, protokół próby ciśnieniowej.</span></p>
+      </div></details>
+
+      <details><summary>Mam grzejniki, nie podłogówkę. Ma to sens?</summary><div class="body">
+        <p>Zależy od temperatury zasilania, jaką trzeba osiągnąć. Reguła jest prosta: każdy stopień w górę to mniej więcej dwa procent sprawności w dół. Między 35°C a 55°C robi się z tego spadek rzędu jednej trzeciej do czterdziestu procent — czyli o tyle wyższy rachunek za prąd.</p>
+        <p>Policzymy Twoje grzejniki. Jeśli wyjdzie, że po powiększeniu kilku z nich zejdziesz do 45°C — da się zrobić dobrą instalację. Jeśli wyjdzie 55°C i więcej, powiemy, żebyś tego nie robił.</p>
+        <p><span class="bd">[BRAK DANYCH] Tu powinna być tabelka: COP urządzenia przy B0/W35 i przy B0/W55 z karty katalogowej. Jedna tabelka rozbraja tę obiekcję lepiej niż akapit.</span></p>
+      </div></details>
+
+      <details><summary>Co z serwisem? Za dziesięć lat wymiana i wszystko od nowa?</summary><div class="body">
+        <p>Tu jest przewaga gruntowej, o której się nie mówi. To, co jest w ziemi — odwierty, sondy, studzienka — nie ma części ruchomych. Obieg dolnego źródła wymaga okresowej kontroli ciśnienia, stanu glikolu i filtra, ale nie ma tam nic, co się zużywa mechanicznie.</p>
+        <p>Wymianie po latach podlega samo urządzenie w kotłowni. Wytyczne VDI, na których opiera się branża, przyjmują dla gruntowej pompy ciepła dwadzieścia lat użytkowania obliczeniowego, a dla powietrznej osiemnaście. W analizie kosztów PORT PC z 2013 roku dla pionowego wymiennika gruntowego przyjęto pięćdziesiąt lat — to założenie rachunkowe, nie gwarancja producenta.</p>
+        <p><span class="bd">[BRAK DANYCH — 7] Wasze gwarancje: osobno na urządzenie, osobno na szczelność sondy, osobno na wykonanie odwiertu. Plus koszt i częstotliwość przeglądu.</span></p>
+      </div></details>
+
+      <details><summary>Ile to naprawdę kosztuje?</summary><div class="body">
+        <p><span class="bd">[BRAK DANYCH — 1 i 2] Stawka za metr odwiertu oraz trzy pakiety: metraż → moc → metry → cena brutto.</span></p>
+        <p>Kalkulator wyżej podaje na razie koszt samych robót wiertniczych według stawek rynkowych dla Wielkopolski. To nie jest nasza oferta — to punkt odniesienia, żebyście wiedzieli, o jakim rzędzie wielkości mówimy.</p>
+      </div></details>
+
+      <details><summary>Pierwsza zima wyszła drożej, niż mówiliście. Co teraz?</summary><div class="body">
+        <p>Jeśli dom jest nowy, prawie na pewno wszystko działa poprawnie. Świeży budynek schnie przez pierwszy sezon i zużywa na to znacznie więcej energii — w kolejnych latach rachunek spada. To jedno z najczęstszych źródeł paniki na forach budowlanych i jedno z najrzadziej tłumaczonych przed podpisaniem umowy.</p>
+      </div></details>
+    </div>
+  </div>
+</section>
+
+<section id="realizacje" style="background:var(--surface-2)">
+  <div class="w">
+        <h2>Realizacje</h2>
+    <div class="card" style="margin-top:22px">
+      <p><span class="bd">[BRAK DANYCH — 11] Trzy do pięciu realizacji: miejscowość, metraż, liczba i głębokość odwiertów, moc pompy, rok montażu i zużycie prądu po pełnym sezonie w kWh.</span></p>
+      <p style="margin-bottom:0;font-size:17px;color:var(--ink-3)">Zużycie z licznika jest tu najważniejsze. Ludzie na forach proszą o to wprost — „chwalcie się rachunkami" — i nikt w branży tego nie pokazuje.</p>
+    </div>
+  </div>
+</section>
+
+<section id="wycena">
+  <div class="w narrow">
+        <h2>Wyślemy wycenę na maila</h2>
+    <p class="lead">Na podstawie tych danych przygotujemy widełki i wstępną liczbę metrów. Dokładny projekt powstaje dopiero po wizycie na działce — nie udajemy, że da się go zrobić z formularza.</p>
+
+    <div class="formbox" style="margin-top:26px">
+      <form onsubmit="event.preventDefault();alert('Prototyp — formularz nie wysyła danych.');">
+        <div class="fg two">
+          <div><label class="f" for="im">Imię</label><input type="text" id="im" required></div>
+          <div><label class="f" for="ema">E-mail</label><input type="email" id="ema" required></div>
+        </div>
+        <div class="fg two" style="margin-top:16px">
+          <div><label class="f" for="loc">Miejscowość inwestycji</label><input type="text" id="loc" required></div>
+          <div><label class="f" for="pow2">Powierzchnia domu (m²)</label><input type="number" id="pow2" required></div>
+        </div>
+        <div style="margin-top:16px">
+          <label class="f">Na jakim etapie jesteś</label>
+          <div class="radio-row">
+            <label><input type="radio" name="etap" checked> Buduję</label>
+            <label><input type="radio" name="etap"> Mam istniejący dom</label>
+            <label><input type="radio" name="etap"> Dopiero się rozglądam</label>
+          </div>
+        </div>
+        <div style="margin-top:16px">
+          <label class="f" for="tel2">Telefon (nieobowiązkowo)</label>
+          <input type="tel" id="tel2">
+          <p style="font-size:13px;color:var(--ink-3);margin:8px 0 0">Zostaw tylko, jeśli wolisz rozmowę. Bez numeru też odpowiemy — mailem.</p>
+        </div>
+        <div style="margin-top:18px">
+          <label class="check"><input type="checkbox" required> Wyrażam zgodę na przetwarzanie moich danych w celu przygotowania i przesłania odpowiedzi na to zapytanie. Administratorem jest DEWAX Sp. z o.o., ul. Ostrowska 1, 63-330 Dobrzyca. Dane przetwarzamy na podstawie Twojej zgody, przechowujemy przez 24 miesiące, a Ty masz prawo dostępu, sprostowania, usunięcia, ograniczenia przetwarzania i wycofania zgody w każdej chwili. Szczegóły w <a href="#" style="color:var(--accent)">polityce prywatności</a>.</label>
+        </div>
+        <div style="margin-top:20px"><button class="btn" type="submit">Wyślij zapytanie</button></div>
+      </form>
+
+      <div style="margin-top:22px;padding-top:20px;border-top:1px solid var(--line)">
+        <h3 style="font-size:17px">Co się stanie po wysłaniu</h3>
+        <ol style="margin:10px 0 0;padding-left:20px;color:var(--ink-2);font-size:17px">
+          <li style="margin-bottom:6px">W ciągu jednego dnia roboczego dostajesz maila z wstępną liczbą metrów i widełkami cenowymi.</li>
+          <li style="margin-bottom:6px">Dzwonimy tylko wtedy, gdy odpiszesz albo zostawisz numer.</li>
+          <li>Nie wpisujemy nikogo na listę mailingową i nie dzwonimy po miesiącach.</li>
+        </ol>
+        <p style="font-size:13px;color:var(--ink-3);margin:14px 0 0">Pracujemy od poniedziałku do piątku, 8:00–16:00. Zapytanie wysłane w weekend odbierzemy w poniedziałek.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="w fgrid">
+    <div>
+      <div class="logo" style="margin-bottom:12px">DE<span>WAX</span></div>
+      <p style="margin:0 0 4px">DEWAX Sp. z o.o.<br>ul. Ostrowska 1, 63-330 Dobrzyca</p>
+      <p style="margin:0">KRS 0000298299 · NIP 6080071501 · REGON 300706044</p>
+    </div>
+    <div>
+      <a href="#odwierty">Odwierty</a>
+      <a href="#kalkulator">Ile metrów</a>
+      <a href="#harmonogram">Kiedy dzwonić</a>
+      <a href="#dotacje">Dofinansowanie</a>
+    </div>
+    <div>
+      <a href="tel:627413227"><b>62 741 32 27</b></a>
+      <a href="mailto:sprzedaz@dewax.pl">sprzedaz@dewax.pl</a>
+      <p style="margin:8px 0 0;font-size:13px">Pon.–pt. 8:00–16:00</p>
+    </div>
+  </div>
+</footer>
+
+<script>
+const $=id=>document.getElementById(id);
+const m2=$('m2'),std=$('std'),cwu=$('cwu'),grunt=$('grunt');
+const STAWKA_MIN=165, STAWKA_MAX=275; // zł/mb — stawki rynkowe, do podmiany na cennik DEWAX
+
+function fmt(n){return n.toLocaleString('pl-PL');}
+
+function licz(){
+  const pow=+m2.value, wsk=+std.value, dodCwu=+cwu.value, wmb=+grunt.value;
+  $('m2v').textContent=pow+' m²';
+
+  // 1. moc — zaokrąglamy RAZ i dalej liczymy na tej samej wartości
+  const moc = Math.round((pow*wsk/1000 + dodCwu)*2)/2;
+
+  // 2. moc dolnego źródła = moc grzewcza minus praca sprężarki (COP 4,3)
+  const mocZrodla = moc*(1-1/4.3);
+
+  // 3. metry, zaokrąglone w górę do 10
+  let metry = Math.ceil((mocZrodla*1000/wmb)/10)*10;
+
+  // 4. podział: żaden odwiert krótszy niż 80 m, żaden dłuższy niż 150 m
+  let szt, dl;
+  if(metry<=150){ szt=1; dl=Math.max(80,metry); }
+  else { szt=Math.ceil(metry/150); dl=Math.ceil(metry/szt/5)*5;
+         if(dl<80){ szt=Math.max(1,Math.floor(metry/80)); dl=Math.ceil(metry/szt/5)*5; } }
+  const metryReal = szt*dl; // to, co realnie zostanie wywiercone
+
+  $('moc').textContent=moc.toFixed(1).replace('.',',')+' kW';
+  $('metry').textContent=fmt(metryReal)+' m';
+  $('odwierty').textContent=szt+' × '+dl+' m';
+  $('cena').textContent=fmt(Math.round(metryReal*STAWKA_MIN/1000)*1000)+'–'+fmt(Math.round(metryReal*STAWKA_MAX/1000)*1000)+' zł';
+
+  $('alertMin').style.display = moc<5 ? 'block':'none';
+  $('alertMax').style.display = moc>30 ? 'block':'none';
+}
+[m2,std,cwu,grunt].forEach(e=>e.addEventListener('input',licz));
+licz();
+
+(function(){
+  const koniec=new Date(2026,11,31,23,59,59);
+  const dni=Math.ceil((koniec-new Date())/86400000);
+  $('dni').textContent = dni>0 ? 'zostało '+dni+' dni' : 'nabór zakończony';
+})();
+</script>
+</body>
+</html>

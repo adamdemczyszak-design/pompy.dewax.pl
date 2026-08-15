@@ -1,0 +1,123 @@
+<!DOCTYPE html><html lang="pl"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1"><title>Audyt pompy.dewax.pl</title><style>
+:root{--bg:#faf9f7;--card:#fff;--ink:#1f1d1b;--muted:#6b6660;--line:#e5e1dc;--acc:#c96442;
+--ok:#1f7a53;--okbg:#e6f4ed;--warn:#8a5a00;--warnbg:#fdf3e0;--bad:#a13333;--badbg:#fbeaea;}
+@media(prefers-color-scheme:dark){:root{--bg:#171614;--card:#201f1c;--ink:#f2efea;--muted:#a29d96;--line:#332f2b;
+--ok:#7cd0a8;--okbg:#16301f;--warn:#e2b45f;--warnbg:#332810;--bad:#e58b8b;--badbg:#331a1a;}}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font:15px/1.6 -apple-system,BlinkMacSystemFont,"Segoe UI",Inter,sans-serif}
+.w{max-width:940px;margin:0 auto;padding:38px 20px 70px}
+h1{font-size:30px;margin:0 0 6px;letter-spacing:-.02em}.sub{color:var(--muted);margin:0 0 26px;font-size:14px}
+h2{font-size:13px;text-transform:uppercase;letter-spacing:.09em;color:var(--muted);margin:38px 0 14px;font-weight:600}
+.kpi{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}@media(min-width:700px){.kpi{grid-template-columns:repeat(4,1fr)}}
+.kpi div{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:14px 16px}
+.kpi b{display:block;font-size:25px;letter-spacing:-.02em}.kpi span{font-size:12px;color:var(--muted)}
+.f{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:16px 18px;margin-bottom:12px;border-left:3px solid var(--line)}
+.f.kryt{border-left-color:var(--bad)}.f.wys{border-left-color:var(--warn)}.f.sre{border-left-color:var(--acc)}
+.f h3{margin:0 0 8px;font-size:16.5px;display:flex;justify-content:space-between;align-items:flex-start;gap:12px}
+.f p{margin:0 0 8px;color:var(--muted);font-size:14px}.f p:last-child{margin-bottom:0}
+.f b.fix{color:var(--ink)}
+.tag{font-size:10.5px;font-weight:700;padding:3px 9px;border-radius:999px;white-space:nowrap;letter-spacing:.04em}
+.t-kryt{background:var(--badbg);color:var(--bad)}.t-wys{background:var(--warnbg);color:var(--warn)}.t-sre{background:var(--okbg);color:var(--ok)}
+code{background:var(--bg);border:1px solid var(--line);border-radius:4px;padding:1px 5px;font-size:12.5px;word-break:break-all}
+table{width:100%;border-collapse:collapse;font-size:13.5px;margin-top:10px}
+th,td{text-align:left;padding:7px 9px;border-bottom:1px solid var(--line)}
+th{color:var(--muted);font-weight:600;font-size:11.5px;text-transform:uppercase;letter-spacing:.06em}
+td.n{color:var(--bad);font-family:ui-monospace,monospace}
+.note{background:var(--card);border:1px solid var(--line);border-left:3px solid var(--acc);border-radius:8px;padding:15px 17px;font-size:14px;color:var(--muted)}
+.note b{color:var(--ink)}
+footer{margin-top:38px;padding-top:16px;border-top:1px solid var(--line);color:var(--muted);font-size:12px}
+</style></head><body><div class="w">
+<h1>Audyt pompy.dewax.pl</h1>
+<p class="sub">9 podstron - 15 sierpnia 2026 - wszystko zmierzone na zywej stronie</p>
+<div class="kpi">
+<div><b>0</b><span>zdarzen piksela Meta</span></div>
+<div><b>5 z 9</b><span>stron bez opisu w Google</span></div>
+<div><b>1</b><span>pusta podstrona w menu</span></div>
+<div><b>0</b><span>wzmianek o Thermokrafft</span></div>
+</div>
+
+<h2>Krytyczne — traci pieniadze codziennie</h2>
+
+<div class="f kryt"><h3>Piksel Meta nie wystrzelil ani razu <span class="tag t-kryt">KRYTYCZNE</span></h3>
+<p>Masz piksel <code>1032857169399673</code> o nazwie „dewax.pl", zalozony 4 czerwca 2026, oznaczony jako aktywny. Sprawdzilem jego historie: <b class="fix">last_fired_time to 1 stycznia 1970</b> — czyli nigdy. Przeszukalem kod wszystkich dziewieciu podstron: nie ma na nich ani jednego wywolania <code>fbq</code> ani skryptu z <code>facebook.net</code>.</p>
+<p>Znaczy to, ze Twoje cztery konta reklamowe Meta kieruja ruch na strone, ktora nie raportuje niczego z powrotem. Nie wiesz, ktora reklama przyniosla zapytanie. Nie mozesz robic remarketingu do osob, ktore weszly i nie wypelnily formularza. Algorytm Meta nie ma na czym sie uczyc, wiec optymalizuje na kliki zamiast na leady.</p>
+<p><b class="fix">Naprawa:</b> wkleic kod piksela do sekcji <code>&lt;head&gt;</code> szablonu i dodac zdarzenie <code>Lead</code> po wyslaniu formularza wyceny. Masz juz GTM na stronie, wiec da sie to zrobic bez dotykania kodu.</p></div>
+
+<div class="f kryt"><h3>Kalkulator to pusta strona <span class="tag t-kryt">KRYTYCZNE</span></h3>
+<p>W glownym menu, na kazdej podstronie, jest pozycja „Kalkulator". Klient klika i dostaje <b class="fix">naglowek „Kalkulator kosztow ogrzewania" i nic wiecej</b> — zero formularzy, zero pol, zero tresci. Sprawdzilem kod: strona ma 0 elementow <code>&lt;form&gt;</code> i 0 pol.</p>
+<p>To najgorszy rodzaj bledu, bo obiecuje narzedzie osobie juz zainteresowanej i zostawia ja z pustka. Czlowiek, ktory chce policzyc oszczednosci, jest o krok od zapytania.</p>
+<p><b class="fix">Naprawa — do wyboru:</b> albo zbudowac kalkulator, albo natychmiast usunac pozycje z menu i przekierowac na formularz wyceny. Pusta strona w menu jest gorsza niz jej brak.</p></div>
+
+<div class="f kryt"><h3>Oferta wciaz mowi o Panasonic i Copeland <span class="tag t-kryt">KRYTYCZNE</span></h3>
+<p>Przeszukalem wszystkie podstrony pod katem „APIC" i „APEC" — <b class="fix">w tekscie nie ma ich nigdzie</b>. Marka byla widoczna wylacznie na zdjeciu w kotlowni, ktore juz wymienilismy.</p>
+<p>Problem jest gdzie indziej: strona „Nasza oferta" zawiera akapit <em>„Partnership z Liderami: Dewax wspolpracuje z globalnymi liderami branzy, takimi jak Panasonic czy Copeland"</em>. Slowo <b class="fix">Thermokrafft nie pada na calej stronie ani razu</b> — sprawdzilem wszystkie dziewiec podstron.</p>
+<p><b class="fix">Naprawa:</b> gotowe teksty w zalaczonym pliku. Zostawilem tam jedna rzecz do potwierdzenia — akapit o polskiej produkcji, bo nie wiem, gdzie Thermokrafft jest produkowany, a nie chce wpisac czegos, czego nie obronisz przed klientem.</p></div>
+
+<h2>Wysokie — psuje widocznosc i wiarygodnosc</h2>
+
+<div class="f wys"><h3>Piec stron bez opisu w wynikach Google <span class="tag t-wys">WYSOKIE</span></h3>
+<p>Brak meta description oznacza, ze Google sam sklada opis z przypadkowego fragmentu tekstu — zwykle z menu nawigacyjnego. Wyglada to nieprofesjonalnie i obniza klikalnosc.</p>
+<table><tr><th>Strona</th><th>Title</th><th>Opis</th><th>H1</th></tr>
+<tr><td>Strona glowna</td><td>29 zn.</td><td class="n">BRAK</td><td class="n">BRAK</td></tr>
+<tr><td>Galeria</td><td>45 zn.</td><td class="n">BRAK</td><td>1</td></tr>
+<tr><td>Kalkulator</td><td>18 zn.</td><td class="n">BRAK</td><td>1</td></tr>
+<tr><td>Kontakt</td><td>15 zn.</td><td class="n">BRAK</td><td>1</td></tr>
+<tr><td>Formularz wyceny</td><td>21 zn.</td><td class="n">BRAK</td><td>1</td></tr>
+<tr><td>Nasza oferta</td><td>29 zn.</td><td>215 zn.</td><td>1</td></tr>
+<tr><td>Dotacje</td><td>37 zn.</td><td>121 zn.</td><td>1</td></tr>
+<tr><td>O nas</td><td>13 zn.</td><td>232 zn.</td><td>1</td></tr>
+<tr><td>Polityka prywatnosci</td><td>28 zn.</td><td>239 zn.</td><td>1</td></tr></table>
+<p style="margin-top:10px"><b class="fix">Strona glowna nie ma zadnego naglowka H1</b> — najwazniejszy sygnal tematyczny dla Google po prostu nie istnieje na najwazniejszej stronie.</p></div>
+
+<div class="f wys"><h3>Polityka prywatnosci podaje nieprawde <span class="tag t-wys">WYSOKIE</span></h3>
+<p>Dokument stwierdza, ze dotyczy serwisu pod adresem <code>dewax.pl</code> (a nie <code>pompy.dewax.pl</code>) i ze strona jest hostowana u operatora <code>ovh.pl</code>. Tymczasem sprawdzilem: <b class="fix">strona stoi na serwerze server420780.nazwa.pl</b>. To blad faktyczny w dokumencie o mocy prawnej.</p>
+<p>Brakuje tez informacji o Google Tag Managerze i HubSpocie, ktore zbieraja dane na wszystkich podstronach. Wymog RODO, nie kosmetyka.</p></div>
+
+<div class="f wys"><h3>Udostepnienie na Facebooku wyglada przypadkowo <span class="tag t-wys">WYSOKIE</span></h3>
+<p>Zadna z dziewieciu podstron nie ma znacznikow Open Graph ani <code>canonical</code>. Gdy ktos wkleja link na Facebooka albo wysyla na WhatsAppie, Facebook sam zgaduje tytul i obrazek — zwykle wybiera logo albo losowy fragment.</p>
+<p>Przy koncie reklamowym na Meta to realna strata: kazde udostepnienie organiczne dziala na Twoja niekorzysc.</p></div>
+
+<div class="f wys"><h3>Podpisy zdjec to „Zdjecie 1", „Zdjecie nr 2" <span class="tag t-wys">WYSOKIE</span></h3>
+<p>W galerii sa dokladnie takie podpisy, plus trzy razy powtorzone „Instalacja pompy ciepla NR 1". Google nie ma z czego zbudowac kontekstu, a klient nie wie, na co patrzy. Zaproponowalem komplet nowych podpisow i tekstow alternatywnych w zalaczonym pliku.</p></div>
+
+<h2>Srednie — warto poprawic przy okazji</h2>
+
+<div class="f sre"><h3>Literowki w tekstach <span class="tag t-sre">SREDNIE</span></h3>
+<table><tr><th>Strona</th><th>Jest</th><th>Ma byc</th></tr>
+<tr><td>Glowna</td><td>zostaniesz poproszo<b>y</b></td><td>poproszo<b>ny</b></td></tr>
+<tr><td>Glowna</td><td>Czy<b>t</b>e powietrze</td><td>Czy<b>st</b>e powietrze</td></tr>
+<tr><td>Glowna</td><td><b>Ekologoiczne</b></td><td><b>Ekologiczne</b></td></tr>
+<tr><td>Glowna</td><td>audyt nieruchomosci<b>.</b></td><td>audyt nieruchomosci<b>)</b>.</td></tr>
+<tr><td>Glowna (stopka)</td><td>Konta<b>k</b></td><td>Konta<b>kt</b></td></tr>
+<tr><td>Oferta</td><td><b>ekspertzy</b></td><td><b>eksperci</b></td></tr>
+<tr><td>Oferta</td><td>gwarantuje <b>ciaglego dostawcy energii</b></td><td>zapewnia stabilne zrodlo energii</td></tr>
+<tr><td>Oferta</td><td><b>Partnership</b> z Liderami</td><td>caly akapit do usuniecia</td></tr></table></div>
+
+<div class="f sre"><h3>Mapa strony pomija jedna trzecia witryny <span class="tag t-sre">SREDNIE</span></h3>
+<p>W <code>sitemap.xml</code> jest szesc adresow, a strona ma ich dziewiec. Brakuje <code>/galeria</code>, <code>/kalkulator</code> i <code>/wycena/</code> — w tym formularza wyceny, czyli strony, na ktorej zarabiasz.</p>
+<p>Dodatkowo <code>robots.txt</code> wskazuje na <code>sitemap.xml.gz</code>, ktory <b class="fix">zwraca blad 404</b>. Robot Google dostaje wiec wskazowke prowadzaca donikad.</p></div>
+
+<div class="f sre"><h3>Brak danych strukturalnych dla firmy lokalnej <span class="tag t-sre">SREDNIE</span></h3>
+<p>Strona nie zawiera zadnego znacznika <code>LocalBusiness</code> ani <code>Organization</code>. Masz komplet danych — adres w Dobrzycy, NIP, KRS, telefon, godziny otwarcia — ale Google musi je zgadywac z tekstu. Dla firmy dzialajacej lokalnie w Wielkopolsce to wymierna strata w wynikach mapowych.</p></div>
+
+<div class="f sre"><h3>Zdjecia bez odroczonego ladowania <span class="tag t-sre">SREDNIE</span></h3>
+<p>Ani jeden znacznik <code>img</code> na calej stronie nie ma atrybutu <code>loading="lazy"</code>. Galeria laduje wszystkie szesc zdjec od razu, nawet te, ktorych uzytkownik nigdy nie zobaczy. Po wymianie zdjec problem jest mniejszy, ale wciaz warty jednej linijki w szablonie.</p>
+<p>Czas do pierwszego bajtu: <b class="fix">0,64–1,22 s</b> w zaleznosci od podstrony. Nie jest zle, ale i nie swietnie — mieszcicie sie w normie dla wspoldzielonego hostingu.</p></div>
+
+<h2>Co dziala dobrze</h2>
+<div class="note">Zeby nie bylo, ze samo narzekanie:
+<p style="margin-top:8px">Strona ma poprawny <b>certyfikat SSL</b> i wymusza HTTPS. Ma <b>viewport</b> i dziala na telefonach. Jezyk ustawiony na <code>pl</code>. Wszystkie 28 linkow wewnetrznych <b>dziala</b> — sprawdzilem kazdy, zero bledow 404. Formularz wyceny jest <b>przemyslany</b>: pyta o metraz, rok budowy, ocieplenie, rekuperacje i odbiorniki ciepla, czyli dokladnie o to, czego trzeba do doboru pompy. <b>Google Tag Manager</b> (GTM-T4DV2B3G) i <b>HubSpot</b> (konto 49004516) sa poprawnie osadzone na wszystkich dziewieciu podstronach.</p>
+<p>Opinie klientow na stronie glownej sa wiarygodne wlasnie dlatego, ze brzmia jak napisane przez ludzi, a nie przez agencje. Nie wygladzalbym ich.</p></div>
+
+<h2>Kolejnosc dzialan</h2>
+<div class="note">
+<b>1.</b> Piksel Meta — jedna wieczor pracy, odblokowuje remarketing i optymalizacje kampanii. Najwiekszy zwrot z calej listy.<br>
+<b>2.</b> Kalkulator — usunac z menu dzis, zbudowac pozniej. Pusta strona szkodzi teraz.<br>
+<b>3.</b> Teksty Thermokrafft — gotowe w zalaczonym pliku, do wklejenia w panelu.<br>
+<b>4.</b> Meta description i H1 na piec stron — dwie godziny, widoczne w Google w dwa tygodnie.<br>
+<b>5.</b> Polityka prywatnosci — poprawic hosting i adres, dopisac GTM i HubSpot.<br>
+<b>6.</b> Open Graph, sitemap, dane strukturalne, literowki — jedno podejscie na spokojnie.
+</div>
+
+<footer>Audyt wykonany bez dostepu do FTP — wszystko zmierzone na zywej stronie i w API Meta. Dane piksela pochodza z Twojego konta reklamowego 1413741105666132.</footer>
+</div></body></html>
