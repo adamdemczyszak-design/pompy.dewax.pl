@@ -1,0 +1,72 @@
+name: Przywroc poprzednia wersje strony
+
+# Odtwarza na serwerze stan sprzed wybranego wdrozenia.
+# Numer wdrozenia znajdziesz w zakladce Actions przy wpisie "Wdrozenie na pompy.dewax.pl".
+on:
+  workflow_dispatch:
+    inputs:
+      numer_wdrozenia:
+        description: 'Numer wdrozenia, ktorego kopie przywrocic (np. 3)'
+        required: true
+        type: string
+
+concurrency:
+  group: wdrozenie-pompy-dewax
+  cancel-in-progress: false
+
+jobs:
+  przywroc:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Sprawdz komplet danych dostepowych
+        env:
+          FTP_HOST: ${{ secrets.FTP_HOST }}
+          FTP_LOGIN: ${{ secrets.FTP_LOGIN }}
+          FTP_HASLO: ${{ secrets.FTP_HASLO }}
+          KATALOG_ZDALNY: ${{ vars.KATALOG_ZDALNY }}
+        run: |
+          BRAKI=""
+          [ -n "$FTP_HOST" ]       || BRAKI="$BRAKI FTP_HOST"
+          [ -n "$FTP_LOGIN" ]      || BRAKI="$BRAKI FTP_LOGIN"
+          [ -n "$FTP_HASLO" ]      || BRAKI="$BRAKI FTP_HASLO"
+          [ -n "$KATALOG_ZDALNY" ] || BRAKI="$BRAKI KATALOG_ZDALNY"
+          [ -z "$BRAKI" ] || { echo "::error::Brakuje:$BRAKI"; exit 1; }
+
+      - name: Pobierz kopie z wdrozenia nr ${{ inputs.numer_wdrozenia }}
+        uses: actions/download-artifact@v4
+        with:
+          name: kopia-serwera-${{ inputs.numer_wdrozenia }}
+          path: .kopia
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          repository: ${{ github.repository }}
+
+      - name: Instaluj lftp
+        run: sudo apt-get update -qq && sudo apt-get install -y -qq lftp
+
+      - name: Wgraj kopie z powrotem
+        env:
+          FTP_HOST: ${{ secrets.FTP_HOST }}
+          FTP_LOGIN: ${{ secrets.FTP_LOGIN }}
+          LFTP_PASSWORD: ${{ secrets.FTP_HASLO }}
+          KATALOG_ZDALNY: ${{ vars.KATALOG_ZDALNY }}
+        run: |
+          set -eu
+          LICZBA=$(find .kopia -type f | wc -l)
+          [ "$LICZBA" -gt 0 ] || { echo "::error::Kopia jest pusta, przerywam"; exit 1; }
+          echo "Przywracam $LICZBA plikow"
+          lftp --env-password -u "$FTP_LOGIN" "ftp://$FTP_HOST" <<LFTP
+          set ssl:verify-certificate no
+          set ftp:ssl-allow yes
+          set net:max-retries 3
+          set net:timeout 30
+          mirror -R --verbose --parallel=3 .kopia "$KATALOG_ZDALNY"
+          bye
+          LFTP
+          echo "Przywrocono $LICZBA plikow z wdrozenia nr ${{ inputs.numer_wdrozenia }}" >> "$GITHUB_STEP_SUMMARY"
+          echo "Wyczysc pamiec podreczna CDN w panelu nazwa.pl." >> "$GITHUB_STEP_SUMMARY"
+
+      - name: Sprawdz czy strona odpowiada
+        run: |
+          KOD=$(curl -s -o /dev/null -w '%{http_code}' --max-time 25 "https://pompy.dewax.pl" || echo 000)
+          echo "Strona glowna: $KOD" >> "$GITHUB_STEP_SUMMARY"
+          [ "$KOD" = "200" ] || echo "::warning::Strona zwraca $KOD, sprawdz CDN"

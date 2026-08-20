@@ -5,10 +5,6 @@ name: Wdrozenie na pompy.dewax.pl
 on:
   workflow_dispatch:
     inputs:
-      wyczysc:
-        description: 'Usunac z serwera pliki spoza pakietu (pierwsze przelaczenie ze starej strony)'
-        type: boolean
-        default: false
       testy_tylko:
         description: 'Nie wgrywaj nic, wykonaj same testy zywej strony'
         type: boolean
@@ -78,6 +74,36 @@ jobs:
         if: ${{ inputs.testy_tylko != true }}
         run: sudo apt-get update -qq && sudo apt-get install -y -qq lftp
 
+
+      - name: Kopia obecnego stanu serwera
+        if: ${{ inputs.testy_tylko != true }}
+        env:
+          FTP_HOST: ${{ secrets.FTP_HOST }}
+          FTP_LOGIN: ${{ secrets.FTP_LOGIN }}
+          LFTP_PASSWORD: ${{ secrets.FTP_HASLO }}
+          KATALOG_ZDALNY: ${{ vars.KATALOG_ZDALNY }}
+        run: |
+          set -eu
+          rm -rf .kopia && mkdir -p .kopia
+          lftp --env-password -u "$FTP_LOGIN" "ftp://$FTP_HOST" <<LFTP
+          set ssl:verify-certificate no
+          set ftp:ssl-allow yes
+          set net:max-retries 3
+          set net:timeout 30
+          mirror --verbose --parallel=3 "$KATALOG_ZDALNY" .kopia
+          bye
+          LFTP
+          echo "Zapisano w kopii: $(find .kopia -type f | wc -l) plikow, $(du -sh .kopia | cut -f1)"
+
+      - name: Odloz kopie na 90 dni
+        if: ${{ inputs.testy_tylko != true }}
+        uses: actions/upload-artifact@v4
+        with:
+          name: kopia-serwera-${{ github.run_number }}
+          path: .kopia
+          retention-days: 90
+          if-no-files-found: warn
+
       - name: Wgraj na serwer
         if: ${{ inputs.testy_tylko != true }}
         env:
@@ -85,21 +111,16 @@ jobs:
           FTP_LOGIN: ${{ secrets.FTP_LOGIN }}
           LFTP_PASSWORD: ${{ secrets.FTP_HASLO }}
           KATALOG_ZDALNY: ${{ vars.KATALOG_ZDALNY }}
-          WYCZYSC: ${{ inputs.wyczysc }}
         run: |
           set -eu
-          USUWANIE=""
-          if [ "${WYCZYSC:-false}" = "true" ]; then
-            USUWANIE="--delete"
-            echo "::warning::Tryb czyszczacy: pliki spoza pakietu zostana usuniete z serwera"
-          fi
+          # bez --delete: stare pliki zostaja na serwerze nietkniete
           lftp --env-password -u "$FTP_LOGIN" "ftp://$FTP_HOST" <<LFTP
           set ssl:verify-certificate no
           set ftp:ssl-allow yes
           set ftp:ssl-protect-data yes
           set net:max-retries 3
           set net:timeout 20
-          mirror -R --verbose --parallel=3 $USUWANIE .pakiet "$KATALOG_ZDALNY"
+          mirror -R --verbose --parallel=3 .pakiet "$KATALOG_ZDALNY"
           chmod 644 $KATALOG_ZDALNY/.htaccess
           cls -la "$KATALOG_ZDALNY"
           bye
