@@ -491,7 +491,7 @@ font-size:20px;color:var(--navy);text-align:right;background:transparent;-moz-ap
       <tr><td>TK-G5S/R290</td><td>6–18 kW</td><td>230 / 400 V</td><td>6,08</td><td>4,75</td><td>5,93</td><td class="p">27 990 zł</td></tr>
       <tr><td>TK-G6S/R290</td><td>10–23 kW</td><td>230 / 400 V</td><td>6,02</td><td>4,67</td><td>5,78</td><td class="p">30 790 zł</td></tr>
     </table></div>
-    <p class="src">Montujemy również gruntowe pompy <b>Buderus</b> — dobór i wycenę robimy indywidualnie. Dane Thermokrafft: producenta, w punktach pracy wg PN-EN 14511. W10/7 oznacza wodę gruntową 10°C na wejściu, W0/-3 — glikol 0°C, czyli warunki zimowe. Ceny brutto, sugerowane detaliczne. Wartości SCOP, klasy energetycznej, poziomu hałasu i masy nie podajemy, dopóki nie mamy ich z etykiety energetycznej producenta — nie zgadujemy parametrów.</p>
+    <p class="src">Montujemy również gruntowe pompy <b>Buderus</b>. Ceny nie ma w tabeli, bo zależy od modelu i konfiguracji, więc podajemy ją w wycenie. Dane Thermokrafft: producenta, w punktach pracy wg PN-EN 14511. W10/7 oznacza wodę gruntową 10°C na wejściu, W0/-3 — glikol 0°C, czyli warunki zimowe. Ceny brutto, sugerowane detaliczne. Wartości SCOP, klasy energetycznej, poziomu hałasu i masy nie podajemy, dopóki nie mamy ich z etykiety energetycznej producenta — nie zgadujemy parametrów.</p>
     <div class="g3" style="margin-top:30px">
       <div class="card rv"><span class="tag"></span><div class="ic">🌿</div><h3>Dlaczego R290</h3><p>Propan ma współczynnik GWP równy 3, wobec setek lub tysięcy dla czynników syntetycznych. Nie podlega wycofywaniu przez przepisy F-gazowe, więc nie kupujesz urządzenia z datą ważności.</p></div>
       <div class="card rv"><span class="tag"></span><div class="ic">🌡</div><h3>Wyższa temperatura zasilania</h3><p>R290 pozwala uzyskać wyższą temperaturę wody grzewczej niż wiele czynników alternatywnych. To ma znaczenie przy modernizacji domu z grzejnikami.</p></div>
@@ -995,9 +995,9 @@ function policz(){
 
   /* render */
   $('rDom').textContent=S.m2+' m²'+(S.miasto?' w '+S.miasto:'');
-  $('rTytul').textContent=kaskada?'Układ kaskadowy — dobór indywidualny':'Thermokrafft '+pompa.id;
+  $('rTytul').textContent=kaskada?'Układ kaskadowy — dobór po oględzinach':'Thermokrafft '+pompa.id;
   $('rZrodlo').textContent='Dolne źródło: '+zrodlo;
-  $('rCena').textContent=kaskada?'wycena indywidualna':fmt(Math.floor(sumaMin/1000)*1000)+' – '+fmt(Math.ceil(sumaMax/1000)*1000);
+  $('rCena').textContent=kaskada?'wycena po oględzinach':fmt(Math.floor(sumaMin/1000)*1000)+' – '+fmt(Math.ceil(sumaMax/1000)*1000);
   $('rZlSuf').style.display=kaskada?'none':'inline';
   document.querySelector('.kprice .u').textContent=kaskada
     ?'zapotrzebowanie przekracza zakres pojedynczego urządzenia'
@@ -1015,11 +1015,11 @@ function policz(){
     :fmt(sumaMin/S.m2)+'–'+fmt(sumaMax/S.m2)+' <small>zł/m²</small>';
 
   var rows=(kaskada
-    ?'<tr><td>Pompa ciepła — układ kaskadowy, dwa urządzenia</td><td>wycena indywidualna</td></tr>'
+    ?'<tr><td>Pompa ciepła — układ kaskadowy, dwa urządzenia</td><td>wycena po oględzinach</td></tr>'
     :'<tr><td>Pompa ciepła Thermokrafft '+pompa.id+' ('+pompa.min+'–'+pompa.max+' kW)</td><td>'+fmt(pompa.cena)+' zł</td></tr>')
     +'<tr><td>Dolne źródło — '+metry+' m odwiertu z sondami, wypełnieniem i próbą</td><td>'+fmt(cOdwMin)+' – '+fmt(cOdwMax)+' zł</td></tr>'
     +'<tr><td>Montaż, uruchomienie i materiał kotłowni <b style="color:#E8A020">·założenie</b></td><td>'+fmt(cMont)+' zł</td></tr>'
-    +'<tr class="sum"><td>Razem, szacunkowo</td><td>'+(kaskada?'wycena indywidualna':fmt(sumaMin)+' – '+fmt(sumaMax)+' zł')+'</td></tr>';
+    +'<tr class="sum"><td>Razem, szacunkowo</td><td>'+(kaskada?'wycena po oględzinach':fmt(sumaMin)+' – '+fmt(sumaMax)+' zł')+'</td></tr>';
   $('tbl').innerHTML=rows;
 
   var por='';
@@ -1030,7 +1030,7 @@ function policz(){
       +fmt(stare)+' zł rocznie, czyli o '+fmt(osz)+' zł więcej.';
     else por=' Uwaga: przy obecnym ogrzewaniu '+PALIWA[S.pal].n+' koszt roczny jest zbliżony — oszczędność będzie niewielka i powiemy Ci to wprost.';
   }
-  if(kaskada)uwaga='Twoje zapotrzebowanie ('+moc.toFixed(1).replace('.',',')+' kW) przekracza zakres najmocniejszego urządzenia z serii TK (23 kW). Taki dom obsługuje układ kaskadowy z dwóch pomp — dobieramy go indywidualnie, bo w tej skali liczy się też rozłożenie odwiertów i sposób sterowania. '+uwaga;
+  if(kaskada)uwaga='Twoje zapotrzebowanie ('+moc.toFixed(1).replace('.',',')+' kW) przekracza zakres najmocniejszego urządzenia z serii TK (23 kW). Taki dom obsługuje układ kaskadowy z dwóch pomp. Taki dobór robimy po oględzinach, bo w tej skali liczy się też rozłożenie odwiertów i sposób sterowania. '+uwaga;
   $('wBox').style.display=uwaga?'block':'none';
   $('wBox').innerHTML=uwaga?'<b>Do sprawdzenia na działce.</b> '+uwaga:'';
 
