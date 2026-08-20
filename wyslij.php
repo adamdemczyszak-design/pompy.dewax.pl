@@ -10,7 +10,11 @@ if ($_SERVER['REQUEST_METHOD'] !== 'POST') { header('Location: index.html'); exi
 
 /* --- ochrona przed botami --- */
 if (!empty($_POST['bot-field'])) { header('Location: podziekowanie.html'); exit; }
-if (isset($_POST['czas']) && (int)$_POST['czas'] < 3) { header('Location: podziekowanie.html'); exit; }
+/* Wartość 0 oznacza, że JavaScript nie podmienił pola (błąd skryptu, wyłączony JS).
+   Takiego zgłoszenia nie wolno odrzucić po cichu — to realny klient, nie bot.
+   Odrzucamy wyłącznie wysyłki zmierzone jako podejrzanie szybkie: 1–2 sekundy. */
+$czas = (int)($_POST['czas'] ?? 0);
+if ($czas > 0 && $czas < 3) { header('Location: podziekowanie.html'); exit; }
 
 /* --- pobranie i oczyszczenie danych --- */
 function pole(string $k, int $max = 500): string {
