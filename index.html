@@ -20,7 +20,7 @@
 html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
 body{font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;color:var(--ink);background:#fff;line-height:1.65;font-size:16.5px;overflow-x:hidden}
 h1,h2,h3,h4{font-family:'Montserrat',sans-serif;letter-spacing:-.02em;line-height:1.14}
-img{max-width:100%;display:block}
+img{max-width:100%;height:auto;display:block}
 .wrap{max-width:var(--wrap);margin:0 auto;padding:0 22px}
 section{padding:84px 0;scroll-margin-top:72px}
 @media(max-width:760px){section{padding:54px 0}}
@@ -34,7 +34,7 @@ h2.head{font-size:clamp(27px,3.9vw,42px);font-weight:800;margin-bottom:15px}
 .dots{display:inline-flex;gap:6px;align-items:center}.dots i{width:10px;height:10px;border-radius:50%;display:block}
 /* buttons */
 .btn{display:inline-flex;align-items:center;justify-content:center;gap:9px;padding:15px 27px;border-radius:10px;font-family:'Montserrat';font-weight:800;font-size:15.5px;text-decoration:none;border:none;cursor:pointer;transition:.16s;text-align:center;line-height:1.3}
-.b-pri{background:var(--blue);color:#fff}.b-pri:hover{background:var(--blue-d);transform:translateY(-2px)}
+.b-pri{background:var(--blue-d);color:#fff}.b-pri:hover{background:#245A82;transform:translateY(-2px)}
 .b-nv{background:var(--navy);color:#fff}.b-nv:hover{background:var(--navy3);transform:translateY(-2px)}
 .b-go{background:var(--yellow);color:var(--navy)}.b-go:hover{filter:brightness(.93);transform:translateY(-2px)}
 .b-gh{background:rgba(255,255,255,.1);color:#fff;border:1.5px solid rgba(255,255,255,.35)}.b-gh:hover{background:rgba(255,255,255,.2)}
@@ -47,7 +47,7 @@ nav .btn,.hero .btn{white-space:nowrap}
 nav{position:sticky;top:0;z-index:80;background:rgba(255,255,255,.97);backdrop-filter:blur(12px);border-bottom:1px solid var(--hair);transition:box-shadow .2s}
 nav.stuck{box-shadow:0 6px 24px rgba(0,0,80,.09)}
 nav .wrap{display:flex;align-items:center;justify-content:space-between;gap:18px;padding-top:12px;padding-bottom:12px}
-nav .logo img{height:36px}
+nav .logo img{height:36px;width:auto}
 .links{display:flex;gap:24px}
 .links a{color:var(--ink);text-decoration:none;font-size:14.5px;font-weight:600;position:relative;padding:4px 0}
 .links a::after{content:"";position:absolute;left:0;bottom:0;width:0;height:2px;background:var(--blue);transition:width .2s}
@@ -230,7 +230,7 @@ font-size:20px;color:var(--navy);text-align:right;background:transparent;-moz-ap
 </div></div>
 
 <nav id="nav"><div class="wrap">
-  <a class="logo" href="#"><img src="img/logo.png" alt="DEWAX"></a>
+  <a class="logo" href="#"><img src="img/logo.png" alt="DEWAX — gruntowe pompy ciepła i odwierty" width="479" height="134"></a>
   <div class="links">
     <a href="#kreator">Policz koszt</a><a href="#rachunek">Rachunek za prąd</a><a href="#dzien-wiercenia">Na działce</a>
     <a href="#pompy">Pompy</a><a href="#dofinansowanie">Dotacje</a><a href="#realizacje">Realizacje</a><a href="#faq">FAQ</a>
@@ -240,7 +240,7 @@ font-size:20px;color:var(--navy);text-align:right;background:transparent;-moz-ap
 </div></nav>
 
 <header class="hero">
-  <div class="bg"><img src="img/hero_wide.webp" alt="Wiertnica DEWAX podczas wykonywania odwiertu pod gruntową pompę ciepła" fetchpriority="high"></div>
+  <div class="bg"><img src="img/hero_wide.webp" alt="Wiertnica DEWAX podczas wykonywania odwiertu pod gruntową pompę ciepła" fetchpriority="high" width="1700" height="1000"></div>
   <div class="wrap"><div class="in">
     <div class="badge"><span class="dots"><i style="background:#008000"></i><i style="background:#FFEA00"></i><i style="background:#FE0000"></i><i style="background:#4087BD"></i></span> Firma założona w 2007 roku</div>
     <h1>Odwiert i pompa ciepła<em>na jednej umowie.</em></h1>
@@ -466,7 +466,7 @@ font-size:20px;color:var(--navy);text-align:right;background:transparent;-moz-ap
     <h2 class="head rv">Ciepło, które już jest pod Twoją działką</h2>
     <p class="lead rv">Pompa nie produkuje ciepła — przenosi je z gruntu do domu. Na głębokości kilkudziesięciu metrów temperatura trzyma stałe 8–10°C przez cały rok, więc pompa nie walczy z mrozem tak jak powietrzna.</p>
     <div class="g2" style="align-items:center;gap:36px">
-      <figure class="fig rv"><img src="img/diag.webp" alt="Schemat gruntowej pompy ciepła: sondy pionowe pod działką połączone z pompą w budynku" loading="lazy"><figcaption>Sondy pionowe pod działką. W rurach krąży glikol, który zbiera ciepło z gruntu i oddaje je pompie.</figcaption></figure>
+      <figure class="fig rv"><img src="img/diag.webp" alt="Schemat gruntowej pompy ciepła: sondy pionowe pod działką połączone z pompą w budynku" loading="lazy" width="1100" height="1100"><figcaption>Sondy pionowe pod działką. W rurach krąży glikol, który zbiera ciepło z gruntu i oddaje je pompie.</figcaption></figure>
       <div class="rv">
         <h3 style="font-size:19px;font-weight:800;margin-bottom:8px">1 · Dolne źródło</h3>
         <p style="color:var(--soft);margin-bottom:20px">Odwierty z sondami w gruncie. To jedyna część instalacji, której nie poprawisz po wypełnieniu otworu — dlatego wymiarujemy ją z zapasem, a nie na styk.</p>
@@ -512,7 +512,7 @@ font-size:20px;color:var(--navy);text-align:right;background:transparent;-moz-ap
       <div class="card rv"><span class="tag"></span><div class="ic">💧</div><h3>Woda-woda</h3><p>Woda ze studni czerpalnej, zrzut do chłonnej, wymiennik pośredni chroniący instalację przed zanieczyszczeniami. Wymaga potwierdzonych, stabilnych warunków wodnych i większej liczby formalności.</p></div>
     </div>
     <div class="g2" style="margin-top:34px;align-items:center;gap:32px">
-      <figure class="fig rv" style="background:var(--navy2);border-color:rgba(255,255,255,.13)"><img src="img/glowica.webp" alt="Głowica sondy pionowej PE100-RC z otworem iniekcyjnym w otworze wiertniczym" loading="lazy"><figcaption style="color:#B9C3E8">Głowica sondy z otworem iniekcyjnym. Dzięki niemu otwór wypełnia się od dna do góry, a nie zasypuje z wierzchu.</figcaption></figure>
+      <figure class="fig rv" style="background:var(--navy2);border-color:rgba(255,255,255,.13)"><img src="img/glowica.webp" alt="Głowica sondy pionowej PE100-RC z otworem iniekcyjnym w otworze wiertniczym" loading="lazy" width="1000" height="688"><figcaption style="color:#B9C3E8">Głowica sondy z otworem iniekcyjnym. Dzięki niemu otwór wypełnia się od dna do góry, a nie zasypuje z wierzchu.</figcaption></figure>
       <div class="rv">
         <h3 style="font-size:21px;font-weight:800;margin-bottom:12px">Jak dobieramy długość źródła</h3>
         <p style="color:#B9C3E8;margin-bottom:14px">Nie z metrażu domu. Liczymy moc odbieraną z gruntu i dzielimy ją przez wydajność jednego metra odwiertu, która zależy od tego, co realnie jest pod Twoją działką. W nawodnionych piaskach z metra wyciągniemy więcej niż w suchej glinie.</p>
@@ -565,7 +565,7 @@ font-size:20px;color:var(--navy);text-align:right;background:transparent;-moz-ap
     <p class="lead rv">Pan Krecik to nasza marka wykonawcza dolnych źródeł. Wykonujemy je pod pompy Thermokrafft i Buderus, ale też pod urządzenie dowolnej marki — również dla instalatorów, którzy montują pompę u siebie.</p>
     <div class="g2" style="gap:34px;align-items:start">
       <div class="rv">
-        <figure class="fig"><img src="img/rig_tall.webp" alt="Wiertnica HR-606S DEWAX w trakcie pracy" loading="lazy"><figcaption>Wiertnica HR-606S — kompaktowa, wjeżdża tam, gdzie duża maszyna na ciężarówce nie ma czego szukać.</figcaption></figure>
+        <figure class="fig"><img src="img/rig_tall.webp" alt="Wiertnica HR-606S DEWAX w trakcie pracy" loading="lazy" width="820" height="1025"><figcaption>Wiertnica HR-606S — kompaktowa, wjeżdża tam, gdzie duża maszyna na ciężarówce nie ma czego szukać.</figcaption></figure>
       </div>
       <div class="rv">
         <h3 style="font-size:20px;font-weight:800;margin-bottom:12px">Co zostaje po zakończeniu prac</h3>
@@ -582,9 +582,9 @@ font-size:20px;color:var(--navy);text-align:right;background:transparent;-moz-ap
       </div>
     </div>
     <div class="gal rv" style="margin-top:30px">
-      <figure><img src="img/pluczka.webp" alt="Wiercenie na płuczkę — woda z urobkiem przy otworze" loading="lazy"><figcaption><b>Wiercenie na płuczkę</b>Woda wypłukuje urobek z otworu.</figcaption></figure>
-      <figure><img src="img/otwor.webp" alt="Sonda koszowa DEWAX Helix zapuszczona do otworu, przed wypełnieniem" loading="lazy"><figcaption><b>Sonda koszowa DEWAX Helix</b>W otworze, przed wypełnieniem — widzisz, co poszło do ziemi.</figcaption></figure>
-      <figure><img src="img/manometr.webp" alt="Manometr podczas próby ciśnieniowej dolnego źródła" loading="lazy"><figcaption><b>Próba ciśnieniowa</b>Przed wypełnieniem otworu, z protokołem.</figcaption></figure>
+      <figure><img src="img/pluczka.webp" alt="Wiercenie na płuczkę — woda z urobkiem przy otworze" loading="lazy" width="1000" height="750"><figcaption><b>Wiercenie na płuczkę</b>Woda wypłukuje urobek z otworu.</figcaption></figure>
+      <figure><img src="img/otwor.webp" alt="Sonda koszowa DEWAX Helix zapuszczona do otworu, przed wypełnieniem" loading="lazy" width="1100" height="688"><figcaption><b>Sonda koszowa DEWAX Helix</b>W otworze, przed wypełnieniem — widzisz, co poszło do ziemi.</figcaption></figure>
+      <figure><img src="img/manometr.webp" alt="Manometr podczas próby ciśnieniowej dolnego źródła" loading="lazy" width="1100" height="688"><figcaption><b>Próba ciśnieniowa</b>Przed wypełnieniem otworu, z protokołem.</figcaption></figure>
     </div>
   </div>
 </section>
@@ -648,12 +648,12 @@ font-size:20px;color:var(--navy);text-align:right;background:transparent;-moz-ap
     <h2 class="head rv">Zdjęcia z placu, nie z banku zdjęć</h2>
     <p class="lead rv">Wiertnica, otwory, sondy i kotłownie z naszych realizacji — od nowych domów po modernizacje starych piwnic.</p>
     <div class="gal">
-      <figure class="rv"><img src="img/g1.webp" alt="Wiercenie odwiertu pod sondy pionowe" loading="lazy"><figcaption><b>Wiercenie pod sondy pionowe</b>Maszt w pionie, metr po metrze.</figcaption></figure>
-      <figure class="rv"><img src="img/g2.webp" alt="Wiertnica i minikoparka DEWAX na placu budowy" loading="lazy"><figcaption><b>Własny sprzęt na placu</b>Wiertnica i minikoparka — przyjeżdżamy swoim.</figcaption></figure>
-      <figure class="rv"><img src="img/helix.webp" alt="Sonda koszowa DEWAX Helix w szerokim otworze przed wypełnieniem" loading="lazy"><figcaption><b>Sonda koszowa DEWAX Helix</b>Zwinięta w spiralę, w szerokim otworze.</figcaption></figure>
-      <figure class="rv"><img src="img/k1.webp" alt="Pompa ciepła Thermokrafft w kotłowni nowego domu" loading="lazy"><figcaption><b>Montaż w nowym domu</b>Pompa, rozdzielacz i przyłącza źródła.</figcaption></figure>
-      <figure class="rv"><img src="img/k2.webp" alt="Pompa ciepła z buforem w kotłowni" loading="lazy"><figcaption><b>Kotłownia z buforem c.o.</b>Pompa i zasobnik na swoim miejscu.</figcaption></figure>
-      <figure class="rv"><img src="img/k3.webp" alt="Pompa ciepła w piwnicy starszego domu" loading="lazy"><figcaption><b>Modernizacja starego domu</b>Pompa weszła do istniejącej piwnicy.</figcaption></figure>
+      <figure class="rv"><img src="img/g1.webp" alt="Wiercenie odwiertu pod sondy pionowe" loading="lazy" width="960" height="720"><figcaption><b>Wiercenie pod sondy pionowe</b>Maszt w pionie, metr po metrze.</figcaption></figure>
+      <figure class="rv"><img src="img/g2.webp" alt="Wiertnica i minikoparka DEWAX na placu budowy" loading="lazy" width="960" height="720"><figcaption><b>Własny sprzęt na placu</b>Wiertnica i minikoparka — przyjeżdżamy swoim.</figcaption></figure>
+      <figure class="rv"><img src="img/helix.webp" alt="Sonda koszowa DEWAX Helix w szerokim otworze przed wypełnieniem" loading="lazy" width="1000" height="688"><figcaption><b>Sonda koszowa DEWAX Helix</b>Zwinięta w spiralę, w szerokim otworze.</figcaption></figure>
+      <figure class="rv"><img src="img/k1.webp" alt="Pompa ciepła Thermokrafft w kotłowni nowego domu" loading="lazy" width="960" height="720"><figcaption><b>Montaż w nowym domu</b>Pompa, rozdzielacz i przyłącza źródła.</figcaption></figure>
+      <figure class="rv"><img src="img/k2.webp" alt="Pompa ciepła z buforem w kotłowni" loading="lazy" width="960" height="720"><figcaption><b>Kotłownia z buforem c.o.</b>Pompa i zasobnik na swoim miejscu.</figcaption></figure>
+      <figure class="rv"><img src="img/k3.webp" alt="Pompa ciepła w piwnicy starszego domu" loading="lazy" width="960" height="720"><figcaption><b>Modernizacja starego domu</b>Pompa weszła do istniejącej piwnicy.</figcaption></figure>
     </div>
     <h3 class="rv" style="font-size:21px;font-weight:800;margin:44px 0 8px">Trzy realizacje z liczbami</h3>
     <p class="rv" style="color:var(--soft);font-size:15.5px;max-width:62ch;margin-bottom:20px">Zdjęcie pokazuje, że robota była. Liczby pokazują, czy zagrała. Dlatego przy każdej realizacji podajemy to, co pozwala porównać ją z własnym domem, łącznie ze zużyciem prądu po pełnym sezonie.</p>
@@ -858,7 +858,7 @@ font-size:20px;color:var(--navy);text-align:right;background:transparent;-moz-ap
   <div class="wrap">
     <div class="g3" style="gap:32px;margin-bottom:30px">
       <div>
-        <img src="img/logo-biale.png" alt="DEWAX" style="height:34px;margin-bottom:14px">
+        <img src="img/logo-biale.png" alt="DEWAX Sp. z o.o." loading="lazy" style="height:34px;width:auto;margin-bottom:14px" width="300" height="84">
         <p style="max-width:40ch;margin-bottom:12px">Gruntowe pompy ciepła Thermokrafft i Buderus, dolne źródła i odwierty. Od 2007 roku w Dobrzycy.</p>
         <p style="font-size:13px;color:#6B78A8">DEWAX Sp. z o.o. · ul. Ostrowska 1, 63-330 Dobrzyca<br>KRS 0000298299 · NIP 6080071501 · REGON 300706044</p>
         <p style="font-size:13px;margin-top:10px"><a href="/polityka-prywatnosci.html" style="color:#8894C4;text-decoration:underline">Polityka prywatności</a></p>
