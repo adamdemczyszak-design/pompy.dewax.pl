@@ -1,132 +1,145 @@
-# Prompt do wklejenia w Claude Code na własnym komputerze
+# Instrukcja wdrożenia — dla sesji Claude Code działającej na komputerze Adama
 
-Skopiuj wszystko poniżej poziomej linii i wklej jako pierwszą wiadomość.
+Ten plik jest instrukcją dla Ciebie, asystencie. Adam wskazał Ci go jednym zdaniem —
+wszystko, czego potrzebujesz, jest poniżej. Nie pytaj go o rzeczy opisane w tym pliku.
+
+**Adam nie jest programistą.** Mów prosto, dawaj jedno zadanie naraz i czekaj na
+potwierdzenie. Nie wypisuj po pięć poleceń w jednej wiadomości — to go gubi.
+Nie tłumacz, jak coś działa, dopóki nie zapyta.
 
 ---
 
-Wdróż gotową stronę na hosting nazwa.pl, pod adres `pompy.dewax.pl`.
+## Cel
+
+Zastąpić starą stronę pod adresem `pompy.dewax.pl` nową, gotową wersją.
+
+## Co jest już zrobione — NIE POWTARZAJ TEGO
+
+**Kopie zapasowe są wykonane.** 20.08.2026 Adam zrobił w panelu nazwa.pl kopię
+na żądanie: pliki strony (100%) oraz baza danych (100%). Leżą po stronie nazwa.pl,
+przechowywane 14 dni. **Nie trać czasu na pobieranie kopii na dysk lokalny.**
+
+Pliki są przygotowane, sprawdzone i wypchnięte na GitHub. Nie buduj ich od nowa.
 
 ## Skąd wziąć pliki
 
-Wszystko jest już przygotowane i zwersjonowane w repozytorium GitHub. Zacznij od:
-
 ```
-git clone https://github.com/adamdemczyszak-design/pompy.dewax.pl
-cd pompy.dewax.pl
+git clone -b main https://github.com/adamdemczyszak-design/pompy.dewax.pl
 ```
 
-Gałąź `main`, commit `3093abb` lub nowszy. W repozytorium znajdziesz:
+Na serwer trafia **wyłącznie**:
 
-- pakiet wdrożeniowy: `index.html`, `wyslij.php`, `podziekowanie.html`, `404.html`,
-  `.htaccess`, `og.jpg`, `favicon.png`, `robots.txt`, `sitemap.xml`, `img/` (15 plików)
-- `wdroz.sh` — etapowy skrypt wdrożenia (Linux/macOS)
-- `poczta-dkim-dmarc.md` — zadanie na później, nie teraz
-- `audyt/` — audyty strony i bezpieczeństwa
+```
+index.html  wyslij.php  podziekowanie.html  404.html  .htaccess
+polityka-prywatnosci.html  og.jpg  favicon.png  robots.txt  sitemap.xml
+img/  (15 plików)
+```
 
-**Nie przepisuj tych plików, nie refaktoryzuj, nie zmieniaj treści ani stylów.**
-Twoim zadaniem jest wymiana strony na serwerze i weryfikacja, że działa.
+Reszta zawartości repozytorium — `CLAUDE.md`, `START.md`, `konfigurator.html`,
+`audyt/`, `tresci/`, `zdjecia/`, `wdroz.sh`, pliki `.md` — **zostaje w repozytorium
+i nie trafia na serwer**.
 
-## Co już zostało zrobione — nie powtarzaj tego
+Nie przepisuj tych plików, nie refaktoryzuj, nie zmieniaj treści ani stylów.
 
-1. Pakiet jest w repozytorium (nie trzeba go wersjonować od nowa).
-2. **Naprawiono błąd cichej utraty zgłoszeń.** Pole `czas` w formularzu ma domyślnie `0`,
-   a podmienia je JavaScript przy wysyłce. Stara wersja `wyslij.php` odrzucała takie
-   zgłoszenie jako bota i pokazywała stronę podziękowania bez wysłania maila.
-   Obecna logika odrzuca wyłącznie wysyłki zmierzone na 1–2 sekundy.
-   **Nie przywracaj poprzedniej wersji tego warunku.**
-3. Sekcji o dofinansowaniach nadano `id="dofinansowanie"`.
+## Czego pod żadnym pozorem nie cofać
 
-## Sytuacja na serwerze
+W `wyslij.php` znajduje się warunek:
 
-Pod adresem `pompy.dewax.pl` stoi dziś aplikacja **CakePHP 4**, która trzyma treść
-w **bazie danych**, nie w plikach. To jest kluczowe dla kopii zapasowej.
+```php
+$czas = (int)($_POST['czas'] ?? 0);
+if ($czas > 0 && $czas < 3) { header('Location: podziekowanie.html'); exit; }
+```
 
-Hosting: nazwa.pl, serwer `server420780.nazwa.pl`, adres `85.128.139.207`.
-Katalog aplikacji to prawdopodobnie `/pompy` z document rootem `/pompy/webroot`,
-ale **nie zgaduj — najpierw wylistuj serwer i pokaż mi drzewo.**
+Wygląda nietypowo, ale jest celowy. Naprawia błąd, przez który formularz pokazywał
+stronę podziękowania **bez wysłania maila**, gdy JavaScript się nie wykonał — klient
+widział potwierdzenie, a zgłoszenie nie docierało do nikogo. Nie zmieniaj go z powrotem
+na `(int)$_POST['czas'] < 3`.
 
-## Kolejność działań
+W `wyslij.php` wolno zmienić wyłącznie `$ODBIORCA` i `$NADAWCA`.
 
-### Krok 1 — połączenie
-Zapytaj mnie o host, login i hasło FTP (panel nazwa.pl → Serwery → Dane dostępowe).
-Nie zapisuj ich w żadnym pliku. Jeśli pakiet ma SSH/SFTP, użyj go zamiast FTP.
-Pokaż mi strukturę katalogów i ustalmy wspólnie, gdzie leży strona.
+## Serwer
 
-Możesz użyć gotowego skryptu: `./wdroz.sh drzewo`
+- nazwa.pl, pakiet CloudHosting Biznes
+- `server420780.nazwa.pl`, IP `85.128.139.207`
+- Panel: `admin.nazwa.pl` (Adam wchodzi przez autologowanie z panelu klienta)
+- Stoi tam stara aplikacja **CakePHP 4**, która trzyma treść w bazie danych
+- Na serwerze aktywny jest **CDN nazwa.pl**
 
-### Krok 2 — kopia zapasowa, trzy elementy
-Kopia plików przez FTP **nie wystarczy**, bo treść jest w bazie danych.
+Poproś Adama o dane FTP. Nie zapisuj ich w żadnym pliku ani w repozytorium.
 
-- **2a. Baza:** panel nazwa.pl → Bazy danych → phpMyAdmin → Eksport → SQL.
-  Dane połączenia są w `config/app_local.php` starej aplikacji.
-  Zapisz jako `~/Downloads/DEWAX_STRONA/backup_RRRR-MM-DD/baza.sql`
-- **2b. Pliki:** cały katalog domeny na dysk lokalny
-- **2c. Galeria:** osobno `/pompy/webroot/uploads/galleries/big/`
+## Kolejność działań — po jednym kroku, z potwierdzeniem
 
-Gotowy skrypt: `KATALOG_ZDALNY=/pompy ./wdroz.sh kopia`
+### Krok 1 — znajdź katalog
+Połącz się i wylistuj katalogi. **Nie zakładaj, że to `/pompy`** — sprawdź.
+Pokaż Adamowi drzewo i potwierdźcie razem, który katalog obsługuje `pompy.dewax.pl`.
 
-Pokaż mi liczbę plików, rozmiar w MB i rozmiar `baza.sql`. **Czekaj na moje „ok".**
+### Krok 2 — mapa przekierowań 301
+Zanim cokolwiek skasujesz, pobierz stary `https://pompy.dewax.pl/sitemap.xml`
+i wypisz adresy starych podstron. Po wdrożeniu wszystkie zwrócą 404 razem
+z pozycjami w Google.
 
-### Krok 3 — mapa przekierowań 301
-Zanim wyczyścisz katalog, pobierz stary `sitemap.xml` i wypisz adresy podstron
-(sprawdź też routing w `config/routes.php`). Po wdrożeniu wszystkie stare adresy
-zwrócą 404 razem z pozycjami w Google.
-
-W `.htaccess` jest przygotowana pusta sekcja między znacznikami
+W `.htaccess` jest pusta sekcja między znacznikami
 `--- początek listy przekierowań ---` i `--- koniec listy przekierowań ---`.
-Format wpisu:
 
-```
-Redirect 301 /kalkulator  https://pompy.dewax.pl/#kreator
-```
+Format: `Redirect 301 /kalkulator  https://pompy.dewax.pl/#kreator`
 
-Dostępne kotwice na nowej stronie: `#kreator`, `#pompy`, `#zrodla`, `#krecik`, `#geo`,
-`#realizacje`, `#proces`, `#faq`, `#instalatorzy`, `#kontakt`, `#dofinansowanie`.
+Dostępne kotwice na nowej stronie: `#kreator` `#pompy` `#zrodla` `#krecik` `#geo`
+`#realizacje` `#proces` `#faq` `#instalatorzy` `#kontakt` `#dofinansowanie`
 
-**Pokaż mi proponowaną mapę do zatwierdzenia przed wgraniem.**
+Pokaż Adamowi proponowaną mapę do zatwierdzenia przed wgraniem.
 
-### Krok 4 — wgranie
-Wyczyść katalog i wgraj pakiet do katalogu głównego domeny (nie do podfolderu).
+### Krok 3 — wgranie
+Wyczyść katalog i wgraj pliki do **katalogu głównego** domeny, nie do podfolderu.
 `img/` zostaje podkatalogiem. Uprawnienia: pliki `644`, katalogi `755`.
 
-Gotowy skrypt: `KATALOG_ZDALNY=/pompy ./wdroz.sh wgraj`
-(odmówi startu bez kopii i bez `baza.sql`, poprosi o wpisanie `WDRAZAM`)
-
-**Po wgraniu zweryfikuj, że `.htaccess` faktycznie jest na serwerze** — zaczyna się
+**Po wgraniu sprawdź, czy `.htaccess` faktycznie jest na serwerze.** Zaczyna się
 od kropki i bywa pomijany przez narzędzia FTP. Bez niego nie ma HTTPS ani kompresji.
 
+### Krok 4 — CDN
+Wyczyść pamięć podręczną CDN w panelu nazwa.pl, inaczej strona będzie pokazywać
+starą wersję mimo poprawnego wgrania.
+
 ### Krok 5 — testy
-Gotowy skrypt: `./wdroz.sh testy` — wykonuje 12 testów i pokazuje tabelę.
+Nie łącz `curl -I` z `-X POST` — przy POST daje mylący wynik.
+Używaj `curl -s -o /dev/null -w "%{http_code}"`.
 
-**Uwaga na składnię:** nie łącz `curl -I` z `-X POST`. `-I` czyta tylko nagłówki
-i przy POST daje mylący wynik. Do testów POST używaj `curl -s -o /dev/null -w "%{http_code}"`.
+| Test | Oczekiwany wynik |
+|---|---|
+| `http://pompy.dewax.pl` | 301 na https |
+| `https://pompy.dewax.pl` | 200 |
+| nagłówek gzip | `content-encoding: gzip` |
+| `/img/hero_wide.webp` | 200 |
+| `/og.jpg` | 200 |
+| `/polityka-prywatnosci.html` | 200 |
+| `/nie-ma-takiej-strony` | 404 |
+| `/sitemap.xml` | poprawny XML |
+| `/wyslij.php` metodą GET | 302 |
+| POST z błędnymi danymi | 422 |
+| POST z `bot-field=spam` | 302 |
+| **POST bez pola `czas`** | **422 — nie 302** |
 
-Testy obejmują: przekierowanie HTTPS (301), stronę główną (200), gzip, zdjęcia WebP,
-logo, `og.jpg`, stronę 404, `sitemap.xml`, `wyslij.php` na GET (302), walidację (422),
-honeypot (302) oraz zgłoszenie bez pola `czas` — to ostatnie musi zwrócić **422, nie 302**.
-Jeśli zwróci 302, poprawka błędu cichej utraty zgłoszeń została cofnięta.
+Ostatni test jest najważniejszy. Jeśli zwróci 302, ktoś cofnął poprawkę
+opisaną w sekcji „Czego pod żadnym pozorem nie cofać".
 
-### Krok 6 — test formularza jak użytkownik
-Wyślij formularz z przeglądarki. Potwierdź stronę podziękowania.
-Ja sprawdzę skrzynkę `sprzedaz@dewax.pl` **oraz folder spam** — domena nie ma
-jeszcze DKIM ani DMARC, więc powiadomienia mogą tam trafiać.
+### Krok 6 — test formularza
+Poproś Adama, żeby wysłał formularz z przeglądarki i sprawdził skrzynkę
+`sprzedaz@dewax.pl` **oraz folder spam** — domena nie ma jeszcze DKIM ani DMARC,
+więc powiadomienia mogą tam trafiać.
 
-### Krok 7 — raport
-Podsumuj: lokalizacja i rozmiar trzech kopii, zastosowana mapa 301, wyniki testów,
-lista spraw wymagających mojej decyzji. Przypomnij o zgłoszeniu `sitemap.xml`
-w Google Search Console.
+### Krok 7 — podsumowanie
+Krótko: co wgrane, jaka mapa 301, wyniki testów, co wymaga decyzji Adama.
+Przypomnij o zgłoszeniu `sitemap.xml` w Google Search Console.
 
-## Czego NIE robić
+## Czego nie robić
 
-- Nie modyfikuj `index.html`, `wyslij.php` ani `404.html` bez mojej zgody.
-  W `wyslij.php` jedyne pola do zmiany to `$ODBIORCA` i `$NADAWCA` na górze.
-- W `.htaccess` uzupełniasz **wyłącznie** sekcję przekierowań między znacznikami.
-- Nie instaluj CMS-a, nie stawiaj Node ani buildów, nie dodawaj bibliotek
-  ani narzędzi analitycznych. Zdarzenia `dataLayer` są w kodzie, GA4 podepnę sam.
-- Nie zmieniaj rekordów DNS.
-- Nie wysyłaj testowych maili masowo — jeden wystarczy.
-- Nie zakładaj repozytorium git na serwerze.
+- Nie instaluj CMS-a, nie stawiaj Node ani buildów
+- Nie dodawaj bibliotek ani narzędzi analitycznych — zdarzenia `dataLayer`
+  są już w kodzie, GA4 Adam podepnie sam
+- Nie zmieniaj rekordów DNS
+- Nie wysyłaj testowych maili masowo — jeden wystarczy
+- Nie zakładaj repozytorium git na serwerze
 
-## Po wdrożeniu
+## Zadanie na później, nie teraz
+
 W repozytorium jest `poczta-dkim-dmarc.md` z instrukcją dodania DKIM i DMARC
-w panelu nazwa.pl. To osobne zadanie, po udanym wdrożeniu.
+w panelu nazwa.pl. Zaproponuj to Adamowi dopiero po udanym wdrożeniu.
