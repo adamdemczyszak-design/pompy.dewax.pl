@@ -1,0 +1,154 @@
+name: Wdrozenie na pompy.dewax.pl
+
+# Uruchamia sie recznie (zakladka Actions -> Run workflow)
+# albo automatycznie, gdy na galezi main zmieni sie ktorykolwiek plik strony.
+on:
+  workflow_dispatch:
+    inputs:
+      wyczysc:
+        description: 'Usunac z serwera pliki spoza pakietu (pierwsze przelaczenie ze starej strony)'
+        type: boolean
+        default: false
+      testy_tylko:
+        description: 'Nie wgrywaj nic, wykonaj same testy zywej strony'
+        type: boolean
+        default: false
+  push:
+    branches: [main]
+    paths:
+      - 'index.html'
+      - 'wyslij.php'
+      - 'podziekowanie.html'
+      - '404.html'
+      - '.htaccess'
+      - 'polityka-prywatnosci.html'
+      - 'og.jpg'
+      - 'favicon.png'
+      - 'robots.txt'
+      - 'sitemap.xml'
+      - 'img/**'
+      - '.github/workflows/wdrozenie.yml'
+
+concurrency:
+  group: wdrozenie-pompy-dewax
+  cancel-in-progress: false
+
+env:
+  DOMENA: pompy.dewax.pl
+
+jobs:
+  wdroz:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Sprawdz komplet danych dostepowych
+        env:
+          FTP_HOST: ${{ secrets.FTP_HOST }}
+          FTP_LOGIN: ${{ secrets.FTP_LOGIN }}
+          FTP_HASLO: ${{ secrets.FTP_HASLO }}
+          KATALOG_ZDALNY: ${{ vars.KATALOG_ZDALNY }}
+        run: |
+          BRAKI=""
+          [ -n "$FTP_HOST" ]       || BRAKI="$BRAKI FTP_HOST(secret)"
+          [ -n "$FTP_LOGIN" ]      || BRAKI="$BRAKI FTP_LOGIN(secret)"
+          [ -n "$FTP_HASLO" ]      || BRAKI="$BRAKI FTP_HASLO(secret)"
+          [ -n "$KATALOG_ZDALNY" ] || BRAKI="$BRAKI KATALOG_ZDALNY(variable)"
+          if [ -n "$BRAKI" ]; then
+            echo "::error::Brakuje danych w ustawieniach repozytorium:$BRAKI"
+            echo "Settings -> Secrets and variables -> Actions" >> "$GITHUB_STEP_SUMMARY"
+            exit 1
+          fi
+
+      - name: Zloz pakiet do wgrania
+        if: ${{ inputs.testy_tylko != true }}
+        run: |
+          set -eu
+          rm -rf .pakiet && mkdir -p .pakiet
+          for P in index.html wyslij.php podziekowanie.html 404.html .htaccess \
+                   polityka-prywatnosci.html og.jpg favicon.png robots.txt sitemap.xml; do
+            [ -f "$P" ] || { echo "::error::Brak pliku $P"; exit 1; }
+            cp "$P" .pakiet/
+          done
+          cp -r img .pakiet/img
+          echo "Pakiet: $(find .pakiet -type f | wc -l) plikow" >> "$GITHUB_STEP_SUMMARY"
+          find .pakiet -type f | sort
+
+      - name: Instaluj lftp
+        if: ${{ inputs.testy_tylko != true }}
+        run: sudo apt-get update -qq && sudo apt-get install -y -qq lftp
+
+      - name: Wgraj na serwer
+        if: ${{ inputs.testy_tylko != true }}
+        env:
+          FTP_HOST: ${{ secrets.FTP_HOST }}
+          FTP_LOGIN: ${{ secrets.FTP_LOGIN }}
+          LFTP_PASSWORD: ${{ secrets.FTP_HASLO }}
+          KATALOG_ZDALNY: ${{ vars.KATALOG_ZDALNY }}
+          WYCZYSC: ${{ inputs.wyczysc }}
+        run: |
+          set -eu
+          USUWANIE=""
+          if [ "${WYCZYSC:-false}" = "true" ]; then
+            USUWANIE="--delete"
+            echo "::warning::Tryb czyszczacy: pliki spoza pakietu zostana usuniete z serwera"
+          fi
+          lftp --env-password -u "$FTP_LOGIN" "ftp://$FTP_HOST" <<LFTP
+          set ssl:verify-certificate no
+          set ftp:ssl-allow yes
+          set ftp:ssl-protect-data yes
+          set net:max-retries 3
+          set net:timeout 20
+          mirror -R --verbose --parallel=3 $USUWANIE .pakiet "$KATALOG_ZDALNY"
+          chmod 644 $KATALOG_ZDALNY/.htaccess
+          cls -la "$KATALOG_ZDALNY"
+          bye
+          LFTP
+
+      - name: Testy zywej strony
+        run: |
+          set -u
+          D="$DOMENA"
+          ZLE=0
+          sprawdz() {
+            OPIS="$1"; OCZEK="$2"; MAM="$3"
+            if [ "$MAM" = "$OCZEK" ]; then
+              echo "| $OPIS | $OCZEK | $MAM | OK |" >> "$GITHUB_STEP_SUMMARY"
+            else
+              echo "| $OPIS | $OCZEK | $MAM | BLAD |" >> "$GITHUB_STEP_SUMMARY"
+              ZLE=$((ZLE+1))
+            fi
+          }
+          kod() { curl -s -o /dev/null -w '%{http_code}' --max-time 25 "$@" || echo 000; }
+
+          echo "## Testy $D" >> "$GITHUB_STEP_SUMMARY"
+          echo "| Test | Oczekiwane | Wynik | |" >> "$GITHUB_STEP_SUMMARY"
+          echo "|---|---|---|---|" >> "$GITHUB_STEP_SUMMARY"
+
+          sprawdz "http -> https"            301 "$(curl -s -o /dev/null -w '%{http_code}' --max-time 25 "http://$D" || echo 000)"
+          sprawdz "strona glowna"            200 "$(kod "https://$D")"
+          sprawdz "/img/hero_wide.webp"      200 "$(kod "https://$D/img/hero_wide.webp")"
+          sprawdz "/og.jpg"                  200 "$(kod "https://$D/og.jpg")"
+          sprawdz "/polityka-prywatnosci"    200 "$(kod "https://$D/polityka-prywatnosci.html")"
+          sprawdz "/podziekowanie.html"      200 "$(kod "https://$D/podziekowanie.html")"
+          sprawdz "nieistniejacy adres"      404 "$(kod "https://$D/nie-ma-takiej-strony")"
+          sprawdz "/wyslij.php metoda GET"   302 "$(kod "https://$D/wyslij.php")"
+          sprawdz "POST bez pola czas"       422 "$(kod -X POST -d 'imie=Test&telefon=500600700' "https://$D/wyslij.php")"
+          sprawdz "POST z bot-field"         302 "$(kod -X POST -d 'bot-field=spam&czas=9' "https://$D/wyslij.php")"
+
+          GZIP=$(curl -sI -H 'Accept-Encoding: gzip' --max-time 25 "https://$D" | grep -ci 'content-encoding: gzip' || true)
+          sprawdz "kompresja gzip" 1 "$GZIP"
+
+          if curl -s --max-time 25 "https://$D/sitemap.xml" | head -1 | grep -q '<?xml'; then
+            sprawdz "sitemap.xml" xml xml
+          else
+            sprawdz "sitemap.xml" xml brak
+          fi
+
+          echo "" >> "$GITHUB_STEP_SUMMARY"
+          if [ "$ZLE" -gt 0 ]; then
+            echo "**Bledow: $ZLE**" >> "$GITHUB_STEP_SUMMARY"
+            echo "::error::Testy nieudane: $ZLE"
+            exit 1
+          fi
+          echo "**Wszystkie testy przeszly.**" >> "$GITHUB_STEP_SUMMARY"
