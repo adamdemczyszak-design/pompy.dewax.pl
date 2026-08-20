@@ -381,11 +381,13 @@ font-size:20px;color:var(--navy);text-align:right;background:transparent;-moz-ap
       <div class="knote" id="rNote"></div>
     </div>
     <div class="kcta">
-      <button class="btn b-go" onclick="alert('W wersji produkcyjnej: formularz kontaktowy wysyłający zapytanie do DEWAX.')">Chcę dokładną ofertę →</button>
+      <a class="btn b-go" href="#kontakt" id="ctaOferta">Chcę dokładną ofertę →</a>
       <button class="btn b-out" onclick="go(1)" style="margin-left:8px">Policz jeszcze raz</button>
       <p>Odpowiadamy w jeden dzień roboczy. Numeru telefonu nie musisz podawać.</p>
     </div>
     </div>
+  </div>
+  </div>
   <div class="wrap"><p class="src" style="margin-top:26px">Dlaczego pokazujemy cenę od razu, skoro nikt w branży tego nie robi? Bo jeśli liczby Ci nie pasują, szkoda Twojego i naszego czasu na spotkanie. A jeśli pasują — wiesz o czym rozmawiamy, zanim zadzwonisz.</p></div>
 </section>
 
@@ -864,9 +866,23 @@ function policz(){
     +'To wyliczenie orientacyjne i nie stanowi oferty — dokładną kwotę podajemy po obejrzeniu działki i sprawdzeniu geologii.';
 
   go(4);
+  WYNIK={moc:+moc.toFixed(1),model:pompa.id,metry:metry,otwory:otwory,
+    cenaOd:Math.round(sumaMin),cenaDo:Math.round(sumaMax)};
   if(window.dataLayer)dataLayer.push({event:'dobor_result',moc_kw:+moc.toFixed(1),
     model:pompa.id,metry:metry,otwory:otwory,cena_od:Math.round(sumaMin),cena_do:Math.round(sumaMax)});
 }
+var WYNIK=null;
+var _cta=document.getElementById('ctaOferta');
+if(_cta)_cta.addEventListener('click',function(){
+  var f=document.forms['wycena']; if(!f)return;
+  var m2=document.getElementById('m2num');
+  if(m2&&m2.value&&f.metraz&&!f.metraz.value)f.metraz.value=m2.value;
+  if(WYNIK&&f.wiadomosc&&!f.wiadomosc.value){
+    f.wiadomosc.value='Z kalkulatora: pompa '+WYNIK.model+', moc '+String(WYNIK.moc).replace('.',',')
+      +' kW, '+WYNIK.otwory+' x odwiert, razem '+WYNIK.metry+' m. Szacunek '
+      +WYNIK.cenaOd.toLocaleString('pl-PL')+'-'+WYNIK.cenaDo.toLocaleString('pl-PL')+' zl.';
+  }
+});
 var _t0=Date.now(); var _fc=document.getElementById('fczas');
 if(_fc){var _f=_fc.form; if(_f)_f.addEventListener('submit',function(){_fc.value=Math.round((Date.now()-_t0)/1000)})}
 var nav=document.getElementById('nav');
