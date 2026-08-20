@@ -59,10 +59,11 @@ nav.open .links a{padding:13px 24px}nav.open .links a::after{display:none}}
 /* hero */
 .hero{position:relative;min-height:min(84vh,760px);display:flex;align-items:center;background:var(--navy);overflow:hidden}
 .hero .bg{position:absolute;inset:0}
-.hero .bg img{width:100%;height:100%;object-fit:cover;object-position:50% 62%;opacity:.55}
-.hero .bg::after{content:"";position:absolute;inset:0;background:linear-gradient(100deg,rgba(0,0,80,.95) 0%,rgba(0,0,80,.84) 46%,rgba(0,0,80,.45) 100%)}
+.hero .bg img{width:100%;height:100%;object-fit:cover;object-position:50% 62%;opacity:1}
+.hero .bg::after{content:"";position:absolute;inset:0;background:linear-gradient(97deg,rgba(0,0,55,.93) 0%,rgba(0,0,55,.82) 38%,rgba(0,0,55,.55) 60%,rgba(0,10,60,.12) 82%,rgba(0,10,60,.04) 100%)}
 .hero .wrap{position:relative;z-index:2;padding:74px 22px}
-.hero .in{max-width:760px}
+.hero .in{max-width:760px;text-shadow:0 1px 16px rgba(0,0,40,.5)}
+.hero .in .btn,.hero .in .chip{text-shadow:none}
 .badge{display:inline-flex;align-items:center;gap:9px;background:rgba(64,135,189,.2);border:1px solid rgba(64,135,189,.55);color:#BBD6EC;font-size:13px;font-weight:700;padding:7px 15px;border-radius:99px;margin-bottom:22px}
 .hero h1{font-size:clamp(32px,5.4vw,60px);font-weight:900;color:#fff;margin-bottom:19px}
 .hero h1 em{font-style:normal;color:var(--blue);display:block}
@@ -87,7 +88,10 @@ nav.open .links a{padding:13px 24px}nav.open .links a::after{display:none}}
 @media(max-width:680px){.g2,.g3,.g4{grid-template-columns:1fr}}
 .card{background:#fff;border:1px solid var(--hair);border-radius:var(--r);padding:26px 24px;transition:.2s;position:relative;overflow:hidden}
 .card:hover{transform:translateY(-4px);box-shadow:var(--sh)}
-.card .ic{width:48px;height:48px;border-radius:12px;background:rgba(64,135,189,.13);display:flex;align-items:center;justify-content:center;font-size:23px;margin-bottom:15px}
+.card .ic{width:48px;height:48px;border-radius:12px;background:rgba(64,135,189,.13);display:flex;align-items:center;justify-content:center;font-size:20px;font-family:Montserrat;font-weight:800;color:var(--blue-d);margin-bottom:15px}
+.card .ic svg{width:26px;height:26px;color:var(--blue-d)}
+.dark .card .ic svg{color:#8FB6DC}
+.dark .card .ic{color:#8FB6DC}
 .card h3{font-size:18.5px;font-weight:800;margin-bottom:8px}
 .card p{font-size:15px;color:var(--soft)}
 .card .tag{position:absolute;top:0;left:0;right:0;height:3px;background:var(--blue)}
@@ -226,7 +230,7 @@ font-size:20px;color:var(--navy);text-align:right;background:transparent;-moz-ap
 </head><body>
 <div class="topbar"><div class="wrap">
   <span>Dobrzyca · Wielkopolska, Dolny Śląsk, Śląsk, Łódzkie, Kujawsko-pomorskie, Mazowieckie</span>
-  <a href="tel:+48627413227">☎ 62 741 32 27</a>
+  <a href="tel:+48627413227"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="width:1em;height:1em;vertical-align:-.12em"><path d="M5 3h3l2 5-2.2 1.6a12 12 0 0 0 5.6 5.6L15 13l5 2v3a2 2 0 0 1-2 2A15 15 0 0 1 3 5a2 2 0 0 1 2-2z"/></svg> 62 741 32 27</a>
 </div></div>
 
 <nav id="nav"><div class="wrap">
@@ -247,7 +251,7 @@ font-size:20px;color:var(--navy);text-align:right;background:transparent;-moz-ap
     <p class="sub">Gruntowe pompy Thermokrafft i Buderus dla domów jednorodzinnych. Większość firm zleca wiercenie podwykonawcy: czekasz w cudzej kolejce, a gdy źródło nie wyrabia, dwie firmy wskazują na siebie palcem. My wiercimy sami, więc masz jeden numer telefonu i jeden termin, wzięty z naszego grafiku.</p>
     <div class="cta-row">
       <a class="btn b-pri" href="#kreator">Policz koszt dla swojego domu →</a>
-      <a class="btn b-gh" href="tel:+48627413227">☎ 62 741 32 27</a>
+      <a class="btn b-gh" href="tel:+48627413227"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="width:1em;height:1em;vertical-align:-.12em"><path d="M5 3h3l2 5-2.2 1.6a12 12 0 0 0 5.6 5.6L15 13l5 2v3a2 2 0 0 1-2 2A15 15 0 0 1 3 5a2 2 0 0 1 2-2z"/></svg> 62 741 32 27</a>
     </div>
     <div class="chips">
       <div class="chip"><b>Bez</b> podawania numeru</div>
@@ -451,12 +455,12 @@ font-size:20px;color:var(--navy);text-align:right;background:transparent;-moz-ap
     <h2 class="head rv">Cały łańcuch w jednych rękach</h2>
     <p class="lead rv">Najczęstszy dramat przy gruntowej pompie: wiertacz twierdzi, że odwiert jest dobry, monter — że pompa jest dobra, a w domu zimno. U nas nie ma komu zwalać winy, bo każdy etap robi ta sama firma.</p>
     <div class="g3">
-      <div class="card rv"><span class="tag"></span><div class="ic">📦</div><h3>Urządzenie</h3><p>Gruntowe pompy Thermokrafft i Buderus. Części i wsparcie techniczne mamy u siebie, na miejscu — nie za granicą.</p></div>
-      <div class="card rv"><span class="tag"></span><div class="ic">📐</div><h3>Projekt i dobór</h3><p>Moc liczymy z realnego zapotrzebowania budynku, a dolne źródło wymiarujemy pod geologię Twojej działki — nie z tabelki.</p></div>
-      <div class="card rv"><span class="tag"></span><div class="ic">⛏</div><h3>Odwiert</h3><p>Wiertnica i ekipa są nasze, więc datę wiercenia ustalamy przy podpisaniu umowy, a nie po telefonie do podwykonawcy. Jeśli za rok coś jest nie tak ze źródłem, wracają ci sami ludzie, którzy je robili.</p></div>
-      <div class="card rv"><span class="tag"></span><div class="ic">🔧</div><h3>Montaż i rozruch</h3><p>Podłączamy dolne źródło, stawiamy pompę, napełniamy, odpowietrzamy i ustawiamy parametry pod konkretny dom.</p></div>
-      <div class="card rv"><span class="tag"></span><div class="ic">📄</div><h3>Dokumentacja</h3><p>Protokół próby ciśnieniowej, dokumentacja powykonawcza i zdjęciowa, numery seryjne sond. Dowód, nie obietnica.</p></div>
-      <div class="card rv"><span class="tag"></span><div class="ic">🛠</div><h3>Serwis</h3><p>Po montażu nie znikamy. Za pięć lat wciąż odbierzemy telefon i przyjedziemy — do własnej instalacji, którą znamy.</p></div>
+      <div class="card rv"><span class="tag"></span><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 8l-9-5-9 5v8l9 5 9-5z"/><path d="M3 8l9 5 9-5"/><path d="M12 13v8"/></svg></div><h3>Urządzenie</h3><p>Gruntowe pompy Thermokrafft i Buderus. Części i wsparcie techniczne mamy u siebie, na miejscu — nie za granicą.</p></div>
+      <div class="card rv"><span class="tag"></span><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="4" r="1.8"/><path d="M11.2 5.6 5.5 20M12.8 5.6 18.5 20"/><path d="M8 14.5a8.5 8.5 0 0 0 8 0"/></svg></div><h3>Projekt i dobór</h3><p>Moc liczymy z realnego zapotrzebowania budynku, a dolne źródło wymiarujemy pod geologię Twojej działki — nie z tabelki.</p></div>
+      <div class="card rv"><span class="tag"></span><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 2v14"/><path d="M8 16l4 6 4-6z"/><path d="M8 5h8M9 9h6"/></svg></div><h3>Odwiert</h3><p>Wiertnica i ekipa są nasze, więc datę wiercenia ustalamy przy podpisaniu umowy, a nie po telefonie do podwykonawcy. Jeśli za rok coś jest nie tak ze źródłem, wracają ci sami ludzie, którzy je robili.</p></div>
+      <div class="card rv"><span class="tag"></span><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14.7 6.3a4.5 4.5 0 0 0-6 5.6L3 17.6V21h3.4l5.7-5.7a4.5 4.5 0 0 0 5.6-6l-3 3-2.8-.7-.7-2.8z"/></svg></div><h3>Montaż i rozruch</h3><p>Podłączamy dolne źródło, stawiamy pompę, napełniamy, odpowietrzamy i ustawiamy parametry pod konkretny dom.</p></div>
+      <div class="card rv"><span class="tag"></span><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 2h8l4 4v16H6z"/><path d="M14 2v5h4"/><path d="M9 12h6M9 16h6"/></svg></div><h3>Dokumentacja</h3><p>Protokół próby ciśnieniowej, dokumentacja powykonawcza i zdjęciowa, numery seryjne sond. Dowód, nie obietnica.</p></div>
+      <div class="card rv"><span class="tag"></span><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="3.2"/><circle cx="12" cy="12" r="7"/><path d="M12 5V2.5M12 21.5V19M5 12H2.5M21.5 12H19M7 7 5.2 5.2M18.8 18.8 17 17M17 7l1.8-1.8M5.2 18.8 7 17"/></svg></div><h3>Serwis</h3><p>Po montażu nie znikamy. Za pięć lat wciąż odbierzemy telefon i przyjedziemy — do własnej instalacji, którą znamy.</p></div>
     </div>
   </div>
 </section>
@@ -493,9 +497,9 @@ font-size:20px;color:var(--navy);text-align:right;background:transparent;-moz-ap
     </table></div>
     <p class="src">Montujemy również gruntowe pompy <b>Buderus</b>. Ceny nie ma w tabeli, bo zależy od modelu i konfiguracji, więc podajemy ją w wycenie. Dane Thermokrafft: producenta, w punktach pracy wg PN-EN 14511. W10/7 oznacza wodę gruntową 10°C na wejściu, W0/-3 — glikol 0°C, czyli warunki zimowe. Ceny brutto, sugerowane detaliczne. Wartości SCOP, klasy energetycznej, poziomu hałasu i masy nie podajemy, dopóki nie mamy ich z etykiety energetycznej producenta — nie zgadujemy parametrów.</p>
     <div class="g3" style="margin-top:30px">
-      <div class="card rv"><span class="tag"></span><div class="ic">🌿</div><h3>Dlaczego R290</h3><p>Propan ma współczynnik GWP równy 3, wobec setek lub tysięcy dla czynników syntetycznych. Nie podlega wycofywaniu przez przepisy F-gazowe, więc nie kupujesz urządzenia z datą ważności.</p></div>
-      <div class="card rv"><span class="tag"></span><div class="ic">🌡</div><h3>Wyższa temperatura zasilania</h3><p>R290 pozwala uzyskać wyższą temperaturę wody grzewczej niż wiele czynników alternatywnych. To ma znaczenie przy modernizacji domu z grzejnikami.</p></div>
-      <div class="card rv"><span class="tag"></span><div class="ic">⚠️</div><h3>Czego nie przemilczamy</h3><p>Propan jest palny, dlatego urządzenia mają ograniczoną ilość czynnika w szczelnym obiegu i wymagają zachowania zasad montażu. To robota dla instalatora z uprawnieniami — czyli dla nas.</p></div>
+      <div class="card rv"><span class="tag"></span><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 20c0-9 5-14 14-14 0 9-5 14-14 14z"/><path d="M5 20c3-5 7-9 11-11"/></svg></div><h3>Dlaczego R290</h3><p>Propan ma współczynnik GWP równy 3, wobec setek lub tysięcy dla czynników syntetycznych. Nie podlega wycofywaniu przez przepisy F-gazowe, więc nie kupujesz urządzenia z datą ważności.</p></div>
+      <div class="card rv"><span class="tag"></span><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10 4a2 2 0 0 1 4 0v9.3a4 4 0 1 1-4 0z"/><path d="M12 9v7"/></svg></div><h3>Wyższa temperatura zasilania</h3><p>R290 pozwala uzyskać wyższą temperaturę wody grzewczej niż wiele czynników alternatywnych. To ma znaczenie przy modernizacji domu z grzejnikami.</p></div>
+      <div class="card rv"><span class="tag"></span><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3 2.5 20h19z"/><path d="M12 9v5"/><path d="M12 17.3v.2"/></svg></div><h3>Czego nie przemilczamy</h3><p>Propan jest palny, dlatego urządzenia mają ograniczoną ilość czynnika w szczelnym obiegu i wymagają zachowania zasad montażu. To robota dla instalatora z uprawnieniami — czyli dla nas.</p></div>
     </div>
   </div>
 </section>
@@ -506,10 +510,10 @@ font-size:20px;color:var(--navy);text-align:right;background:transparent;-moz-ap
     <h2 class="head rv">Cztery technologie, bo żadna nie pasuje do każdej działki</h2>
     <p class="lead rv">To jest ta część instalacji, o której producenci piszą dwa akapity — bo jej nie wykonują. My robimy ją sami, więc najpierw ustalamy technologię, a dopiero potem wyceniamy.</p>
     <div class="g4">
-      <div class="card rv"><span class="tag"></span><div class="ic">⛏</div><h3>Odwiert pionowy</h3><p>Metodą płuczkową. Idzie w głąb, więc na powierzchni zajmuje kilka metrów kwadratowych. Da się wykonać przy gotowym domu, jeśli wiertnica ma jak wjechać. Najwyższy koszt na metr z całej czwórki.</p></div>
-      <div class="card rv"><span class="tag"></span><div class="ic">🌀</div><h3>Sondy koszowe DEWAX Helix</h3><p>Rura zwinięta w spiralę, opuszczona płycej niż sonda pionowa. Rozwiązanie uznane w wytycznych branżowych. Dobiera się je do konkretnych warunków gruntu — sensowny kompromis między odwiertem a kolektorem.</p></div>
-      <div class="card rv"><span class="tag"></span><div class="ic">〰️</div><h3>Kolektor poziomy</h3><p>Kopany, układany płytko na dużej powierzchni. Najtańszy w wykonaniu, ale potrzebuje wolnego terenu i ingeruje w większy kawałek działki niż rozwiązania wiercone. Na małej działce zwykle się nie mieści.</p></div>
-      <div class="card rv"><span class="tag"></span><div class="ic">💧</div><h3>Woda-woda</h3><p>Woda ze studni czerpalnej, zrzut do chłonnej, wymiennik pośredni chroniący instalację przed zanieczyszczeniami. Wymaga potwierdzonych, stabilnych warunków wodnych i większej liczby formalności.</p></div>
+      <div class="card rv"><span class="tag"></span><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 2v14"/><path d="M8 16l4 6 4-6z"/><path d="M8 5h8M9 9h6"/></svg></div><h3>Odwiert pionowy</h3><p>Metodą płuczkową. Idzie w głąb, więc na powierzchni zajmuje kilka metrów kwadratowych. Da się wykonać przy gotowym domu, jeśli wiertnica ma jak wjechać. Najwyższy koszt na metr z całej czwórki.</p></div>
+      <div class="card rv"><span class="tag"></span><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><ellipse cx="12" cy="5.5" rx="5.5" ry="2.4"/><ellipse cx="12" cy="12" rx="5.5" ry="2.4"/><ellipse cx="12" cy="18.5" rx="5.5" ry="2.4"/></svg></div><h3>Sondy koszowe DEWAX Helix</h3><p>Rura zwinięta w spiralę, opuszczona płycej niż sonda pionowa. Rozwiązanie uznane w wytycznych branżowych. Dobiera się je do konkretnych warunków gruntu — sensowny kompromis między odwiertem a kolektorem.</p></div>
+      <div class="card rv"><span class="tag"></span><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 9c2.5 0 2.5 3 5 3s2.5-3 5-3 2.5 3 5 3 2.5-3 5-3"/><path d="M2 15c2.5 0 2.5 3 5 3s2.5-3 5-3 2.5 3 5 3 2.5-3 5-3"/></svg></div><h3>Kolektor poziomy</h3><p>Kopany, układany płytko na dużej powierzchni. Najtańszy w wykonaniu, ale potrzebuje wolnego terenu i ingeruje w większy kawałek działki niż rozwiązania wiercone. Na małej działce zwykle się nie mieści.</p></div>
+      <div class="card rv"><span class="tag"></span><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3s6 7 6 11a6 6 0 0 1-12 0c0-4 6-11 6-11z"/></svg></div><h3>Woda-woda</h3><p>Woda ze studni czerpalnej, zrzut do chłonnej, wymiennik pośredni chroniący instalację przed zanieczyszczeniami. Wymaga potwierdzonych, stabilnych warunków wodnych i większej liczby formalności.</p></div>
     </div>
     <div class="g2" style="margin-top:34px;align-items:center;gap:32px">
       <figure class="fig rv" style="background:var(--navy2);border-color:rgba(255,255,255,.13)"><img src="img/glowica.webp" alt="Głowica sondy pionowej PE100-RC z otworem iniekcyjnym w otworze wiertniczym" loading="lazy" width="1000" height="688"><figcaption style="color:#B9C3E8">Głowica sondy z otworem iniekcyjnym. Dzięki niemu otwór wypełnia się od dna do góry, a nie zasypuje z wierzchu.</figcaption></figure>
@@ -529,9 +533,9 @@ font-size:20px;color:var(--navy);text-align:right;background:transparent;-moz-ap
     <p class="lead rv">To pytanie pada w każdej rozmowie, a prawie żaden wykonawca nie odpowiada na nie na stronie. Poniżej jest wszystko, łącznie z rzeczami, które wolelibyśmy przemilczeć.</p>
 
     <div class="g3">
-      <div class="card rv"><span class="tag"></span><div class="ic">📐</div><h3>Ile miejsca zajmujemy</h3><p>Wiertnica HR-606S jest kompaktowa: potrzebuje przejazdu na działkę i placu na maszt, a wjeżdża tam, gdzie duża maszyna na ciężarówce nie ma czego szukać. Sam odwiert zajmuje na powierzchni kilka metrów kwadratowych, bo idzie w głąb, nie na boki. Wjazd sprawdzamy na oględzinach, przed umową, żeby nie okazało się na miejscu, że maszyna nie ma którędy wjechać.</p></div>
-      <div class="card rv"><span class="tag"></span><div class="ic">🕓</div><h3>Ile to trwa</h3><p>Wiercenie liczy się w dniach, nie w tygodniach. Ile dokładnie, zależy od liczby metrów i od tego, czy idziemy na płuczkę, czy przebijamy się młotkiem przez skałę, dlatego liczbę dni wpisujemy do umowy po sprawdzeniu geologii. Termin dostajesz przy podpisaniu, bo grafik jest nasz, nie podwykonawcy.</p></div>
-      <div class="card rv"><span class="tag"></span><div class="ic">🧹</div><h3>Co zostaje z trawnika</h3><p>Powiemy wprost: przy wierceniu na płuczkę powstaje urobek, czyli mokra mieszanina wody i tego, co wyszło z otworu. Trzeba go gdzieś odprowadzić, a teren wokół otworu zostaje naruszony. Co z nim zrobimy u Ciebie, ustalamy na oględzinach i wpisujemy do umowy. Najlepszy moment na odwierty to etap przed kostką i trawnikiem.</p></div>
+      <div class="card rv"><span class="tag"></span><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="4" r="1.8"/><path d="M11.2 5.6 5.5 20M12.8 5.6 18.5 20"/><path d="M8 14.5a8.5 8.5 0 0 0 8 0"/></svg></div><h3>Ile miejsca zajmujemy</h3><p>Wiertnica HR-606S jest kompaktowa: potrzebuje przejazdu na działkę i placu na maszt, a wjeżdża tam, gdzie duża maszyna na ciężarówce nie ma czego szukać. Sam odwiert zajmuje na powierzchni kilka metrów kwadratowych, bo idzie w głąb, nie na boki. Wjazd sprawdzamy na oględzinach, przed umową, żeby nie okazało się na miejscu, że maszyna nie ma którędy wjechać.</p></div>
+      <div class="card rv"><span class="tag"></span><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg></div><h3>Ile to trwa</h3><p>Wiercenie liczy się w dniach, nie w tygodniach. Ile dokładnie, zależy od liczby metrów i od tego, czy idziemy na płuczkę, czy przebijamy się młotkiem przez skałę, dlatego liczbę dni wpisujemy do umowy po sprawdzeniu geologii. Termin dostajesz przy podpisaniu, bo grafik jest nasz, nie podwykonawcy.</p></div>
+      <div class="card rv"><span class="tag"></span><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 3 11 11"/><path d="M11 11a5 5 0 0 0-7 5l1 5 5 1a5 5 0 0 0 5-7z"/><path d="M6.5 14.5 9 17"/></svg></div><h3>Co zostaje z trawnika</h3><p>Powiemy wprost: przy wierceniu na płuczkę powstaje urobek, czyli mokra mieszanina wody i tego, co wyszło z otworu. Trzeba go gdzieś odprowadzić, a teren wokół otworu zostaje naruszony. Co z nim zrobimy u Ciebie, ustalamy na oględzinach i wpisujemy do umowy. Najlepszy moment na odwierty to etap przed kostką i trawnikiem.</p></div>
     </div>
 
     <div class="split rv" style="margin-top:26px">
@@ -591,9 +595,9 @@ font-size:20px;color:var(--navy);text-align:right;background:transparent;-moz-ap
     <h2 class="head rv">Sprawdź geologię swojej działki, zanim ktokolwiek poda Ci cenę</h2>
     <p class="lead rv">Zbudowaliśmy narzędzie, które generuje raport geologiczny dla otworu dolnego źródła na podstawie oficjalnych danych Państwowego Instytutu Geologicznego. To ono decyduje, ile metrów odwiertu naprawdę potrzebujesz — a nie metraż domu.</p>
     <div class="g3">
-      <div class="card rv"><span class="tag"></span><div class="ic">🗺</div><h3>Dane państwowe</h3><p>Raport powstaje z Centralnej Bazy Danych Geologicznych PGI-PIB, a nie z naszych przypuszczeń.</p></div>
-      <div class="card rv"><span class="tag"></span><div class="ic">📊</div><h3>Profil warstw</h3><p>Widzisz, co jest pod działką i czego spodziewać się przy wierceniu — zanim podpiszesz jakąkolwiek umowę.</p></div>
-      <div class="card rv"><span class="tag"></span><div class="ic">🆓</div><h3>Dla każdego</h3><p>Bez logowania i bez zostawiania numeru. Możesz z niego skorzystać, nawet jeśli ostatecznie wybierzesz inną firmę.</p></div>
+      <div class="card rv"><span class="tag"></span><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 4 3 6v14l6-2 6 2 6-2V4l-6 2z"/><path d="M9 4v14M15 6v14"/></svg></div><h3>Dane państwowe</h3><p>Raport powstaje z Centralnej Bazy Danych Geologicznych PGI-PIB, a nie z naszych przypuszczeń.</p></div>
+      <div class="card rv"><span class="tag"></span><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3 3 8l9 5 9-5z"/><path d="M3 13l9 5 9-5"/><path d="M3 17.5 12 22l9-4.5"/></svg></div><h3>Profil warstw</h3><p>Widzisz, co jest pod działką i czego spodziewać się przy wierceniu — zanim podpiszesz jakąkolwiek umowę.</p></div>
+      <div class="card rv"><span class="tag"></span><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 11V6a1.5 1.5 0 0 1 3 0v4"/><path d="M10 10V4.5a1.5 1.5 0 0 1 3 0V10"/><path d="M13 10V6a1.5 1.5 0 0 1 3 0v6"/><path d="M16 12l2.2-1.8a1.4 1.4 0 0 1 1.8 2.1L15 17.5a6 6 0 0 1-4.6 2H10a6 6 0 0 1-6-6V9a1.5 1.5 0 0 1 3 0v2"/></svg></div><h3>Dla każdego</h3><p>Bez logowania i bez zostawiania numeru. Możesz z niego skorzystać, nawet jeśli ostatecznie wybierzesz inną firmę.</p></div>
     </div>
     <div style="margin-top:26px" class="rv">
       <a class="btn b-pri" href="https://dewax-geo.netlify.app/" target="_blank" rel="noopener">Otwórz DEWAX GEO →</a>
@@ -738,9 +742,9 @@ font-size:20px;color:var(--navy);text-align:right;background:transparent;-moz-ap
     <p class="lead rv">Trzeci strach po cenie i po rachunku: że firma weźmie pieniądze i zniknie, a Ty zostaniesz z instalacją, której nikt nie chce dotknąć. Oto co dokładnie dostajesz i kto przyjeżdża.</p>
 
     <div class="g3">
-      <div class="card rv"><span class="tag"></span><div class="ic">🛡</div><h3>Gwarancja</h3><p>Trzy różne rzeczy, trzy różne okresy: urządzenie w kotłowni, szczelność sondy w gruncie i samo wykonanie odwiertu. Wykonawca, który podaje jedną liczbę na wszystko, albo upraszcza, albo nie czytał własnej umowy. U nas wszystkie trzy okresy są rozpisane w umowie osobno, razem z tym, co trzeba robić, żeby gwarancji nie stracić. Poproś o ten zapis przy wycenie i porównaj go z każdą inną ofertą.</p></div>
-      <div class="card rv"><span class="tag"></span><div class="ic">🚐</div><h3>Kto przyjedzie</h3><p>Ta sama firma, która stawiała instalację, i zwykle ci sami ludzie. Nie infolinia producenta, nie serwisant z drugiego końca Polski, który pierwszy raz widzi Twoją kotłownię. Siedzimy w Dobrzycy i stąd wyjeżdżamy, więc zimą nie czekasz w ogólnopolskiej kolejce zgłoszeń.</p></div>
-      <div class="card rv"><span class="tag"></span><div class="ic">🔩</div><h3>Części</h3><p>Wsparcie techniczne i części do pomp Thermokrafft mamy na miejscu, w kraju, a nie u zagranicznego dystrybutora. To różnica między naprawą w kilka dni a czekaniem na przesyłkę zza granicy w środku mrozów. O przeglądy okresowe i ich koszt zapytaj przy wycenie, razem z warunkami gwarancji.</p></div>
+      <div class="card rv"><span class="tag"></span><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l7 3v5c0 5-3.2 8.4-7 10-3.8-1.6-7-5-7-10V6z"/><path d="M9 12l2 2 4-4"/></svg></div><h3>Gwarancja</h3><p>Trzy różne rzeczy, trzy różne okresy: urządzenie w kotłowni, szczelność sondy w gruncie i samo wykonanie odwiertu. Wykonawca, który podaje jedną liczbę na wszystko, albo upraszcza, albo nie czytał własnej umowy. U nas wszystkie trzy okresy są rozpisane w umowie osobno, razem z tym, co trzeba robić, żeby gwarancji nie stracić. Poproś o ten zapis przy wycenie i porównaj go z każdą inną ofertą.</p></div>
+      <div class="card rv"><span class="tag"></span><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 7h13v10H2z"/><path d="M15 10h4l3 3v4h-7"/><circle cx="6.5" cy="17" r="1.8"/><circle cx="17.5" cy="17" r="1.8"/></svg></div><h3>Kto przyjedzie</h3><p>Ta sama firma, która stawiała instalację, i zwykle ci sami ludzie. Nie infolinia producenta, nie serwisant z drugiego końca Polski, który pierwszy raz widzi Twoją kotłownię. Siedzimy w Dobrzycy i stąd wyjeżdżamy, więc zimą nie czekasz w ogólnopolskiej kolejce zgłoszeń.</p></div>
+      <div class="card rv"><span class="tag"></span><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 2l3 3-9 9-3 1 1-3z"/><path d="M9 5l3 3M14 10l4 4 3 3-2 2-3-3-4-4"/></svg></div><h3>Części</h3><p>Wsparcie techniczne i części do pomp Thermokrafft mamy na miejscu, w kraju, a nie u zagranicznego dystrybutora. To różnica między naprawą w kilka dni a czekaniem na przesyłkę zza granicy w środku mrozów. O przeglądy okresowe i ich koszt zapytaj przy wycenie, razem z warunkami gwarancji.</p></div>
     </div>
 
     <div class="rv" style="margin-top:26px"><p class="src">Co się w tej instalacji faktycznie psuje: to, co pod ziemią, nie ma ruchomych części, więc awarie zdarzają się w kotłowni, w samym urządzeniu. W analizach kosztowych PORT PC przyjmuje się dla pionowego wymiennika gruntowego okres 50 lat, a dla pompy gruntowej okres użytkowania 20 lat według VDI 2067, wobec 18 lat dla powietrznej. To założenia rachunkowe do porównań, a nie gwarancja producenta.</p></div>
@@ -777,10 +781,10 @@ font-size:20px;color:var(--navy);text-align:right;background:transparent;-moz-ap
         <a class="btn b-gh" href="https://dewax-kreator.netlify.app/" target="_blank" rel="noopener" style="margin-left:8px">Kreator ofertowy (kod dostępu)</a>
       </div>
       <div class="g2 rv" style="grid-template-columns:1fr 1fr;gap:16px">
-        <div class="card"><div class="ic">📋</div><h3>Kreator ofertowy</h3><p>Narzędzie do wystawiania ofert i umów dla partnerów — dobór, kosztorys, PDF.</p></div>
-        <div class="card"><div class="ic">🗺</div><h3>DEWAX GEO</h3><p>Raport geologiczny z bazy PGI-PIB dla otworu, który planujesz.</p></div>
-        <div class="card"><div class="ic">🤝</div><h3>Podwykonawstwo</h3><p>Dolne źródło pod pompę dowolnej marki — Thermokrafft, Buderus i inne.</p></div>
-        <div class="card"><div class="ic">📦</div><h3>Urządzenia</h3><p>Thermokrafft i Buderus — warunki partnerskie do ustalenia.</p></div>
+        <div class="card"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 4h8v3H8z"/><path d="M16 5h3v17H5V5h3"/><path d="M9 12h6M9 16h6"/></svg></div><h3>Kreator ofertowy</h3><p>Narzędzie do wystawiania ofert i umów dla partnerów — dobór, kosztorys, PDF.</p></div>
+        <div class="card"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 4 3 6v14l6-2 6 2 6-2V4l-6 2z"/><path d="M9 4v14M15 6v14"/></svg></div><h3>DEWAX GEO</h3><p>Raport geologiczny z bazy PGI-PIB dla otworu, który planujesz.</p></div>
+        <div class="card"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 12l4-5h3l3 3-3 3-3-3"/><path d="M20 12l-4-5"/><path d="M4 12l5 6 3-1 3 2 5-7"/></svg></div><h3>Podwykonawstwo</h3><p>Dolne źródło pod pompę dowolnej marki — Thermokrafft, Buderus i inne.</p></div>
+        <div class="card"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 8l-9-5-9 5v8l9 5 9-5z"/><path d="M3 8l9 5 9-5"/><path d="M12 13v8"/></svg></div><h3>Urządzenia</h3><p>Thermokrafft i Buderus — warunki partnerskie do ustalenia.</p></div>
       </div>
     </div>
     
@@ -866,7 +870,7 @@ font-size:20px;color:var(--navy);text-align:right;background:transparent;-moz-ap
 </footer>
 
 <div class="mbar">
-  <a class="c" href="tel:+48627413227">☎ Zadzwoń</a>
+  <a class="c" href="tel:+48627413227"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="width:1em;height:1em;vertical-align:-.12em"><path d="M5 3h3l2 5-2.2 1.6a12 12 0 0 0 5.6 5.6L15 13l5 2v3a2 2 0 0 1-2 2A15 15 0 0 1 3 5a2 2 0 0 1 2-2z"/></svg> Zadzwoń</a>
   <a class="w" href="#kreator">Policz koszt</a>
 </div>
 <script>
