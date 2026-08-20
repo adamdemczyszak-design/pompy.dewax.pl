@@ -24,7 +24,7 @@ ZRODLO="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
 # Pliki wchodzące w skład wdrożenia (reszta repo NIE jest wgrywana)
 PLIKI_WDROZENIA=(index.html wyslij.php podziekowanie.html 404.html .htaccess
-                 og.jpg favicon.png robots.txt sitemap.xml)
+                 polityka-prywatnosci.html og.jpg favicon.png robots.txt sitemap.xml)
 KATALOGI_WDROZENIA=(img)
 
 c_ok()   { printf '\033[32m%s\033[0m\n' "$*"; }
@@ -148,10 +148,18 @@ etap_wgraj() {
     naglowek "KROK 5 — wgranie nowej strony"
     [ -n "${KATALOG_ZDALNY:-}" ] || { c_zle "Ustaw KATALOG_ZDALNY."; exit 1; }
 
-    # Twarde zabezpieczenie: bez kompletu kopii ani kroku dalej
-    [ -d "${KATALOG_KOPII}/pliki" ] || { c_zle "Brak kopii plików w ${KATALOG_KOPII}. Uruchom najpierw: ./wdroz.sh kopia"; exit 1; }
-    [ -f "${KATALOG_KOPII}/baza.sql" ] || { c_zle "Brak ${KATALOG_KOPII}/baza.sql. Zrób zrzut bazy przez phpMyAdmin."; exit 1; }
-    c_ok "Kopia plików i baza.sql obecne."
+    # Twarde zabezpieczenie: bez kompletu kopii ani kroku dalej.
+    # KOPIA_W_PANELU=tak — gdy kopia (pliki + baza) została zrobiona po stronie nazwa.pl
+    # w panelu "Kopie zapasowe na żądanie" i nie ma jej na dysku lokalnym.
+    if [ "${KOPIA_W_PANELU:-}" = "tak" ]; then
+        c_uwaga "Pomijam kontrolę kopii lokalnej — deklarujesz kopię w panelu nazwa.pl."
+        echo "Zanim potwierdzisz: panel nazwa.pl → Kopie zapasowe → sprawdź, że dzisiejsza"
+        echo "kopia PLIKÓW i BAZY ma status 100% i mieści się w 14-dniowym okresie przechowywania."
+    else
+        [ -d "${KATALOG_KOPII}/pliki" ] || { c_zle "Brak kopii plików w ${KATALOG_KOPII}. Uruchom najpierw: ./wdroz.sh kopia"; echo "   albo, jeśli kopia jest w panelu nazwa.pl:  KOPIA_W_PANELU=tak KATALOG_ZDALNY=... ./wdroz.sh wgraj"; exit 1; }
+        [ -f "${KATALOG_KOPII}/baza.sql" ] || { c_zle "Brak ${KATALOG_KOPII}/baza.sql. Zrób zrzut bazy przez phpMyAdmin."; exit 1; }
+        c_ok "Kopia plików i baza.sql obecne."
+    fi
 
     for P in "${PLIKI_WDROZENIA[@]}"; do
         [ -f "${ZRODLO}/${P}" ] || { c_zle "Brak pliku ${P} w ${ZRODLO}"; exit 1; }
@@ -225,6 +233,9 @@ etap_testy() {
     KOD=$(curl -s -o /dev/null -w '%{http_code}' "https://${DOMENA}/og.jpg" || echo 000)
     sprawdz "Podgląd linku" "200" "$KOD"
 
+    KOD=$(curl -s -o /dev/null -w '%{http_code}' "https://${DOMENA}/polityka-prywatnosci.html" || echo 000)
+    sprawdz "Polityka prywatnosci" "200" "$KOD"
+
     KOD=$(curl -s -o /dev/null -w '%{http_code}' "https://${DOMENA}/nie-ma-takiej-strony" || echo 000)
     sprawdz "Strona 404" "404" "$KOD"
 
@@ -270,6 +281,7 @@ case "${1:-}" in
         echo "  ./wdroz.sh drzewo                          krok 2 — pokaż serwer (bezpieczne)"
         echo "  KATALOG_ZDALNY=/pompy ./wdroz.sh kopia     krok 3 — kopia plików + baza"
         echo "  KATALOG_ZDALNY=/pompy ./wdroz.sh wgraj     krok 5 — wgranie strony"
+        echo "       dodaj KOPIA_W_PANELU=tak, jeśli kopia jest po stronie nazwa.pl"
         echo "  ./wdroz.sh testy                           krok 6 — weryfikacja"
         exit 1 ;;
 esac
