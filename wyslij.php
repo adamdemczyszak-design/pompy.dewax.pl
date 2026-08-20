@@ -29,13 +29,16 @@ $metraz      = pole('metraz', 10);
 $telefon     = pole('telefon', 30);
 $wiadomosc   = mb_substr(trim((string)($_POST['wiadomosc'] ?? '')), 0, 2000);
 $ogrzewanie  = pole('ogrzewanie', 60);
+$zgodaDane   = ($_POST['zgoda_dane'] ?? '') === 'tak';
+$zgodaTel    = ($_POST['zgoda_telefon'] ?? '') === 'tak';
 
 /* --- walidacja --- */
 $bledy = [];
 if ($imie === '')                                        $bledy[] = 'imię';
 if (!filter_var($email, FILTER_VALIDATE_EMAIL))          $bledy[] = 'poprawny e-mail';
 if ($miejscowosc === '')                                 $bledy[] = 'miejscowość';
-if ($metraz === '' || !ctype_digit($metraz))             $bledy[] = 'metraż (liczba)';
+if ($metraz !== '' && !ctype_digit($metraz))             $bledy[] = 'metraż jako sama liczba';
+if (!$zgodaDane)                                         $bledy[] = 'zgoda na kontakt w sprawie zapytania';
 
 if ($bledy) {
     http_response_code(422);
@@ -56,7 +59,8 @@ $tresc .= "Imię:         $imie\n";
 $tresc .= "E-mail:       $email\n";
 $tresc .= "Telefon:      " . ($telefon !== '' ? $telefon : '— nie podano —') . "\n";
 $tresc .= "Miejscowość:  $miejscowosc\n";
-$tresc .= "Metraż:       $metraz m2\n";
+$tresc .= "Metraż:       " . ($metraz !== '' ? "$metraz m2" : '— nie podano —') . "\n";
+$tresc .= "Zgoda tel.:   " . ($zgodaTel ? 'TAK — można dzwonić' : 'NIE — tylko e-mail') . "\n";
 if ($ogrzewanie !== '') $tresc .= "Ogrzewanie:   $ogrzewanie\n";
 if ($wiadomosc !== '')  $tresc .= "\nO domu:\n$wiadomosc\n";
 $tresc .= "\n" . str_repeat('-', 46) . "\n";

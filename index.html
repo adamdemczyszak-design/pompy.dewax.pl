@@ -118,6 +118,16 @@ nav.open .links a{padding:13px 24px}nav.open .links a::after{display:none}}
 .gal figcaption b{display:block;font-family:'Montserrat';font-weight:800;font-size:15px;margin-bottom:2px;color:#fff}
 .src{font-size:12.5px;color:var(--soft);border-left:3px solid var(--hair);padding-left:13px;margin-top:20px;line-height:1.55}
 #proces .card .kiedy{display:inline-block;font-family:Montserrat;font-weight:800;font-size:11.5px;letter-spacing:.06em;text-transform:uppercase;color:var(--blue-d);background:rgba(64,135,189,.12);border-radius:6px;padding:4px 9px;margin-bottom:9px}
+form.zap label.et{display:block;font-size:13px;font-weight:700;margin-bottom:6px;color:var(--ink)}
+form.zap input[type=text],form.zap input[type=email],form.zap input[type=tel],form.zap input[type=number],form.zap textarea{width:100%;padding:13px;border:1.5px solid var(--hair);border-radius:9px;font-family:inherit;font-size:15.5px;color:var(--ink);background:#fff}
+form.zap input:focus,form.zap textarea:focus{outline:none;border-color:var(--blue);box-shadow:0 0 0 3px rgba(64,135,189,.22)}
+form.zap .row{margin-bottom:14px}
+form.zap .zgoda{display:flex;gap:11px;align-items:flex-start;margin-bottom:12px;font-size:13px;line-height:1.55;color:var(--soft)}
+form.zap .zgoda input[type=checkbox]{flex:0 0 auto;width:19px;height:19px;margin-top:1px;accent-color:var(--blue-d);cursor:pointer}
+form.zap .zgoda label{cursor:pointer}
+form.zap .zgoda b{color:var(--ink);font-weight:700}
+a:focus-visible,button:focus-visible,summary:focus-visible,input:focus-visible,textarea:focus-visible,[tabindex]:focus-visible{outline:3px solid var(--blue);outline-offset:2px;border-radius:4px}
+.dark a:focus-visible,.dark button:focus-visible{outline-color:#8FB6DC}
 .todo{background:#FFF8E1;border-left:4px solid #E8C766;border-radius:8px;padding:14px 17px;font-size:13.5px;color:#6b5a20;margin-top:16px}
 .todo b{color:#4a3d10}
 table.tk{width:100%;border-collapse:collapse;font-size:14.5px;background:#fff;border-radius:var(--r);overflow:hidden;box-shadow:var(--sh)}
@@ -809,23 +819,33 @@ font-size:20px;color:var(--navy);text-align:right;background:transparent;-moz-ap
         </div>
         
       </div>
-      <form class="rv" name="wycena" method="POST" action="wyslij.php" style="background:#fff;border:1px solid var(--hair);border-radius:var(--r);padding:30px 28px;box-shadow:var(--sh)">
-        <p style="position:absolute;left:-9999px" aria-hidden="true"><label>Nie wypełniaj tego pola <input name="bot-field" tabindex="-1" autocomplete="off"></label></p>
+      <form class="rv zap" name="wycena" method="POST" action="wyslij.php" style="background:#fff;border:1px solid var(--hair);border-radius:var(--r);padding:30px 28px;box-shadow:var(--sh)">
+        <p style="position:absolute;left:-9999px" aria-hidden="true"><label for="bf">Nie wypełniaj tego pola</label><input id="bf" name="bot-field" tabindex="-1" autocomplete="off"></p>
         <input type="hidden" name="czas" value="0" id="fczas">
         <h3 style="font-size:21px;font-weight:800;margin-bottom:5px">Zamów bezpłatną wycenę</h3>
-        <p style="font-size:14.5px;color:var(--soft);margin-bottom:20px">Cztery pola wystarczą.</p>
+        <p style="font-size:14.5px;color:var(--soft);margin-bottom:20px">Trzy pola obowiązkowe. Resztę wypełnij, jeśli chcesz dokładniejszą odpowiedź.</p>
         <div class="g2" style="gap:12px;grid-template-columns:1fr 1fr">
-          <div style="margin-bottom:14px"><label style="display:block;font-size:13px;font-weight:700;margin-bottom:6px">Imię *</label><input name="imie" type="text" required autocomplete="name" style="width:100%;padding:13px;border:1.5px solid var(--hair);border-radius:9px;font-family:inherit;font-size:15.5px"></div>
-          <div style="margin-bottom:14px"><label style="display:block;font-size:13px;font-weight:700;margin-bottom:6px">E-mail *</label><input name="email" type="email" required autocomplete="email" style="width:100%;padding:13px;border:1.5px solid var(--hair);border-radius:9px;font-family:inherit;font-size:15.5px"></div>
+          <div class="row"><label class="et" for="f-imie">Imię <span aria-hidden="true">*</span></label><input id="f-imie" name="imie" type="text" required autocomplete="given-name"></div>
+          <div class="row"><label class="et" for="f-email">E-mail <span aria-hidden="true">*</span></label><input id="f-email" name="email" type="email" required autocomplete="email"></div>
         </div>
         <div class="g2" style="gap:12px;grid-template-columns:1fr 1fr">
-          <div style="margin-bottom:14px"><label style="display:block;font-size:13px;font-weight:700;margin-bottom:6px">Miejscowość *</label><input name="miejscowosc" type="text" required style="width:100%;padding:13px;border:1.5px solid var(--hair);border-radius:9px;font-family:inherit;font-size:15.5px"></div>
-          <div style="margin-bottom:14px"><label style="display:block;font-size:13px;font-weight:700;margin-bottom:6px">Metraż (m²) *</label><input name="metraz" type="number" inputmode="numeric" required style="width:100%;padding:13px;border:1.5px solid var(--hair);border-radius:9px;font-family:inherit;font-size:15.5px"></div>
+          <div class="row"><label class="et" for="f-miejscowosc">Miejscowość <span aria-hidden="true">*</span></label><input id="f-miejscowosc" name="miejscowosc" type="text" required autocomplete="address-level2"></div>
+          <div class="row"><label class="et" for="f-metraz">Metraż domu w m²</label><input id="f-metraz" name="metraz" type="number" inputmode="numeric" min="20" max="2000" autocomplete="off"></div>
         </div>
-        <div style="margin-bottom:14px"><label style="display:block;font-size:13px;font-weight:700;margin-bottom:6px">Telefon (opcjonalnie)</label><input name="telefon" type="tel" autocomplete="tel" style="width:100%;padding:13px;border:1.5px solid var(--hair);border-radius:9px;font-family:inherit;font-size:15.5px"></div>
-        <div style="margin-bottom:14px"><label style="display:block;font-size:13px;font-weight:700;margin-bottom:6px">Dwa słowa o domu</label><textarea name="wiadomosc" rows="3" placeholder="nowy czy stary, podłogówka czy grzejniki, czym grzejesz dziś" style="width:100%;padding:13px;border:1.5px solid var(--hair);border-radius:9px;font-family:inherit;font-size:15.5px"></textarea></div>
-        <button class="btn b-go" type="submit" style="width:100%">Wyślij zapytanie →</button>
-        <p style="font-size:11.5px;color:var(--soft);margin-top:12px;line-height:1.55">Numer zostaw tylko, jeśli wolisz rozmowę. Administratorem danych jest DEWAX Sp. z o.o., ul. Ostrowska 1, 63-330 Dobrzyca. Użyjemy ich wyłącznie do przygotowania wyceny i kontaktu w tej sprawie. Podanie danych jest dobrowolne, a w każdej chwili masz prawo wglądu do nich, sprostowania i usunięcia. Szczegóły w <a href="/polityka-prywatnosci.html" style="color:var(--blue-d);font-weight:600">polityce prywatności</a>.</p>
+        <div class="row"><label class="et" for="f-telefon">Telefon, jeśli wolisz rozmowę</label><input id="f-telefon" name="telefon" type="tel" autocomplete="tel"></div>
+        <div class="row"><label class="et" for="f-wiadomosc">Dwa słowa o domu</label><textarea id="f-wiadomosc" name="wiadomosc" rows="3" placeholder="nowy czy stary, podłogówka czy grzejniki, czym grzejesz dziś"></textarea></div>
+
+        <div class="zgoda">
+          <input type="checkbox" id="zg-dane" name="zgoda_dane" value="tak" required>
+          <label for="zg-dane"><b>Zgadzam się na kontakt w sprawie tego zapytania.</b> DEWAX Sp. z o.o. użyje moich danych, żeby przygotować wycenę i odpowiedzieć. <span aria-hidden="true">*</span></label>
+        </div>
+        <div class="zgoda">
+          <input type="checkbox" id="zg-tel" name="zgoda_telefon" value="tak">
+          <label for="zg-tel">Możecie do mnie zadzwonić, jeśli łatwiej wyjaśnić to przez telefon. <b>Nieobowiązkowe.</b></label>
+        </div>
+
+        <button class="btn b-go" type="submit" style="width:100%;margin-top:6px">Wyślij zapytanie →</button>
+        <p style="font-size:11.5px;color:var(--soft);margin-top:12px;line-height:1.55">Administratorem danych jest DEWAX Sp. z o.o., ul. Ostrowska 1, 63-330 Dobrzyca. Użyjemy ich wyłącznie do przygotowania wyceny i kontaktu w tej sprawie, nie przekazujemy ich nikomu i nie zapisujemy na listę mailingową. Zgodę możesz wycofać w każdej chwili, masz też prawo wglądu do danych, ich sprostowania i usunięcia. Szczegóły w <a href="/polityka-prywatnosci.html" style="color:var(--blue-d);font-weight:600">polityce prywatności</a>.</p>
       </form>
     </div>
   </div>
