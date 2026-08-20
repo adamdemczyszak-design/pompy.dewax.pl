@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://pompy.dewax.pl/sitemap.xml

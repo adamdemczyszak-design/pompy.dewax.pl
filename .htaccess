@@ -1,0 +1,57 @@
+# ---- pompy.dewax.pl · konfiguracja dla nazwa.pl (Apache) ----
+
+# Strona startowa
+DirectoryIndex index.html
+
+# Wymuszenie HTTPS
+<IfModule mod_rewrite.c>
+  RewriteEngine On
+  RewriteCond %{HTTPS} !=on
+  RewriteRule ^(.*)$ https://%{HTTP_HOST}/$1 [R=301,L]
+</IfModule>
+
+# Kompresja — najważniejsze dla szybkości HTML i CSS
+<IfModule mod_deflate.c>
+  AddOutputFilterByType DEFLATE text/html text/plain text/css text/xml
+  AddOutputFilterByType DEFLATE application/javascript application/x-javascript
+  AddOutputFilterByType DEFLATE application/json application/xml image/svg+xml
+</IfModule>
+
+# Pamięć podręczna przeglądarki
+<IfModule mod_expires.c>
+  ExpiresActive On
+  ExpiresByType image/webp "access plus 1 year"
+  ExpiresByType image/jpeg "access plus 1 year"
+  ExpiresByType image/png  "access plus 1 year"
+  ExpiresByType text/css   "access plus 1 month"
+  ExpiresByType application/javascript "access plus 1 month"
+  ExpiresByType text/html  "access plus 1 hour"
+</IfModule>
+
+# Poprawny typ dla WebP (starsze konfiguracje Apache)
+<IfModule mod_mime.c>
+  AddType image/webp .webp
+</IfModule>
+
+# Kodowanie
+AddDefaultCharset UTF-8
+
+# ---- PRZEKIEROWANIA 301 ZE STARYCH ADRESÓW ----
+# UWAGA: pod tym adresem stała wcześniej strona na CakePHP z podstronami.
+# Przed wdrożeniem wypisz stare adresy (sitemap.xml starej strony, Google Search Console)
+# i dopisz je tutaj, żeby nie stracić pozycji w Google ani ruchu z linków.
+# Wzór:
+#   Redirect 301 /kalkulator   https://pompy.dewax.pl/#kreator
+#   Redirect 301 /dotacje      https://pompy.dewax.pl/#dofinansowanie
+#   Redirect 301 /kontakt      https://pompy.dewax.pl/#kontakt
+#   Redirect 301 /realizacje   https://pompy.dewax.pl/#realizacje
+# --- początek listy przekierowań ---
+
+# --- koniec listy przekierowań ---
+
+# Strona błędu 404 (własna, z odnośnikami do sekcji — NIE przekierowanie na stronę główną,
+# bo Google traktowałby to jako "miękki 404")
+ErrorDocument 404 /404.html
+
+# Blokada podglądu katalogów
+Options -Indexes
