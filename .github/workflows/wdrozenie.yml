@@ -9,6 +9,10 @@ on:
         description: 'Nie wgrywaj nic, wykonaj same testy zywej strony'
         type: boolean
         default: false
+      pokaz_katalogi:
+        description: 'Nie wgrywaj nic, tylko wylistuj katalogi na serwerze FTP'
+        type: boolean
+        default: false
   push:
     branches: [main]
     paths:
@@ -44,20 +48,43 @@ jobs:
           FTP_LOGIN: ${{ secrets.FTP_LOGIN }}
           FTP_HASLO: ${{ secrets.FTP_HASLO }}
           KATALOG_ZDALNY: ${{ vars.KATALOG_ZDALNY }}
+          POKAZ_KATALOGI: ${{ inputs.pokaz_katalogi }}
+          TESTY_TYLKO: ${{ inputs.testy_tylko }}
         run: |
           BRAKI=""
           [ -n "$FTP_HOST" ]       || BRAKI="$BRAKI FTP_HOST(secret)"
           [ -n "$FTP_LOGIN" ]      || BRAKI="$BRAKI FTP_LOGIN(secret)"
           [ -n "$FTP_HASLO" ]      || BRAKI="$BRAKI FTP_HASLO(secret)"
-          [ -n "$KATALOG_ZDALNY" ] || BRAKI="$BRAKI KATALOG_ZDALNY(variable)"
+          if [ "${POKAZ_KATALOGI:-false}" != "true" ] && [ "${TESTY_TYLKO:-false}" != "true" ]; then
+            [ -n "$KATALOG_ZDALNY" ] || BRAKI="$BRAKI KATALOG_ZDALNY(variable)"
+          fi
           if [ -n "$BRAKI" ]; then
             echo "::error::Brakuje danych w ustawieniach repozytorium:$BRAKI"
             echo "Settings -> Secrets and variables -> Actions" >> "$GITHUB_STEP_SUMMARY"
             exit 1
           fi
 
+      - name: Wylistuj katalogi na serwerze
+        if: ${{ inputs.pokaz_katalogi == true }}
+        env:
+          FTP_HOST: ${{ secrets.FTP_HOST }}
+          FTP_LOGIN: ${{ secrets.FTP_LOGIN }}
+          LFTP_PASSWORD: ${{ secrets.FTP_HASLO }}
+        run: |
+          set -eu
+          sudo apt-get update -qq && sudo apt-get install -y -qq lftp
+          echo '## Katalogi na serwerze' >> "$GITHUB_STEP_SUMMARY"
+          echo '```' >> "$GITHUB_STEP_SUMMARY"
+          lftp --env-password -u "$FTP_LOGIN" "ftp://$FTP_HOST" -e "set ssl:verify-certificate no; set ftp:ssl-allow yes; set net:timeout 20; cls -l /; bye" | tee -a "$GITHUB_STEP_SUMMARY"
+          echo '```' >> "$GITHUB_STEP_SUMMARY"
+          echo 'Wybierz katalog domeny pompy.dewax.pl i wpisz go jako zmienna KATALOG_ZDALNY.' >> "$GITHUB_STEP_SUMMARY"
+
+      - name: Zakoncz po listowaniu
+        if: ${{ inputs.pokaz_katalogi == true }}
+        run: exit 0
+
       - name: Zloz pakiet do wgrania
-        if: ${{ inputs.testy_tylko != true }}
+        if: ${{ inputs.testy_tylko != true && inputs.pokaz_katalogi != true }}
         run: |
           set -eu
           rm -rf .pakiet && mkdir -p .pakiet
@@ -71,12 +98,12 @@ jobs:
           find .pakiet -type f | sort
 
       - name: Instaluj lftp
-        if: ${{ inputs.testy_tylko != true }}
+        if: ${{ inputs.testy_tylko != true && inputs.pokaz_katalogi != true }}
         run: sudo apt-get update -qq && sudo apt-get install -y -qq lftp
 
 
       - name: Kopia obecnego stanu serwera
-        if: ${{ inputs.testy_tylko != true }}
+        if: ${{ inputs.testy_tylko != true && inputs.pokaz_katalogi != true }}
         env:
           FTP_HOST: ${{ secrets.FTP_HOST }}
           FTP_LOGIN: ${{ secrets.FTP_LOGIN }}
@@ -96,7 +123,7 @@ jobs:
           echo "Zapisano w kopii: $(find .kopia -type f | wc -l) plikow, $(du -sh .kopia | cut -f1)"
 
       - name: Odloz kopie na 90 dni
-        if: ${{ inputs.testy_tylko != true }}
+        if: ${{ inputs.testy_tylko != true && inputs.pokaz_katalogi != true }}
         uses: actions/upload-artifact@v4
         with:
           name: kopia-serwera-${{ github.run_number }}
@@ -105,7 +132,7 @@ jobs:
           if-no-files-found: warn
 
       - name: Wgraj na serwer
-        if: ${{ inputs.testy_tylko != true }}
+        if: ${{ inputs.testy_tylko != true && inputs.pokaz_katalogi != true }}
         env:
           FTP_HOST: ${{ secrets.FTP_HOST }}
           FTP_LOGIN: ${{ secrets.FTP_LOGIN }}
@@ -127,6 +154,7 @@ jobs:
           LFTP
 
       - name: Testy zywej strony
+        if: ${{ inputs.pokaz_katalogi != true }}
         run: |
           set -u
           D="$DOMENA"
