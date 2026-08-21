@@ -13,29 +13,27 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - name: Pobierz grafiki ze strony farb dewax.pl
+      - name: Pobierz tlo hero ze stylow Divi
         run: |
           set -u
           mkdir -p grafiki
-          curl -s -L --max-time 30 https://dewax.pl/ -o strona.html
-          echo "=== wszystkie obrazki na stronie ==="
-          grep -o -E '(src|href|content)="[^"]*\.(jpe?g|png|webp)[^"]*"' strona.html | sed 's/^[a-z]*="//;s/"$//' | sort -u | tee lista.txt
-          echo
-          echo "=== takze z srcset i tla CSS ==="
-          grep -o -E 'url\(([^)]*\.(jpe?g|png|webp))\)' strona.html | sed 's/url(//;s/)//;s/["'"'"']//g' | sort -u | tee -a lista.txt
-          echo
+          curl -s -L --max-time 30 "https://dewax.pl/wp-content/et-cache/2/et-core-unified-2.min.css" -o divi.css
+          curl -s -L --max-time 30 "https://dewax.pl/wp-content/et-cache/2/et-core-unified-deferred-2.min.css" -o divi2.css
+          cat divi.css divi2.css > style.css
+          echo "=== obrazki w CSS ==="
+          grep -o -E 'url\(([^)]*\.(jpe?g|png|webp))[^)]*\)' style.css | sed "s/url(//;s/)//;s/['\"]//g" | sort -u | tee lista.txt
           n=0
           while read -r u; do
-            case "$u" in http*) adres="$u";; //*) adres="https:$u";; /*) adres="https://dewax.pl$u";; *) adres="https://dewax.pl/$u";; esac
-            plik="grafiki/$(printf '%02d' $n)-$(basename "${adres%%\?*}")"
+            case "$u" in http*) adres="$u";; //*) adres="https:$u";; /*) adres="https://dewax.pl$u";; *) adres="https://dewax.pl/wp-content/et-cache/2/$u";; esac
+            plik="grafiki/css-$(printf '%02d' $n)-$(basename "${adres%%\?*}")"
             curl -s -L --max-time 30 -o "$plik" "$adres" && n=$((n+1))
-            [ $n -ge 14 ] && break
-          done < <(sort -u lista.txt)
-          echo "pobrano: $n"
+            [ $n -ge 12 ] && break
+          done < lista.txt
+          curl -s -L --max-time 30 -o grafiki/klatka-schodowa.jpg "https://dewax.pl/wp-content/uploads/2019/09/klatka-schodowa-min.jpg"
+          curl -s -L --max-time 30 -o grafiki/wzornik.jpg "https://dewax.pl/wp-content/uploads/2019/09/dewax-baner-wzornik-kolorow-min.jpg"
+          find grafiki -type f -size -8k -delete
           ls -la grafiki/
-          # tylko sensowne rozmiary
-          find grafiki -type f -size -12k -delete
-          ls -la grafiki/
+          cp style.css strona.html 2>/dev/null || true
       - name: Wypchnij grafiki na galaz grafiki-farb
         run: |
           set -eu
