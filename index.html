@@ -57,13 +57,12 @@ nav .logo img{height:36px;width:auto}
 nav.open .links{display:flex;position:absolute;top:100%;left:0;right:0;background:#fff;flex-direction:column;gap:0;border-bottom:1px solid var(--hair);box-shadow:0 16px 32px rgba(0,0,80,.13);padding:6px 0}
 nav.open .links a{padding:13px 24px}nav.open .links a::after{display:none}}
 /* hero */
-.hero{position:relative;background:linear-gradient(135deg,var(--navy) 0%,var(--navy2) 55%,var(--navy3) 100%);overflow:hidden}
-.hero .wrap{position:relative;z-index:2;padding:72px 22px 64px;display:grid;grid-template-columns:minmax(0,1fr) minmax(300px,420px);gap:52px;align-items:center}
+.hero{position:relative;min-height:min(84vh,760px);display:flex;align-items:center;background:var(--navy);overflow:hidden}
+.hero .bg{position:absolute;inset:0}
+.hero .bg img{width:100%;height:100%;object-fit:cover;object-position:50% 28%;opacity:.55}
+.hero .bg::after{content:"";position:absolute;inset:0;background:linear-gradient(100deg,rgba(0,0,80,.95) 0%,rgba(0,0,80,.84) 46%,rgba(0,0,80,.45) 100%)}
+.hero .wrap{position:relative;z-index:2;padding:74px 22px}
 .hero .in{max-width:760px}
-.hero .foto{border-radius:var(--r);overflow:hidden;box-shadow:0 24px 60px rgba(0,0,30,.45);border:1px solid rgba(255,255,255,.14);margin:0}
-.hero .foto img{width:100%;height:auto;display:block}
-@media(max-width:960px){.hero .wrap{grid-template-columns:1fr;gap:38px;padding:56px 22px 48px}
-.hero .foto{max-width:430px;justify-self:center}}
 .badge{display:inline-flex;align-items:center;gap:9px;background:rgba(64,135,189,.2);border:1px solid rgba(64,135,189,.55);color:#BBD6EC;font-size:13px;font-weight:700;padding:7px 15px;border-radius:99px;margin-bottom:22px}
 .hero h1{font-size:clamp(32px,5.4vw,60px);font-weight:900;color:#fff;margin-bottom:19px}
 .hero h1 em{font-style:normal;color:var(--blue);display:block}
@@ -244,6 +243,7 @@ font-size:20px;color:var(--navy);text-align:right;background:transparent;-moz-ap
 </div></nav>
 
 <header class="hero">
+  <div class="bg"><img src="img/hero_wide.webp" alt="Maszt wiertnicy DEWAX na tle nieba podczas wykonywania odwiertu" fetchpriority="high" width="1600" height="1166"></div>
   <div class="wrap"><div class="in">
     <div class="badge"><span class="dots"><i style="background:#008000"></i><i style="background:#FFEA00"></i><i style="background:#FE0000"></i><i style="background:#4087BD"></i></span> Firma założona w 2007 roku</div>
     <h1>Odwiert i pompa ciepła<em>na jednej umowie.</em></h1>
@@ -257,9 +257,7 @@ font-size:20px;color:var(--navy);text-align:right;background:transparent;-moz-ap
       <div class="chip"><b>2 minuty</b> na wynik z ceną</div>
       <div class="chip"><b>Jedna</b> umowa: odwiert i pompa</div>
     </div>
-  </div>
-  <figure class="foto"><img src="img/hero_wide.webp" alt="Operator DEWAX przy wiertnicy podczas wykonywania odwiertu pod gruntową pompę ciepła" fetchpriority="high" width="933" height="1400"></figure>
-  </div>
+  </div></div>
 </header>
 
 <div class="tbar"><div class="wrap">
