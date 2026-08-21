@@ -68,6 +68,18 @@ jobs:
           bye
           LFTP
 
+      - name: Diagnoza pochodzenia
+        run: |
+          set -u
+          echo "=== bezposrednio z serwera (z pominieciem CDN) ==="
+          curl -sk --resolve dewax.pl:443:85.128.139.207 -o /dev/null -w "origin /: %{http_code}\n" --max-time 25 https://dewax.pl/
+          curl -sk --resolve dewax.pl:443:85.128.139.207 --max-time 25 https://dewax.pl/ -o origin.html || true
+          grep -q "ENGINEERING" origin.html && echo "origin: BRAMA WIDOCZNA" || { echo "origin: brama NIEwidoczna, tytul:"; grep -o -i '<title>[^<]*</title>' origin.html | head -1; }
+          curl -sk --resolve dewax.pl:443:85.128.139.207 -o /dev/null -w "origin /pompy.webp: %{http_code}\n" --max-time 25 https://dewax.pl/pompy.webp
+          echo "=== przez CDN z pominieciem cache ==="
+          curl -s -o /dev/null -w "cdn /pompy.webp?v=2: %{http_code}\n" --max-time 25 "https://dewax.pl/pompy.webp?v=2"
+          curl -sI --max-time 25 https://dewax.pl/ | grep -i -E "cdn|cache|age" || true
+
       - name: Testy
         run: |
           set -u
