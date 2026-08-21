@@ -18,13 +18,15 @@ jobs:
           FTP_HOST: ${{ secrets.FTP_HOST }}
           FTP_LOGIN: ${{ secrets.FTP_LOGIN }}
           LFTP_PASSWORD: ${{ secrets.FTP_HASLO }}
+          KAT: ${{ vars.KATALOG_DEWAX || '/' }}
         run: |
           set -eu
-          lftp --env-password -u "$FTP_LOGIN" "ftp://$FTP_HOST" <<'LFTP'
+          echo "katalog docelowy: $KAT"
+          lftp --env-password -u "$FTP_LOGIN" "ftp://$FTP_HOST" <<LFTP
           set ssl:verify-certificate no
           set ftp:ssl-allow yes
           set net:timeout 25
-          get /.htaccess -o htaccess-glowny.txt
+          get ${KAT%/}/.htaccess -o htaccess-glowny.txt
           bye
           LFTP
           echo "--- obecny /.htaccess ---"
@@ -43,6 +45,7 @@ jobs:
           FTP_HOST: ${{ secrets.FTP_HOST }}
           FTP_LOGIN: ${{ secrets.FTP_LOGIN }}
           LFTP_PASSWORD: ${{ secrets.FTP_HASLO }}
+          KAT: ${{ vars.KATALOG_DEWAX || '/' }}
         run: |
           set -eu
           if ! grep -qi "DirectoryIndex" htaccess-glowny.txt; then
@@ -51,20 +54,19 @@ jobs:
           else
             cp htaccess-glowny.txt htaccess-nowy.txt
           fi
-          lftp --env-password -u "$FTP_LOGIN" "ftp://$FTP_HOST" <<'LFTP'
+          lftp --env-password -u "$FTP_LOGIN" "ftp://$FTP_HOST" <<LFTP
           set ssl:verify-certificate no
           set ftp:ssl-allow yes
           set ftp:ssl-protect-data yes
           set net:timeout 25
-          put htaccess-glowny.txt -o /.htaccess.kopia-przed-brama
-          put brama/index.html -o /index.html
-          put brama/pompy.webp -o /pompy.webp
-          put brama/granit.webp -o /granit.webp
-          put brama/farba.webp -o /farba.webp
-          put brama/logo-biale-kropki.png -o /logo-biale-kropki.png
-          put htaccess-nowy.txt -o /.htaccess
-          chmod 644 /index.html /pompy.webp /granit.webp /farba.webp /logo-biale-kropki.png /.htaccess
-          cls -la /index.html /.htaccess
+          put brama/index.html -o ${KAT%/}/index.html
+          put brama/pompy.webp -o ${KAT%/}/pompy.webp
+          put brama/granit.webp -o ${KAT%/}/granit.webp
+          put brama/farba.webp -o ${KAT%/}/farba.webp
+          put brama/logo-biale-kropki.png -o ${KAT%/}/logo-biale-kropki.png
+          put htaccess-nowy.txt -o ${KAT%/}/.htaccess
+          chmod 644 ${KAT%/}/index.html ${KAT%/}/.htaccess
+          cls -la ${KAT%/}/index.html ${KAT%/}/.htaccess
           bye
           LFTP
 
