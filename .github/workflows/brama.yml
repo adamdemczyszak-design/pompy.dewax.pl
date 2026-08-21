@@ -13,7 +13,7 @@ jobs:
       - name: Instaluj lftp
         run: sudo apt-get update -qq && sudo apt-get install -y -qq lftp
 
-      - name: Kopia glownego htaccess
+      - name: Pobierz htaccess i odtworz oryginal
         env:
           FTP_HOST: ${{ secrets.FTP_HOST }}
           FTP_LOGIN: ${{ secrets.FTP_LOGIN }}
@@ -26,18 +26,30 @@ jobs:
           set ssl:verify-certificate no
           set ftp:ssl-allow yes
           set net:timeout 25
-          get ${KAT%/}/.htaccess -o htaccess-glowny.txt
+          get ${KAT%/}/.htaccess -o htaccess-zserwera.txt
           bye
           LFTP
-          echo "--- obecny /.htaccess ---"
-          cat htaccess-glowny.txt
-          grep -qi "DirectoryIndex" htaccess-glowny.txt && echo "UWAGA: juz ma DirectoryIndex" || echo "brak DirectoryIndex — dopisze"
+          echo "--- .htaccess pobrany z serwera ---"
+          cat htaccess-zserwera.txt
+          # Zdejmij blok bramy z poprzednich wdrozen, zeby kopia zapasowa byla ZAWSZE oryginalem.
+          if grep -q "^# brama DEWAX" htaccess-zserwera.txt; then
+            echo ">>> plik zawiera juz blok bramy — usuwam go przed zrobieniem kopii"
+            sed -e '/^# brama DEWAX START/,/^# brama DEWAX END/d' -e '/^# brama DEWAX: strona wyboru dzialu/d' htaccess-zserwera.txt > bez-bloku.txt
+            awk 'BEGIN{u=0} { if (u==0 && $0=="DirectoryIndex index.html index.php") { u=1; next } print }' bez-bloku.txt > htaccess-oryginal.txt
+          else
+            cp htaccess-zserwera.txt htaccess-oryginal.txt
+          fi
+          # skasuj puste linie z poczatku pliku
+          sed -i '/./,$!d' htaccess-oryginal.txt
+          grep -q "RewriteEngine On" htaccess-oryginal.txt || { echo "::error::W odtworzonym oryginale nie ma regul WordPressa — przerywam, nic nie wgrywam"; exit 1; }
+          echo "--- oryginal bez bramy (to idzie do kopii zapasowej) ---"
+          cat htaccess-oryginal.txt
 
-      - name: Odloz kopie htaccess na 90 dni
+      - name: Odloz oryginalna kopie htaccess na 90 dni
         uses: actions/upload-artifact@v4
         with:
-          name: htaccess-dewax-pl-${{ github.run_number }}
-          path: htaccess-glowny.txt
+          name: htaccess-oryginal-dewax-pl-${{ github.run_number }}
+          path: htaccess-oryginal.txt
           retention-days: 90
 
       - name: Wgraj brame
@@ -48,12 +60,21 @@ jobs:
           KAT: ${{ vars.KATALOG_DEWAX || '/' }}
         run: |
           set -eu
-          if ! grep -qi "DirectoryIndex" htaccess-glowny.txt; then
-            { echo "# brama DEWAX: strona wyboru dzialu przed WordPressem (usun te 2 linie, by wrocic)"; \
-              echo "DirectoryIndex index.html index.php"; echo; cat htaccess-glowny.txt; } > htaccess-nowy.txt
-          else
-            cp htaccess-glowny.txt htaccess-nowy.txt
-          fi
+          {
+            echo "# brama DEWAX START - usun wszystko do linii END, by wrocic do samej strony farb"
+            echo "DirectoryIndex index.html index.php"
+            echo "<IfModule mod_rewrite.c>"
+            echo "RewriteEngine On"
+            echo "RewriteBase /"
+            echo "RewriteCond %{QUERY_STRING} (^|&)dzial=paint(&|\$)"
+            echo "RewriteRule ^\$ index.php [L]"
+            echo "</IfModule>"
+            echo "# brama DEWAX END"
+            echo
+            cat htaccess-oryginal.txt
+          } > htaccess-nowy.txt
+          echo "--- nowy .htaccess ---"
+          head -12 htaccess-nowy.txt
           lftp --env-password -u "$FTP_LOGIN" "ftp://$FTP_HOST" <<LFTP
           set ssl:verify-certificate no
           set ftp:ssl-allow yes
@@ -70,36 +91,35 @@ jobs:
           bye
           LFTP
 
-      - name: Diagnoza pochodzenia
-        run: |
-          set -u
-          echo "=== bezposrednio z serwera (z pominieciem CDN) ==="
-          curl -sk --resolve dewax.pl:443:85.128.139.207 -o /dev/null -w "origin /: %{http_code}\n" --max-time 25 https://dewax.pl/
-          curl -sk --resolve dewax.pl:443:85.128.139.207 --max-time 25 https://dewax.pl/ -o origin.html || true
-          grep -q "ENGINEERING" origin.html && echo "origin: BRAMA WIDOCZNA" || { echo "origin: brama NIEwidoczna, tytul:"; grep -o -i '<title>[^<]*</title>' origin.html | head -1; }
-          curl -sk --resolve dewax.pl:443:85.128.139.207 -o /dev/null -w "origin /pompy.webp: %{http_code}\n" --max-time 25 https://dewax.pl/pompy.webp
-          echo "=== przez CDN z pominieciem cache ==="
-          curl -s -o /dev/null -w "cdn /pompy.webp?v=2: %{http_code}\n" --max-time 25 "https://dewax.pl/pompy.webp?v=2"
-          curl -sI --max-time 25 https://dewax.pl/ | grep -i -E "cdn|cache|age" || true
-
       - name: Testy
         run: |
           set -u
+          sleep 8
           ZLE=0
           spr() { echo "$1: $2 (oczekiwane $3)"; [ "$2" = "$3" ] || ZLE=$((ZLE+1)); }
           curl -s -L --max-time 30 https://dewax.pl/ -o glowna.html
           if grep -q "ENGINEERING" glowna.html && grep -q "PAINT" glowna.html; then
             echo "dewax.pl: BRAMA WIDOCZNA"
           else
-            echo "dewax.pl: brama NIEwidoczna — tytul:"; grep -o -i '<title>[^<]*</title>' glowna.html | head -1
+            echo "::error::dewax.pl: brama NIEwidoczna"
+            grep -o -i '<title>[^<]*</title>' glowna.html | head -1
             ZLE=$((ZLE+1))
           fi
-          spr "strona farb pod /index.php" "$(curl -s -o /dev/null -w '%{http_code}' -L --max-time 30 'https://dewax.pl/index.php')" 200
-          curl -s -L --max-time 30 'https://dewax.pl/index.php' -o farby.html
-          grep -o -i '<title>[^<]*</title>' farby.html | head -1
+          curl -s -L --max-time 30 "https://dewax.pl/?dzial=paint" -o farby.html
+          if grep -qi "multilan" farby.html; then
+            echo "DEWAX PAINT prowadzi na strone farb: OK"
+            grep -o -i '<title>[^<]*</title>' farby.html | head -1
+          else
+            echo "::error::DEWAX PAINT nie prowadzi na strone farb"
+            grep -o -i '<title>[^<]*</title>' farby.html | head -1
+            ZLE=$((ZLE+1))
+          fi
+          spr "podstrona /kontakt/" "$(curl -s -o /dev/null -w '%{http_code}' -L --max-time 30 'https://dewax.pl/kontakt/')" 200
+          spr "podstrona /dotacje/" "$(curl -s -o /dev/null -w '%{http_code}' -L --max-time 30 'https://dewax.pl/dotacje/')" 200
           spr "grafika pompy.webp" "$(curl -s -o /dev/null -w '%{http_code}' --max-time 30 https://dewax.pl/pompy.webp)" 200
           spr "grafika granit.webp" "$(curl -s -o /dev/null -w '%{http_code}' --max-time 30 https://dewax.pl/granit.webp)" 200
           spr "grafika farba.webp" "$(curl -s -o /dev/null -w '%{http_code}' --max-time 30 https://dewax.pl/farba.webp)" 200
           spr "logo" "$(curl -s -o /dev/null -w '%{http_code}' --max-time 30 https://dewax.pl/logo-biale-kropki.png)" 200
           spr "pompy.dewax.pl dziala dalej" "$(curl -s -o /dev/null -w '%{http_code}' --max-time 30 https://pompy.dewax.pl/)" 200
+          spr "thermokrafft.pl dziala dalej" "$(curl -s -o /dev/null -w '%{http_code}' --max-time 30 https://thermokrafft.pl/)" 200
           [ "$ZLE" -eq 0 ] && echo "WSZYSTKO OK" || { echo "BLEDY: $ZLE"; exit 1; }

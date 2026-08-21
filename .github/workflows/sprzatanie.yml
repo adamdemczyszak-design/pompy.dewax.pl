@@ -1,5 +1,7 @@
 name: Sprzatanie po bramie
 
+# Cofa brame: zdejmuje blok z .htaccess w katalogu domeny dewax.pl
+# i kasuje pliki bramy. Strona farb wraca natychmiast.
 on:
   push:
     branches: [main]
@@ -11,29 +13,77 @@ jobs:
     steps:
       - name: Instaluj lftp
         run: sudo apt-get update -qq && sudo apt-get install -y -qq lftp
-      - name: Usun dopisane linie z htaccess
+
+      - name: Zdejmij blok bramy z htaccess
         env:
           FTP_HOST: ${{ secrets.FTP_HOST }}
           FTP_LOGIN: ${{ secrets.FTP_LOGIN }}
           LFTP_PASSWORD: ${{ secrets.FTP_HASLO }}
+          KAT: ${{ vars.KATALOG_DEWAX || '/' }}
         run: |
           set -eu
-          lftp --env-password -u "$FTP_LOGIN" "ftp://$FTP_HOST" -e "set ssl:verify-certificate no; set ftp:ssl-allow yes; set net:timeout 25; get /.htaccess -o przed.txt; bye"
+          echo "katalog: $KAT"
+          lftp --env-password -u "$FTP_LOGIN" "ftp://$FTP_HOST" <<LFTP
+          set ssl:verify-certificate no
+          set ftp:ssl-allow yes
+          set net:timeout 25
+          get ${KAT%/}/.htaccess -o przed.txt
+          bye
+          LFTP
           echo "=== PRZED ==="; cat przed.txt
-          # zostawiamy wylacznie oryginalna czesc WordPressa
-          sed -n '/# BEGIN WordPress/,$p' przed.txt > po.txt
+          sed -e '/^# brama DEWAX START/,/^# brama DEWAX END/d' -e '/^# brama DEWAX: strona wyboru dzialu/d' przed.txt > bez-bloku.txt
+          awk 'BEGIN{u=0} { if (u==0 && $0=="DirectoryIndex index.html index.php") { u=1; next } print }' bez-bloku.txt > po.txt
+          sed -i '/./,$!d' po.txt
           echo "=== PO ==="; cat po.txt
-          if ! grep -q "RewriteEngine On" po.txt; then echo "::error::Brak regul WordPressa — przerywam"; exit 1; fi
-          lftp --env-password -u "$FTP_LOGIN" "ftp://$FTP_HOST" -e "set ssl:verify-certificate no; set ftp:ssl-allow yes; set ftp:ssl-protect-data yes; set net:timeout 25; put po.txt -o /.htaccess; chmod 644 /.htaccess; bye"
-      - name: Odloz kopie htaccess
+          grep -q "RewriteEngine On" po.txt || { echo "::error::Brak regul WordPressa w wyniku — przerywam, nic nie zmieniam"; exit 1; }
+          if cmp -s przed.txt po.txt; then
+            echo "Nie bylo czego zdejmowac — .htaccess bez zmian."
+          else
+            lftp --env-password -u "$FTP_LOGIN" "ftp://$FTP_HOST" <<LFTP
+            set ssl:verify-certificate no
+            set ftp:ssl-allow yes
+            set ftp:ssl-protect-data yes
+            set net:timeout 25
+            put po.txt -o ${KAT%/}/.htaccess
+            chmod 644 ${KAT%/}/.htaccess
+            bye
+          LFTP
+          fi
+
+      - name: Odloz kopie htaccess sprzed sprzatania
         uses: actions/upload-artifact@v4
         with:
           name: htaccess-przed-sprzataniem-${{ github.run_number }}
           path: przed.txt
           retention-days: 90
+
+      - name: Skasuj pliki bramy
+        env:
+          FTP_HOST: ${{ secrets.FTP_HOST }}
+          FTP_LOGIN: ${{ secrets.FTP_LOGIN }}
+          LFTP_PASSWORD: ${{ secrets.FTP_HASLO }}
+          KAT: ${{ vars.KATALOG_DEWAX || '/' }}
+        run: |
+          set -u
+          lftp --env-password -u "$FTP_LOGIN" "ftp://$FTP_HOST" <<LFTP
+          set ssl:verify-certificate no
+          set ftp:ssl-allow yes
+          set net:timeout 25
+          rm -f ${KAT%/}/index.html
+          rm -f ${KAT%/}/pompy.webp
+          rm -f ${KAT%/}/granit.webp
+          rm -f ${KAT%/}/farba.webp
+          rm -f ${KAT%/}/logo-biale-kropki.png
+          bye
+          LFTP
+          echo "pliki bramy skasowane (o ile byly)"
+
       - name: Sprawdz czy strony dzialaja
         run: |
           set -u
-          for a in https://dewax.pl/ https://thermokrafft.pl/ https://pompy.dewax.pl/; do
-            echo "$a -> $(curl -s -o /dev/null -w '%{http_code}' --max-time 25 $a)"
+          sleep 8
+          for a in https://dewax.pl/ https://dewax.pl/kontakt/ https://thermokrafft.pl/ https://pompy.dewax.pl/; do
+            echo "$a -> $(curl -s -o /dev/null -w '%{http_code}' -L --max-time 25 $a)"
           done
+          curl -s -L --max-time 25 https://dewax.pl/ -o g.html
+          grep -o -i '<title>[^<]*</title>' g.html | head -1
