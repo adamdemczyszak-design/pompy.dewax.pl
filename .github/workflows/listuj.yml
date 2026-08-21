@@ -11,12 +11,21 @@ jobs:
     steps:
       - name: Instaluj lftp
         run: sudo apt-get update -qq && sudo apt-get install -y -qq lftp
-      - name: Wylistuj katalog glowny serwera
+      - name: Reguly htaccess i zawartosc uploads
         env:
           FTP_HOST: ${{ secrets.FTP_HOST }}
           FTP_LOGIN: ${{ secrets.FTP_LOGIN }}
           LFTP_PASSWORD: ${{ secrets.FTP_HASLO }}
         run: |
           set -eu
-          [ -n "$FTP_HOST" ] && [ -n "$FTP_LOGIN" ] && [ -n "$LFTP_PASSWORD" ] || { echo "::error::Brak sekretow FTP"; exit 1; }
-          lftp --env-password -u "$FTP_LOGIN" "ftp://$FTP_HOST" -e "set ssl:verify-certificate no; set ftp:ssl-allow yes; set net:timeout 25; set net:max-retries 2; cls -la /datadir; echo ---; cls -la /images; echo ---; cls -la /migracja; echo ---; cls -la /backups; echo ---; cls -la /; bye"
+          lftp --env-password -u "$FTP_LOGIN" "ftp://$FTP_HOST" <<'LFTP'
+          set ssl:verify-certificate no
+          set ftp:ssl-allow yes
+          set net:timeout 25
+          get /.htaccess -o htac.txt
+          cls -la /wp-content/uploads
+          cls -la /wp-content/et-cache
+          bye
+          LFTP
+          echo "=================== reguly z .htaccess ==================="
+          cat htac.txt
