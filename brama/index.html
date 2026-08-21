@@ -1,98 +1,103 @@
 <!DOCTYPE html><html lang="pl"><head>
 <meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>DEWAX — pompy ciepła i farby dekoracyjne | Dobrzyca</title>
-<meta name="description" content="DEWAX Sp. z o.o. to dwie specjalizacje: gruntowe pompy ciepła z własnymi odwiertami oraz farby dekoracyjne Multilan. Wybierz, czego szukasz.">
+<title>DEWAX — Engineering i Paint | Dobrzyca</title>
+<meta name="description" content="DEWAX Sp. z o.o. — dwa działy: DEWAX Engineering (gruntowe pompy ciepła i odwierty) oraz DEWAX Paint (farby dekoracyjne Multilan). Wybierz dział.">
 <link rel="canonical" href="https://dewax.pl/">
-<meta property="og:title" content="DEWAX — pompy ciepła i farby dekoracyjne">
-<meta property="og:description" content="Dwie specjalizacje, jedna firma z Dobrzycy. Wybierz, czego szukasz.">
+<meta property="og:title" content="DEWAX — Engineering i Paint">
+<meta property="og:description" content="Dwa działy, jedna firma z Dobrzycy. Wybierz, czego szukasz.">
 <meta property="og:url" content="https://dewax.pl/">
 <meta property="og:type" content="website"><meta property="og:locale" content="pl_PL">
 <meta name="theme-color" content="#000050">
 <link rel="icon" href="https://pompy.dewax.pl/favicon.png">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;800;900&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700;800;900&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
-:root{--navy:#000050;--navy2:#0A0A6B;--blue:#4087BD;--blue-d:#2F6D9E;--grafit:#232028;--kamien:#4A4550;--piask:#EDE9E3;--ink:#1C1C2E;--hair:#E3E7EF}
+:root{--navy:#000050;--navy2:#0A0A6B;--blue:#4087BD;--blue-d:#2F6D9E;--grafit:#232028;--kamien:#443F4A;--piask:#EDE9E3;--ink:#1C1C2E;--hair:#E3E7EF}
 html{-webkit-text-size-adjust:100%}
-body{font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;color:var(--ink);background:#fff;line-height:1.6;min-height:100vh;display:flex;flex-direction:column}
+body{font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;color:var(--ink);background:#fff;min-height:100vh;display:flex;flex-direction:column;line-height:1.6}
 img{max-width:100%;height:auto;display:block}
 a{text-decoration:none;color:inherit}
 
-header{padding:26px 22px 20px;text-align:center}
-header img{height:44px;width:auto;margin:0 auto 14px}
-header p{font-size:15.5px;color:#5A6080;max-width:52ch;margin:0 auto}
-header p b{color:var(--ink)}
+.pasek{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:16px 30px;border-bottom:1px solid var(--hair)}
+.pasek img{height:36px;width:auto}
+.pasek .adres{font-size:12.5px;letter-spacing:.06em;text-transform:uppercase;color:#5A6080;font-weight:600}
+.pasek .tel{font-family:'Montserrat';font-weight:800;font-size:15px;color:var(--navy);white-space:nowrap}
+@media(max-width:640px){.pasek{padding:14px 18px}.pasek .adres{display:none}}
 
-.wybor{flex:1;display:grid;grid-template-columns:1fr 1fr;gap:18px;max-width:1180px;width:100%;margin:0 auto;padding:8px 22px 30px}
-@media(max-width:820px){.wybor{grid-template-columns:1fr;max-width:560px}}
+.polowy{flex:1;display:grid;grid-template-columns:1fr 1fr;min-height:min(80vh,720px)}
+@media(max-width:820px){.polowy{grid-template-columns:1fr;min-height:0}}
 
-.kafel{position:relative;display:flex;flex-direction:column;justify-content:flex-end;min-height:min(62vh,560px);border-radius:18px;overflow:hidden;isolation:isolate;transition:transform .22s,box-shadow .22s}
-.kafel:hover,.kafel:focus-visible{transform:translateY(-5px);box-shadow:0 26px 60px rgba(0,0,40,.28)}
-.kafel:focus-visible{outline:3px solid var(--blue);outline-offset:3px}
-@media(max-width:820px){.kafel{min-height:340px}}
-@media(prefers-reduced-motion:reduce){.kafel{transition:none}.kafel:hover{transform:none}}
+.dzial{position:relative;display:flex;align-items:flex-end;overflow:hidden;isolation:isolate}
+@media(max-width:820px){.dzial{min-height:340px}}
+.dzial .tlo{position:absolute;inset:0;z-index:-1;transition:transform .5s ease}
+.dzial:hover .tlo,.dzial:focus-visible .tlo{transform:scale(1.03)}
+.dzial:focus-visible{outline:3px solid var(--blue);outline-offset:-3px}
+@media(prefers-reduced-motion:reduce){.dzial .tlo{transition:none}.dzial:hover .tlo{transform:none}}
+.dzial .tlo img{width:100%;height:100%;object-fit:cover;object-position:50% 30%}
 
-.kafel .tlo{position:absolute;inset:0;z-index:-1}
-.kafel .tlo img{width:100%;height:100%;object-fit:cover;object-position:50% 30%}
+.eng .tlo::after{content:"";position:absolute;inset:0;background:linear-gradient(178deg,rgba(0,0,60,.38) 0%,rgba(0,0,60,.58) 52%,rgba(0,0,70,.95) 100%)}
+.paint .tlo{background:
+  radial-gradient(2px 2px at 11% 21%,rgba(255,255,255,.18) 50%,transparent 51%),
+  radial-gradient(2.5px 2.5px at 31% 63%,rgba(255,255,255,.12) 50%,transparent 51%),
+  radial-gradient(2px 2px at 57% 33%,rgba(0,0,0,.4) 50%,transparent 51%),
+  radial-gradient(2.5px 2.5px at 78% 71%,rgba(255,255,255,.15) 50%,transparent 51%),
+  radial-gradient(2px 2px at 89% 44%,rgba(0,0,0,.34) 50%,transparent 51%),
+  radial-gradient(2px 2px at 21% 84%,rgba(255,255,255,.13) 50%,transparent 51%),
+  radial-gradient(3px 3px at 64% 14%,rgba(0,0,0,.3) 50%,transparent 51%),
+  radial-gradient(2px 2px at 43% 47%,rgba(255,255,255,.11) 50%,transparent 51%),
+  radial-gradient(2.5px 2.5px at 15% 52%,rgba(0,0,0,.28) 50%,transparent 51%),
+  radial-gradient(2px 2px at 70% 88%,rgba(255,255,255,.10) 50%,transparent 51%),
+  linear-gradient(160deg,var(--kamien) 0%,var(--grafit) 58%,#191620 100%)}
+.paint .tlo::after{content:"";position:absolute;inset:0;background:linear-gradient(178deg,rgba(20,17,24,.06) 0%,rgba(20,17,24,.28) 52%,rgba(14,12,17,.88) 100%)}
 
-.pompy .tlo::after{content:"";position:absolute;inset:0;background:linear-gradient(178deg,rgba(0,0,60,.30) 0%,rgba(0,0,60,.55) 55%,rgba(0,0,70,.94) 100%)}
-.farby .tlo{background:
-  radial-gradient(1.5px 1.5px at 12% 18%,rgba(255,255,255,.16) 50%,transparent 51%),
-  radial-gradient(2px 2px at 34% 64%,rgba(255,255,255,.10) 50%,transparent 51%),
-  radial-gradient(1.5px 1.5px at 58% 30%,rgba(0,0,0,.35) 50%,transparent 51%),
-  radial-gradient(2px 2px at 76% 74%,rgba(255,255,255,.13) 50%,transparent 51%),
-  radial-gradient(1.5px 1.5px at 88% 42%,rgba(0,0,0,.30) 50%,transparent 51%),
-  radial-gradient(1.5px 1.5px at 22% 86%,rgba(255,255,255,.11) 50%,transparent 51%),
-  radial-gradient(2.5px 2.5px at 66% 12%,rgba(0,0,0,.28) 50%,transparent 51%),
-  radial-gradient(1.5px 1.5px at 44% 44%,rgba(255,255,255,.09) 50%,transparent 51%),
-  linear-gradient(160deg,var(--kamien) 0%,var(--grafit) 60%,#1A171E 100%)}
-.farby .tlo::after{content:"";position:absolute;inset:0;background:linear-gradient(178deg,rgba(20,17,24,.05) 0%,rgba(20,17,24,.25) 55%,rgba(15,13,18,.85) 100%)}
+.dzial .in{position:relative;width:100%;padding:44px clamp(26px,4.5vw,64px) 48px;color:#fff}
+.dzial .nr{display:block;font-family:'Montserrat';font-weight:700;font-size:13px;letter-spacing:.22em;color:rgba(255,255,255,.55);margin-bottom:16px}
+.dzial h2{font-family:'Montserrat',sans-serif;font-weight:900;font-size:clamp(28px,3.2vw,44px);line-height:1.05;letter-spacing:-.01em;margin-bottom:6px}
+.dzial h2 small{display:block;font-size:.44em;font-weight:700;letter-spacing:.30em;text-transform:uppercase;color:rgba(255,255,255,.72);margin-bottom:10px}
+.dzial .opis{font-size:15.5px;color:rgba(255,255,255,.85);max-width:46ch;margin:14px 0 26px}
+.dzial .cta{display:inline-flex;align-items:center;gap:10px;font-family:'Montserrat';font-weight:800;font-size:14px;letter-spacing:.08em;text-transform:uppercase;padding:15px 28px;border:1.5px solid rgba(255,255,255,.55);border-radius:4px;transition:.18s;background:rgba(255,255,255,.06)}
+.dzial .cta::after{content:"→";font-size:16px}
+.dzial:hover .cta{background:#fff;color:var(--ink);border-color:#fff}
 
-.kafel .in{position:relative;padding:30px 30px 32px;color:#fff}
-.kafel .marka{display:inline-block;font-size:12px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;padding:6px 13px;border-radius:99px;margin-bottom:14px;border:1px solid rgba(255,255,255,.35);background:rgba(255,255,255,.10)}
-.kafel h2{font-family:'Montserrat',sans-serif;font-weight:900;font-size:clamp(26px,3.4vw,38px);line-height:1.1;letter-spacing:-.02em;margin-bottom:10px;text-wrap:balance}
-.kafel .opis{font-size:15.5px;color:rgba(255,255,255,.85);max-width:46ch;margin-bottom:20px}
-.kafel .cta{display:inline-flex;align-items:center;gap:9px;font-family:'Montserrat';font-weight:800;font-size:15.5px;padding:14px 24px;border-radius:10px;transition:.16s}
-.pompy .cta{background:var(--blue);color:#fff}
-.kafel:hover .cta{filter:brightness(1.08)}
-.farby .cta{background:var(--piask);color:var(--grafit)}
-.kafel .cta::after{content:"→"}
-
-footer{padding:18px 22px 26px;text-align:center;font-size:13px;color:#5A6080;border-top:1px solid var(--hair)}
+footer{display:flex;flex-wrap:wrap;gap:8px 28px;align-items:center;justify-content:center;padding:18px 22px;font-size:12.5px;color:#5A6080;border-top:1px solid var(--hair)}
+footer b{color:var(--ink);font-weight:600}
 footer a{color:var(--blue-d);font-weight:600}
 </style>
 </head><body>
 
-<header>
+<div class="pasek">
   <img src="https://pompy.dewax.pl/img/logo.png" alt="DEWAX" width="479" height="134">
-  <p><b>Jedna firma z Dobrzycy, dwie specjalizacje.</b> Wybierz, czego szukasz — trafisz od razu na właściwą stronę.</p>
-</header>
+  <span class="adres">Dobrzyca · Wielkopolska · od 2007</span>
+  <a class="tel" href="tel:+48627413227">62 741 32 27</a>
+</div>
 
-<main class="wybor">
-  <a class="kafel pompy" href="https://pompy.dewax.pl/" aria-label="Przejdź do strony o gruntowych pompach ciepła">
+<main class="polowy">
+  <a class="dzial eng" href="https://pompy.dewax.pl/" aria-label="DEWAX Engineering — gruntowe pompy ciepła">
     <div class="tlo"><img src="pompy.webp" alt="" width="800" height="1029" fetchpriority="high"></div>
     <div class="in">
-      <span class="marka">DEWAX Energy</span>
-      <h2>Gruntowe pompy ciepła</h2>
-      <p class="opis">Odwiert i pompa na jednej umowie. Wiercimy własną wiertnicą, montujemy i serwisujemy — od pierwszego metra po rozruch.</p>
-      <span class="cta">Przejdź do pomp ciepła</span>
+      <span class="nr">01</span>
+      <h2><small>DEWAX Engineering</small>Gruntowe pompy ciepła</h2>
+      <p class="opis">Odwiert i pompa na jednej umowie. Wiercimy własnym sprzętem, montujemy i serwisujemy — od pierwszego metra po rozruch.</p>
+      <span class="cta">Wejdź</span>
     </div>
   </a>
 
-  <a class="kafel farby" href="/index.php" aria-label="Przejdź do strony o farbach dekoracyjnych Multilan">
+  <a class="dzial paint" href="/index.php" aria-label="DEWAX Paint — farby dekoracyjne Multilan">
     <div class="tlo"></div>
     <div class="in">
-      <span class="marka">DEWAX Multilan</span>
-      <h2>Farby dekoracyjne</h2>
+      <span class="nr">02</span>
+      <h2><small>DEWAX Paint</small>Farby dekoracyjne</h2>
       <p class="opis">Multilan — farba dekoracyjna imitująca granit. Trwałe, kamienne wykończenie ścian i elewacji.</p>
-      <span class="cta">Przejdź do farb</span>
+      <span class="cta">Wejdź</span>
     </div>
   </a>
 </main>
 
 <footer>
-  DEWAX Sp. z o.o. · ul. Ostrowska 1, 63-330 Dobrzyca · KRS 0000298299 · NIP 6080071501 · <a href="tel:+48627413227">62 741 32 27</a>
+  <span><b>DEWAX Sp. z o.o.</b> · ul. Ostrowska 1, 63-330 Dobrzyca</span>
+  <span>KRS 0000298299 · NIP 6080071501 · REGON 300706044</span>
+  <a href="mailto:sprzedaz@dewax.pl">sprzedaz@dewax.pl</a>
 </footer>
 
 </body></html>
