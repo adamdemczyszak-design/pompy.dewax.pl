@@ -5,10 +5,14 @@ on:
     branches: [main]
     paths: ['.github/diagnoza-znacznik']
 
+permissions:
+  contents: write
+
 jobs:
   diagnoza:
     runs-on: ubuntu-latest
     steps:
+      - uses: actions/checkout@v4
       - name: Pobierz grafiki ze strony farb dewax.pl
         run: |
           set -u
@@ -32,10 +36,13 @@ jobs:
           # tylko sensowne rozmiary
           find grafiki -type f -size -12k -delete
           ls -la grafiki/
-      - name: Odloz grafiki
-        uses: actions/upload-artifact@v4
-        with:
-          name: grafiki-farb
-          path: grafiki
-          retention-days: 7
-          if-no-files-found: warn
+      - name: Wypchnij grafiki na galaz grafiki-farb
+        run: |
+          set -eu
+          git config user.name "Claude"
+          git config user.email "noreply@anthropic.com"
+          git checkout --orphan grafiki-farb
+          git rm -rq --cached . 2>/dev/null || true
+          git add -f grafiki lista.txt strona.html
+          git commit -q -m "Grafiki pobrane ze strony farb dewax.pl"
+          git push -f origin grafiki-farb
