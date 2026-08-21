@@ -1,0 +1,91 @@
+name: Wdrozenie bramy dewax.pl
+
+on:
+  push:
+    branches: [main]
+    paths: ['.github/brama-znacznik']
+
+jobs:
+  brama:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Instaluj lftp
+        run: sudo apt-get update -qq && sudo apt-get install -y -qq lftp
+
+      - name: Kopia glownego htaccess
+        env:
+          FTP_HOST: ${{ secrets.FTP_HOST }}
+          FTP_LOGIN: ${{ secrets.FTP_LOGIN }}
+          LFTP_PASSWORD: ${{ secrets.FTP_HASLO }}
+        run: |
+          set -eu
+          lftp --env-password -u "$FTP_LOGIN" "ftp://$FTP_HOST" <<'LFTP'
+          set ssl:verify-certificate no
+          set ftp:ssl-allow yes
+          set net:timeout 25
+          get /.htaccess -o htaccess-glowny.txt
+          bye
+          LFTP
+          echo "--- obecny /.htaccess ---"
+          cat htaccess-glowny.txt
+          grep -qi "DirectoryIndex" htaccess-glowny.txt && echo "UWAGA: juz ma DirectoryIndex" || echo "brak DirectoryIndex — dopisze"
+
+      - name: Odloz kopie htaccess na 90 dni
+        uses: actions/upload-artifact@v4
+        with:
+          name: htaccess-dewax-pl-${{ github.run_number }}
+          path: htaccess-glowny.txt
+          retention-days: 90
+
+      - name: Wgraj brame
+        env:
+          FTP_HOST: ${{ secrets.FTP_HOST }}
+          FTP_LOGIN: ${{ secrets.FTP_LOGIN }}
+          LFTP_PASSWORD: ${{ secrets.FTP_HASLO }}
+        run: |
+          set -eu
+          if ! grep -qi "DirectoryIndex" htaccess-glowny.txt; then
+            { echo "# brama DEWAX: strona wyboru dzialu przed WordPressem (usun te 2 linie, by wrocic)"; \
+              echo "DirectoryIndex index.html index.php"; echo; cat htaccess-glowny.txt; } > htaccess-nowy.txt
+          else
+            cp htaccess-glowny.txt htaccess-nowy.txt
+          fi
+          lftp --env-password -u "$FTP_LOGIN" "ftp://$FTP_HOST" <<'LFTP'
+          set ssl:verify-certificate no
+          set ftp:ssl-allow yes
+          set ftp:ssl-protect-data yes
+          set net:timeout 25
+          put htaccess-glowny.txt -o /.htaccess.kopia-przed-brama
+          put brama/index.html -o /index.html
+          put brama/pompy.webp -o /pompy.webp
+          put brama/granit.webp -o /granit.webp
+          put brama/farba.webp -o /farba.webp
+          put brama/logo-biale-kropki.png -o /logo-biale-kropki.png
+          put htaccess-nowy.txt -o /.htaccess
+          chmod 644 /index.html /pompy.webp /granit.webp /farba.webp /logo-biale-kropki.png /.htaccess
+          cls -la /index.html /.htaccess
+          bye
+          LFTP
+
+      - name: Testy
+        run: |
+          set -u
+          ZLE=0
+          spr() { echo "$1: $2 (oczekiwane $3)"; [ "$2" = "$3" ] || ZLE=$((ZLE+1)); }
+          curl -s -L --max-time 30 https://dewax.pl/ -o glowna.html
+          if grep -q "ENGINEERING" glowna.html && grep -q "PAINT" glowna.html; then
+            echo "dewax.pl: BRAMA WIDOCZNA"
+          else
+            echo "dewax.pl: brama NIEwidoczna — tytul:"; grep -o -i '<title>[^<]*</title>' glowna.html | head -1
+            ZLE=$((ZLE+1))
+          fi
+          spr "strona farb pod /index.php" "$(curl -s -o /dev/null -w '%{http_code}' -L --max-time 30 'https://dewax.pl/index.php')" 200
+          curl -s -L --max-time 30 'https://dewax.pl/index.php' -o farby.html
+          grep -o -i '<title>[^<]*</title>' farby.html | head -1
+          spr "grafika pompy.webp" "$(curl -s -o /dev/null -w '%{http_code}' --max-time 30 https://dewax.pl/pompy.webp)" 200
+          spr "grafika granit.webp" "$(curl -s -o /dev/null -w '%{http_code}' --max-time 30 https://dewax.pl/granit.webp)" 200
+          spr "grafika farba.webp" "$(curl -s -o /dev/null -w '%{http_code}' --max-time 30 https://dewax.pl/farba.webp)" 200
+          spr "logo" "$(curl -s -o /dev/null -w '%{http_code}' --max-time 30 https://dewax.pl/logo-biale-kropki.png)" 200
+          spr "pompy.dewax.pl dziala dalej" "$(curl -s -o /dev/null -w '%{http_code}' --max-time 30 https://pompy.dewax.pl/)" 200
+          [ "$ZLE" -eq 0 ] && echo "WSZYSTKO OK" || { echo "BLEDY: $ZLE"; exit 1; }
