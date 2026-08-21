@@ -23,7 +23,7 @@ jobs:
           FTP_HOST: ${{ secrets.FTP_HOST }}
           FTP_LOGIN: ${{ secrets.FTP_LOGIN }}
           FTP_HASLO: ${{ secrets.FTP_HASLO }}
-          KATALOG_ZDALNY: ${{ vars.KATALOG_ZDALNY }}
+          KATALOG_ZDALNY: ${{ vars.KATALOG_ZDALNY || '/pompy/webroot' }}
         run: |
           BRAKI=""
           [ -n "$FTP_HOST" ]       || BRAKI="$BRAKI FTP_HOST"
@@ -48,7 +48,7 @@ jobs:
           FTP_HOST: ${{ secrets.FTP_HOST }}
           FTP_LOGIN: ${{ secrets.FTP_LOGIN }}
           LFTP_PASSWORD: ${{ secrets.FTP_HASLO }}
-          KATALOG_ZDALNY: ${{ vars.KATALOG_ZDALNY }}
+          KATALOG_ZDALNY: ${{ vars.KATALOG_ZDALNY || '/pompy/webroot' }}
         run: |
           set -eu
           LICZBA=$(find .kopia -type f | wc -l)

@@ -47,7 +47,7 @@ jobs:
           FTP_HOST: ${{ secrets.FTP_HOST }}
           FTP_LOGIN: ${{ secrets.FTP_LOGIN }}
           FTP_HASLO: ${{ secrets.FTP_HASLO }}
-          KATALOG_ZDALNY: ${{ vars.KATALOG_ZDALNY }}
+          KATALOG_ZDALNY: ${{ vars.KATALOG_ZDALNY || '/pompy/webroot' }}
           POKAZ_KATALOGI: ${{ inputs.pokaz_katalogi }}
           TESTY_TYLKO: ${{ inputs.testy_tylko }}
         run: |
@@ -108,7 +108,7 @@ jobs:
           FTP_HOST: ${{ secrets.FTP_HOST }}
           FTP_LOGIN: ${{ secrets.FTP_LOGIN }}
           LFTP_PASSWORD: ${{ secrets.FTP_HASLO }}
-          KATALOG_ZDALNY: ${{ vars.KATALOG_ZDALNY }}
+          KATALOG_ZDALNY: ${{ vars.KATALOG_ZDALNY || '/pompy/webroot' }}
         run: |
           set -eu
           rm -rf .kopia && mkdir -p .kopia
@@ -137,7 +137,7 @@ jobs:
           FTP_HOST: ${{ secrets.FTP_HOST }}
           FTP_LOGIN: ${{ secrets.FTP_LOGIN }}
           LFTP_PASSWORD: ${{ secrets.FTP_HASLO }}
-          KATALOG_ZDALNY: ${{ vars.KATALOG_ZDALNY }}
+          KATALOG_ZDALNY: ${{ vars.KATALOG_ZDALNY || '/pompy/webroot' }}
         run: |
           set -eu
           # bez --delete: stare pliki zostaja na serwerze nietkniete
