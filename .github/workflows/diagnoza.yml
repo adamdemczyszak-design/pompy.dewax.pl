@@ -9,17 +9,30 @@ jobs:
   diagnoza:
     runs-on: ubuntu-latest
     steps:
-      - name: Co domena widzi z katalogu FTP
+      - name: Gdzie stoi dewax.pl
         run: |
           set -u
-          k() { curl -s -o /dev/null -w "%{http_code}" --max-time 25 "$1"; }
-          echo "readme.html (stary plik 644 w katalogu FTP): $(k https://dewax.pl/readme.html)"
-          echo "index_default.html (stary 755):             $(k https://dewax.pl/index_default.html)"
-          echo "license.txt (stary 600):                    $(k https://dewax.pl/license.txt)"
-          echo "pompy.webp (nasz, wgrany 8:46):             $(k https://dewax.pl/pompy.webp)"
-          echo "pompy.webp?swiezy=$RANDOM:                  $(k "https://dewax.pl/pompy.webp?swiezy=$RANDOM")"
-          echo "index.html (nasza brama, wprost):           $(k https://dewax.pl/index.html)"
-          echo "--- naglowki pompy.webp ---"
-          curl -sI --max-time 25 https://dewax.pl/pompy.webp | head -12
-          echo "--- naglowki index.html ---"
-          curl -sI --max-time 25 https://dewax.pl/index.html | head -12
+          sudo apt-get update -qq && sudo apt-get install -y -qq dnsutils >/dev/null 2>&1
+          echo "=== ADRESY IP ==="
+          for d in dewax.pl www.dewax.pl pompy.dewax.pl thermokrafft.pl server420780.nazwa.pl; do
+            echo "$d -> $(dig +short $d A | tr '\n' ' ')"
+          done
+          echo
+          echo "=== SERWERY NAZW ==="
+          dig +short dewax.pl NS
+          echo
+          echo "=== NAGLOWKI: dewax.pl ==="
+          curl -sI --max-time 25 https://dewax.pl/ | grep -i -E "server|x-|via|location" | head -12
+          echo
+          echo "=== NAGLOWKI: pompy.dewax.pl ==="
+          curl -sI --max-time 25 https://pompy.dewax.pl/ | grep -i -E "server|x-|via|location" | head -12
+          echo
+          echo "=== NAGLOWKI: thermokrafft.pl (znany katalog /thermokrafft) ==="
+          curl -sI --max-time 25 https://thermokrafft.pl/ | grep -i -E "server|x-|location" | head -8
+          echo
+          echo "=== czy nasz plik z konta FTP jest widoczny przez thermokrafft.pl ==="
+          curl -s -o /dev/null -w "thermokrafft.pl/index.html: %{http_code}\n" --max-time 25 https://thermokrafft.pl/index.html
+          echo
+          echo "=== czy dewax.pl widzi katalog /pompy z naszego konta ==="
+          curl -s -o /dev/null -w "dewax.pl/pompy/webroot/index.html: %{http_code}\n" --max-time 25 https://dewax.pl/pompy/webroot/index.html
+          curl -s -o /dev/null -w "dewax.pl/thermokrafft/index.html: %{http_code}\n" --max-time 25 https://dewax.pl/thermokrafft/index.html
