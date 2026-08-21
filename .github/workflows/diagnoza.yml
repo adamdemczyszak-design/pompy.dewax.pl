@@ -9,18 +9,33 @@ jobs:
   diagnoza:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
-      - name: Ktora wersja kalkulatora jest na zywo
+      - name: Pobierz grafiki ze strony farb dewax.pl
         run: |
           set -u
-          for i in 1 2 3; do
-            curl -s --max-time 30 -H "Cache-Control: no-cache" "https://pompy.dewax.pl/?proba=$i" -o zywa$i.html
-            echo "proba $i:"
-            grep -c "kk.getBoundingClientRect" zywa$i.html && echo "  NOWY kod przewijania" || true
-            grep -c "scrollTo({top:0" zywa$i.html && echo "  STARY kod - skok na gore" || true
-          done
-          echo "=== bez parametru (tak jak przegladarka) ==="
-          curl -s --max-time 30 https://pompy.dewax.pl/ -o zywa0.html
-          grep -c "kk.getBoundingClientRect" zywa0.html && echo "NOWY" || true
-          grep -c "scrollTo({top:0" zywa0.html && echo "STARY" || true
-          curl -sI --max-time 30 https://pompy.dewax.pl/ | grep -i -E "cdn|cache|age|pagespeed"
+          mkdir -p grafiki
+          curl -s -L --max-time 30 https://dewax.pl/ -o strona.html
+          echo "=== wszystkie obrazki na stronie ==="
+          grep -o -E '(src|href|content)="[^"]*\.(jpe?g|png|webp)[^"]*"' strona.html | sed 's/^[a-z]*="//;s/"$//' | sort -u | tee lista.txt
+          echo
+          echo "=== takze z srcset i tla CSS ==="
+          grep -o -E 'url\(([^)]*\.(jpe?g|png|webp))\)' strona.html | sed 's/url(//;s/)//;s/["'"'"']//g' | sort -u | tee -a lista.txt
+          echo
+          n=0
+          while read -r u; do
+            case "$u" in http*) adres="$u";; //*) adres="https:$u";; /*) adres="https://dewax.pl$u";; *) adres="https://dewax.pl/$u";; esac
+            plik="grafiki/$(printf '%02d' $n)-$(basename "${adres%%\?*}")"
+            curl -s -L --max-time 30 -o "$plik" "$adres" && n=$((n+1))
+            [ $n -ge 14 ] && break
+          done < <(sort -u lista.txt)
+          echo "pobrano: $n"
+          ls -la grafiki/
+          # tylko sensowne rozmiary
+          find grafiki -type f -size -12k -delete
+          ls -la grafiki/
+      - name: Odloz grafiki
+        uses: actions/upload-artifact@v4
+        with:
+          name: grafiki-farb
+          path: grafiki
+          retention-days: 7
+          if-no-files-found: warn
