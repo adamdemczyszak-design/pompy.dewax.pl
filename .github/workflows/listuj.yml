@@ -1,0 +1,22 @@
+name: Listuj katalogi FTP
+
+on:
+  push:
+    branches: [main]
+    paths: ['.github/listuj-znacznik']
+
+jobs:
+  listuj:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Instaluj lftp
+        run: sudo apt-get update -qq && sudo apt-get install -y -qq lftp
+      - name: Wylistuj katalog glowny serwera
+        env:
+          FTP_HOST: ${{ secrets.FTP_HOST }}
+          FTP_LOGIN: ${{ secrets.FTP_LOGIN }}
+          LFTP_PASSWORD: ${{ secrets.FTP_HASLO }}
+        run: |
+          set -eu
+          [ -n "$FTP_HOST" ] && [ -n "$FTP_LOGIN" ] && [ -n "$LFTP_PASSWORD" ] || { echo "::error::Brak sekretow FTP"; exit 1; }
+          lftp --env-password -u "$FTP_LOGIN" "ftp://$FTP_HOST" -e "set ssl:verify-certificate no; set ftp:ssl-allow yes; set net:timeout 25; set net:max-retries 2; cls -la /; echo '--- podkatalogi ---'; cls -la /pompy 2>/dev/null || true; bye"
