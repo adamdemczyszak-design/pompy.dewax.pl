@@ -934,7 +934,9 @@ function go(n){
     $('p'+i).classList.toggle('on',i===n);
     var t=$('t'+i); t.classList.toggle('on',i===n); t.classList.toggle('done',i<n);
   }
-  window.scrollTo({top:0,behavior:'smooth'});
+  var kk=document.querySelector('#kreator .kcard');
+  if(kk){var y=kk.getBoundingClientRect().top+window.scrollY-82;
+    window.scrollTo({top:Math.max(y,0),behavior:'smooth'});}
   if(window.dataLayer)dataLayer.push({event:'dobor_step',step:n});
 }
 

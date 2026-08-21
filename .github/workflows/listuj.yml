@@ -19,4 +19,4 @@ jobs:
         run: |
           set -eu
           [ -n "$FTP_HOST" ] && [ -n "$FTP_LOGIN" ] && [ -n "$LFTP_PASSWORD" ] || { echo "::error::Brak sekretow FTP"; exit 1; }
-          lftp --env-password -u "$FTP_LOGIN" "ftp://$FTP_HOST" -e "set ssl:verify-certificate no; set ftp:ssl-allow yes; set net:timeout 25; set net:max-retries 2; cls -la /; echo '--- podkatalogi ---'; cls -la /pompy 2>/dev/null || true; bye"
+          lftp --env-password -u "$FTP_LOGIN" "ftp://$FTP_HOST" -e "set ssl:verify-certificate no; set ftp:ssl-allow yes; set net:timeout 25; set net:max-retries 2; cls -la /wp-content; echo ---; cls -la /wp-content/uploads; echo ---; cls -la /wp-content/plugins; echo ---; cls -la /thermokrafft; bye"

@@ -1,0 +1,46 @@
+name: Diagnoza zywej strony
+
+on:
+  push:
+    branches: [main]
+    paths: ['.github/diagnoza-znacznik']
+
+permissions:
+  contents: write
+
+jobs:
+  diagnoza:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Pobierz tlo hero ze stylow Divi
+        run: |
+          set -u
+          mkdir -p grafiki
+          curl -s -L --max-time 30 "https://dewax.pl/wp-content/et-cache/2/et-core-unified-2.min.css" -o divi.css
+          curl -s -L --max-time 30 "https://dewax.pl/wp-content/et-cache/2/et-core-unified-deferred-2.min.css" -o divi2.css
+          cat divi.css divi2.css > style.css
+          echo "=== obrazki w CSS ==="
+          grep -o -E 'url\(([^)]*\.(jpe?g|png|webp))[^)]*\)' style.css | sed "s/url(//;s/)//;s/['\"]//g" | sort -u | tee lista.txt
+          n=0
+          while read -r u; do
+            case "$u" in http*) adres="$u";; //*) adres="https:$u";; /*) adres="https://dewax.pl$u";; *) adres="https://dewax.pl/wp-content/et-cache/2/$u";; esac
+            plik="grafiki/css-$(printf '%02d' $n)-$(basename "${adres%%\?*}")"
+            curl -s -L --max-time 30 -o "$plik" "$adres" && n=$((n+1))
+            [ $n -ge 12 ] && break
+          done < lista.txt
+          curl -s -L --max-time 30 -o grafiki/klatka-schodowa.jpg "https://dewax.pl/wp-content/uploads/2019/09/klatka-schodowa-min.jpg"
+          curl -s -L --max-time 30 -o grafiki/wzornik.jpg "https://dewax.pl/wp-content/uploads/2019/09/dewax-baner-wzornik-kolorow-min.jpg"
+          find grafiki -type f -size -8k -delete
+          ls -la grafiki/
+          cp style.css strona.html 2>/dev/null || true
+      - name: Wypchnij grafiki na galaz grafiki-farb
+        run: |
+          set -eu
+          git config user.name "Claude"
+          git config user.email "noreply@anthropic.com"
+          git checkout --orphan grafiki-farb
+          git rm -rq --cached . 2>/dev/null || true
+          git add -f grafiki lista.txt strona.html
+          git commit -q -m "Grafiki pobrane ze strony farb dewax.pl"
+          git push -f origin grafiki-farb
