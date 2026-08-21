@@ -1,0 +1,62 @@
+name: Test katalogu dewax.pl
+
+on:
+  push:
+    branches: [main]
+    paths: ['.github/test-znacznik']
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Instaluj lftp
+        run: sudo apt-get update -qq && sudo apt-get install -y -qq lftp
+      - name: Znacznik w kazdym katalogu
+        env:
+          FTP_HOST: ${{ secrets.FTP_HOST }}
+          FTP_LOGIN: ${{ secrets.FTP_LOGIN }}
+          LFTP_PASSWORD: ${{ secrets.FTP_HASLO }}
+        run: |
+          set -eu
+          T=$RANDOM
+          echo "znacznik" > z.txt
+          echo "sufiks testu: $T"
+          lftp --env-password -u "$FTP_LOGIN" "ftp://$FTP_HOST" <<LFTP
+          set ssl:verify-certificate no
+          set ftp:ssl-allow yes
+          set ftp:ssl-protect-data yes
+          set net:timeout 25
+          put z.txt -o /k-root-$T.txt
+          put z.txt -o /datadir/k-datadir-$T.txt
+          put z.txt -o /backups/k-backups-$T.txt
+          put z.txt -o /bazy_danych/k-bazy-$T.txt
+          put z.txt -o /images/k-images-$T.txt
+          put z.txt -o /migracja/k-migracja-$T.txt
+          put z.txt -o /migracja/ftp.d1063384-23091.wuti.pl/k-wuti-$T.txt
+          put z.txt -o /wp-content/k-wpcontent-$T.txt
+          put z.txt -o /pompy/k-pompy-$T.txt
+          bye
+          LFTP
+          sleep 3
+          echo "=== ktory katalog obsluguje dewax.pl ==="
+          for n in root datadir backups bazy images migracja wuti wpcontent pompy; do
+            KOD=$(curl -s -o /dev/null -w '%{http_code}' --max-time 20 "https://dewax.pl/k-$n-$T.txt")
+            echo "katalog $n -> $KOD"
+          done
+          echo "=== sprzatanie ==="
+          lftp --env-password -u "$FTP_LOGIN" "ftp://$FTP_HOST" <<LFTP2
+          set ssl:verify-certificate no
+          set ftp:ssl-allow yes
+          set net:timeout 25
+          rm -f /k-root-$T.txt
+          rm -f /datadir/k-datadir-$T.txt
+          rm -f /backups/k-backups-$T.txt
+          rm -f /bazy_danych/k-bazy-$T.txt
+          rm -f /images/k-images-$T.txt
+          rm -f /migracja/k-migracja-$T.txt
+          rm -f /migracja/ftp.d1063384-23091.wuti.pl/k-wuti-$T.txt
+          rm -f /wp-content/k-wpcontent-$T.txt
+          rm -f /pompy/k-pompy-$T.txt
+          bye
+          LFTP2
+          echo "posprzatane"
