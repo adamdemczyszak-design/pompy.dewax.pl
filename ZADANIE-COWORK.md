@@ -1,3 +1,62 @@
+# ZADANIE WYKONANE — 21 sierpnia 2026
+
+Brama stoi na dewax.pl. Ponizsza tresc zostawiona jest jako historia; dwa jej
+wnioski okazaly sie bledne i sa sprostowane nizej.
+
+## Gdzie naprawde siedzi dewax.pl
+
+`admin.nazwa.pl` -> DOMENY -> wiersz `dewax.pl`:
+
+    /migracja/ftp.d1063384-23091.wuti.pl/webspace/httpdocs/dewax.pl
+
+To **to samo konto FTP** `server420780_deploy`. Wczesniejszy test sprawdzil
+`/migracja/ftp.d1063384-23091.wuti.pl`, ale strona lezy trzy poziomy nizej,
+w `webspace/httpdocs/dewax.pl`. Stad 404 i stad wrazenie "dwoch roznych
+instalacji WordPressa" — to po prostu dwa katalogi na jednym koncie.
+
+Przy okazji z tej samej listy: `sklep.dewax.pl` ->
+`/migracja/ftp.d1063384-23091.wuti.pl/webspace/httpdocs/sklep.dewax.pl/Wordpress/wordpress`.
+
+Sciezka jest zapisana jako zmienna `KATALOG_DEWAX` w ustawieniach repozytorium.
+
+## Poprawiony blad w bramie
+
+Przycisk DEWAX PAINT prowadzil do `/index.php`. WordPress przekierowuje
+`/index.php` z powrotem na `/`, czyli na brame — powstawala petla. Teraz
+przycisk prowadzi do `/?dzial=paint`, a `.htaccess` przepuszcza ten jeden
+adres do WordPressa.
+
+## Jak wyglada teraz .htaccess w katalogu domeny
+
+    # brama DEWAX START - usun wszystko do linii END, by wrocic do samej strony farb
+    DirectoryIndex index.html index.php
+    <IfModule mod_rewrite.c>
+    RewriteEngine On
+    RewriteBase /
+    RewriteCond %{QUERY_STRING} (^|&)dzial=paint(&|$)
+    RewriteRule ^$ index.php [L]
+    </IfModule>
+    # brama DEWAX END
+
+Ponizej tego bloku stoi nietkniety oryginal (iThemes Security + WordPress).
+Workflow `brama.yml` zdejmuje ten blok przed zrobieniem kopii zapasowej, wiec
+artefakt `htaccess-oryginal-dewax-pl-N` to zawsze czysty oryginal — pulapka
+z nadpisana kopia juz nie moze wystapic.
+
+## Jak wycofac brame
+
+Zmien plik `.github/sprzatanie-znacznik` (wpisz biezaca date) i wypchnij na
+`main`. Workflow zdejmie blok z `.htaccess`, skasuje pliki bramy i sprawdzi,
+czy strony wstaly. Strona farb wraca natychmiast.
+
+## Jedna rzecz do swiadomej decyzji
+
+Logo na stronie farb prowadzi do `https://dewax.pl/`, czyli teraz do bramy.
+Klikniecie w logo cofa uzytkownika do wyboru dzialu. Tak dziala kazda brama
+postawiona na glownym adresie; zmiana wymagalaby ruszenia ustawien WordPressa.
+
+---
+
 # Zadanie: dokończyć wdrożenie bramy na dewax.pl
 
 Adam nie ma czasu klikać po panelach. Zrób to za niego, prowadząc go tylko tam,
