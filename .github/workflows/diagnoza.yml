@@ -10,31 +10,17 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - name: Porownaj zywa strone z repozytorium
+      - name: Ktora wersja kalkulatora jest na zywo
         run: |
           set -u
-          echo "=== pompy.dewax.pl: czy serwowana strona jest identyczna z repo ==="
-          curl -s --max-time 30 https://pompy.dewax.pl/ -o zywa.html || echo "BLAD pobrania"
-          if cmp -s zywa.html index.html; then
-            echo "IDENTYCZNA — zadnych doklejonych skryptow"
-          else
-            echo "ROZNI SIE — szczegoly:"
-            diff <(head -c 200000 index.html) <(head -c 200000 zywa.html) | head -40
-          fi
-          echo
-          echo "=== naglowki pompy.dewax.pl ==="
-          curl -sI --max-time 30 https://pompy.dewax.pl/ | head -20
-          echo
-          echo "=== co serwuje glowna domena dewax.pl (stary WordPress) ==="
-          curl -s -o glowna.html -w "kod: %{http_code}, adres koncowy: %{url_effective}\n" -L --max-time 30 https://dewax.pl/ || true
-          echo "--- tytul i podejrzane elementy ---"
-          grep -o -i '<title>[^<]*</title>' glowna.html | head -3 || true
-          grep -c -i -E 'casino|viagra|porn|bet|pill|loan|crypto-invest' glowna.html || true
-          grep -o -i 'src="http[^"]*"' glowna.html | grep -v -E 'dewax|google|gstatic|facebook|w\.org' | head -10 || true
-          echo
-          echo "=== www.dewax.pl ==="
-          curl -s -o /dev/null -w "kod: %{http_code}, koncowy adres: %{url_effective}\n" -L --max-time 30 https://www.dewax.pl/ || true
-          echo
-          echo "=== losowa subdomena (wildcard) ==="
-          curl -s -o sub.html -w "kod: %{http_code}\n" --max-time 30 https://losowa-proba-xyz.dewax.pl/ || true
-          grep -o -i '<title>[^<]*</title>' sub.html | head -2 || true
+          for i in 1 2 3; do
+            curl -s --max-time 30 -H "Cache-Control: no-cache" "https://pompy.dewax.pl/?proba=$i" -o zywa$i.html
+            echo "proba $i:"
+            grep -c "kk.getBoundingClientRect" zywa$i.html && echo "  NOWY kod przewijania" || true
+            grep -c "scrollTo({top:0" zywa$i.html && echo "  STARY kod - skok na gore" || true
+          done
+          echo "=== bez parametru (tak jak przegladarka) ==="
+          curl -s --max-time 30 https://pompy.dewax.pl/ -o zywa0.html
+          grep -c "kk.getBoundingClientRect" zywa0.html && echo "NOWY" || true
+          grep -c "scrollTo({top:0" zywa0.html && echo "STARY" || true
+          curl -sI --max-time 30 https://pompy.dewax.pl/ | grep -i -E "cdn|cache|age|pagespeed"
