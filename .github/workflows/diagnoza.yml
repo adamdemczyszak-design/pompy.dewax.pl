@@ -1,0 +1,40 @@
+name: Diagnoza zywej strony
+
+on:
+  push:
+    branches: [main]
+    paths: ['.github/diagnoza-znacznik']
+
+jobs:
+  diagnoza:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Porownaj zywa strone z repozytorium
+        run: |
+          set -u
+          echo "=== pompy.dewax.pl: czy serwowana strona jest identyczna z repo ==="
+          curl -s --max-time 30 https://pompy.dewax.pl/ -o zywa.html || echo "BLAD pobrania"
+          if cmp -s zywa.html index.html; then
+            echo "IDENTYCZNA — zadnych doklejonych skryptow"
+          else
+            echo "ROZNI SIE — szczegoly:"
+            diff <(head -c 200000 index.html) <(head -c 200000 zywa.html) | head -40
+          fi
+          echo
+          echo "=== naglowki pompy.dewax.pl ==="
+          curl -sI --max-time 30 https://pompy.dewax.pl/ | head -20
+          echo
+          echo "=== co serwuje glowna domena dewax.pl (stary WordPress) ==="
+          curl -s -o glowna.html -w "kod: %{http_code}, adres koncowy: %{url_effective}\n" -L --max-time 30 https://dewax.pl/ || true
+          echo "--- tytul i podejrzane elementy ---"
+          grep -o -i '<title>[^<]*</title>' glowna.html | head -3 || true
+          grep -c -i -E 'casino|viagra|porn|bet|pill|loan|crypto-invest' glowna.html || true
+          grep -o -i 'src="http[^"]*"' glowna.html | grep -v -E 'dewax|google|gstatic|facebook|w\.org' | head -10 || true
+          echo
+          echo "=== www.dewax.pl ==="
+          curl -s -o /dev/null -w "kod: %{http_code}, koncowy adres: %{url_effective}\n" -L --max-time 30 https://www.dewax.pl/ || true
+          echo
+          echo "=== losowa subdomena (wildcard) ==="
+          curl -s -o sub.html -w "kod: %{http_code}\n" --max-time 30 https://losowa-proba-xyz.dewax.pl/ || true
+          grep -o -i '<title>[^<]*</title>' sub.html | head -2 || true
