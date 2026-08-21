@@ -105,3 +105,20 @@ Strona farb wróci natychmiast — pliki WordPressa nie są w ogóle ruszane.
 Przy pierwszym podejściu workflow nadpisał własną kopię zapasową `.htaccess` swoją
 zmodyfikowaną wersją. Jeśli uruchamiasz wdrożenie po raz drugi, sprawdź, czy plik
 `.htaccess.kopia-przed-brama` nie zawiera już dopisanych linii.
+
+## Czego już nie sprawdzaj — sprawdzone i bez wyniku
+
+DNS nie rozstrzygnie, gdzie leży dewax.pl. Wszystkie domeny wskazują na ten sam
+adres brzegowy nazwa.pl:
+
+```
+dewax.pl        85.128.139.207
+www.dewax.pl    85.128.139.207
+pompy.dewax.pl  85.128.139.207
+thermokrafft.pl 85.128.139.207
+server420780    85.128.139.207
+```
+
+To jest wspólny front CDN, a nie dowód na wspólny katalog. Jedyne wiarygodne
+źródło to panel `admin.nazwa.pl` → DOMENY, wiersz `dewax.pl`, kolumna z katalogiem
+albo z nazwą usługi hostingowej.
