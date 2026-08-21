@@ -1,0 +1,36 @@
+name: Sprzatanie po bramie
+
+on:
+  push:
+    branches: [main]
+    paths: ['.github/sprzatanie-znacznik']
+
+jobs:
+  sprzataj:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Usun pliki bramy z martwej kopii i przywroc htaccess
+        env:
+          FTP_HOST: ${{ secrets.FTP_HOST }}
+          FTP_LOGIN: ${{ secrets.FTP_LOGIN }}
+          LFTP_PASSWORD: ${{ secrets.FTP_HASLO }}
+        run: |
+          set -eu
+          sudo apt-get update -qq && sudo apt-get install -y -qq lftp
+          lftp --env-password -u "$FTP_LOGIN" "ftp://$FTP_HOST" <<'LFTP'
+          set ssl:verify-certificate no
+          set ftp:ssl-allow yes
+          set net:timeout 25
+          get /.htaccess.kopia-przed-brama -o kopia.txt
+          put kopia.txt -o /.htaccess
+          rm /index.html
+          rm /pompy.webp
+          rm /granit.webp
+          rm /farba.webp
+          rm /logo-biale-kropki.png
+          rm /.htaccess.kopia-przed-brama
+          cls -la /.htaccess /index.html
+          bye
+          LFTP
+          echo "--- przywrocony .htaccess ---"
+          cat kopia.txt
