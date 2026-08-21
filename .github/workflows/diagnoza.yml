@@ -5,42 +5,21 @@ on:
     branches: [main]
     paths: ['.github/diagnoza-znacznik']
 
-permissions:
-  contents: write
-
 jobs:
   diagnoza:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
-      - name: Pobierz tlo hero ze stylow Divi
+      - name: Co domena widzi z katalogu FTP
         run: |
           set -u
-          mkdir -p grafiki
-          curl -s -L --max-time 30 "https://dewax.pl/wp-content/et-cache/2/et-core-unified-2.min.css" -o divi.css
-          curl -s -L --max-time 30 "https://dewax.pl/wp-content/et-cache/2/et-core-unified-deferred-2.min.css" -o divi2.css
-          cat divi.css divi2.css > style.css
-          echo "=== obrazki w CSS ==="
-          grep -o -E 'url\(([^)]*\.(jpe?g|png|webp))[^)]*\)' style.css | sed "s/url(//;s/)//;s/['\"]//g" | sort -u | tee lista.txt
-          n=0
-          while read -r u; do
-            case "$u" in http*) adres="$u";; //*) adres="https:$u";; /*) adres="https://dewax.pl$u";; *) adres="https://dewax.pl/wp-content/et-cache/2/$u";; esac
-            plik="grafiki/css-$(printf '%02d' $n)-$(basename "${adres%%\?*}")"
-            curl -s -L --max-time 30 -o "$plik" "$adres" && n=$((n+1))
-            [ $n -ge 12 ] && break
-          done < lista.txt
-          curl -s -L --max-time 30 -o grafiki/klatka-schodowa.jpg "https://dewax.pl/wp-content/uploads/2019/09/klatka-schodowa-min.jpg"
-          curl -s -L --max-time 30 -o grafiki/wzornik.jpg "https://dewax.pl/wp-content/uploads/2019/09/dewax-baner-wzornik-kolorow-min.jpg"
-          find grafiki -type f -size -8k -delete
-          ls -la grafiki/
-          cp style.css strona.html 2>/dev/null || true
-      - name: Wypchnij grafiki na galaz grafiki-farb
-        run: |
-          set -eu
-          git config user.name "Claude"
-          git config user.email "noreply@anthropic.com"
-          git checkout --orphan grafiki-farb
-          git rm -rq --cached . 2>/dev/null || true
-          git add -f grafiki lista.txt strona.html
-          git commit -q -m "Grafiki pobrane ze strony farb dewax.pl"
-          git push -f origin grafiki-farb
+          k() { curl -s -o /dev/null -w "%{http_code}" --max-time 25 "$1"; }
+          echo "readme.html (stary plik 644 w katalogu FTP): $(k https://dewax.pl/readme.html)"
+          echo "index_default.html (stary 755):             $(k https://dewax.pl/index_default.html)"
+          echo "license.txt (stary 600):                    $(k https://dewax.pl/license.txt)"
+          echo "pompy.webp (nasz, wgrany 8:46):             $(k https://dewax.pl/pompy.webp)"
+          echo "pompy.webp?swiezy=$RANDOM:                  $(k "https://dewax.pl/pompy.webp?swiezy=$RANDOM")"
+          echo "index.html (nasza brama, wprost):           $(k https://dewax.pl/index.html)"
+          echo "--- naglowki pompy.webp ---"
+          curl -sI --max-time 25 https://dewax.pl/pompy.webp | head -12
+          echo "--- naglowki index.html ---"
+          curl -sI --max-time 25 https://dewax.pl/index.html | head -12
