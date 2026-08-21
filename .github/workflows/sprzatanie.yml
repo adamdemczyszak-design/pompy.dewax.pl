@@ -9,28 +9,31 @@ jobs:
   sprzataj:
     runs-on: ubuntu-latest
     steps:
-      - name: Usun pliki bramy z martwej kopii i przywroc htaccess
+      - name: Instaluj lftp
+        run: sudo apt-get update -qq && sudo apt-get install -y -qq lftp
+      - name: Usun dopisane linie z htaccess
         env:
           FTP_HOST: ${{ secrets.FTP_HOST }}
           FTP_LOGIN: ${{ secrets.FTP_LOGIN }}
           LFTP_PASSWORD: ${{ secrets.FTP_HASLO }}
         run: |
           set -eu
-          sudo apt-get update -qq && sudo apt-get install -y -qq lftp
-          lftp --env-password -u "$FTP_LOGIN" "ftp://$FTP_HOST" <<'LFTP'
-          set ssl:verify-certificate no
-          set ftp:ssl-allow yes
-          set net:timeout 25
-          get /.htaccess.kopia-przed-brama -o kopia.txt
-          put kopia.txt -o /.htaccess
-          rm /index.html
-          rm /pompy.webp
-          rm /granit.webp
-          rm /farba.webp
-          rm /logo-biale-kropki.png
-          rm /.htaccess.kopia-przed-brama
-          cls -la /.htaccess /index.html
-          bye
-          LFTP
-          echo "--- przywrocony .htaccess ---"
-          cat kopia.txt
+          lftp --env-password -u "$FTP_LOGIN" "ftp://$FTP_HOST" -e "set ssl:verify-certificate no; set ftp:ssl-allow yes; set net:timeout 25; get /.htaccess -o przed.txt; bye"
+          echo "=== PRZED ==="; cat przed.txt
+          # zostawiamy wylacznie oryginalna czesc WordPressa
+          sed -n '/# BEGIN WordPress/,$p' przed.txt > po.txt
+          echo "=== PO ==="; cat po.txt
+          if ! grep -q "RewriteEngine On" po.txt; then echo "::error::Brak regul WordPressa — przerywam"; exit 1; fi
+          lftp --env-password -u "$FTP_LOGIN" "ftp://$FTP_HOST" -e "set ssl:verify-certificate no; set ftp:ssl-allow yes; set ftp:ssl-protect-data yes; set net:timeout 25; put po.txt -o /.htaccess; chmod 644 /.htaccess; bye"
+      - name: Odloz kopie htaccess
+        uses: actions/upload-artifact@v4
+        with:
+          name: htaccess-przed-sprzataniem-${{ github.run_number }}
+          path: przed.txt
+          retention-days: 90
+      - name: Sprawdz czy strony dzialaja
+        run: |
+          set -u
+          for a in https://dewax.pl/ https://thermokrafft.pl/ https://pompy.dewax.pl/; do
+            echo "$a -> $(curl -s -o /dev/null -w '%{http_code}' --max-time 25 $a)"
+          done
