@@ -1,0 +1,47 @@
+# ============================================================
+# pompy.dewax.pl — nagłówki bezpieczeństwa
+# Audyt zgodności 22.08.2026, punkt 2
+#
+# GDZIE WGRAĆ: /pompy/webroot/.htaccess na server420780.nazwa.pl
+#
+# !!! NIE NADPISUJ ISTNIEJĄCEGO PLIKU !!!
+# W /pompy/webroot/.htaccess siedzą reguły routingu CakePHP 4.
+# Zastąpienie ich tym plikiem położy całą stronę.
+# Dopisz poniższy blok <IfModule mod_headers.c> na KOŃCU
+# istniejącego pliku, nie ruszając reguł RewriteRule Cake'a.
+# ============================================================
+
+<IfModule mod_headers.c>
+  Header always set Strict-Transport-Security "max-age=31536000; includeSubDomains"
+  Header always set X-Content-Type-Options "nosniff"
+  Header always set X-Frame-Options "SAMEORIGIN"
+  Header always set Referrer-Policy "strict-origin-when-cross-origin"
+  Header always set Permissions-Policy "camera=(), microphone=(), geolocation=()"
+
+  # CSP rozszerzone o GTM i HubSpot — patrz UWAGA poniżej.
+  Header always set Content-Security-Policy "default-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com data:; img-src 'self' data: https://www.googletagmanager.com https://*.google-analytics.com https://track.hubspot.com https://*.hsforms.com https://www.facebook.com; script-src 'self' 'unsafe-inline' https://www.googletagmanager.com https://*.hs-scripts.com https://*.hsforms.net https://*.hs-analytics.net https://*.hsadspixel.net https://*.hscollectedforms.net https://*.usemessages.com https://connect.facebook.net; connect-src 'self' https://*.google-analytics.com https://*.analytics.google.com https://*.googletagmanager.com https://*.hubspot.com https://*.hsforms.com https://api.hubapi.com; frame-src 'self' https://*.hsforms.net https://*.hubspot.com https://www.googletagmanager.com; form-action 'self' https://*.hsforms.com; frame-ancestors 'self'"
+</IfModule>
+
+# ============================================================
+# UWAGA — dlaczego CSP odbiega od treści zadania
+#
+# Zadanie podawało CSP z "script-src 'self' 'unsafe-inline'".
+# Wg CLAUDE.md tego repozytorium na żywej stronie są poprawnie osadzone
+# na wszystkich podstronach: GTM (GTM-T4DV2B3G) i HubSpot (49004516).
+# Tamto CSP zablokowałoby oba od razu po wgraniu — zniknęłyby dane
+# analityczne i formularze HubSpot. Dlatego script-src/connect-src/
+# img-src/frame-src są rozszerzone o domeny GTM i HubSpot.
+# connect.facebook.net jest z wyprzedzeniem, pod planowany piksel Meta.
+#
+# Nie udało mi się tego potwierdzić na żywej stronie — proxy tej sesji
+# blokuje ruch do pompy.dewax.pl. Zweryfikuj, co faktycznie jest w kodzie,
+# i wytnij z CSP domeny, których nie używacie.
+#
+# Wersja dosłownie z zadania (użyj, jeśli GTM i HubSpot jednak nie działają
+# na stronie — jest znacznie ciaśniejsza, więc lepsza, jeśli wystarcza):
+#   Header always set Content-Security-Policy "default-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data:; script-src 'self' 'unsafe-inline'; form-action 'self'; frame-ancestors 'self'"
+#
+# Bezpieczny rozruch: najpierw Content-Security-Policy-Report-Only,
+# przeklikaj stronę (formularz, kreator, kalkulator, galeria), zbierz
+# błędy z konsoli, dopiero potem przełącz na wersję egzekwowaną.
+# ============================================================

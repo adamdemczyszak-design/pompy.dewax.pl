@@ -1,0 +1,42 @@
+# ============================================================
+# dewax.pl — wymuszenie HTTPS + nagłówki bezpieczeństwa
+# Audyt zgodności 22.08.2026, punkty 1 i 2
+#
+# GDZIE WGRAĆ: katalog główny (document root) dewax.pl
+# JEŚLI .htaccess JUŻ TAM JEST: nie nadpisuj go. Wklej blok
+# RewriteEngine/RewriteCond/RewriteRule na SAMYM POCZĄTKU pliku,
+# a blok <IfModule mod_headers.c> na końcu.
+# ============================================================
+
+# --- 1. Wymuszenie HTTPS ---
+RewriteEngine On
+RewriteCond %{HTTPS} off
+RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+
+# Jeśli po wgraniu strona wpadnie w pętlę przekierowań, hosting stoi
+# za proxy/load balancerem i %{HTTPS} nie jest ustawiane. Wtedy zamiast
+# dwóch linii powyżej użyj tych:
+#   RewriteCond %{HTTP:X-Forwarded-Proto} !https
+#   RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+
+# --- 2. Nagłówki bezpieczeństwa ---
+<IfModule mod_headers.c>
+  Header always set Strict-Transport-Security "max-age=31536000; includeSubDomains"
+  Header always set X-Content-Type-Options "nosniff"
+  Header always set X-Frame-Options "SAMEORIGIN"
+  Header always set Referrer-Policy "strict-origin-when-cross-origin"
+  Header always set Permissions-Policy "camera=(), microphone=(), geolocation=()"
+  Header always set Content-Security-Policy "default-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data:; script-src 'self' 'unsafe-inline'; form-action 'self'; frame-ancestors 'self'"
+</IfModule>
+
+# UWAGA 1 — HSTS includeSubDomains obejmuje WSZYSTKIE subdomeny dewax.pl,
+# w tym pompy.dewax.pl. Każda subdomena musi mieć działający certyfikat,
+# inaczej stanie się niedostępna w przeglądarkach na rok (max-age).
+# Sprawdź listę subdomen przed wgraniem.
+#
+# UWAGA 2 — powyższe CSP nie było testowane na dewax.pl (nie miałem dostępu
+# do plików ani do żywej strony). Jeśli strona ładuje cokolwiek spoza
+# własnej domeny i Google Fonts (mapa, wideo, czat, piksel), CSP to zablokuje.
+# Bezpieczny rozruch: zamień nazwę nagłówka na testową, sprawdź konsolę
+# przeglądarki przez dzień, dopiero potem włącz wersję egzekwowaną:
+#   Header always set Content-Security-Policy-Report-Only "...ta sama wartość..."
