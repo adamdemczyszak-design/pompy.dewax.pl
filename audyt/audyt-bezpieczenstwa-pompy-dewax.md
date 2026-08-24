@@ -385,7 +385,8 @@ Set-Cookie: SESSID=...; Path=/; Secure; HttpOnly; SameSite=Lax
   bywa uciążliwe przy powrotach z zewnętrznych linków.
 
 Ciasteczka analityczne (`_ga`, `_gid`, `_gcl_au`) **nie mogą** być ustawiane przed
-uzyskaniem zgody. Zgodnie z RODO oraz art. 173 Prawa telekomunikacyjnego:
+uzyskaniem zgody. Zgodnie z RODO oraz art. 399 Prawa komunikacji elektronicznej (ustawa z 12 lipca 2024 r.,
+która uchyliła Prawo telekomunikacyjne wraz z jego art. 173):
 
 - GTM/GA4 wolno załadować **dopiero po** kliknięciu „Akceptuję" (albo w trybie
   Google Consent Mode v2 z domyślnym stanem `denied`),
