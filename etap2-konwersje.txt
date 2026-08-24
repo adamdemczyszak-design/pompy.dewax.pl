@@ -1,53 +1,65 @@
 ================================================================================
 ETAP 2 — KONWERSJE GOOGLE ADS
-Przygotowane 2026-08-24. NIE JEST WDROŻONE. Nie wklejaj, dopóki nie uzupełnisz
-placeholderów i nie potwierdzisz, że GA4 z etapu 1 zbiera dane.
+Przygotowane 2026-08-24 na podstawie gałęzi main (= to, co stoi na produkcji).
+NIE JEST WDROŻONE. Nie wklejaj, dopóki nie uzupełnisz placeholderów i nie
+potwierdzisz, że GA4 z etapu 1 zbiera dane.
 ================================================================================
 
 CO TRZEBA UZUPEŁNIĆ PRZED WKLEJENIEM
 --------------------------------------------------------------------------------
-1. AW-XXXXXXXXX
-   Identyfikator konta Google Ads. Panel Ads > Cele > Podsumowanie > kolumna
-   "Źródło konwersji", albo Ads > Narzędzia > Menedżer tagów Google.
-   Występuje 4 razy w bloku poniżej.
+1. AW-XXXXXXXXX — identyfikator konta Google Ads.
+   Ads > Narzędzia > Menedżer tagów Google. Występuje 4 razy w blokach poniżej.
 
-2. Trzy etykiety konwersji (conversion label), po jednej na zdarzenie.
-   Powstają dopiero po utworzeniu akcji konwersji w Ads:
-   Cele > Konwersje > + Nowa akcja konwersji > Witryna > dodaj ręcznie.
-   Ads pokaże ciąg w formacie AW-XXXXXXXXX/aBcDeFgHiJkLmNoP.
-   Do bloku wstawiasz CAŁY ten ciąg, razem z AW- i ukośnikiem.
+2. Trzy etykiety konwersji. Powstają dopiero po utworzeniu akcji konwersji:
+   Ads > Cele > Konwersje > + Nowa akcja > Witryna > dodaj ręcznie.
+   Ads pokaże ciąg AW-XXXXXXXXX/aBcDeFgHiJkLmNoP — wstawiasz CAŁY, z ukośnikiem.
 
      ETYKIETA_FORMULARZ   — zgłoszenie z formularza wyceny
      ETYKIETA_TELEFON     — kliknięcie w numer telefonu
-     ETYKIETA_KALKULATOR  — ukończenie kalkulatora
+     ETYKIETA_KALKULATOR  — ukończenie kalkulatora doboru
 
-3. Wartości konwersji (pole 'value'). Teraz stoi tam 0. Jeśli znasz średnią
-   wartość leada, wpisz ją — Ads inaczej optymalizuje kampanie. Zostaw 0,
-   dopóki nie masz realnej liczby.
+3. Wartości konwersji ('value'). Teraz 0. Wpisz średnią wartość leada, jeśli ją
+   znasz — Ads inaczej optymalizuje kampanie. Zostaw 0, dopóki nie masz liczby.
 
 
-UWAGI DO STANU KODU — CZYTAJ, ZANIM WKLEISZ
+STAN FAKTYCZNY KODU — SPRAWDZONE, NIE ZAŁOŻONE
 --------------------------------------------------------------------------------
-Zadanie zakładało sekcję #kontakt, telefon w formacie tel:+48627413227 oraz
-kalkulator #kreator. W prototypie jest inaczej:
+  formularz    index.html:793  <section id="kontakt">
+               index.html:812  <form name="wycena" method="POST" action="wyslij.php">
+               index.html:837  <button type="submit">
+               To PRAWDZIWY POST z przeładowaniem strony, nie AJAX.
 
-  * formularz  -> sekcja ma id="wycena" (index.html:488), formularz w środku
-                  (index.html:494). Selektor poniżej łapie oba warianty,
-                  więc zadziała też po ewentualnej zmianie id na "kontakt".
-  * telefon    -> href to tel:627413227 (bez +48), dwa wystąpienia:
-                  index.html:149 (topbar) i index.html:549 (stopka/hero).
-                  Selektor a[href^="tel:"] łapie oba niezależnie od formatu.
-  * kalkulator -> w index.html sekcja ma id="kalkulator" (nie "kreator"),
-                  osobny pełny konfigurator jest w konfigurator.html.
+  telefon      tel:+48627413227 — 5 wystąpień: index.html linie
+               232, 253 (topbar i hero), 806, 855, 872 (kontakt i stopka)
 
-Formularz w prototypie NIE WYSYŁA danych — ma
-onsubmit="event.preventDefault();alert(...)". Konwersja odpali się mimo to,
-bo nasłuch jest na zdarzeniu 'submit'. Po podpięciu prawdziwej wysyłki
-sprawdź ponownie, czy zdarzenie nadal się propaguje.
+  kalkulator   sekcja id="kreator", krokowa (funkcja go(n))
+               index.html:940   dataLayer.push({event:'dobor_step', step:n})
+               index.html:1037  dataLayer.push({event:'dobor_result', ...})
+               KALKULATOR JEST JUŻ OPRZYRZĄDOWANY. Nie pisz tego od zera.
+
+  wyslij.php   linia 78: header('Location: podziekowanie.html') — po sukcesie
+               linia 12: to samo po złapaniu bota (honeypot bot-field)
+               linia 17: to samo, gdy formularz wysłany szybciej niż 3 s
+
+
+DECYZJA PROJEKTOWA — DLACZEGO NIE NASŁUCH NA 'submit'
+--------------------------------------------------------------------------------
+Formularz robi klasyczny POST i przeładowanie. Konwersja odpalona na zdarzeniu
+'submit' ściga się z nawigacją: przeglądarka może przerwać żądanie do Google,
+zanim wyjdzie. Część zgłoszeń przepadnie, w dodatku niemierzalnie.
+
+Dlatego konwersja formularza siedzi na stronie podziękowania, nie na submit.
+Strona podziękowania wyświetla się tylko po realnym przejściu przez wyslij.php,
+więc mierzy sukces, a nie samo kliknięcie przycisku.
+
+UWAGA — wyslij.php przekierowuje na podziekowanie.html także w liniach 12 i 17,
+czyli po odrzuceniu bota. Bez zmiany w PHP boty będą zliczane jako konwersje.
+Poprawka opisana na końcu, w sekcji ZALECANA ZMIANA W wyslij.php.
 
 
 ================================================================================
-BLOK DO WKLEJENIA — DOKŁADNIE PRZED </body>
+BLOK A — DO index.html, DOKŁADNIE PRZED </body>
+   obsługuje: telefon (b) i kalkulator (c)
 ================================================================================
 
 <!-- === DEWAX: konwersje Google Ads === -->
@@ -61,7 +73,6 @@ gtag('config', 'AW-XXXXXXXXX');
 (function(){
   'use strict';
 
-  // wspólny wysyłacz, z zabezpieczeniem przed podwójnym zliczeniem
   var wyslane = {};
   function konwersja(etykieta, wartosc, klucz){
     if (klucz && wyslane[klucz]) return;
@@ -73,17 +84,8 @@ gtag('config', 'AW-XXXXXXXXX');
     });
   }
 
-  // ---- a) formularz kontaktowy -------------------------------------------
-  // #kontakt zostawione dla zgodności, jeśli sekcja zmieni id
-  document.addEventListener('submit', function(e){
-    var f = e.target;
-    if (!f || f.tagName !== 'FORM') return;
-    if (!f.closest('#kontakt, #wycena')) return;
-    konwersja('AW-XXXXXXXXX/ETYKIETA_FORMULARZ', 0, 'formularz');
-  }, true);
-
   // ---- b) kliknięcie w telefon -------------------------------------------
-  // delegacja: łapie wszystkie tel: na stronie, także dodane później
+  // delegacja na dokumencie: łapie wszystkie 5 wystąpień naraz
   document.addEventListener('click', function(e){
     var a = e.target.closest ? e.target.closest('a[href^="tel:"]') : null;
     if (!a) return;
@@ -91,7 +93,6 @@ gtag('config', 'AW-XXXXXXXXX');
   }, true);
 
   // ---- c) ukończenie kalkulatora -----------------------------------------
-  // wywołaj z kodu kalkulatora w momencie pokazania wyniku
   window.dewaxKalkulatorUkonczony = function(dane){
     konwersja('AW-XXXXXXXXX/ETYKIETA_KALKULATOR',
               (dane && dane.wartosc) || 0,
@@ -101,101 +102,116 @@ gtag('config', 'AW-XXXXXXXXX');
 </script>
 <!-- === koniec: konwersje Google Ads === -->
 
+
+================================================================================
+BLOK B — DO podziekowanie.html, DOKŁADNIE PRZED </body>
+   obsługuje: formularz (a)
+================================================================================
+
+<!-- === DEWAX: konwersja formularza === -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=AW-XXXXXXXXX"></script>
+<script>
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'AW-XXXXXXXXX');
+
+// Odpala się przy wyświetleniu strony podziękowania, czyli po realnym
+// przejściu przez wyslij.php. Warunek na ?ok=1 opisany niżej — dopóki nie
+// wprowadzisz zmiany w PHP, zostaw sam gtag bez warunku.
+gtag('event', 'conversion', {
+  send_to: 'AW-XXXXXXXXX/ETYKIETA_FORMULARZ',
+  value: 0,
+  currency: 'PLN'
+});
+</script>
+<!-- === koniec: konwersja formularza === -->
+
+
 ================================================================================
 GDZIE WPIĄĆ PUNKT (c) — DOKŁADNE MIEJSCE
 ================================================================================
 
-Kalkulator przelicza się przy KAŻDYM ruchu suwaka (zdarzenie 'input') i raz
-przy starcie strony. Gdyby wywołać konwersję wprost w funkcji liczącej,
-Ads dostałby kilkadziesiąt konwersji na jedną wizytę, w tym jedną od razu po
-wejściu, bez żadnego udziału użytkownika. Dlatego wywołanie musi być
-warunkowe: po pierwszej realnej interakcji, nie przy starcie.
+Kalkulator już wysyła zdarzenie w momencie pokazania wyniku. Nie trzeba szukać
+„momentu ukończenia" — jest wskazany w kodzie.
 
-Zabezpieczenie przed podwójnym zliczeniem jest już w bloku wyżej (klucz
-'kalkulator'), więc w kalkulatorze wystarczy nie strzelać przy inicjalizacji.
+index.html, linie 1037-1038, koniec funkcji policz():
 
---------------------------------------------------------------------------------
-index.html — kalkulator w sekcji #kalkulator
---------------------------------------------------------------------------------
-Stan obecny, index.html:591-592 (koniec skryptu):
+    if(window.dataLayer)dataLayer.push({event:'dobor_result',moc_kw:+moc.toFixed(1),
+      model:pompa.id,metry:metry,otwory:otwory,cena_od:Math.round(sumaMin),cena_do:Math.round(sumaMax)});
 
-    [m2,std,cwu,grunt].forEach(e=>e.addEventListener('input',licz));
-    licz();
+Dopisz JEDNĄ linię bezpośrednio pod tym pushem, przed zamykającym }:
 
-Podmień te dwie linie na:
+    if(window.dewaxKalkulatorUkonczony)
+      window.dewaxKalkulatorUkonczony({wartosc: Math.round(sumaMin)});
 
-    [m2,std,cwu,grunt].forEach(e=>e.addEventListener('input',function(){
-      licz();
-      if(window.dewaxKalkulatorUkonczony) window.dewaxKalkulatorUkonczony();
-    }));
-    licz();   // start strony: przeliczenie bez konwersji
+Efekt końcowy tego fragmentu:
 
-Dlaczego tak, a nie w środku licz(): licz() jest wywoływane też w linii 592
-przy ładowaniu strony. Nasłuch opakowany osobno oddziela "wynik pokazany,
-bo ktoś ruszył suwakiem" od "wynik pokazany, bo strona się wczytała".
+    if(window.dataLayer)dataLayer.push({event:'dobor_result',moc_kw:+moc.toFixed(1),
+      model:pompa.id,metry:metry,otwory:otwory,cena_od:Math.round(sumaMin),cena_do:Math.round(sumaMax)});
+    if(window.dewaxKalkulatorUkonczony)
+      window.dewaxKalkulatorUkonczony({wartosc: Math.round(sumaMin)});
+  }
 
-Wariant ostrożniejszy, jeśli konwersja ma znaczyć "obejrzał wynik na
-serio", a nie "dotknął suwaka": ten sam kod, ale z opóźnieniem, żeby liczyło
-się dopiero, gdy przestanie przesuwać.
+Dlaczego akurat tu, a nie przy ruchu suwakiem:
+  * policz() kończy krok 4 kreatora, czyli pokazanie wyniku — dokładnie to,
+    o co chodzi w punkcie (c)
+  * nie jest wywoływane przy starcie strony, więc konwersja nie odpali się
+    komuś, kto tylko wszedł
+  * gdy ktoś cofnie się i przeliczy drugi raz, klucz 'kalkulator' w bloku A
+    zatrzyma dublet
 
-    var tKalk;
-    [m2,std,cwu,grunt].forEach(e=>e.addEventListener('input',function(){
-      licz();
-      clearTimeout(tKalk);
-      tKalk = setTimeout(function(){
-        if(window.dewaxKalkulatorUkonczony) window.dewaxKalkulatorUkonczony();
-      }, 1500);
-    }));
-    licz();
+Wartość konwersji to dolna granica widełek (cenaOd), czyli kwota inwestycji,
+a nie marża ani wartość leada. Jeśli chcesz optymalizować pod realną wartość,
+przemnóż to własnym współczynnikiem, zanim wyślesz.
 
---------------------------------------------------------------------------------
-konfigurator.html — pełny konfigurator ceny
---------------------------------------------------------------------------------
-Tu wynikiem końcowym jest kwota "Zostaje do zapłaty", ustawiana w
-konfigurator.html:369, na końcu funkcji przelicz():
+Alternatywa bez dotykania index.html: zamiast dopisywać linię, nasłuchuj
+istniejącego zdarzenia. Wymaga GTM, którego na stronie nie ma, więc przy
+obecnym stanie prostsza jest jedna linia wyżej.
 
-    $('koncowa').textContent=fmt(razem-dot);
 
-Nasłuchy i pierwsze przeliczenie są w liniach 377-378:
+================================================================================
+ZALECANA ZMIANA W wyslij.php — ODCIĘCIE BOTÓW OD KONWERSJI
+================================================================================
 
-    ['m2','std','os','grunt','szt','gl'].forEach(id=>$(id).addEventListener('input',przelicz));
-    przelicz();
+Bez niej każdy złapany bot zaliczy się jako zgłoszenie i zafałszuje Ads.
 
-Ta sama zasada. Podmień linie 377-378 na:
+W wyslij.php linia 78 (przekierowanie po SUKCESIE) zmień na:
 
-    ['m2','std','os','grunt','szt','gl'].forEach(id=>$(id).addEventListener('input',function(){
-      przelicz();
-      if(window.dewaxKalkulatorUkonczony)
-        window.dewaxKalkulatorUkonczony({wartosc: ostatniaKwota});
-    }));
-    przelicz();   // start strony: przeliczenie bez konwersji
+    header('Location: podziekowanie.html?ok=1');
 
-Żeby przekazać wartość konwersji, zapamiętaj kwotę końcową w przelicz().
-W linii 369 zamiast:
+Linii 12 i 17 (bot i zbyt szybkie wysłanie) NIE ruszaj — mają zostać bez ?ok=1.
 
-    $('koncowa').textContent=fmt(razem-dot);
+Następnie w BLOKU B zamień samo wywołanie gtag na warunkowe:
 
-wpisz:
+    if (location.search.indexOf('ok=1') !== -1) {
+      gtag('event', 'conversion', {
+        send_to: 'AW-XXXXXXXXX/ETYKIETA_FORMULARZ',
+        value: 0,
+        currency: 'PLN'
+      });
+    }
 
-    ostatniaKwota = razem-dot;
-    $('koncowa').textContent=fmt(ostatniaKwota);
 
-i zadeklaruj zmienną obok pozostałych stałych na początku skryptu:
+================================================================================
+CO TRAFIA NA SERWER — ZANIM WKLEISZ, SPRAWDŹ LISTĘ
+================================================================================
+Wdrożenie idzie automatem: push na main w plik z listy paths w
+.github/workflows/wdrozenie.yml wysyła go FTP do /pompy/webroot.
 
-    var ostatniaKwota = 0;
+Na liście są m.in.: index.html, wyslij.php, podziekowanie.html, 404.html,
+polityka-prywatnosci.html, .htaccess, robots.txt, sitemap.xml, img/**
 
-Uwaga: wartość konwersji to wtedy kwota inwestycji, a nie marża ani wartość
-leada. Jeśli w Ads chcesz optymalizować pod realną wartość, przelicz to
-własnym mnożnikiem, zanim wyślesz.
+NIE MA NA LIŚCIE: konfigurator.html, audyt/**, backup/**, brama/**
+Zmiany w tych plikach nie pojadą na produkcję.
 
 
 ================================================================================
 JAK SPRAWDZIĆ PO WDROŻENIU
 ================================================================================
-1. Rozszerzenie Google Tag Assistant, tryb podglądu — wejdź na stronę,
-   wyślij formularz, kliknij telefon, ruszaj suwakiem kalkulatora.
-   Każde działanie ma dać jedno zdarzenie 'conversion' z właściwym send_to.
-2. Ads > Cele > Konwersje: kolumna "Stan" powinna zejść z "Brak ostatnich
-   konwersji" w ciągu 24 godzin od pierwszego zdarzenia.
-3. W konsoli przeglądarki: dataLayer.filter(x => x[1] === 'conversion')
-   pokaże wysłane zdarzenia w bieżącej sesji.
+1. Tag Assistant, tryb podglądu: kliknij telefon, przejdź kreator do wyniku,
+   wyślij formularz. Każde działanie ma dać jedno 'conversion' z właściwym
+   send_to. Formularz sprawdzasz już na stronie podziękowania.
+2. Ads > Cele > Konwersje: kolumna "Stan" schodzi z "Brak ostatnich konwersji"
+   w ciągu 24 godzin od pierwszego zdarzenia.
+3. W konsoli: dataLayer.filter(function(x){return x[1]==='conversion'})
