@@ -1,5 +1,45 @@
 <!DOCTYPE html><html lang="pl"><head>
 <meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<!-- === DEWAX: zgoda i pomiar — początek === -->
+<!-- 1. Consent Mode v2: stany domyślne. MUSZĄ poprzedzać gtag.js. -->
+<script data-cookieconsent="ignore">
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('consent', 'default', {
+    ad_storage: 'denied',
+    ad_user_data: 'denied',
+    ad_personalization: 'denied',
+    analytics_storage: 'denied',
+    functionality_storage: 'granted',
+    security_storage: 'granted',
+    personalization_storage: 'denied',
+    wait_for_update: 500
+  });
+  gtag('set', 'ads_data_redaction', true);
+  gtag('set', 'url_passthrough', true);
+  gtag('js', new Date());
+</script>
+<!-- 2. Tag Google (GA4). Bramkowany stanem zgody, nie blokowaniem Cookiebota. -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-XHZDND4X1W"
+        data-cookieconsent="ignore"></script>
+<script data-cookieconsent="ignore">
+  gtag('config', 'G-XHZDND4X1W');
+</script>
+<!-- 3. Cookiebot CMP. Wysyła sygnał aktualizacji zgody po decyzji użytkownika. -->
+<script id="Cookiebot"
+        src="https://consent.cookiebot.com/uc.js"
+        data-cbid="7a55c023-e775-4510-b1af-bdb8eaadfff5"
+        data-blockingmode="auto"
+        data-culture="PL"
+        type="text/javascript"></script>
+<!-- 4. HubSpot. Nie obsługuje Consent Mode, więc bramkuje go Cookiebot.
+     Kategoria marketing: hubspotutk wiąże sesję z kontaktem w CRM. -->
+<script type="text/javascript"
+        id="hs-script-loader"
+        async defer
+        src="//js.hs-scripts.com/49004516.js"
+        data-cookieconsent="marketing"></script>
+<!-- === DEWAX: zgoda i pomiar — koniec === -->
 <title>Polityka prywatności — DEWAX Sp. z o.o.</title>
 <meta name="description" content="Jak DEWAX Sp. z o.o. przetwarza dane osobowe osób korzystających z formularza wyceny na pompy.dewax.pl. Administrator, cele, podstawy prawne, okresy przechowywania i Twoje prawa.">
 <link rel="canonical" href="https://pompy.dewax.pl/polityka-prywatnosci.html">
@@ -64,7 +104,7 @@ display:flex;justify-content:space-between;gap:14px;flex-wrap:wrap}
   <div class="top">
     <div class="dots"><i style="background:#008000"></i><i style="background:#FFEA00"></i><i style="background:#FE0000"></i><i style="background:#4087BD"></i></div>
     <h1>Polityka prywatności</h1>
-    <p>Serwis pompy.dewax.pl · obowiązuje od 20 sierpnia 2026 r.</p>
+    <p>Serwis pompy.dewax.pl · obowiązuje od 24 sierpnia 2026 r.</p>
   </div>
 
   <div class="wrap">
@@ -203,6 +243,16 @@ display:flex;justify-content:space-between;gap:14px;flex-wrap:wrap}
       <li><b>podwykonawcy</b> realizujący odwiert lub montaż — tylko w zakresie niezbędnym
       do wykonania konkretnej umowy i tylko po jej zawarciu</li>
       <li><b>uprawnione organy</b> — jeżeli obowiązek wynika z przepisów prawa</li>
+      <li><b>Google Ireland Limited</b> (Gordon House, Barrow Street, Dublin 4, Irlandia)
+      — kroje pisma Google Fonts oraz statystyka Google Analytics 4. Statystyka działa
+      wyłącznie po Twojej zgodzie</li>
+      <li><b>HubSpot, Inc.</b> (2 Canal Park, Cambridge, MA 02141, USA) — system CRM
+      i automatyzacji marketingu. Działa wyłącznie po Twojej zgodzie marketingowej.
+      Przekazanie danych do USA opiera się na dwóch mechanizmach naraz, opisanych
+      w punkcie 6</li>
+      <li><b>Cybot A/S</b> (Havnegade 39, 1058 Kopenhaga, Dania) — dostawca narzędzia
+      Cookiebot, które zbiera i przechowuje Twoją decyzję o zgodzie. Działa niezależnie
+      od zgody, bo bez niego nie da się jej zapamiętać</li>
     </ul>
 
     <h3>Google Fonts</h3>
@@ -211,30 +261,170 @@ display:flex;justify-content:space-between;gap:14px;flex-wrap:wrap}
     i przekazuje im Twój adres IP. Mówimy o tym otwarcie, bo to realne przekazanie danych,
     choć dla Ciebie niewidoczne.</p>
     <p>Robimy to na podstawie art. 6 ust. 1 lit. f RODO — naszym uzasadnionym interesem jest
-    poprawne i czytelne wyświetlanie strony. Dostawcą usługi jest Google Ireland Limited,
-    przy czym Google może przekazywać dane do Stanów Zjednoczonych na zasadach opisanych
-    we własnej polityce prywatności: <a href="https://policies.google.com/privacy"
-    rel="noopener noreferrer" target="_blank">policies.google.com/privacy</a>.</p>
+    poprawne i czytelne wyświetlanie strony. Dostawcą usługi jest Google Ireland Limited
+    z siedzibą w Irlandii, które może przekazać dane do Google LLC w Stanach Zjednoczonych.</p>
+    <p>Takie przekazanie odbywa się na podstawie <b>decyzji wykonawczej Komisji Europejskiej
+    z 10 lipca 2023 r. stwierdzającej odpowiedni stopień ochrony danych w ramach
+    EU-US Data Privacy Framework</b> (art. 45 RODO). Google LLC wraz ze swoimi
+    amerykańskimi spółkami zależnymi przystąpiła do tego programu i utrzymuje w nim
+    aktywną certyfikację; potwierdza to
+    <a href="https://policies.google.com/privacy/frameworks" rel="noopener noreferrer"
+    target="_blank">policies.google.com/privacy/frameworks</a>, a wpis możesz sprawdzić
+    samodzielnie na <a href="https://www.dataprivacyframework.gov/list"
+    rel="noopener noreferrer" target="_blank">dataprivacyframework.gov/list</a>.</p>
+    <p>Decyzja o odpowiednim stopniu ochrony oznacza, że do tego przekazania nie są
+    potrzebne dodatkowe zabezpieczenia — poziom ochrony w kraju odbiorcy Komisja uznała
+    za równoważny europejskiemu. Gdyby decyzja została uchylona lub unieważniona,
+    poinformujemy o tym w tym dokumencie i wskażemy mechanizm, który ją zastąpi.</p>
+    <p>Zasady przetwarzania po stronie Google opisuje
+    <a href="https://policies.google.com/privacy" rel="noopener noreferrer"
+    target="_blank">policies.google.com/privacy</a>.</p>
 
     <h2>6. Czy dane trafiają poza Europę</h2>
-    <p>Poza jednym wyjątkiem opisanym powyżej — nie. Hosting i poczta działają na serwerach
-    w Polsce. Jedyne przekazanie poza Europejski Obszar Gospodarczy może nastąpić w związku
-    z usługą Google Fonts.</p>
+    <p>Dane z formularza wyceny — nie. Hosting i poczta działają na serwerach nazwa.pl
+    w Polsce i Twoje zapytanie nie opuszcza Europejskiego Obszaru Gospodarczego.</p>
+    <p>Poza EOG trafiają natomiast dane związane z działaniem strony:</p>
+    <ul>
+      <li><b>Google Fonts</b> — Twój adres IP, przy każdym wczytaniu strony,
+      niezależnie od zgody</li>
+      <li><b>Google Analytics 4</b> — dane o wizycie, wyłącznie po zgodzie na statystykę.
+      Adres IP jest skracany, zanim trafi do analizy</li>
+      <li><b>HubSpot</b> — dane o wizycie i identyfikator przeglądarki, wyłącznie
+      po zgodzie marketingowej. HubSpot przetwarza je na serwerach w Stanach Zjednoczonych</li>
+    </ul>
+    <p>Każde z tych przekazań ma własną podstawę prawną i nie są one identyczne:</p>
+    <ul>
+      <li><b>Google</b> (Fonts oraz Analytics) — <b>decyzja wykonawcza Komisji Europejskiej
+      z 10 lipca 2023 r. w sprawie EU-US Data Privacy Framework</b> (art. 45 RODO).
+      Google LLC i jej amerykańskie spółki zależne mają w tym programie aktywną
+      certyfikację. Szczegóły opisaliśmy w punkcie 5</li>
+      <li><b>HubSpot</b> — <b>dwa mechanizmy naraz</b>. Podstawowym jest ta sama decyzja
+      o EU-US Data Privacy Framework (art. 45 RODO), do którego HubSpot, Inc. przystąpiła
+      i certyfikuje w nim zgodność. Niezależnie od tego HubSpot stosuje <b>standardowe
+      klauzule umowne przyjęte przez Komisję Europejską</b> (art. 46 ust. 2 lit. c RODO)
+      jako zabezpieczenie dodatkowe. Oznacza to, że gdyby decyzja o DPF kiedykolwiek
+      upadła — tak jak wcześniej stało się z Safe Harbour i Privacy Shield — przekazanie
+      nie traci podstawy prawnej, bo klauzule obowiązują dalej. Warunki opisuje
+      <a href="https://legal.hubspot.com/dpa" rel="noopener noreferrer"
+      target="_blank">legal.hubspot.com/dpa</a></li>
+    </ul>
+    <p><b>Kopię standardowych klauzul umownych</b> stosowanych przy przekazaniu do HubSpot
+    otrzymasz na żądanie wysłane na
+    <a href="mailto:sprzedaz@dewax.pl">sprzedaz@dewax.pl</a> (art. 13 ust. 1 lit. f
+    w związku z art. 46 ust. 1 RODO).</p>
+    <p>Cookiebot dostarcza duńska spółka Cybot A/S, więc obsługa zgody odbywa się
+    w całości w granicach EOG.</p>
 
     <h2>7. Profilowanie i decyzje automatyczne</h2>
-    <p>Nie profilujemy Cię i nie podejmujemy wobec Ciebie decyzji w sposób automatyczny,
-    o których mowa w art. 22 RODO. Wycenę przygotowuje człowiek.</p>
-    <p>Kalkulator dostępny na stronie działa wyłącznie w Twojej przeglądarce. Wprowadzone
-    do niego liczby nie są nigdzie wysyłane ani zapisywane, dopóki sam nie klikniesz
-    przycisku wysłania formularza.</p>
+    <p><b>Nie podejmujemy wobec Ciebie decyzji opartych wyłącznie na automatycznym
+    przetwarzaniu</b>, które wywoływałyby skutki prawne lub w podobny sposób istotnie
+    na Ciebie wpływały (art. 22 RODO). Wycenę przygotowuje człowiek i to człowiek decyduje,
+    czy i na jakich warunkach podejmiemy się zlecenia.</p>
+    <p>Musimy natomiast powiedzieć wprost, że <b>jeżeli wyrazisz zgodę, część narzędzi
+    analizuje Twoje zachowanie na stronie</b>. Nie chcemy tego owijać w bawełnę:</p>
+    <ul>
+      <li><b>po zgodzie na statystykę</b> Google Analytics 4 zapisuje, które podstrony
+      oglądasz, jak długo i skąd do nas trafiłeś. Służy to zbiorczym statystykom ruchu,
+      a nie ocenianiu Ciebie jako osoby</li>
+      <li><b>po zgodzie marketingowej</b> HubSpot nadaje Twojej przeglądarce identyfikator
+      i zapisuje historię odwiedzin. Jeżeli później wyślesz formularz, ta historia
+      <b>zostaje powiązana z Twoim kontaktem w naszym CRM</b> — będziemy więc widzieć,
+      czym interesowałeś się przed wysłaniem zapytania. To jest profilowanie w rozumieniu
+      art. 4 pkt 4 RODO i dlatego prosimy o zgodę, zamiast powoływać się na uzasadniony
+      interes</li>
+    </ul>
+    <p>Jeżeli nie chcesz, żeby tak się działo, wystarczy nie wyrażać zgody marketingowej
+    albo wycofać ją w dowolnym momencie — sposób opisaliśmy w punkcie 8. Odmowa nie zamyka
+    Ci dostępu do żadnej treści i nie wpływa na to, jak potraktujemy Twoje zapytanie.</p>
+    <p>Kalkulator doboru pompy działa wyłącznie w Twojej przeglądarce. Wprowadzone do niego
+    liczby nie są nigdzie wysyłane ani zapisywane, dopóki sam nie klikniesz przycisku
+    wysłania formularza. Jeżeli zgodziłeś się na statystykę, do Google Analytics trafia
+    sama informacja, że kalkulator został użyty i jaki wyszedł rząd wielkości —
+    bez Twoich danych kontaktowych.</p>
 
-    <h2>8. Pliki cookies</h2>
-    <p>Serwis <b>nie używa plików cookies</b> ani innych technologii śledzących. Nie mamy
-    zainstalowanego Google Analytics, piksela Facebooka ani żadnego innego narzędzia
-    analitycznego. Dlatego nie zobaczysz tu banera zgody na ciasteczka — po prostu nie ma
-    na co się zgadzać.</p>
-    <p>Gdyby to się w przyszłości zmieniło, przed uruchomieniem takich narzędzi pojawi się
-    baner zgody, a niniejsza polityka zostanie zaktualizowana.</p>
+    <h2>8. Pliki cookies i zgody</h2>
+
+    <p>Serwis używa plików cookies, czyli niewielkich informacji zapisywanych w Twoim
+    urządzeniu. Zapisanie czegokolwiek poza plikami niezbędnymi wymaga Twojej zgody —
+    tak stanowi <b>art. 399 ustawy z 12 lipca 2024 r. Prawo komunikacji elektronicznej</b>.
+    Dlatego przy pierwszej wizycie zobaczysz baner, w którym decydujesz, na co się godzisz.</p>
+
+    <div class="uwaga">
+      <p><b>Dopóki nie klikniesz, nic się nie dzieje.</b> Do czasu Twojej decyzji nie
+      uruchamiamy ani statystyki, ani narzędzi marketingowych. Żadne z pól w banerze nie
+      jest zaznaczone z góry, a przycisk odmowy jest równie widoczny i równie blisko
+      jak przycisk akceptacji. Odmowa niczego nie blokuje — całą stronę przeczytasz
+      tak samo.</p>
+    </div>
+
+    <h3>Trzy kategorie</h3>
+
+    <div class="tabela">
+    <table>
+      <thead>
+        <tr><th>Kategoria</th><th>Po co</th><th>Podstawa prawna</th><th>Jak długo</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><b>Niezbędne</b><br>zawsze aktywne</td>
+          <td>Zapamiętanie Twojej decyzji o zgodzie, żeby baner nie wyskakiwał przy
+          każdym kliknięciu. Narzędzie: <b>Cookiebot</b>, dostawca Cybot A/S (Dania).</td>
+          <td><b>art. 6 ust. 1 lit. f RODO</b> — nasz uzasadniony interes w postaci
+          prawidłowego działania serwisu i wykazania, że zgoda została udzielona</td>
+          <td>do 12 miesięcy</td>
+        </tr>
+        <tr>
+          <td><b>Analityczne</b><br>tylko za zgodą</td>
+          <td>Zliczanie odwiedzin, sprawdzanie które treści są czytane i skąd trafiają
+          do nas ludzie. Narzędzie: <b>Google Analytics 4</b>, dostawca Google Ireland
+          Limited (Irlandia), z przekazaniem do Google LLC (USA).</td>
+          <td><b>art. 6 ust. 1 lit. a RODO</b> — Twoja zgoda</td>
+          <td>do 24 miesięcy</td>
+        </tr>
+        <tr>
+          <td><b>Marketingowe</b><br>tylko za zgodą</td>
+          <td>Rozpoznanie Twojej przeglądarki i powiązanie historii odwiedzin z kontaktem
+          w naszym CRM, jeśli wyślesz formularz. Narzędzie: <b>HubSpot</b>, dostawca
+          HubSpot, Inc. (USA).</td>
+          <td><b>art. 6 ust. 1 lit. a RODO</b> — Twoja zgoda</td>
+          <td>do 6 miesięcy</td>
+        </tr>
+      </tbody>
+    </table>
+    </div>
+
+    <p>Pełną i zawsze aktualną listę konkretnych plików, razem z ich nazwami i dokładnym
+    czasem przechowywania, generuje automatycznie Cookiebot na podstawie skanu tej strony:</p>
+
+    <script id="CookieDeclaration"
+            src="https://consent.cookiebot.com/7a55c023-e775-4510-b1af-bdb8eaadfff5/cd.js"
+            type="text/javascript" async></script>
+
+    <h3>Jak wycofać zgodę</h3>
+
+    <p>Zgodę możesz wycofać w dowolnym momencie i <b>ma to być tak samo łatwe jak jej
+    udzielenie</b> (art. 7 ust. 3 RODO). U nas wygląda to tak:</p>
+
+    <ol>
+      <li>zjedź na sam dół dowolnej strony serwisu</li>
+      <li>kliknij <b>„Ustawienia cookies"</b> w stopce, obok odnośnika do tej polityki</li>
+      <li>baner otworzy się ponownie — przestaw suwaki i zatwierdź</li>
+    </ol>
+
+    <p>Odnośnik działa zawsze, również długo po zamknięciu banera przy pierwszej wizycie.
+    Wycofanie zgody działa na przyszłość: nie unieważnia tego, co zgodnie z prawem
+    zebraliśmy wcześniej (art. 7 ust. 3 zdanie trzecie RODO), ale od momentu kliknięcia
+    narzędzie przestaje działać.</p>
+
+    <p>Możesz też usunąć i zablokować pliki cookies w ustawieniach swojej przeglądarki.
+    Zadziała to niezależnie od naszego banera, choć może popsuć działanie także innych stron.</p>
+
+    <h3>Czego tu nie ma</h3>
+
+    <p>Nie mamy piksela Facebooka, nie prowadzimy remarketingu i nie przekazujemy nikomu
+    danych do sprzedaży ani do budowania profili reklamowych poza tym, co opisaliśmy wyżej.
+    Jeżeli to się zmieni, zmienimy najpierw ten dokument i baner, a dopiero potem
+    uruchomimy narzędzie.</p>
 
     <h2>9. Odnośniki do innych stron</h2>
     <p>Na stronie znajdują się odnośniki do serwisów zewnętrznych. Po ich kliknięciu
@@ -251,7 +441,11 @@ display:flex;justify-content:space-between;gap:14px;flex-wrap:wrap}
       <li><b>przenoszenia danych</b> do innego administratora (art. 20 RODO)</li>
       <li><b>sprzeciwu</b> wobec przetwarzania opartego na naszym uzasadnionym interesie —
       dotyczy to celów z art. 6 ust. 1 lit. f, czyli obrony przed roszczeniami,
-      ochrony formularza i Google Fonts (art. 21 RODO)</li>
+      ochrony formularza, obsługi zgody i Google Fonts (art. 21 RODO)</li>
+      <li><b>wycofania zgody</b> w dowolnym momencie, bez podawania powodu i bez wpływu
+      na zgodność z prawem tego, co zrobiliśmy wcześniej (art. 7 ust. 3 RODO) — dotyczy
+      cookies analitycznych i marketingowych. Wystarczy kliknąć <b>„Ustawienia cookies"</b>
+      w stopce każdej strony; szczegóły w punkcie 8</li>
     </ol>
 
     <p>Żeby skorzystać z któregokolwiek z tych praw, wystarczy napisać na
@@ -288,14 +482,19 @@ display:flex;justify-content:space-between;gap:14px;flex-wrap:wrap}
     </ul>
 
     <h2>13. Zmiany polityki</h2>
-    <p>Jeżeli zmienimy sposób przetwarzania danych — na przykład uruchomimy analitykę
-    albo zaczniemy wysyłać newsletter — zaktualizujemy ten dokument i zmienimy datę
-    obowiązywania na górze strony. Warto tu zajrzeć przy kolejnym kontakcie.</p>
+    <p>Jeżeli zmienimy sposób przetwarzania danych — na przykład dołożymy narzędzie
+    reklamowe albo zaczniemy wysyłać newsletter — zaktualizujemy ten dokument i zmienimy
+    datę obowiązywania na górze strony. Nowe narzędzie zapisujące cookies uruchomimy
+    dopiero po tej aktualizacji i po dodaniu go do banera zgody, nigdy odwrotnie.</p>
+    <p>Ostatnia zmiana, 24 sierpnia 2026 r.: uruchomiliśmy statystykę Google Analytics 4
+    oraz system HubSpot, oba wyłącznie za zgodą, i wprowadziliśmy baner zgody.
+    Przepisaliśmy przy tej okazji punkty 5, 6, 7, 8 i 10.</p>
 
   </div>
 
   <div class="foot">
     <span>DEWAX Sp. z o.o. · ul. Ostrowska 1, 63-330 Dobrzyca</span>
+    <span><a href="#" onclick="if(window.Cookiebot){Cookiebot.renew();}return false;">Ustawienia cookies</a></span>
     <span><a href="/">← Wróć na stronę główną</a></span>
   </div>
 </div>

@@ -1,5 +1,45 @@
 <!DOCTYPE html><html lang="pl"><head>
 <meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<!-- === DEWAX: zgoda i pomiar — początek === -->
+<!-- 1. Consent Mode v2: stany domyślne. MUSZĄ poprzedzać gtag.js. -->
+<script data-cookieconsent="ignore">
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('consent', 'default', {
+    ad_storage: 'denied',
+    ad_user_data: 'denied',
+    ad_personalization: 'denied',
+    analytics_storage: 'denied',
+    functionality_storage: 'granted',
+    security_storage: 'granted',
+    personalization_storage: 'denied',
+    wait_for_update: 500
+  });
+  gtag('set', 'ads_data_redaction', true);
+  gtag('set', 'url_passthrough', true);
+  gtag('js', new Date());
+</script>
+<!-- 2. Tag Google (GA4). Bramkowany stanem zgody, nie blokowaniem Cookiebota. -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-XHZDND4X1W"
+        data-cookieconsent="ignore"></script>
+<script data-cookieconsent="ignore">
+  gtag('config', 'G-XHZDND4X1W');
+</script>
+<!-- 3. Cookiebot CMP. Wysyła sygnał aktualizacji zgody po decyzji użytkownika. -->
+<script id="Cookiebot"
+        src="https://consent.cookiebot.com/uc.js"
+        data-cbid="7a55c023-e775-4510-b1af-bdb8eaadfff5"
+        data-blockingmode="auto"
+        data-culture="PL"
+        type="text/javascript"></script>
+<!-- 4. HubSpot. Nie obsługuje Consent Mode, więc bramkuje go Cookiebot.
+     Kategoria marketing: hubspotutk wiąże sesję z kontaktem w CRM. -->
+<script type="text/javascript"
+        id="hs-script-loader"
+        async defer
+        src="//js.hs-scripts.com/49004516.js"
+        data-cookieconsent="marketing"></script>
+<!-- === DEWAX: zgoda i pomiar — koniec === -->
 <title>Nie znaleziono strony — DEWAX</title>
 <meta name="robots" content="noindex">
 <link rel="icon" type="image/png" href="/favicon.png">
@@ -48,6 +88,6 @@ font-family:'Montserrat';font-weight:800;font-size:15px;text-decoration:none}
       <a class="btn b2" href="tel:+48627413227">☎ 62 741 32 27</a>
     </div>
   </div>
-  <div class="foot">DEWAX Sp. z o.o. · ul. Ostrowska 1, 63-330 Dobrzyca · <a href="mailto:sprzedaz@dewax.pl">sprzedaz@dewax.pl</a></div>
+  <div class="foot">DEWAX Sp. z o.o. · ul. Ostrowska 1, 63-330 Dobrzyca · <a href="mailto:sprzedaz@dewax.pl">sprzedaz@dewax.pl</a><br><a href="/polityka-prywatnosci.html">Polityka prywatności</a> · <a href="#" onclick="if(window.Cookiebot){Cookiebot.renew();}return false;">Ustawienia cookies</a></div>
 </div>
 </body></html>
