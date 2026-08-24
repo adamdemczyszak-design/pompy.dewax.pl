@@ -937,7 +937,7 @@ function go(n){
   var kk=document.querySelector('#kreator .kcard');
   if(kk){var y=kk.getBoundingClientRect().top+window.scrollY-82;
     window.scrollTo({top:Math.max(y,0),behavior:'smooth'});}
-  if(window.dataLayer)dataLayer.push({event:'dobor_step',step:n});
+  if(window.gtag)gtag('event','dobor_step',{step:n});
 }
 
 function policz(){
@@ -1034,7 +1034,7 @@ function policz(){
   go(4);
   WYNIK={moc:+moc.toFixed(1),model:pompa.id,metry:metry,otwory:otwory,
     cenaOd:Math.round(sumaMin),cenaDo:Math.round(sumaMax)};
-  if(window.dataLayer)dataLayer.push({event:'dobor_result',moc_kw:+moc.toFixed(1),
+  if(window.gtag)gtag('event','dobor_result',{moc_kw:+moc.toFixed(1),
     model:pompa.id,metry:metry,otwory:otwory,cena_od:Math.round(sumaMin),cena_do:Math.round(sumaMax)});
 }
 var WYNIK=null;
