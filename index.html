@@ -1,5 +1,45 @@
 <!DOCTYPE html><html lang="pl"><head>
 <meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<!-- === DEWAX: zgoda i pomiar — początek === -->
+<!-- 1. Consent Mode v2: stany domyślne. MUSZĄ poprzedzać gtag.js. -->
+<script data-cookieconsent="ignore">
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('consent', 'default', {
+    ad_storage: 'denied',
+    ad_user_data: 'denied',
+    ad_personalization: 'denied',
+    analytics_storage: 'denied',
+    functionality_storage: 'granted',
+    security_storage: 'granted',
+    personalization_storage: 'denied',
+    wait_for_update: 500
+  });
+  gtag('set', 'ads_data_redaction', true);
+  gtag('set', 'url_passthrough', true);
+  gtag('js', new Date());
+</script>
+<!-- 2. Tag Google (GA4). Bramkowany stanem zgody, nie blokowaniem Cookiebota. -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-XHZDND4X1W"
+        data-cookieconsent="ignore"></script>
+<script data-cookieconsent="ignore">
+  gtag('config', 'G-XHZDND4X1W');
+</script>
+<!-- 3. Cookiebot CMP. Wysyła sygnał aktualizacji zgody po decyzji użytkownika. -->
+<script id="Cookiebot"
+        src="https://consent.cookiebot.com/uc.js"
+        data-cbid="CBID-DO-UZUPELNIENIA"
+        data-blockingmode="auto"
+        data-culture="PL"
+        type="text/javascript"></script>
+<!-- 4. HubSpot. Nie obsługuje Consent Mode, więc bramkuje go Cookiebot.
+     Kategoria marketing: hubspotutk wiąże sesję z kontaktem w CRM. -->
+<script type="text/javascript"
+        id="hs-script-loader"
+        async defer
+        src="//js.hs-scripts.com/49004516.js"
+        data-cookieconsent="marketing"></script>
+<!-- === DEWAX: zgoda i pomiar — koniec === -->
 <title>Gruntowa pompa ciepła z odwiertem na jednej umowie | DEWAX Dobrzyca</title>
 <meta name="description" content="Odwiert i pompa ciepła u jednego wykonawcy: jedna umowa, jeden termin, jeden numer telefonu, gdy coś nie gra. Policz koszt systemu dla swojego domu w 2 minuty, bez podawania numeru.">
 <meta property="og:title" content="Odwiert i pompa ciepła na jednej umowie — DEWAX, Dobrzyca">
@@ -848,7 +888,7 @@ font-size:20px;color:var(--navy);text-align:right;background:transparent;-moz-ap
         <img src="img/logo-biale.png" alt="DEWAX Sp. z o.o." loading="lazy" style="height:34px;width:auto;margin-bottom:14px" width="300" height="84">
         <p style="max-width:40ch;margin-bottom:12px">Gruntowe pompy ciepła Thermokrafft i Buderus, dolne źródła i odwierty. Od 2007 roku w Dobrzycy.</p>
         <p style="font-size:13px;color:#6B78A8">DEWAX Sp. z o.o. · ul. Ostrowska 1, 63-330 Dobrzyca<br>KRS 0000298299 · NIP 6080071501 · REGON 300706044</p>
-        <p style="font-size:13px;margin-top:10px"><a href="/polityka-prywatnosci.html" style="color:#8894C4;text-decoration:underline">Polityka prywatności</a></p>
+        <p style="font-size:13px;margin-top:10px"><a href="/polityka-prywatnosci.html" style="color:#8894C4;text-decoration:underline">Polityka prywatności</a> · <a href="#" style="color:#8894C4;text-decoration:underline" onclick="if(window.Cookiebot){Cookiebot.renew();}return false;">Ustawienia cookies</a></p>
       </div>
       <div>
         <b style="color:#fff;display:block;margin-bottom:10px;font-family:Montserrat">Kontakt</b>
