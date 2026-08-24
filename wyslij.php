@@ -75,7 +75,10 @@ $naglowki .= "X-Mailer: PHP/" . phpversion();
 $temat = '=?UTF-8?B?' . base64_encode("Wycena: $imie, $miejscowosc, $metraz m2") . '?=';
 
 if (@mail($ODBIORCA, $temat, $tresc, $naglowki)) {
-    header('Location: podziekowanie.html');
+    /* ?ok=1 dostaje WYLACZNIE zgloszenie realnie wyslane mailem.
+       Odrzucenia botow wyzej przekierowuja na te sama strone bez tego
+       parametru, zeby nie liczyly sie jako konwersja w Google Ads. */
+    header('Location: podziekowanie.html?ok=1');
 } else {
     http_response_code(500);
     header('Content-Type: text/html; charset=utf-8');
