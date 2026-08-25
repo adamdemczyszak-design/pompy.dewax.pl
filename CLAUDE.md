@@ -18,8 +18,6 @@ W tym folderze są **prototypy**, nie produkcja. Żywa strona to aplikacja **Cak
 | `konfigurator.html` | konfigurator ceny inwestycji, wersja 2 |
 | `tresci/strategia.md` | pełna strategia: psychologia klienta, konkurencja, architektura, SEO |
 | `tresci/teksty-thermokrafft.md` | gotowe teksty zastępcze do wklejenia w panelu |
-| `audyt/audyt-strony.html` | audyt techniczny i SEO żywej strony |
-| `audyt/audyt-zdjec.html` | analiza zdjęć w galerii |
 | `zdjecia/` | nowe zdjęcia gotowe do wgrania (nazwy pasują do rekordów w bazie) |
 | `zdjecia/kopia-starych/` | kopia bezpieczeństwa poprzednich zdjęć |
 
