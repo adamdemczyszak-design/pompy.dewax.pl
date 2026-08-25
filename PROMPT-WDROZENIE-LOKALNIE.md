@@ -21,7 +21,6 @@ Gałąź `main`, commit `3093abb` lub nowszy. W repozytorium znajdziesz:
   `.htaccess`, `og.jpg`, `favicon.png`, `robots.txt`, `sitemap.xml`, `img/` (15 plików)
 - `wdroz.sh` — etapowy skrypt wdrożenia (Linux/macOS)
 - `poczta-dkim-dmarc.md` — zadanie na później, nie teraz
-- `audyt/` — audyty strony i bezpieczeństwa
 
 **Nie przepisuj tych plików, nie refaktoryzuj, nie zmieniaj treści ani stylów.**
 Twoim zadaniem jest wymiana strony na serwerze i weryfikacja, że działa.
