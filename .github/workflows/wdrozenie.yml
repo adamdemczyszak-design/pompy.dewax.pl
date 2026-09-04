@@ -141,7 +141,10 @@ jobs:
           name: kopia-serwera-${{ github.run_number }}
           path: .kopia
           retention-days: 90
-          if-no-files-found: warn
+          # Katalog zaczyna sie od kropki, a akcja domyslnie pomija pliki ukryte.
+          # Bez tej linii kopia zapasowa pobiera sie, ale nie zapisuje jako artefakt.
+          include-hidden-files: true
+          if-no-files-found: error
 
       - name: Wgraj na serwer
         if: ${{ inputs.testy_tylko != true && inputs.pokaz_katalogi != true }}

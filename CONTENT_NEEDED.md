@@ -5,12 +5,19 @@ a każde miejsce, w którym danych brakuje, jest napisane tak, żeby było prawd
 także dziś. Każda pozycja niżej wzmacnia sprzedaż, ale żadna nie blokuje publikacji,
 z wyjątkiem punktu 1.
 
-## 1. Blokujące przed publikacją
+## 1. Załatwione 4 września 2026
 
-| # | Co | Gdzie na stronie | Dlaczego |
-|---|---|---|---|
-| 1.1 | **Publiczny dostęp do DEWAX GEO.** `https://dewax-geo.netlify.app/` przekierowuje dziś na logowanie Netlify (SSO zespołu, zgodnie z `dewax-crm/INFRASTRUKTURA.md`). | Hero (drugi przycisk), sekcja „Czy można wykonać odwiert na Twojej działce?”, stopka, `podziekowanie.html`, `dla-instalatorow.html` | Strona prowadzi klienta do narzędzia. Dopóki wymaga logowania, klient trafia na ścianę. Treść napisano ostrożnie („jeśli zobaczysz ekran logowania, publiczny dostęp jest w przygotowaniu”), ale docelowo trzeba: (a) zdjąć ochronę Netlify z tej strony albo (b) wystawić publiczny adres, np. `geo.dewax.pl`, i podmienić linki (3 pliki, atrybut `data-geo`). Po otwarciu dostępu usunąć akapit `.geo-access` w `index.html`. |
-| 1.2 | **Potwierdzenie, że DEWAX GEO nie zapisuje adresu ani danych osobowych.** | sekcja GEO | Na stronie świadomie NIE ma obietnic o prywatności ani o przechowywaniu adresu. Jeśli narzędzie ich nie zapisuje, można to dopisać jednym zdaniem. Jeśli zapisuje, trzeba dopisać to do polityki prywatności. |
+| # | Co | Stan |
+|---|---|---|
+| 1.1 | **Publiczny dostęp do DEWAX GEO.** Narzędzie było za logowaniem Netlify. | **Zrobione.** Widoczność projektu `dewax-geo` zmieniona na publiczną dla wersji produkcyjnej; podglądy robocze zostały prywatne. Sprawdzone: strona i jej API odpowiadają anonimowemu użytkownikowi, raport dla wskazanej miejscowości się generuje. Teksty na stronie poprawione. |
+
+Do rozważenia na przyszłość, nie blokuje niczego: DEWAX GEO nazywa się „Asystent Wiertacza GSHP” i pyta o rzeczy, których właściciel domu nie zna (docelowa głębokość otworu, roczny czas pracy sprężarki, „Sporządził”, „Nr oferty”). Kto najpierw przejdzie kalkulator, ma moc w kW i głębokość, więc kolejność na stronie pomaga. Uproszczenie samego narzędzia wymaga jego kodu źródłowego, którego nie ma w repozytorium `dewax-geo` (jest tam tylko wersja zbudowana).
+
+## 1b. Do potwierdzenia przed dalszą promocją narzędzia
+
+| # | Co | Dlaczego |
+|---|---|---|
+| 1.2 | **Czy DEWAX GEO zapisuje adres albo dane osobowe.** | Na stronie świadomie NIE ma obietnic o prywatności. Jeśli narzędzie niczego nie zapisuje, można to dopisać jednym zdaniem. Jeśli zapisuje, trzeba dopisać je do polityki prywatności. |
 
 ## 2. Realizacje (największy zwrot za najmniejszy wysiłek)
 
