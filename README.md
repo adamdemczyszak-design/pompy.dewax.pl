@@ -55,6 +55,25 @@ wykonano skryptami Playwright poza repozytorium; wyniki i zrzuty leżą w `docs/
 | `docs/ANALITYKA.md` | zdarzenia GA4 i plan mierzenia konwersji |
 | `.github/workflows/wdrozenie.yml`, `wdroz.sh` | wdrożenie na nazwa.pl (pakiet obejmuje `css/`, `js/`, nowe podstrony) |
 
+## Pamięć podręczna CDN nazwa.pl (ważne przy każdej zmianie stylów i skryptów)
+
+Przed stroną stoi CDN nazwa.pl. Pliki HTML mają `no-cache`, więc zmiany w treści widać
+od razu, ale `css/dewax.css` jest tam trzymany do 30 dni, a `js/*.js` i `sitemap.xml`
+do 14 dni. Bez obejścia klient przez wiele dni dostawałby stary arkusz stylów do nowego HTML-a.
+
+Dlatego adresy arkusza i skryptów mają znacznik wersji, np. `css/dewax.css?v=2026-09-04`.
+**Po każdej zmianie w `css/` albo `js/` podnieś ten znacznik we wszystkich trzech stronach**
+(`index.html`, `pompy.html`, `dla-instalatorow.html`). Nowy adres to dla CDN nowy plik,
+więc pobierze go od razu. Sprawdzenie, czy serwer ma aktualną wersję:
+
+```bash
+curl -s "https://pompy.dewax.pl/css/dewax.css?kontrola=1" | head -3
+```
+
+Adres z dowolnym nowym parametrem omija pamięć podręczną. Jeśli trzeba wyczyścić
+pamięć CDN dla adresów bez parametru (np. `sitemap.xml`), robi się to w panelu
+`admin.nazwa.pl` w sekcji CDN.
+
 ## Wdrożenie
 
 Nie wdrażaj bez decyzji właściciela. Workflow `wdrozenie.yml` startuje automatycznie po

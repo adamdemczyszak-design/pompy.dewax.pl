@@ -32,6 +32,13 @@ deweloperskiego: `npm start`, `npm run check`. Szczegóły: `README.md`.
 | `docs/ANALITYKA.md` | zdarzenia GA4 i plan mierzenia |
 | `tresci/strategia.md` | strategia z 15.08: psychologia klienta, konkurencja, źródła, czego nie wolno twierdzić |
 
+## CDN nazwa.pl
+
+Przed stroną stoi CDN: HTML `no-cache`, ale CSS do 30 dni, JS i `sitemap.xml` do 14 dni.
+Adresy arkusza i skryptów mają znacznik wersji (`css/dewax.css?v=RRRR-MM-DD`).
+**Zmieniasz `css/` albo `js/` → podnieś znacznik w trzech stronach**, inaczej klienci
+dostaną stary plik do nowego HTML-a. Kontrola: dowolny nowy parametr w adresie omija CDN.
+
 ## Narzędzia zewnętrzne
 
 - **DEWAX GEO** `https://dewax-geo.netlify.app/`: raport geologiczny z danych PIG-PIB.

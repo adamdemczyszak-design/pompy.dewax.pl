@@ -30,7 +30,7 @@ for (const s of STRONY) {
   });
   test(`${s}: lokalne pliki z src/href/srcset istnieją`, async () => {
     const refs = new Set();
-    for (const m of html[s].matchAll(/\s(?:src|href)="([^"#?]+)"/g)) { const v = m[1]; if (!/^(https?:)?\/\/|^mailto:|^tel:|^javascript:|^data:/.test(v)) refs.add(v); }
+    for (const m of html[s].matchAll(/\s(?:src|href)="([^"#?]+)(?:\?[^"#]*)?"/g)) { const v = m[1]; if (!/^(https?:)?\/\/|^mailto:|^tel:|^javascript:|^data:/.test(v)) refs.add(v); }
     for (const m of html[s].matchAll(/srcset="([^"]+)"/g)) for (const part of m[1].split(',')) refs.add(part.trim().split(/\s+/)[0]);
     for (const m of html[s].matchAll(/imagesrcset="([^"]+)"/g)) for (const part of m[1].split(',')) refs.add(part.trim().split(/\s+/)[0]);
     for (const r of refs) {
