@@ -3,3 +3,6 @@ package-lock.json
 .DS_Store
 Thumbs.db
 .claude/skills/
+
+# zrzuty ekranu do porównania przed/po (duże pliki, generowane lokalnie)
+docs/zrzuty/

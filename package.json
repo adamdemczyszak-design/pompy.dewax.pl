@@ -1,0 +1,13 @@
+{
+  "name": "pompy-dewax-pl",
+  "private": true,
+  "version": "2.0.0",
+  "description": "Strona pompy.dewax.pl: statyczny HTML + CSS + JS, formularz przez wyslij.php (nazwa.pl). Brak kroku budowania: pliki w repozytorium są artefaktem wdrożenia.",
+  "scripts": {
+    "start": "node testy/serwer-dev.mjs",
+    "test": "node --test testy/kalkulator.test.mjs testy/strona.test.mjs",
+    "lint": "node testy/lint.mjs",
+    "check": "npm run lint && npm test"
+  },
+  "engines": { "node": ">=20" }
+}

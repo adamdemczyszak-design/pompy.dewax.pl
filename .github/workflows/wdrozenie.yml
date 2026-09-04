@@ -26,6 +26,10 @@ on:
       - 'favicon.png'
       - 'robots.txt'
       - 'sitemap.xml'
+      - 'pompy.html'
+      - 'dla-instalatorow.html'
+      - 'css/**'
+      - 'js/**'
       - 'img/**'
       - '.github/workflows/wdrozenie.yml'
 
@@ -89,7 +93,7 @@ jobs:
           set -eu
           rm -rf .pakiet && mkdir -p .pakiet
           for P in index.html wyslij.php podziekowanie.html 404.html .htaccess \
-                   polityka-prywatnosci.html og.jpg favicon.png robots.txt sitemap.xml; do
+                   polityka-prywatnosci.html og.jpg favicon.png favicon-32.png icon-192.png apple-touch-icon.png robots.txt sitemap.xml; do
             [ -f "$P" ] || { echo "::error::Brak pliku $P"; exit 1; }
             cp "$P" .pakiet/
           done
@@ -180,6 +184,10 @@ jobs:
           sprawdz "/og.jpg"                  200 "$(kod "https://$D/og.jpg")"
           sprawdz "/polityka-prywatnosci"    200 "$(kod "https://$D/polityka-prywatnosci.html")"
           sprawdz "/podziekowanie.html"      200 "$(kod "https://$D/podziekowanie.html")"
+          sprawdz "/pompy.html"              200 "$(kod "https://$D/pompy.html")"
+          sprawdz "/dla-instalatorow.html"   200 "$(kod "https://$D/dla-instalatorow.html")"
+          sprawdz "/css/dewax.css"           200 "$(kod "https://$D/css/dewax.css")"
+          sprawdz "/js/kalkulator.js"        200 "$(kod "https://$D/js/kalkulator.js")"
           sprawdz "nieistniejacy adres"      404 "$(kod "https://$D/nie-ma-takiej-strony")"
           sprawdz "/wyslij.php metoda GET"   302 "$(kod "https://$D/wyslij.php")"
           sprawdz "POST bez pola czas"       422 "$(kod -X POST -d 'imie=Test&telefon=500600700' "https://$D/wyslij.php")"

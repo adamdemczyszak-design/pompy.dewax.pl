@@ -1,0 +1,20 @@
+{
+  "_opis": "Wyniki kalkulatora zapisane 2026-09-04 z wersji produkcyjnej (commit a83bb89), przed przebudową. Służą do porównania po zmianach.",
+  "przypadki": [
+    {"n":"A","wejscie":{"m2":150,"std":50,"odb":"podl","os":4,"pal":"gaz","dz":"mala","wj":"tak"},
+     "wynik":{"moc":8.3,"model":"TK-G2S/R290","metry":130,"otwory":2,"cenaOd":51962,"cenaDo":54068},
+     "ekran":{"tytul":"Thermokrafft TK-G2S/R290","zrodlo":"Dolne źródło: 2 odwierty pionowe po 65 m","cena":"51 000 – 55 000","kwh":"4 250","rok":"4 420","pmW":"55 W/m²","pmKwh":"28,3 kWh/m²·rok","pmZl":"29,5 zł/m²·rok","pmInw":"346–360 zł/m²","porownanie":"gazem ziemnym ok. 7 497 zł rocznie, o 3 077 zł więcej"}},
+    {"n":"B","wejscie":{"m2":220,"std":90,"odb":"grz","os":5,"pal":"wegiel","dz":"srednia","wj":"tak"},
+     "wynik":{"moc":20.8,"model":"TK-G6S/R290","metry":300,"otwory":3,"cenaOd":82630,"cenaDo":87490},
+     "ekran":{"tytul":"Układ kaskadowy — dobór po oględzinach","zrodlo":"Dolne źródło: 3 odwierty pionowe po 100 m","cena":"wycena po oględzinach","kwh":"12 034","rok":"12 516","pmW":"95 W/m²","pmKwh":"54,7 kWh/m²·rok","pmZl":"56,9 zł/m²·rok","pmInw":"— wycena indyw.","porownanie":"ekogroszkiem ok. 13 478 zł rocznie, o 963 zł więcej"}},
+    {"n":"C","wejscie":{"m2":100,"std":20,"odb":"podl","os":2,"pal":"brak","dz":"duza","wj":"tak"},
+     "wynik":{"moc":2.4,"model":"TK-G2S/R290","metry":40,"otwory":1,"cenaOd":39326,"cenaDo":39974},
+     "ekran":{"tytul":"Thermokrafft TK-G2S/R290","zrodlo":"Dolne źródło: 1 odwiert pionowy po 40 m","cena":"39 000 – 40 000","kwh":"1 333","rok":"1 387","pmW":"24 W/m²","pmKwh":"13,3 kWh/m²·rok","pmZl":"13,9 zł/m²·rok","pmInw":"393–400 zł/m²","uwaga":"kolektor poziomy"}},
+    {"n":"D","wejscie":{"m2":400,"std":120,"odb":"mix","os":6,"pal":"olej","dz":"mala","wj":"nie"},
+     "wynik":{"moc":49.2,"model":"TK-G6S/R290","metry":720,"otwory":8,"cenaOd":141598,"cenaDo":153262},
+     "ekran":{"tytul":"Układ kaskadowy — dobór po oględzinach","zrodlo":"Dolne źródło: 8 × 90 m — do potwierdzenia po oględzinach","cena":"wycena po oględzinach","kwh":"25 421","rok":"26 438","pmW":"123 W/m²","pmKwh":"63,6 kWh/m²·rok","pmZl":"66,1 zł/m²·rok","porownanie":"olejem opałowym ok. 53 130 zł rocznie, o 26 692 zł więcej"}},
+    {"n":"E","wejscie":{"m2":60,"std":35,"odb":"podl","os":1,"pal":"prad","dz":"mala","wj":"tak"},
+     "wynik":{"moc":2.3,"model":"TK-G2S/R290","metry":40,"otwory":1,"cenaOd":39326,"cenaDo":39974},
+     "ekran":{"tytul":"Thermokrafft TK-G2S/R290","zrodlo":"Dolne źródło: 1 odwiert pionowy po 40 m","cena":"39 000 – 40 000","kwh":"1 164","rok":"1 211","pmW":"38 W/m²","pmKwh":"19,4 kWh/m²·rok","pmZl":"20,2 zł/m²·rok","pmInw":"655–666 zł/m²","porownanie":"prądem ok. 5 086 zł rocznie, o 3 875 zł więcej"}}
+  ]
+}

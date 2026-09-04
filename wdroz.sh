@@ -23,9 +23,9 @@ KATALOG_KOPII="$HOME/Downloads/DEWAX_STRONA/backup_${DATA}"
 ZRODLO="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
 # Pliki wchodzące w skład wdrożenia (reszta repo NIE jest wgrywana)
-PLIKI_WDROZENIA=(index.html wyslij.php podziekowanie.html 404.html .htaccess
-                 polityka-prywatnosci.html og.jpg favicon.png robots.txt sitemap.xml)
-KATALOGI_WDROZENIA=(img)
+PLIKI_WDROZENIA=(index.html pompy.html dla-instalatorow.html wyslij.php podziekowanie.html 404.html .htaccess
+                 polityka-prywatnosci.html og.jpg favicon.png favicon-32.png icon-192.png apple-touch-icon.png robots.txt sitemap.xml)
+KATALOGI_WDROZENIA=(img css js)
 
 c_ok()   { printf '\033[32m%s\033[0m\n' "$*"; }
 c_uwaga(){ printf '\033[33m%s\033[0m\n' "$*"; }
