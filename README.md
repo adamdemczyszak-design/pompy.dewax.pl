@@ -51,6 +51,7 @@ wykonano skryptami Playwright poza repozytorium; wyniki i zrzuty leżą w `docs/
 | `img/` | zdjęcia DEWAX w wariantach WebP (`nazwa-SZEROKOŚĆ.webp`) oraz oryginalne pliki z poprzedniej wersji |
 | `zdjecia/` | źródła JPG wyższej rozdzielczości (z nich powstały warianty hero i realizacji) |
 | `testy/` | testy Node, wzorzec wyników kalkulatora, serwer deweloperski, lint |
+| `googlee4c582b5162d1cb9.html` | plik weryfikacyjny Google Search Console. **Nie kasować**, inaczej usługa traci weryfikację |
 | `CONTENT_NEEDED.md` | lista danych i zdjęć do uzupełnienia przez właściciela |
 | `docs/ANALITYKA.md` | zdarzenia GA4 i plan mierzenia konwersji |
 | `.github/workflows/wdrozenie.yml`, `wdroz.sh` | wdrożenie na nazwa.pl (pakiet obejmuje `css/`, `js/`, nowe podstrony) |

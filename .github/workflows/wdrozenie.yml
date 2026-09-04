@@ -26,6 +26,7 @@ on:
       - 'favicon.png'
       - 'robots.txt'
       - 'sitemap.xml'
+      - 'googlee4c582b5162d1cb9.html'
       - 'pompy.html'
       - 'dla-instalatorow.html'
       - 'css/**'
@@ -93,7 +94,8 @@ jobs:
           set -eu
           rm -rf .pakiet && mkdir -p .pakiet
           for P in index.html pompy.html dla-instalatorow.html wyslij.php podziekowanie.html 404.html .htaccess \
-                   polityka-prywatnosci.html og.jpg favicon.png favicon-32.png icon-192.png apple-touch-icon.png robots.txt sitemap.xml; do
+                   polityka-prywatnosci.html og.jpg favicon.png favicon-32.png icon-192.png apple-touch-icon.png \
+                   robots.txt sitemap.xml googlee4c582b5162d1cb9.html; do
             [ -f "$P" ] || { echo "::error::Brak pliku $P"; exit 1; }
             cp "$P" .pakiet/
           done
@@ -199,6 +201,7 @@ jobs:
           sprawdz "/dla-instalatorow.html"   200 "$(kod "https://$D/dla-instalatorow.html")"
           sprawdz "/css/dewax.css"           200 "$(kod "https://$D/css/dewax.css")"
           sprawdz "/js/kalkulator.js"        200 "$(kod "https://$D/js/kalkulator.js")"
+          sprawdz "plik weryfikacyjny Google"  200 "$(kod "https://$D/googlee4c582b5162d1cb9.html")"
           sprawdz "nieistniejacy adres"      404 "$(kod "https://$D/nie-ma-takiej-strony")"
           sprawdz "/wyslij.php metoda GET"   302 "$(kod "https://$D/wyslij.php")"
           sprawdz "POST bez pola czas"       422 "$(kod -X POST -d 'imie=Test&telefon=500600700' "https://$D/wyslij.php")"

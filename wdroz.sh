@@ -24,7 +24,8 @@ ZRODLO="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
 # Pliki wchodzące w skład wdrożenia (reszta repo NIE jest wgrywana)
 PLIKI_WDROZENIA=(index.html pompy.html dla-instalatorow.html wyslij.php podziekowanie.html 404.html .htaccess
-                 polityka-prywatnosci.html og.jpg favicon.png favicon-32.png icon-192.png apple-touch-icon.png robots.txt sitemap.xml)
+                 polityka-prywatnosci.html og.jpg favicon.png favicon-32.png icon-192.png apple-touch-icon.png robots.txt sitemap.xml
+                 googlee4c582b5162d1cb9.html)
 KATALOGI_WDROZENIA=(img css js)
 
 c_ok()   { printf '\033[32m%s\033[0m\n' "$*"; }
