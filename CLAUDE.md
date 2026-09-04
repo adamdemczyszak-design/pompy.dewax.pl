@@ -42,9 +42,12 @@ dostaną stary plik do nowego HTML-a. Kontrola: dowolny nowy parametr w adresie 
 ## Narzędzia zewnętrzne
 
 - **DEWAX GEO** `https://dewax-geo.netlify.app/`: raport geologiczny z danych PIG-PIB.
-  **Dziś za logowaniem Netlify (SSO zespołu).** Strona linkuje do niego i mówi o tym uczciwie
-  (akapit `.geo-access` w sekcji `#geo`). Nie obiecuj publicznego dostępu, dopóki nie zostanie
-  otwarty. Linki mają atrybut `data-geo` (zdarzenie `geo_clicked`).
+  **Publiczne od 4.09.2026** (Netlify: widoczność Private z opcją „Previews only”, czyli
+  produkcja otwarta, podglądy robocze zamknięte). Narzędzie jest techniczne, nazywa się
+  „Asystent Wiertacza GSHP”, więc sekcja `#geo` uprzedza, żeby wejść tam z liczbami
+  z kalkulatora. Kodu źródłowego GEO nie ma w repozytorium `dewax-geo`, jest tylko wersja
+  zbudowana, więc jego tekstów nie da się zmienić. Linki mają atrybut `data-geo`
+  (zdarzenie `geo_clicked`).
 - **Kreator ofertowy** `https://dewax-kreator.netlify.app/`: chroniony, dla partnerów.
   Linkowany wyłącznie z `dla-instalatorow.html`. Nie promuj go klientom indywidualnym.
 - GA4 `G-XHZDND4X1W`, Cookiebot `7a55c023-…`, HubSpot `49004516`: blok zgody w `<head>`
@@ -95,7 +98,9 @@ efektywność energetyczna, rozwiązanie ekologiczne. **Ekologia nie sprzedaje.*
 - „Pompa jest bezemisyjna” (polski miks: ok. 225 g CO₂/kWh ciepła).
 - „Zwraca się w X lat”. Nie sprzedajemy zwrotem inwestycji.
 - Wartości W/mb z powołaniem na PORT PC.
-- Dostęp do DEWAX GEO „bez logowania”, dopóki jest za SSO.
+- Obietnic o prywatności DEWAX GEO (czy zapisuje adres, jak długo trzyma dane), dopóki
+  właściciel narzędzia tego nie potwierdzi. Sam fakt, że wchodzi się bez logowania, jest już
+  sprawdzony i można go pisać.
 
 **Wolno, ze źródłem:** SPF 3,5 (grunt) vs 2,5 (powietrze) wg decyzji KE 2013/114/UE;
 Fraunhofer ISE 3,9 vs 2,9; EER chłodzenia pasywnego 15–30; 20 lat (grunt) vs 18 (powietrze)
