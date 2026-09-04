@@ -92,12 +92,20 @@ jobs:
         run: |
           set -eu
           rm -rf .pakiet && mkdir -p .pakiet
-          for P in index.html wyslij.php podziekowanie.html 404.html .htaccess \
+          for P in index.html pompy.html dla-instalatorow.html wyslij.php podziekowanie.html 404.html .htaccess \
                    polityka-prywatnosci.html og.jpg favicon.png favicon-32.png icon-192.png apple-touch-icon.png robots.txt sitemap.xml; do
             [ -f "$P" ] || { echo "::error::Brak pliku $P"; exit 1; }
             cp "$P" .pakiet/
           done
-          cp -r img .pakiet/img
+          for K in img css js; do
+            [ -d "$K" ] || { echo "::error::Brak katalogu $K"; exit 1; }
+            cp -r "$K" ".pakiet/$K"
+          done
+          # Strona bez arkusza stylow i skryptu kalkulatora jest zepsuta, wiec
+          # sprawdzamy je osobno, zanim cokolwiek pojdzie na serwer.
+          for W in .pakiet/css/dewax.css .pakiet/js/kalkulator.js .pakiet/js/dewax.js .pakiet/pompy.html .pakiet/dla-instalatorow.html; do
+            [ -s "$W" ] || { echo "::error::Pakiet niekompletny: brak $W"; exit 1; }
+          done
           echo "Pakiet: $(find .pakiet -type f | wc -l) plikow" >> "$GITHUB_STEP_SUMMARY"
           find .pakiet -type f | sort
 
