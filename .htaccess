@@ -8,6 +8,10 @@ DirectoryIndex index.html
   RewriteEngine On
   RewriteCond %{HTTPS} !=on
   RewriteRule ^(.*)$ https://%{HTTP_HOST}/$1 [R=301,L]
+  # Jeden adres kanoniczny: www.pompy.dewax.pl prowadzi na pompy.dewax.pl.
+  # Zadziala dopiero, gdy certyfikat obejmie takze nazwe z www.
+  RewriteCond %{HTTP_HOST} ^www\.pompy\.dewax\.pl$ [NC]
+  RewriteRule ^(.*)$ https://pompy.dewax.pl/$1 [R=301,L]
 </IfModule>
 
 # Kompresja — najważniejsze dla szybkości HTML i CSS
@@ -48,11 +52,30 @@ AddDefaultCharset UTF-8
 # i dokleja resztę do celu, więc "/kontakt/" trafiłoby na "/#kontakt/" — kotwica
 # przestaje działać. Wzorce ^...$ z opcjonalnym ukośnikiem trafiają dokładnie.
 
+# UWAGA (04.09.2026). Sprawdzone na zywym serwerze: nazwa.pl ignoruje dyrektywy
+# RedirectMatch z modulu mod_alias. Wszystkie osiem starych adresow zwracalo 404,
+# mimo ze reguly byly w tym pliku. Dziala natomiast mod_rewrite, ktory obsluguje
+# tez wymuszenie HTTPS wyzej. Dlatego przekierowania sa napisane jako RewriteRule.
+# Flaga NE jest konieczna: bez niej Apache zamienia "#" na "%23" i kotwica przestaje dzialac.
+<IfModule mod_rewrite.c>
+  RewriteEngine On
+  RewriteRule ^kalkulator/?$                          /#kreator          [R=301,L,NE]
+  RewriteRule ^galeria/?$                             /#realizacje       [R=301,L,NE]
+  RewriteRule ^wycena/?$                              /#kontakt          [R=301,L,NE]
+  RewriteRule ^kontakt/?$                             /#kontakt          [R=301,L,NE]
+  RewriteRule ^strona/nasza-oferta/?$                 /pompy.html        [R=301,L]
+  RewriteRule ^strona/o-nas/?$                        /#krecik           [R=301,L,NE]
+  RewriteRule ^strona/dotacje-na-zakup-pompy-ciepa/?$ /#dofinansowanie   [R=301,L,NE]
+  RewriteRule ^strona/polityka-prywatnosci/?$         /polityka-prywatnosci.html [R=301,L]
+</IfModule>
+
+# Zostawione dla serwerow, ktore obsluguja mod_alias. Na nazwa.pl nie dzialaja,
+# ale nie szkodza: gdy mod_rewrite juz przekierowal, te reguly sie nie wykonaja.
 RedirectMatch 301 ^/kalkulator/?$                          https://pompy.dewax.pl/#kreator
 RedirectMatch 301 ^/galeria/?$                             https://pompy.dewax.pl/#realizacje
 RedirectMatch 301 ^/wycena/?$                              https://pompy.dewax.pl/#kontakt
 RedirectMatch 301 ^/kontakt/?$                             https://pompy.dewax.pl/#kontakt
-RedirectMatch 301 ^/strona/nasza-oferta/?$                 https://pompy.dewax.pl/#pompy
+RedirectMatch 301 ^/strona/nasza-oferta/?$                 https://pompy.dewax.pl/pompy.html
 RedirectMatch 301 ^/strona/o-nas/?$                        https://pompy.dewax.pl/#krecik
 RedirectMatch 301 ^/strona/dotacje-na-zakup-pompy-ciepa/?$ https://pompy.dewax.pl/#dofinansowanie
 RedirectMatch 301 ^/strona/polityka-prywatnosci/?$         https://pompy.dewax.pl/polityka-prywatnosci.html
