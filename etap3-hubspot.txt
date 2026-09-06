@@ -1,0 +1,150 @@
+================================================================================
+ETAP 3 — PRZYWRÓCENIE ŚLEDZENIA HUBSPOT (portal 49004516)
+Przygotowane 2026-08-24. NIE JEST WDROŻONE.
+================================================================================
+
+NAJPIERW RZECZ, KTÓRA BLOKUJE — CZYTAJ, ZANIM COKOLWIEK WKLEISZ
+--------------------------------------------------------------------------------
+polityka-prywatnosci.html, punkt 8, jest dziś opublikowana na stronie i mówi:
+
+    "Serwis nie używa plików cookies ani innych technologii śledzących.
+     Nie mamy zainstalowanego Google Analytics, piksela Facebooka ani żadnego
+     innego narzędzia analitycznego. Dlatego nie zobaczysz tu banera zgody
+     na ciasteczka — po prostu nie ma na co się zgadzać.
+     Gdyby to się w przyszłości zmieniło, PRZED URUCHOMIENIEM takich narzędzi
+     pojawi się baner zgody, a niniejsza polityka zostanie zaktualizowana."
+
+To nie jest ogólnik, tylko zobowiązanie złożone na piśmie, we własnym serwisie.
+Skrypt HubSpot zapisuje ciasteczka (lista niżej), więc jego wdrożenie sprawia,
+że punkt 8 przestaje być prawdziwy. Dokładnie to samo dotyczy tagu GA4
+z etapu 1.
+
+Do rozstrzygnięcia PRZED wdrożeniem, nie po:
+  1. aktualizacja punktu 8 polityki prywatnosci
+  2. baner zgody — polityka sama go obiecuje
+  3. kolejność: polityka i baner najpierw, skrypty potem
+
+Ta notatka nie rozstrzyga kwestii prawnych i nie jest opinią prawną.
+Sygnalizuje sprzeczność między tym, co strona deklaruje, a tym, co ma robić.
+
+
+CZEGO NIE UDAŁO SIĘ ODTWORZYĆ
+--------------------------------------------------------------------------------
+Zadanie brzmiało: sprawdź w backup/ i w historii gita, jak skrypt był osadzony,
+i odtwórz to samo osadzenie. Nie da się — tego kodu nigdy tu nie było.
+
+Co sprawdziłem:
+
+  * wszystkie pliki .html, .php, .md i .js w drzewie roboczym
+  * katalog backup/ w całości
+  * historię wszystkich 9 gałęzi: git log --all -S dla ciągów
+    "hs-scripts", "49004516", "_hsq", "hsforms"
+
+Wynik: ciąg "49004516" pojawia się w JEDNYM commicie (1318350, import
+materiałów z 15 sierpnia) i to wyłącznie jako proza w CLAUDE.md oraz
+w audyt/audyt-strony.html. Ciągi "hs-scripts", "_hsq" i "hsforms" nie
+występują w żadnym commicie w całej historii repozytorium.
+
+Powód: backup/ to kopia NOWEJ strony statycznej sprzed przepisania treści
+(commit 99e6a0c "Kopia plikow strony przed przepisaniem tresci"), a nie kopia
+starej aplikacji CakePHP. Skrypt HubSpot siedział w szablonach CakePHP,
+które nigdy nie trafiły do tego repozytorium.
+
+Wniosek: poniższy kod to standardowy snippet HubSpot, a nie odtworzenie
+poprzedniego osadzenia. Jeśli stara strona miała jakieś modyfikacje wokół
+niego, tego nie odtworzę, bo nie ma z czego. Źródłem, w którym można to
+sprawdzić, jest kopia plików CakePHP z serwera, jeśli gdzieś istnieje.
+
+
+CO UDAŁO SIĘ POTWIERDZIĆ U ŹRÓDŁA
+--------------------------------------------------------------------------------
+Odpytałem konto HubSpot podłączone do tej sesji:
+
+    accountId  : 49004516        <- zgadza się z audytem
+    uiDomain   : app.hubspot.com
+    accountType: STANDARD
+    waluta     : PLN
+
+Dwie rzeczy z tego wynikają:
+
+1. Portal 49004516 to faktycznie konto tej firmy. Potwierdzone, nie założone.
+
+2. uiDomain to app.hubspot.com, a nie app-eu1.hubspot.com, czyli portal
+   siedzi w regionie NA (Ameryka Północna). Host skryptu śledzącego to
+   więc js.hs-scripts.com, a NIE js-eu1.hs-scripts.com.
+   Wpisanie złego regionu daje skrypt, który się wczytuje i cicho nic nie robi.
+
+   Uwaga poboczna: region NA oznacza przetwarzanie danych poza EOG.
+   Przy aktualizacji polityki prywatności to jest istotne — dotychczasowy
+   zapis o Google Fonts wspomina o przekazywaniu danych do USA, analogiczny
+   zapis będzie potrzebny dla HubSpot.
+
+
+================================================================================
+BLOK DO WKLEJENIA — DOKŁADNIE PRZED </body>
+================================================================================
+
+<!-- === DEWAX: HubSpot === -->
+<script type="text/javascript" id="hs-script-loader" async defer
+        src="//js.hs-scripts.com/49004516.js"></script>
+<!-- === koniec: HubSpot === -->
+
+Nic w nim nie podmieniasz. Numer portalu jest już wpisany i zweryfikowany.
+
+
+MIEJSCA WSTAWKI — TE SAME CZTERY PLIKI CO GA4
+--------------------------------------------------------------------------------
+    index.html                 </body> w linii 1063
+    podziekowanie.html         </body> w linii 57
+    polityka-prywatnosci.html  </body> w linii 303
+    404.html                   </body> w linii 53
+
+Wszystkie cztery są na liście paths w .github/workflows/wdrozenie.yml, więc
+scalenie do main wyśle je FTP na /pompy/webroot.
+
+Dlaczego przed </body>, a nie w <head>: tak zaleca HubSpot, a atrybuty
+async defer sprawiają, że skrypt nie blokuje renderowania. Tag GA4 z etapu 1
+idzie do <head> i te dwie wstawki nie kolidują ze sobą.
+
+
+CO TEN SKRYPT ROBI
+--------------------------------------------------------------------------------
+Jeden plik ładuje komplet narzędzi HubSpot: analitykę odwiedzin, wiązanie
+sesji z kontaktem w CRM, a także czat i formularze HubSpot, jeśli zostaną
+włączone w panelu.
+
+Ciasteczka, które zapisuje:
+
+    hubspotutk   identyfikator odwiedzającego, wiąże sesję z kontaktem w CRM
+    __hstc       główne ciasteczko analityczne
+    __hssrc      wykrywanie nowej sesji
+    __hssc       licznik sesji
+
+To są ciasteczka śledzące, nie techniczne. Stąd sprawa z punktem 8 polityki.
+
+HubSpot ma wbudowany mechanizm zgody: Ustawienia > Prywatność i zgoda >
+Baner ciasteczek. Włączony przejmuje obsługę zgody dla własnych ciasteczek.
+Nie obejmuje jednak GA4 — tamten wymaga osobnej obsługi. Jeśli baner ma być
+jeden dla obu narzędzi, HubSpotowy nie wystarczy.
+
+
+ZALEŻNOŚĆ OD FORMULARZA
+--------------------------------------------------------------------------------
+Formularz wyceny na stronie to zwykły POST na wyslij.php, wysyłający maila.
+Nie jest formularzem HubSpot i po wdrożeniu tego skryptu nadal nim nie będzie
+— zgłoszenia nie zaczną same wpadać do CRM.
+
+Żeby zgłoszenia trafiały do HubSpot, trzeba osobno albo podmienić formularz
+na formularz HubSpot, albo dopisać w wyslij.php wywołanie Forms API.
+To osobny temat, poza zakresem tego etapu.
+
+
+JAK SPRAWDZIĆ PO WDROŻENIU
+--------------------------------------------------------------------------------
+1. Narzędzia deweloperskie > Sieć, przeładuj stronę: ma pojawić się żądanie
+   do js.hs-scripts.com/49004516.js ze statusem 200.
+2. Zakładka Aplikacja > Ciasteczka: ma się pojawić hubspotutk i __hstc.
+3. HubSpot > Raporty > Ruch w witrynie: wejścia powinny być widoczne
+   w ciągu kilkunastu minut.
+4. Jeśli skrypt się ładuje, ale w HubSpot nic nie widać — najpierw sprawdź
+   region. Zły host daje dokładnie taki objaw.
