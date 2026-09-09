@@ -22,6 +22,93 @@ function pole(string $k, int $max = 500): string {
     $v = str_replace(["\r", "\n", "%0a", "%0d"], ' ', $v);   // blokada wstrzykiwania nagłówków
     return mb_substr($v, 0, $max);
 }
+function strona_bledu(int $kod, string $tytul, string $h1, string $tresc): void {
+    http_response_code($kod);
+    header('Content-Type: text/html; charset=utf-8');
+    echo '<!DOCTYPE html><html lang="pl"><head><meta charset="UTF-8">'
+       . '<meta name="viewport" content="width=device-width,initial-scale=1"><title>' . $tytul . '</title>'
+       . '<style>body{font-family:system-ui,sans-serif;max-width:640px;margin:12vh auto;padding:0 24px;color:#1C1C2E;line-height:1.65}'
+       . 'h1{font-size:26px;color:#000050;margin-bottom:12px}a{color:#2F6D9E}</style></head><body>'
+       . '<h1>' . $h1 . '</h1>' . $tresc . '</body></html>';
+}
+
+/* --- formularz zgody na publikację opinii (zgoda-na-publikacje-opinii.html) ---
+   Ten sam kanał (mail na $ODBIORCA), osobny temat i osobna strona podziękowania
+   (?zgoda=1, bez ?ok=1, żeby nie liczyć zgody jako konwersji wyceny). */
+if (($_POST['formularz'] ?? '') === 'zgoda-opinia') {
+    $imie        = pole('imie', 100);
+    $nazwisko    = pole('nazwisko', 100);
+    $email       = pole('email', 150);
+    $telefon     = pole('telefon', 30);
+    $miejscowosc = pole('miejscowosc', 100);
+    $publikacja  = pole('publikacja', 30);
+    $pokazMiejsc = ($_POST['pokaz_miejscowosc'] ?? '') === 'tak';
+    $pokazDane   = ($_POST['pokaz_dane'] ?? '') === 'tak';
+    $rok         = pole('rok', 10);
+    $metraz      = pole('metraz', 10);
+    $model       = pole('model', 80);
+    $odwierty    = pole('odwierty', 80);
+    $kwh         = pole('kwh', 20);
+    $opinia      = mb_substr(trim((string)($_POST['opinia'] ?? '')), 0, 2000);
+    $podpis      = pole('podpis', 150);
+    $dataPodpisu = pole('data_podpisu', 20);
+    $zgodaRodo   = ($_POST['zgoda_rodo'] ?? '') === 'tak';
+
+    $bledy = [];
+    if ($imie === '')                                          $bledy[] = 'imię';
+    if ($nazwisko === '')                                      $bledy[] = 'nazwisko';
+    if (!filter_var($email, FILTER_VALIDATE_EMAIL))            $bledy[] = 'poprawny e-mail';
+    if ($miejscowosc === '')                                   $bledy[] = 'miejscowość instalacji';
+    if (!in_array($publikacja, ['imie', 'imie-nazwisko'], true)) $bledy[] = 'sposób podpisania opinii';
+    if ($opinia === '')                                        $bledy[] = 'treść opinii';
+    if (!$zgodaRodo)                                           $bledy[] = 'zgoda na publikację';
+    if ($podpis === '')                                        $bledy[] = 'podpis (imię i nazwisko)';
+    if ($bledy) {
+        strona_bledu(422, 'Uzupełnij formularz', 'Brakuje kilku danych',
+            '<p>Uzupełnij: <b>' . htmlspecialchars(implode(', ', $bledy), ENT_QUOTES, 'UTF-8') . '</b>.</p>'
+          . '<p><a href="javascript:history.back()">← Wróć do formularza</a></p>');
+        exit;
+    }
+
+    $tresc  = "Zgoda na publikację opinii — pompy.dewax.pl\n";
+    $tresc .= str_repeat('=', 46) . "\n\n";
+    $tresc .= "Imię i nazwisko:   $imie $nazwisko\n";
+    $tresc .= "E-mail:            $email\n";
+    $tresc .= "Telefon:           " . ($telefon !== '' ? $telefon : '— nie podano —') . "\n";
+    $tresc .= "Miejscowość:       $miejscowosc\n\n";
+    $tresc .= "ZAKRES ZGODY\n";
+    $tresc .= "Podpis na stronie: " . ($publikacja === 'imie-nazwisko' ? 'imię i nazwisko' : 'imię i pierwsza litera nazwiska') . "\n";
+    $tresc .= "Miejscowość:       " . ($pokazMiejsc ? 'TAK, można podać' : 'NIE') . "\n";
+    $tresc .= "Dane techniczne:   " . ($pokazDane ? 'TAK, można podać' : 'NIE') . "\n\n";
+    $tresc .= "DANE INSTALACJI (podane przez klienta)\n";
+    $tresc .= "Rok:               " . ($rok !== '' ? $rok : '—') . "\n";
+    $tresc .= "Metraż:            " . ($metraz !== '' ? "$metraz m2" : '—') . "\n";
+    $tresc .= "Model pompy:       " . ($model !== '' ? $model : '—') . "\n";
+    $tresc .= "Odwierty:          " . ($odwierty !== '' ? $odwierty : '—') . "\n";
+    $tresc .= "Prąd po sezonie:   " . ($kwh !== '' ? "$kwh kWh" : '—') . "\n\n";
+    $tresc .= "OPINIA\n$opinia\n\n";
+    $tresc .= "Podpis:            $podpis\n";
+    $tresc .= "Data podpisu:      " . ($dataPodpisu !== '' ? $dataPodpisu : '—') . "\n";
+    $tresc .= "\n" . str_repeat('-', 46) . "\n";
+    $tresc .= 'Wysłano: ' . date('Y-m-d H:i:s') . "\n";
+    $tresc .= 'IP: ' . ($_SERVER['REMOTE_ADDR'] ?? '?') . "\n";
+
+    $naglowki  = "From: Formularz DEWAX <$NADAWCA>\r\n";
+    $naglowki .= "Reply-To: $imie $nazwisko <$email>\r\n";
+    $naglowki .= "Content-Type: text/plain; charset=UTF-8\r\n";
+    $naglowki .= "X-Mailer: PHP/" . phpversion();
+    $temat = '=?UTF-8?B?' . base64_encode("Zgoda na publikację opinii: $imie $nazwisko, $miejscowosc") . '?=';
+
+    if (@mail($ODBIORCA, $temat, $tresc, $naglowki)) {
+        header('Location: podziekowanie.html?zgoda=1');
+    } else {
+        strona_bledu(500, 'Błąd wysyłki', 'Nie udało się wysłać zgody',
+            '<p>Przepraszamy. Wydrukuj formularz i oddaj ekipie albo napisz na <a href="mailto:sprzedaz@dewax.pl">sprzedaz@dewax.pl</a>.</p>'
+          . '<p><a href="zgoda-na-publikacje-opinii.html">← Wróć do formularza</a></p>');
+    }
+    exit;
+}
+
 $imie        = pole('imie', 100);
 $email       = pole('email', 150);
 $miejscowosc = pole('miejscowosc', 100);

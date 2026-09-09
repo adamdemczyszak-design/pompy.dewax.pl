@@ -24,6 +24,24 @@ function wyslij(req, res, body) {
   if ((p.get('bot-field') || '') !== '') { res.writeHead(302, { Location: 'podziekowanie.html' }); return res.end(); }
   const czas = parseInt(p.get('czas') || '0', 10) || 0;
   if (czas > 0 && czas < 3) { res.writeHead(302, { Location: 'podziekowanie.html' }); return res.end(); }
+  if (p.get('formularz') === 'zgoda-opinia') {
+    const bl = [];
+    if (!pole('imie', 100)) bl.push('imię');
+    if (!pole('nazwisko', 100)) bl.push('nazwisko');
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(pole('email', 150))) bl.push('poprawny e-mail');
+    if (!pole('miejscowosc', 100)) bl.push('miejscowość instalacji');
+    if (!['imie', 'imie-nazwisko'].includes(pole('publikacja', 30))) bl.push('sposób podpisania opinii');
+    if (!(p.get('opinia') || '').trim()) bl.push('treść opinii');
+    if (p.get('zgoda_rodo') !== 'tak') bl.push('zgoda na publikację');
+    if (!pole('podpis', 150)) bl.push('podpis (imię i nazwisko)');
+    if (bl.length) {
+      res.writeHead(422, { 'Content-Type': 'text/html; charset=utf-8' });
+      return res.end(strona('Uzupełnij formularz', 'Brakuje kilku danych', `<p>Uzupełnij: <b>${bl.join(', ')}</b>.</p><p><a href="javascript:history.back()">← Wróć do formularza</a></p>`));
+    }
+    console.log('\n[wyslij.php - symulacja] Zgoda na publikację opinii');
+    for (const k of ['imie', 'nazwisko', 'email', 'telefon', 'miejscowosc', 'publikacja', 'pokaz_miejscowosc', 'pokaz_dane', 'rok', 'metraz', 'model', 'odwierty', 'kwh', 'opinia', 'podpis', 'data_podpisu', 'zgoda_rodo', 'czas']) console.log(`  ${k.padEnd(18)} ${p.get(k) || '-'}`);
+    res.writeHead(302, { Location: 'podziekowanie.html?zgoda=1' }); return res.end();
+  }
   const imie = pole('imie', 100), email = pole('email', 150), miejscowosc = pole('miejscowosc', 100), metraz = pole('metraz', 10);
   const bledy = [];
   if (!imie) bledy.push('imię');

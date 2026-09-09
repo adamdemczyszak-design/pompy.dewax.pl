@@ -22,7 +22,7 @@ const otw = (css.match(/{/g) || []).length, zam = (css.match(/}/g) || []).length
 if (otw !== zam) zle(`css/dewax.css: klamry ${otw} vs ${zam}`); else console.log('  ✓ css/dewax.css: klamry zbalansowane');
 if (/{\s*}/.test(css)) zle('css/dewax.css: pusta reguła');
 
-for (const s of ['index.html', 'pompy.html', 'dla-instalatorow.html', 'odwierty-pod-pompe-ciepla.html', 'dolne-zrodlo-pompy-ciepla.html', 'sondy-koszowe-helix.html', 'gruntowa-pompa-ciepla-cena.html', 'dotacje-pompa-ciepla.html', 'pompa-ciepla-czy-warto.html', 'gdzie-dzialamy/wielkopolskie.html', 'gdzie-dzialamy/lodzkie.html', 'gdzie-dzialamy/kujawsko-pomorskie.html', 'gdzie-dzialamy/dolnoslaskie.html', 'gdzie-dzialamy/slaskie.html', 'gdzie-dzialamy/mazowieckie.html']) {
+for (const s of ['index.html', 'pompy.html', 'dla-instalatorow.html', 'odwierty-pod-pompe-ciepla.html', 'dolne-zrodlo-pompy-ciepla.html', 'sondy-koszowe-helix.html', 'gruntowa-pompa-ciepla-cena.html', 'dotacje-pompa-ciepla.html', 'pompa-ciepla-czy-warto.html', 'gdzie-dzialamy/wielkopolskie.html', 'gdzie-dzialamy/lodzkie.html', 'gdzie-dzialamy/kujawsko-pomorskie.html', 'gdzie-dzialamy/dolnoslaskie.html', 'gdzie-dzialamy/slaskie.html', 'gdzie-dzialamy/mazowieckie.html', 'zgoda-na-publikacje-opinii.html']) {
   const h = await readFile(join(ROOT, s), 'utf8');
   for (const tag of ['section', 'div', 'details', 'ul', 'ol', 'li', 'table', 'form', 'a', 'button', 'figure', 'main', 'header', 'footer', 'nav', 'article', 'aside']) {
     const o = (h.match(new RegExp(`<${tag}[\\s>]`, 'g')) || []).length, c = (h.match(new RegExp(`</${tag}>`, 'g')) || []).length;

@@ -8,7 +8,7 @@ import { fileURLToPath } from 'node:url';
 import { join, dirname } from 'node:path';
 
 const ROOT = fileURLToPath(new URL('..', import.meta.url));
-const STRONY = ['index.html', 'pompy.html', 'dla-instalatorow.html', 'odwierty-pod-pompe-ciepla.html', 'dolne-zrodlo-pompy-ciepla.html', 'sondy-koszowe-helix.html', 'gruntowa-pompa-ciepla-cena.html', 'dotacje-pompa-ciepla.html', 'pompa-ciepla-czy-warto.html', 'gdzie-dzialamy/wielkopolskie.html', 'gdzie-dzialamy/lodzkie.html', 'gdzie-dzialamy/kujawsko-pomorskie.html', 'gdzie-dzialamy/dolnoslaskie.html', 'gdzie-dzialamy/slaskie.html', 'gdzie-dzialamy/mazowieckie.html', 'podziekowanie.html', '404.html', 'polityka-prywatnosci.html'];
+const STRONY = ['index.html', 'pompy.html', 'dla-instalatorow.html', 'odwierty-pod-pompe-ciepla.html', 'dolne-zrodlo-pompy-ciepla.html', 'sondy-koszowe-helix.html', 'gruntowa-pompa-ciepla-cena.html', 'dotacje-pompa-ciepla.html', 'pompa-ciepla-czy-warto.html', 'gdzie-dzialamy/wielkopolskie.html', 'gdzie-dzialamy/lodzkie.html', 'gdzie-dzialamy/kujawsko-pomorskie.html', 'gdzie-dzialamy/dolnoslaskie.html', 'gdzie-dzialamy/slaskie.html', 'gdzie-dzialamy/mazowieckie.html', 'zgoda-na-publikacje-opinii.html', 'podziekowanie.html', '404.html', 'polityka-prywatnosci.html'];
 const html = {};
 for (const s of STRONY) html[s] = await readFile(join(ROOT, s), 'utf8');
 
@@ -69,5 +69,5 @@ test('index.html: obowiązkowa treść hero i nawigacja', () => {
 
 test('blok zgody (Consent Mode, Cookiebot, GA4, HubSpot) identyczny na każdej stronie publicznej', () => {
   const wyciag = (h) => ({ ga: /G-XHZDND4X1W/.test(h), cb: /data-cbid="7a55c023-e775-4510-b1af-bdb8eaadfff5"/.test(h), hs: /49004516\.js/.test(h), consent: /gtag\('consent', 'default'/.test(h) });
-  for (const s of ['index.html', 'pompy.html', 'dla-instalatorow.html', 'odwierty-pod-pompe-ciepla.html', 'dolne-zrodlo-pompy-ciepla.html', 'sondy-koszowe-helix.html', 'gruntowa-pompa-ciepla-cena.html', 'dotacje-pompa-ciepla.html', 'pompa-ciepla-czy-warto.html', 'gdzie-dzialamy/wielkopolskie.html', 'gdzie-dzialamy/lodzkie.html', 'gdzie-dzialamy/kujawsko-pomorskie.html', 'gdzie-dzialamy/dolnoslaskie.html', 'gdzie-dzialamy/slaskie.html', 'gdzie-dzialamy/mazowieckie.html', 'podziekowanie.html', '404.html']) assert.deepEqual(wyciag(html[s]), { ga: true, cb: true, hs: true, consent: true }, s);
+  for (const s of ['index.html', 'pompy.html', 'dla-instalatorow.html', 'odwierty-pod-pompe-ciepla.html', 'dolne-zrodlo-pompy-ciepla.html', 'sondy-koszowe-helix.html', 'gruntowa-pompa-ciepla-cena.html', 'dotacje-pompa-ciepla.html', 'pompa-ciepla-czy-warto.html', 'gdzie-dzialamy/wielkopolskie.html', 'gdzie-dzialamy/lodzkie.html', 'gdzie-dzialamy/kujawsko-pomorskie.html', 'gdzie-dzialamy/dolnoslaskie.html', 'gdzie-dzialamy/slaskie.html', 'gdzie-dzialamy/mazowieckie.html', 'zgoda-na-publikacje-opinii.html', 'podziekowanie.html', '404.html']) assert.deepEqual(wyciag(html[s]), { ga: true, cb: true, hs: true, consent: true }, s);
 });

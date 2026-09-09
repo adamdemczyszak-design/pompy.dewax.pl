@@ -25,6 +25,10 @@ Bez zgody na statystyki GA4 działa w trybie bez cookies (Consent Mode), tak jak
 Konwersja docelowa w GA4 to nadal odsłona `podziekowanie.html` (potwierdzone dostarczenie
 do `wyslij.php`), `quote_submitted` jest zdarzeniem pomocniczym po stronie przeglądarki.
 
+Od 09.09.2026 na `podziekowanie.html` trafia też formularz zgody na publikację opinii, z parametrem
+`?zgoda=1` i bez `?ok=1`. Jeśli konwersja w GA4 lub Google Ads jest zdefiniowana na samym adresie
+strony podziękowania, trzeba ją zawęzić do `?ok=1`, inaczej zgody będą liczone jak wyceny.
+
 ## Lejek do zbudowania w GA4 (eksploracja „ścieżka”)
 
 1. `page_view` strony głównej

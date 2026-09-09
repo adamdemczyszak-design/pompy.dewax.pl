@@ -357,7 +357,45 @@
       <figure><img src="img/kotlownia-bufor-600.webp" width="600" height="798" alt="Pompa ciepła Thermokrafft obok dużego zasobnika buforowego w kotłowni" loading="lazy" decoding="async"><figcaption><b>Ciepła woda bez czekania</b>Pompa z zasobnikiem w kotłowni.</figcaption></figure>
     </div>
 
-    <p class="foot-note">Zdjęcie pokazuje, że robota była; liczby pokazują, czy zagrała. Przy wycenie pokazujemy dane instalacji porównywalnych z Twoim domem i podajemy kontakt do klientów z instalacjami starszymi niż kilka lat. Nie wieszamy anonimowych opinii ani liczników „zadowolonych klientów”.</p>
+    <p class="foot-note">Zdjęcie pokazuje, że robota była; liczby pokazują, czy zagrała. Przy wycenie pokazujemy dane instalacji porównywalnych z Twoim domem i podajemy kontakt do klientów z instalacjami starszymi niż kilka lat. Nie wieszamy anonimowych opinii ani liczników „zadowolonych klientów”. Opinie z imieniem i liczbami publikujemy wyłącznie za <a href="zgoda-na-publikacje-opinii.html">pisemną zgodą właściciela</a>.</p>
+  </div>
+</section>
+
+<!-- ================= OPINIE (ukryte do czasu zebrania pisemnych zgód) ================= -->
+<!-- Sekcja czeka na prawdziwe opinie. Gdy DEWAX zbierze zgody (formularz: zgoda-na-publikacje-opinii.html):
+     1) skopiuj wpis (element article) oznaczony SZABLON tyle razy, ile jest opinii, i wypełnij WYŁĄCZNIE danymi w zakresie zgody,
+     2) usuń wpis SZABLON,
+     3) usuń atrybut hidden z sekcji opinie (element section poniżej),
+     4) dopisz do JSON-LD w <head> obiekty Review według szablonu w komentarzu niżej.
+     Bez zgody nic tu nie publikujemy. Nie wpisywać zmyślonych opinii. -->
+<section id="opinie" class="off" aria-labelledby="h-opinie" hidden>
+  <div class="wrap">
+    <div class="sec-head">
+      <p class="eyebrow">Opinie klientów</p>
+      <h2 id="h-opinie" class="head">Co mówią właściciele domów, w których to już działa</h2>
+      <p class="lead">Każda opinia jest tu za pisemną zgodą właściciela: z imieniem, miejscowością i liczbami z licznika, w zakresie, na jaki się zgodził. Bez anonimowych gwiazdek i bez poprawiania treści.</p>
+    </div>
+    <div class="trzy" id="opinie-lista">
+      <!-- SZABLON: jeden wpis. Skopiuj, wypełnij, usuń ten komentarz i wpis wzorcowy. -->
+      <article class="t" data-opinia="szablon">
+        <h3>Imię N., Miejscowość</h3>
+        <p>„Treść opinii własnymi słowami klienta, bez skracania i poprawiania poza literówkami.”</p>
+        <ul>
+          <li>Rok realizacji: RRRR</li>
+          <li>Dom: 000 m²</li>
+          <li>Pompa: Thermokrafft TK-…/R290</li>
+          <li>Odwierty: 0 × 00 m</li>
+          <li>Zużycie prądu po sezonie: 0 000 kWh (z licznika)</li>
+        </ul>
+      </article>
+      <!-- SZABLON danych strukturalnych (schema.org/Review). Wklej do tablicy @graph w JSON-LD w <head> dopiero razem
+           z prawdziwą opinią i zgodą. Przykładowe lub puste recenzje w danych strukturalnych naruszają wytyczne Google.
+           {"@type":"Review","itemReviewed":{"@id":"https://pompy.dewax.pl/#dewax"},"author":{"@type":"Person","name":"Imię N."},
+            "datePublished":"RRRR-MM-DD","reviewBody":"Treść opinii","inLanguage":"pl-PL",
+            "reviewRating":{"@type":"Rating","ratingValue":"5","bestRating":"5"}}
+           reviewRating jest opcjonalne: wpisz tylko, jeśli klient ocenił w skali; inaczej usuń ten klucz. -->
+    </div>
+    <p class="foot-note">Jesteś naszym klientem i chcesz dodać opinię? <a href="zgoda-na-publikacje-opinii.html">Wypełnij zgodę na publikację</a>. Zakres danych (samo imię czy imię i nazwisko, miejscowość, dane techniczne instalacji) wybierasz sam.</p>
   </div>
 </section>
 
@@ -871,7 +909,7 @@
       </div>
       <div>
         <b>Informacje</b>
-        <ul><li><a href="dla-instalatorow.html">Dla instalatorów</a></li><li><a href="/polityka-prywatnosci.html">Polityka prywatności</a></li><li><a href="#" onclick="if(window.Cookiebot){Cookiebot.renew();}return false;">Ustawienia cookies</a></li></ul>
+        <ul><li><a href="dla-instalatorow.html">Dla instalatorów</a></li><li><a href="zgoda-na-publikacje-opinii.html">Zgoda na publikację opinii</a></li><li><a href="/polityka-prywatnosci.html">Polityka prywatności</a></li><li><a href="#" onclick="if(window.Cookiebot){Cookiebot.renew();}return false;">Ustawienia cookies</a></li></ul>
       </div>
     </div>
     <div class="bottom"><span>© DEWAX Sp. z o.o. Wyliczenia kalkulatora i raport DEWAX GEO mają charakter orientacyjny i nie stanowią oferty w rozumieniu Kodeksu cywilnego.</span><span>Zdjęcia: realizacje DEWAX.</span></div>

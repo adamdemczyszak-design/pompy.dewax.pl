@@ -95,4 +95,17 @@ font-family:'Montserrat';font-weight:800;font-size:15px;text-decoration:none;tra
     <a href="/polityka-prywatnosci.html">Polityka prywatności</a> · <a href="#" onclick="if(window.Cookiebot){Cookiebot.renew();}return false;">Ustawienia cookies</a>
   </div>
 </div>
+<script data-cookieconsent="ignore">
+/* Ta sama strona obsługuje zgodę na publikację opinii (wyslij.php przekierowuje z ?zgoda=1).
+   Bez ?ok=1, więc nie liczy się jako konwersja wyceny. */
+(function(){
+  if (!/[?&]zgoda=1/.test(location.search)) return;
+  var h1 = document.querySelector('h1'), p = document.querySelector('.top p'), ul = document.querySelector('.body ul'), b2 = document.querySelector('.cta .b2');
+  if (h1) h1.textContent = 'Zgoda do nas dotarła';
+  if (p) p.textContent = 'Dziękujemy za zaufanie.';
+  if (ul) ul.innerHTML = '<li>Sprawdzimy treść i zakres zgody, niczego nie dopiszemy od siebie</li><li>Opinia pojawi się na stronie w zaznaczonym przez Ciebie zakresie</li><li>Zgodę możesz wycofać w każdej chwili mailem na sprzedaz@dewax.pl, wtedy opinię usuniemy</li>';
+  if (b2) { b2.textContent = 'Wróć do formularza zgody'; b2.setAttribute('href', 'zgoda-na-publikacje-opinii.html'); b2.removeAttribute('target'); }
+  document.title = 'Dziękujemy za zgodę | DEWAX';
+})();
+</script>
 </body></html>

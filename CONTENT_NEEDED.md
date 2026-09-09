@@ -129,3 +129,14 @@ Opisy geologii są napisane na podstawie ogólnodostępnej wiedzy o budowie geol
 | 8.5 | `mazowieckie.html` | Głębokość stropu skał mezozoicznych w rejonie Radomia i Szydłowca. |
 | 8.6 | wszystkie | Odległości i czasy dojazdu z serwera tras OSRM (OpenStreetMap), stan 09.09.2026; jeśli DEWAX ma własne doświadczenie z czasem dojazdu, podmienić. |
 | 8.7 | wszystkie | Jeśli DEWAX ma listę powiatów, w których faktycznie wykonano odwierty, warto dopisać zdanie „wierciliśmy w powiatach…” z realnymi nazwami; dziś strony tego nie twierdzą. |
+
+## 9. Opinie (Etap 4, 09.09.2026)
+
+Infrastruktura gotowa, treści brak. Sekcja `#opinie` w `index.html` jest ukryta; formularz zgody: `zgoda-na-publikacje-opinii.html`.
+
+| # | Co | Uwaga |
+|---|---|---|
+| 9.1 | Zebrane zgody klientów (online przez formularz albo podpisany wydruk) | Bez zgody nie odsłaniać sekcji. Zakres danych przy opinii wyłącznie taki, jaki klient zaznaczył. |
+| 9.2 | Konwersja w GA4 / Google Ads | Sprawdzić, czy jest zdefiniowana na adresie `podziekowanie.html` bez parametru; jeśli tak, zawęzić do `?ok=1` (patrz docs/ANALITYKA.md). |
+| 9.3 | Polityka prywatności | Dopisać cel „publikacja opinii za zgodą” do listy celów przetwarzania przy najbliższej edycji dokumentu. |
+| 9.4 | Test wysyłki na produkcji | Po wdrożeniu wysłać jedną testową zgodę i sprawdzić, czy mail dociera na sprzedaz@dewax.pl z tematem „Zgoda na publikację opinii”. |

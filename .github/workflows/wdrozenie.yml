@@ -35,6 +35,7 @@ on:
       - 'gruntowa-pompa-ciepla-cena.html'
       - 'dotacje-pompa-ciepla.html'
       - 'pompa-ciepla-czy-warto.html'
+      - 'zgoda-na-publikacje-opinii.html'
       - 'gdzie-dzialamy/**'
       - 'css/**'
       - 'js/**'
@@ -103,7 +104,7 @@ jobs:
           for P in index.html pompy.html dla-instalatorow.html wyslij.php podziekowanie.html 404.html .htaccess \
                    polityka-prywatnosci.html og.jpg favicon.png favicon-32.png icon-192.png apple-touch-icon.png \
                    robots.txt sitemap.xml googlee4c582b5162d1cb9.html \
-                   odwierty-pod-pompe-ciepla.html dolne-zrodlo-pompy-ciepla.html sondy-koszowe-helix.html gruntowa-pompa-ciepla-cena.html dotacje-pompa-ciepla.html pompa-ciepla-czy-warto.html; do
+                   odwierty-pod-pompe-ciepla.html dolne-zrodlo-pompy-ciepla.html sondy-koszowe-helix.html gruntowa-pompa-ciepla-cena.html dotacje-pompa-ciepla.html pompa-ciepla-czy-warto.html zgoda-na-publikacje-opinii.html; do
             [ -f "$P" ] || { echo "::error::Brak pliku $P"; exit 1; }
             cp "$P" .pakiet/
           done
@@ -219,6 +220,8 @@ jobs:
           sprawdz "/gdzie-dzialamy/dolnoslaskie.html" 200 "$(kod "https://$D/gdzie-dzialamy/dolnoslaskie.html")"
           sprawdz "/gdzie-dzialamy/slaskie.html" 200 "$(kod "https://$D/gdzie-dzialamy/slaskie.html")"
           sprawdz "/gdzie-dzialamy/mazowieckie.html" 200 "$(kod "https://$D/gdzie-dzialamy/mazowieckie.html")"
+          sprawdz "/zgoda-na-publikacje-opinii.html" 200 "$(kod "https://$D/zgoda-na-publikacje-opinii.html")"
+          sprawdz "POST zgoda bez tresci" 422 "$(kod -X POST -d 'formularz=zgoda-opinia&imie=Test&czas=9' "https://$D/wyslij.php")"
           sprawdz "/css/dewax.css"           200 "$(kod "https://$D/css/dewax.css")"
           sprawdz "/js/kalkulator.js"        200 "$(kod "https://$D/js/kalkulator.js")"
           sprawdz "plik weryfikacyjny Google"  200 "$(kod "https://$D/googlee4c582b5162d1cb9.html")"
