@@ -115,3 +115,17 @@ Użyto wyłącznie zdjęć z repozytorium (`img/`, `zdjecia/`). Nie użyto `img/
 | 7.2 | `odwierty-pod-pompe-ciepla.html` | Standardowe postępowanie z urobkiem i minimalna szerokość wjazdu wiertnicy HR-606S (to samo co punkty 4.8 i 4.9). |
 | 7.3 | `dotacje-pompa-ciepla.html` | Aktualny próg wskaźnika EP w Moim Cieple dla wniosków z 2026 oraz kwoty i progi dochodowe Czystego Powietrza z aktualnego Załącznika nr 2. Na stronie świadomie nie ma tych liczb. |
 | 7.4 | wszystkie | Zdjęcie sondy koszowej w trakcie opuszczania i zdjęcie terenu po zakończeniu prac wzmocniłyby strony o Helix i o odwiertach (to samo co punkt 5). |
+
+## 8. Strony wojewódzkie (Etap 3, 09.09.2026): miejsca oznaczone w kodzie komentarzem DO WERYFIKACJI
+
+Opisy geologii są napisane na podstawie ogólnodostępnej wiedzy o budowie geologicznej regionów (materiały PIG-PIB, mapy geologiczne) i celowo unikają liczb. Przed dopisaniem konkretnych miąższości, głębokości stropu skał czy uzysków dla powiatu trzeba je sprawdzić w profilach CBDG PIG-PIB lub w DEWAX GEO.
+
+| # | Plik | Do sprawdzenia |
+|---|---|---|
+| 8.1 | wszystkie | Zakresy miąższości czwartorzędu podane ogólnie („kilkadziesiąt metrów”); przed publikacją liczb dla powiatów sprawdzić profile archiwalne. |
+| 8.2 | `lodzkie.html` | Zasięg terenu górniczego KWB Bełchatów i wymagane uzgodnienia dla odwiertów do 100 m. |
+| 8.3 | `kujawsko-pomorskie.html`, `dolnoslaskie.html` | Zasady dla odwiertów w strefach ochrony uzdrowiskowej (Ciechocinek, Inowrocław, uzdrowiska sudeckie). |
+| 8.4 | `slaskie.html` | Procedura uzgodnień odwiertów na terenach górniczych (OUG, przedsiębiorca górniczy, starostwo). |
+| 8.5 | `mazowieckie.html` | Głębokość stropu skał mezozoicznych w rejonie Radomia i Szydłowca. |
+| 8.6 | wszystkie | Odległości i czasy dojazdu z serwera tras OSRM (OpenStreetMap), stan 09.09.2026; jeśli DEWAX ma własne doświadczenie z czasem dojazdu, podmienić. |
+| 8.7 | wszystkie | Jeśli DEWAX ma listę powiatów, w których faktycznie wykonano odwierty, warto dopisać zdanie „wierciliśmy w powiatach…” z realnymi nazwami; dziś strony tego nie twierdzą. |

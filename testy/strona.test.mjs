@@ -5,10 +5,10 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import { readFile, access } from 'node:fs/promises';
 import { fileURLToPath } from 'node:url';
-import { join } from 'node:path';
+import { join, dirname } from 'node:path';
 
 const ROOT = fileURLToPath(new URL('..', import.meta.url));
-const STRONY = ['index.html', 'pompy.html', 'dla-instalatorow.html', 'odwierty-pod-pompe-ciepla.html', 'dolne-zrodlo-pompy-ciepla.html', 'sondy-koszowe-helix.html', 'gruntowa-pompa-ciepla-cena.html', 'dotacje-pompa-ciepla.html', 'pompa-ciepla-czy-warto.html', 'podziekowanie.html', '404.html', 'polityka-prywatnosci.html'];
+const STRONY = ['index.html', 'pompy.html', 'dla-instalatorow.html', 'odwierty-pod-pompe-ciepla.html', 'dolne-zrodlo-pompy-ciepla.html', 'sondy-koszowe-helix.html', 'gruntowa-pompa-ciepla-cena.html', 'dotacje-pompa-ciepla.html', 'pompa-ciepla-czy-warto.html', 'gdzie-dzialamy/wielkopolskie.html', 'gdzie-dzialamy/lodzkie.html', 'gdzie-dzialamy/kujawsko-pomorskie.html', 'gdzie-dzialamy/dolnoslaskie.html', 'gdzie-dzialamy/slaskie.html', 'gdzie-dzialamy/mazowieckie.html', 'podziekowanie.html', '404.html', 'polityka-prywatnosci.html'];
 const html = {};
 for (const s of STRONY) html[s] = await readFile(join(ROOT, s), 'utf8');
 
@@ -23,7 +23,7 @@ for (const s of STRONY) {
   });
   test(`${s}: kotwice wewnętrzne prowadzą do istniejących id`, () => {
     const own = ids(html[s]);
-    for (const m of html[s].matchAll(/href="(#|index\.html#)([^"]+)"/g)) {
+    for (const m of html[s].matchAll(/href="(#|(?:\.\.\/)?index\.html#)([^"]+)"/g)) {
       const target = m[1] === '#' ? own : ids(html['index.html']);
       assert.ok(target.has(m[2]), `brak celu kotwicy #${m[2]} (${m[1]})`);
     }
@@ -34,7 +34,7 @@ for (const s of STRONY) {
     for (const m of html[s].matchAll(/srcset="([^"]+)"/g)) for (const part of m[1].split(',')) refs.add(part.trim().split(/\s+/)[0]);
     for (const m of html[s].matchAll(/imagesrcset="([^"]+)"/g)) for (const part of m[1].split(',')) refs.add(part.trim().split(/\s+/)[0]);
     for (const r of refs) {
-      const p = join(ROOT, r.replace(/^\//, ''));
+      const p = r.startsWith('/') ? join(ROOT, r.slice(1)) : join(ROOT, dirname(s), r);
       await access(p).catch(() => assert.fail(`brak pliku ${r}`));
     }
   });
@@ -69,5 +69,5 @@ test('index.html: obowiązkowa treść hero i nawigacja', () => {
 
 test('blok zgody (Consent Mode, Cookiebot, GA4, HubSpot) identyczny na każdej stronie publicznej', () => {
   const wyciag = (h) => ({ ga: /G-XHZDND4X1W/.test(h), cb: /data-cbid="7a55c023-e775-4510-b1af-bdb8eaadfff5"/.test(h), hs: /49004516\.js/.test(h), consent: /gtag\('consent', 'default'/.test(h) });
-  for (const s of ['index.html', 'pompy.html', 'dla-instalatorow.html', 'odwierty-pod-pompe-ciepla.html', 'dolne-zrodlo-pompy-ciepla.html', 'sondy-koszowe-helix.html', 'gruntowa-pompa-ciepla-cena.html', 'dotacje-pompa-ciepla.html', 'pompa-ciepla-czy-warto.html', 'podziekowanie.html', '404.html']) assert.deepEqual(wyciag(html[s]), { ga: true, cb: true, hs: true, consent: true }, s);
+  for (const s of ['index.html', 'pompy.html', 'dla-instalatorow.html', 'odwierty-pod-pompe-ciepla.html', 'dolne-zrodlo-pompy-ciepla.html', 'sondy-koszowe-helix.html', 'gruntowa-pompa-ciepla-cena.html', 'dotacje-pompa-ciepla.html', 'pompa-ciepla-czy-warto.html', 'gdzie-dzialamy/wielkopolskie.html', 'gdzie-dzialamy/lodzkie.html', 'gdzie-dzialamy/kujawsko-pomorskie.html', 'gdzie-dzialamy/dolnoslaskie.html', 'gdzie-dzialamy/slaskie.html', 'gdzie-dzialamy/mazowieckie.html', 'podziekowanie.html', '404.html']) assert.deepEqual(wyciag(html[s]), { ga: true, cb: true, hs: true, consent: true }, s);
 });

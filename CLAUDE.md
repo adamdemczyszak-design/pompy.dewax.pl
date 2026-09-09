@@ -28,6 +28,7 @@ deweloperskiego: `npm start`, `npm run check`. Szczegóły: `README.md`.
 | `pompy.html` | pełna specyfikacja Thermokrafft TK |
 | `dla-instalatorow.html` | B2B: podwykonawstwo, kreator ofertowy (kod dostępu), warunki partnerskie |
 | `odwierty-pod-pompe-ciepla.html`, `dolne-zrodlo-pompy-ciepla.html`, `sondy-koszowe-helix.html`, `gruntowa-pompa-ciepla-cena.html`, `dotacje-pompa-ciepla.html`, `pompa-ciepla-czy-warto.html` | poradnik (od 09.09.2026): podstrony SEO rozwijające sekcje strony głównej. Wspólny nagłówek, stopka z kolumną „Poradnik” i pełnymi danymi rejestrowymi (art. 206 KSH). Nowa podstrona = dopisać do `wdrozenie.yml`, `wdroz.sh`, `sitemap.xml`, list w `testy/` i do kolumny „Poradnik” w stopkach |
+| `gdzie-dzialamy/*.html` | strony wojewódzkie (od 09.09.2026) z geologią regionu, dojazdem i `LocalBusiness`. Katalog wchodzi do pakietu wdrożenia jako całość. Nie tworzyć stron dla pojedynczych miast (doorway pages) |
 | `js/kalkulator.js` | algorytm kalkulatora; czysta funkcja `oblicz(S)`; test regresji `testy/kalkulator.test.mjs` porównuje z `testy/kalkulator-wzorzec.json` |
 | `CONTENT_NEEDED.md` | czego brakuje i co potwierdzić przed publikacją |
 | `docs/ANALITYKA.md` | zdarzenia GA4 i plan mierzenia |
