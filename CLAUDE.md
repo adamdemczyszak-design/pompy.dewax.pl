@@ -27,6 +27,7 @@ deweloperskiego: `npm start`, `npm run check`. Szczegóły: `README.md`.
 | `index.html` | strona główna (hero 55/45, wybór koszt/geologia, kalkulator, GEO, realizacje, jedna firma, proces, obawy, porównanie, dolne źródło, pompy, gwarancja, dotacje, FAQ, wycena) |
 | `pompy.html` | pełna specyfikacja Thermokrafft TK |
 | `dla-instalatorow.html` | B2B: podwykonawstwo, kreator ofertowy (kod dostępu), warunki partnerskie |
+| `odwierty-pod-pompe-ciepla.html`, `dolne-zrodlo-pompy-ciepla.html`, `sondy-koszowe-helix.html`, `gruntowa-pompa-ciepla-cena.html`, `dotacje-pompa-ciepla.html`, `pompa-ciepla-czy-warto.html` | poradnik (od 09.09.2026): podstrony SEO rozwijające sekcje strony głównej. Wspólny nagłówek, stopka z kolumną „Poradnik” i pełnymi danymi rejestrowymi (art. 206 KSH). Nowa podstrona = dopisać do `wdrozenie.yml`, `wdroz.sh`, `sitemap.xml`, list w `testy/` i do kolumny „Poradnik” w stopkach |
 | `js/kalkulator.js` | algorytm kalkulatora; czysta funkcja `oblicz(S)`; test regresji `testy/kalkulator.test.mjs` porównuje z `testy/kalkulator-wzorzec.json` |
 | `CONTENT_NEEDED.md` | czego brakuje i co potwierdzić przed publikacją |
 | `docs/ANALITYKA.md` | zdarzenia GA4 i plan mierzenia |

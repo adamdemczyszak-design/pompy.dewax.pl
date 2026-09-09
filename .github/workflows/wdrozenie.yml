@@ -29,6 +29,12 @@ on:
       - 'googlee4c582b5162d1cb9.html'
       - 'pompy.html'
       - 'dla-instalatorow.html'
+      - 'odwierty-pod-pompe-ciepla.html'
+      - 'dolne-zrodlo-pompy-ciepla.html'
+      - 'sondy-koszowe-helix.html'
+      - 'gruntowa-pompa-ciepla-cena.html'
+      - 'dotacje-pompa-ciepla.html'
+      - 'pompa-ciepla-czy-warto.html'
       - 'css/**'
       - 'js/**'
       - 'img/**'
@@ -95,7 +101,8 @@ jobs:
           rm -rf .pakiet && mkdir -p .pakiet
           for P in index.html pompy.html dla-instalatorow.html wyslij.php podziekowanie.html 404.html .htaccess \
                    polityka-prywatnosci.html og.jpg favicon.png favicon-32.png icon-192.png apple-touch-icon.png \
-                   robots.txt sitemap.xml googlee4c582b5162d1cb9.html; do
+                   robots.txt sitemap.xml googlee4c582b5162d1cb9.html \
+                   odwierty-pod-pompe-ciepla.html dolne-zrodlo-pompy-ciepla.html sondy-koszowe-helix.html gruntowa-pompa-ciepla-cena.html dotacje-pompa-ciepla.html pompa-ciepla-czy-warto.html; do
             [ -f "$P" ] || { echo "::error::Brak pliku $P"; exit 1; }
             cp "$P" .pakiet/
           done
@@ -199,6 +206,12 @@ jobs:
           sprawdz "/podziekowanie.html"      200 "$(kod "https://$D/podziekowanie.html")"
           sprawdz "/pompy.html"              200 "$(kod "https://$D/pompy.html")"
           sprawdz "/dla-instalatorow.html"   200 "$(kod "https://$D/dla-instalatorow.html")"
+          sprawdz "/odwierty-pod-pompe-ciepla.html" 200 "$(kod "https://$D/odwierty-pod-pompe-ciepla.html")"
+          sprawdz "/dolne-zrodlo-pompy-ciepla.html" 200 "$(kod "https://$D/dolne-zrodlo-pompy-ciepla.html")"
+          sprawdz "/sondy-koszowe-helix.html" 200 "$(kod "https://$D/sondy-koszowe-helix.html")"
+          sprawdz "/gruntowa-pompa-ciepla-cena.html" 200 "$(kod "https://$D/gruntowa-pompa-ciepla-cena.html")"
+          sprawdz "/dotacje-pompa-ciepla.html" 200 "$(kod "https://$D/dotacje-pompa-ciepla.html")"
+          sprawdz "/pompa-ciepla-czy-warto.html" 200 "$(kod "https://$D/pompa-ciepla-czy-warto.html")"
           sprawdz "/css/dewax.css"           200 "$(kod "https://$D/css/dewax.css")"
           sprawdz "/js/kalkulator.js"        200 "$(kod "https://$D/js/kalkulator.js")"
           sprawdz "plik weryfikacyjny Google"  200 "$(kod "https://$D/googlee4c582b5162d1cb9.html")"

@@ -44,6 +44,7 @@ wykonano skryptami Playwright poza repozytorium; wyniki i zrzuty leżą w `docs/
 | `index.html` | strona główna dla właścicieli domów (hero, wybór koszt/geologia, kalkulator, DEWAX GEO, realizacje, jedna firma, proces, obawy, porównanie, dolne źródło, pompy, gwarancja, dotacje, FAQ, wycena) |
 | `pompy.html` | pełna specyfikacja Thermokrafft TK (COP, EER, ceny), R290, Buderus |
 | `dla-instalatorow.html` | podwykonawstwo dolnego źródła, warunki partnerskie, kreator ofertowy (kod dostępu), DEWAX GEO |
+| `odwierty-pod-pompe-ciepla.html`, `dolne-zrodlo-pompy-ciepla.html`, `sondy-koszowe-helix.html`, `gruntowa-pompa-ciepla-cena.html`, `dotacje-pompa-ciepla.html`, `pompa-ciepla-czy-warto.html` | poradnik (Etap 2, 09.09.2026): sześć podstron tematycznych pod osobne frazy, każda z własnym `title`, opisem, `canonical`, breadcrumbs (schema.org) i sekcją FAQ. Rozwijają sekcje strony głównej, nie zastępują ich; kotwice one-pagera zostają. Linkowane z sekcji `#poradnik` na stronie głównej, z kolumny „Poradnik” w stopce każdej strony i wzajemnie |
 | `css/dewax.css` | jeden arkusz dla wszystkich stron (tokeny marki, komponenty, responsywność, druk) |
 | `js/kalkulator.js` | algorytm kalkulatora (czysta funkcja `oblicz(S)`, eksport do testów) + interfejs kroków |
 | `js/dewax.js` | nawigacja, pomiar zdarzeń (gtag), walidacja formularza, pasek mobilny, wspólny stan „koszt + geologia” |

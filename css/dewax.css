@@ -500,7 +500,7 @@ form.zap .status.ok{color:var(--green-d)}
 
 /* ======================== STOPKA ======================== */
 footer.ft{background:#00042B;color:#9AA3C9;font-size:14.5px;padding:var(--s7) 0 var(--s5)}
-footer.ft .cols{display:grid;grid-template-columns:1.3fr 1fr 1fr 1fr;gap:32px;margin-bottom:var(--s6)}
+footer.ft .cols{display:grid;grid-template-columns:1.3fr 1fr 1fr 1fr 1fr;gap:28px;margin-bottom:var(--s6)}
 footer.ft b{color:#fff;display:block;margin-bottom:10px;font-family:var(--fh);font-weight:600}
 footer.ft a{color:#CFD6F0;text-decoration:none;display:inline-block;padding:3px 0}
 footer.ft a:hover{color:#fff;text-decoration:underline}

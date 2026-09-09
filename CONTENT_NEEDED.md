@@ -106,3 +106,12 @@ Użyto wyłącznie zdjęć z repozytorium (`img/`, `zdjecia/`). Nie użyto `img/
   restrykcyjną CSP nie jest tą wdrożoną). Jeśli na serwerze CSP jednak działa, musi dopuszczać
   `fonts.googleapis.com`, `fonts.gstatic.com`, `googletagmanager.com`, `consent.cookiebot.com`,
   `consentcdn.cookiebot.com`, `js.hs-scripts.com` i pozostałe skrypty HubSpot; własne CSS/JS są z tej samej domeny.
+
+## 7. Podstrony poradnika (Etap 2, 09.09.2026): miejsca oznaczone w kodzie komentarzem DO UZUPEŁNIENIA / DO WERYFIKACJI
+
+| # | Plik | Czego brakuje |
+|---|---|---|
+| 7.1 | `sondy-koszowe-helix.html` | Parametry DEWAX Helix: głębokość i średnica otworu na kosz, długość rury w koszu, materiał rury, ciśnienie próby, typowy uzysk mocy z jednego kosza w gruncie wilgotnym i suchym. Bez tych danych strona opisuje zasadę działania, nie liczby. |
+| 7.2 | `odwierty-pod-pompe-ciepla.html` | Standardowe postępowanie z urobkiem i minimalna szerokość wjazdu wiertnicy HR-606S (to samo co punkty 4.8 i 4.9). |
+| 7.3 | `dotacje-pompa-ciepla.html` | Aktualny próg wskaźnika EP w Moim Cieple dla wniosków z 2026 oraz kwoty i progi dochodowe Czystego Powietrza z aktualnego Załącznika nr 2. Na stronie świadomie nie ma tych liczb. |
+| 7.4 | wszystkie | Zdjęcie sondy koszowej w trakcie opuszczania i zdjęcie terenu po zakończeniu prac wzmocniłyby strony o Helix i o odwiertach (to samo co punkt 5). |
