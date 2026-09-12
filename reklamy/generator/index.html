@@ -1,0 +1,95 @@
+<!DOCTYPE html><html lang="pl"><head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Generator kreacji DEWAX</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;700;800&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="generator.css">
+</head><body>
+
+<div id="brama" hidden>
+  <form>
+    <div class="dots"><i style="background:#1E7F3F"></i><i style="background:#FFEA00"></i><i style="background:#E53935"></i><i style="background:#2F6D9E"></i></div>
+    <h1>Generator kreacji Meta</h1>
+    <p>Panel wewnętrzny DEWAX. Podaj kod dostępu.</p>
+    <label for="kod">Kod dostępu</label>
+    <input id="kod" type="password" autocomplete="off" autofocus>
+    <p class="err" role="alert"></p>
+    <button class="btn b-pri" type="submit">Wejdź</button>
+  </form>
+</div>
+
+<div id="app" hidden>
+  <header class="top">
+    <div class="marka"><div class="dots"><i style="background:#1E7F3F"></i><i style="background:#FFEA00"></i><i style="background:#E53935"></i><i style="background:#2F6D9E"></i></div><b>DEWAX pompy</b> · generator kreacji Meta</div>
+    <div class="staty">
+      <div><span id="s-biblioteka">0</span><small>w bibliotece</small></div>
+      <div><span id="s-kolejka">0</span><small>w kolejce</small></div>
+      <div><span id="s-meta">0 / 8</span><small>w Meta</small></div>
+      <div><span id="s-leady">0</span><small>leadów z kreacji</small></div>
+    </div>
+    <div class="top-r"><span id="s-aktualizacja" class="mut small"></span><button class="btn b-out b-mini" data-akcja="wyloguj">Wyloguj</button></div>
+  </header>
+  <p id="komunikat" class="komunikat" hidden></p>
+
+  <nav class="tabs" aria-label="Sekcje">
+    <button data-panel="p-biblioteka" aria-selected="true">Biblioteka</button>
+    <button data-panel="p-kolejka" aria-selected="false">Kolejka do Meta</button>
+    <button data-panel="p-wyniki" aria-selected="false">Wyniki</button>
+    <button data-panel="p-zrodla" aria-selected="false">Źródła i zasady</button>
+  </nav>
+
+  <section id="p-biblioteka" class="panel">
+    <div class="intro">
+      <p>Każda kreacja to hook + korzyść + wezwanie. 10 × 6 × 3 = 180 gotowych tekstów w jednym rejestrze. Do Meta idzie najwyżej 8 naraz, reszta czeka w kolejce, bo przy budżecie kilkudziesięciu złotych dziennie więcej kreacji nie zebrałoby danych.</p>
+    </div>
+    <form id="filtry" class="filtry" onsubmit="return false">
+      <select name="hook" aria-label="Hook"></select>
+      <select name="korzysc" aria-label="Korzyść"></select>
+      <select name="cta" aria-label="CTA"></select>
+      <select name="status" aria-label="Status"><option value="">każdy status</option><option value="biblioteka">w bibliotece</option><option value="kolejka">w kolejce</option><option value="meta">wysłana do Meta</option><option value="stop">zatrzymana</option></select>
+      <input name="szukaj" type="search" placeholder="szukaj w tekście lub kodzie" aria-label="Szukaj">
+      <span id="licznik" class="mut"></span>
+    </form>
+    <div id="podglad" class="podglad" hidden></div>
+    <div class="tbl"><table id="tabela">
+      <thead><tr><th>Kod</th><th>Hook</th><th>Korzyść</th><th>CTA</th><th>Zdjęcie</th><th>Status</th><th>Uwagi</th><th></th></tr></thead>
+      <tbody></tbody>
+    </table></div>
+  </section>
+
+  <section id="p-kolejka" class="panel" hidden>
+    <div class="intro"><p id="limit-info"></p><p class="mut">Kolejność: biblioteka → kolejka → wysłana do Meta (najwyżej 8) → zatrzymana. „Wysłana do Meta” oznaczasz po założeniu reklamy w Menedżerze reklam; w nazwie reklamy wpisz kod kreacji, wtedy wyniki z Meta da się przypisać do kreacji. „Zatrzymaj” zwalnia miejsce, gdy reklamę wyłączysz w Meta.</p></div>
+    <div class="kol-akcje"><button class="btn b-pri" id="kopiuj-paczke" data-akcja="kopiuj-paczke">Kopiuj komplet (Meta + kolejka)</button><button class="btn b-out" data-akcja="eksport">Zapisz stan do pliku</button><button class="btn b-out" data-akcja="import">Wczytaj stan z pliku</button><input type="file" id="plik-import" accept="application/json" hidden></div>
+    <h2>W Meta</h2><ul id="lista-meta" class="kol"></ul>
+    <h2>W kolejce</h2><ul id="lista-kolejka" class="kol"></ul>
+    <h2>Zatrzymane</h2><ul id="lista-stop" class="kol"></ul>
+  </section>
+
+  <section id="p-wyniki" class="panel" hidden>
+    <div class="intro"><p id="wyniki-data" class="mut"></p><p>Leady liczone z HubSpota po kodzie kreacji zapisanym w zgłoszeniu (pole „Kreacja” w wiadomości kontaktu). Wydatki i wyświetlenia z Meta po nazwie reklamy zaczynającej się od kodu kreacji. Koszt zapytania = wydatki ÷ leady. Dane odświeża Claude na polecenie „zaktualizuj wyniki generatora” (zapis do wyniki.json).</p></div>
+    <div class="tbl"><table id="wyniki">
+      <thead><tr><th>Kod</th><th>Kreacja</th><th>Status</th><th>W Meta od</th><th class="num">Wyświetlenia</th><th class="num">Kliknięcia</th><th class="num">Wydatki</th><th class="num">Leady</th><th class="num">Koszt zapytania</th></tr></thead>
+      <tbody></tbody><tfoot></tfoot>
+    </table></div>
+  </section>
+
+  <section id="p-zrodla" class="panel" hidden>
+    <div class="intro"><p>Każdy blok ma podane źródło faktu. Nic nie jest wymyślone: hooki i korzyści wynikają z tego, co strona pompy.dewax.pl i realizacje DEWAX naprawdę pokazują. Bloki „do potwierdzenia” czekają na jedno słowo właściciela, zanim trafią do Meta.</p></div>
+    <h2>Bloki i ich źródła</h2><ul id="zrodla-lista" class="zrodla"></ul>
+    <h2>Zdjęcia (wyłącznie z placu i kotłowni DEWAX)</h2><ul id="zdjecia-lista" class="zdjecia"></ul>
+    <h2>Zasady tonu</h2>
+    <p>Krótkie zdania. Konkret, spokój, zero sprzedażowego entuzjazmu. Bez wykrzykników, bez pauz, tylko dywiz. Zakazane słowa i znaki: <span id="zakazane" class="mono small"></span>.</p>
+    <h2>Posty z fanpage'a jako surowiec</h2>
+    <p class="mut">Automatyczne pobieranie postów ze strony „Dewax gruntowe pompy ciepła” wymaga podłączenia konektora Facebook Page (organic) w Windsor.ai. Do tego czasu wklej tu treści postów, które mają posłużyć za hooki „historia” i „zdjęcie z placu”; Claude przerobi je na nowe bloki przy najbliższej aktualizacji macierzy.</p>
+    <textarea id="posty" rows="8" placeholder="Wklej treści postów, po jednym na akapit."></textarea>
+    <p><button class="btn b-out" data-akcja="zapisz-posty">Zapisz w tej przeglądarce</button></p>
+  </section>
+
+  <footer class="dol"><span>Stan panelu jest zapisany w tej przeglądarce (localStorage). Przed zmianą komputera zapisz stan do pliku w zakładce Kolejka.</span><span>Repozytorium: adamdemczyszak-design/pompy.dewax.pl, katalog <span class="mono">reklamy/generator</span>.</span></footer>
+</div>
+
+<script src="tresci.js"></script>
+<script src="miniatury.js"></script>
+<script src="generator.js"></script>
+</body></html>

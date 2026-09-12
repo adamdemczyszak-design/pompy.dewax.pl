@@ -1,0 +1,11 @@
+{
+  "aktualizacja": "2026-09-12",
+  "zrodlo": "Meta przez Windsor.ai (poziom kampanii), HubSpot: brak leadów z kodem kreacji",
+  "uwaga": "Kampania startowa z 12.09.2026 ma cztery reklamy spoza macierzy (R1–R4). Dane per reklama pojawią się po pierwszym pełnym dniu; dziś Meta zwróciła tylko poziom kampanii: 12,80 zł, 415 wyświetleń, 46 kliknięć.",
+  "kreacje": {
+    "R1": { "nazwa": "Dzień wiercenia (kampania startowa)", "wyswietlenia": null, "klikniecia": null, "wydatki": null, "leady": 0 },
+    "R2": { "nazwa": "Dom, który już stoi (kampania startowa)", "wyswietlenia": null, "klikniecia": null, "wydatki": null, "leady": 0 },
+    "R3": { "nazwa": "Kotłownia (kampania startowa)", "wyswietlenia": null, "klikniecia": null, "wydatki": null, "leady": 0 },
+    "R4": { "nazwa": "Karuzela (kampania startowa)", "wyswietlenia": null, "klikniecia": null, "wydatki": null, "leady": 0 }
+  }
+}
