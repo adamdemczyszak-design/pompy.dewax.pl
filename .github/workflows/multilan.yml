@@ -56,7 +56,7 @@ jobs:
           set -u
           sleep 5
           blad=0
-          for u in "" "dla-zarzadcow" "realizacje/gorzno" "kolory"; do
+          for u in "" "dla-zarzadcow" "realizacje" "realizacja/gorzno" "kolory"; do
             kod=$(curl -s -o /dev/null -w "%{http_code}" "https://dewax.pl/multilan/$u")
             echo "/multilan/$u -> $kod"
             [ "$kod" = "200" ] || blad=1
