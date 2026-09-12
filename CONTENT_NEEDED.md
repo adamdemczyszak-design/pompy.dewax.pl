@@ -140,3 +140,19 @@ Infrastruktura gotowa, treści brak. Sekcja `#opinie` w `index.html` jest ukryta
 | 9.2 | Konwersja w GA4 / Google Ads | Sprawdzić, czy jest zdefiniowana na adresie `podziekowanie.html` bez parametru; jeśli tak, zawęzić do `?ok=1` (patrz docs/ANALITYKA.md). |
 | 9.3 | Polityka prywatności | Dopisać cel „publikacja opinii za zgodą” do listy celów przetwarzania przy najbliższej edycji dokumentu. |
 | 9.4 | Test wysyłki na produkcji | Po wdrożeniu wysłać jedną testową zgodę i sprawdzić, czy mail dociera na sprzedaz@dewax.pl z tematem „Zgoda na publikację opinii”. |
+
+## 10. Google Ads (12.09.2026): decyzje i czynności właściciela
+
+Kampania jest przygotowana w całości (`docs/GOOGLE-ADS.md`, `reklama/google-ads/`), ale nie została
+jeszcze wgrana do konta. Bez pozycji 10.1 i 10.2 nic się nie wyświetli.
+
+| # | Co | Dlaczego |
+|---|---|---|
+| 10.1 | **Windsor.ai: włączyć zapis** (Settings → API Access → „Enable write actions for Claude, ChatGPT & API”) albo wybrać import przez Google Ads Editor z plików `reklama/google-ads/import/`. | 12.09.2026 próba utworzenia kampanii przez API została odrzucona: zapis wyłączony dla użytkownika. |
+| 10.2 | **Sprawdzić, dlaczego kampania „Pompy gruntowe - Konin 200km” jest niekwalifikująca się od 26.08.2026** (Rozliczenia, weryfikacja reklamodawcy, powiadomienia w panelu). | Konto nie wyświetla reklam od 26.08. Ta sama przyczyna zablokuje nowe kampanie. |
+| 10.3 | **Konwersje:** połączyć GA4 z Google Ads, oznaczyć `generate_lead` jako kluczowe zdarzenie, zaimportować do Google Ads, dodać konwersję „Połączenia z reklam”. | Dotychczasowa kampania wydała 885 zł bez jednej zmierzonej konwersji, bo w koncie nie ma działań powodujących konwersję. |
+| 10.4 | **Budżet:** potwierdzić 105 zł/dzień (ok. 3 200 zł/mies.) albo podać inną kwotę. | Kampanie powstają wstrzymane; włączenie to decyzja właściciela. |
+| 10.5 | **Telefon w reklamach:** potwierdzić 62 741 32 27 i to, kto odbiera w godzinach 8:00 do 16:00. | Zasób połączenia liczy rozmowy powyżej 60 s jako konwersje. |
+| 10.6 | **Obrazy i logo:** wgrać pliki z `reklama/google-ads/obrazy/`; przejść weryfikację reklamodawcy; jeśli jest logo w wektorze (SVG/PDF), przekazać. | Obrazy podnoszą CTR; nazwa i logo firmy w reklamie wymagają weryfikacji. |
+| 10.7 | **Polityka prywatności:** przy najbliższej edycji dopisać, że do zgłoszenia dopisujemy źródło wejścia (parametry kampanii i identyfikator kliknięcia Google Ads), trzymane w `sessionStorage` na czas wizyty. | Nowe pole `zrodlo` w mailu z formularza (docs/ANALITYKA.md). |
+| 10.8 | **Wykluczenia miast:** lista wykluczonych miast poza obszarem (Kraków, Gdańsk, Szczecin, Lublin, Rzeszów, Białystok, Olsztyn, Kielce, Opole, Zielona Góra…) zakłada, że DEWAX nie jeździ poza 6 województw. Jeśli jeździ, skreślić z listy w `reklama/google-ads/kampania.py`. | Wykluczenie działa na słowo w zapytaniu, nie na lokalizację użytkownika. |

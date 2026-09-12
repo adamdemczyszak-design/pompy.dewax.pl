@@ -56,7 +56,9 @@ wykonano skryptami Playwright poza repozytorium; wyniki i zrzuty leżą w `docs/
 | `testy/` | testy Node, wzorzec wyników kalkulatora, serwer deweloperski, lint |
 | `googlee4c582b5162d1cb9.html` | plik weryfikacyjny Google Search Console. **Nie kasować**, inaczej usługa traci weryfikację |
 | `CONTENT_NEEDED.md` | lista danych i zdjęć do uzupełnienia przez właściciela |
-| `docs/ANALITYKA.md` | zdarzenia GA4 i plan mierzenia konwersji |
+| `docs/ANALITYKA.md` | zdarzenia GA4 i plan mierzenia konwersji (w tym `generate_lead` na `podziekowanie.html?ok=1` i linia „Źródło:” w mailu z formularza) |
+| `docs/GOOGLE-ADS.md` | (od 12.09.2026) plan i instrukcja kampanii Google Ads: stan konta, konwersje, struktura, budżet, optymalizacja, lista dla właściciela |
+| `reklama/google-ads/` | (od 12.09.2026) źródło kampanii (`kampania.py`), kontrola i eksport (`narzedzia.py`), pliki importu do Google Ads Editor (`import/`), obrazy do reklam z prawdziwych zdjęć (`obrazy/`). **Nie wchodzi do pakietu wdrożenia** |
 | `.github/workflows/wdrozenie.yml`, `wdroz.sh` | wdrożenie na nazwa.pl (pakiet obejmuje `css/`, `js/`, nowe podstrony) |
 
 ## Pamięć podręczna CDN nazwa.pl (ważne przy każdej zmianie stylów i skryptów)
@@ -66,9 +68,10 @@ od razu, ale `css/dewax.css` jest tam trzymany do 30 dni, a `js/*.js` i `sitemap
 do 14 dni. Bez obejścia klient przez wiele dni dostawałby stary arkusz stylów do nowego HTML-a.
 
 Dlatego adresy arkusza i skryptów mają znacznik wersji, np. `css/dewax.css?v=2026-09-04`.
-**Po każdej zmianie w `css/` albo `js/` podnieś ten znacznik we wszystkich trzech stronach**
-(`index.html`, `pompy.html`, `dla-instalatorow.html`). Nowy adres to dla CDN nowy plik,
-więc pobierze go od razu. Sprawdzenie, czy serwer ma aktualną wersję:
+**Po każdej zmianie w `css/` albo `js/` podnieś ten znacznik na wszystkich stronach**, które
+dany plik ładują (dziś 16 plików HTML: strona główna, pompy, instalatorzy, poradnik, strony
+wojewódzkie, zgoda na opinię; lista: `grep -rl 'dewax.js?v=' --include=*.html .`). Nowy adres to
+dla CDN nowy plik, więc pobierze go od razu. Sprawdzenie, czy serwer ma aktualną wersję:
 
 ```bash
 curl -s "https://pompy.dewax.pl/css/dewax.css?kontrola=1" | head -3

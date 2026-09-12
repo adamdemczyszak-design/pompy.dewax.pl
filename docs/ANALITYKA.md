@@ -21,9 +21,23 @@ Bez zgody na statystyki GA4 działa w trybie bez cookies (Consent Mode), tak jak
 | `quote_started` | pierwszy fokus w formularzu wyceny | brak | `js/dewax.js` |
 | `quote_submitted` | formularz przeszedł walidację i jest wysyłany | `z_kalkulatora` (0/1), `telefon` (0/1) | `js/dewax.js` |
 | `form_error` | walidacja zatrzymała wysyłkę | `pola` (lista nazw) | `js/dewax.js` |
+| `generate_lead` | (od 12.09.2026) odsłona `podziekowanie.html?ok=1`, czyli formularz wyceny realnie wysłany mailem przez `wyslij.php` | `formularz` (`wycena`) | `podziekowanie.html` |
 
-Konwersja docelowa w GA4 to nadal odsłona `podziekowanie.html` (potwierdzone dostarczenie
-do `wyslij.php`), `quote_submitted` jest zdarzeniem pomocniczym po stronie przeglądarki.
+Konwersja docelowa to `generate_lead`: w GA4 oznaczyć jako kluczowe zdarzenie i zaimportować do
+Google Ads jako konwersję główną (instrukcja krok po kroku: `docs/GOOGLE-ADS.md`, punkt 2).
+Zdarzenie nie wysyła się dla `?zgoda=1` (zgoda na opinię) ani dla wejść bez parametru
+(przekierowania odrzuconych botów). `quote_submitted` zostaje zdarzeniem pomocniczym po stronie
+przeglądarki, `phone_clicked` i `calculator_completed` nadają się na konwersje pomocnicze (obserwacja).
+
+## Źródło wejścia w zgłoszeniu (od 12.09.2026)
+
+`js/dewax.js` czyta z adresu parametry `utm_source`, `utm_medium`, `utm_campaign`, `utm_term`,
+`utm_content` i `gclid`, dokłada `lp` (ścieżka strony wejścia), zapamiętuje je w `sessionStorage`
+(`dx_zrodlo`) i dopisuje do linków prowadzących na własne strony HTML, żeby przetrwały przejście
+z podstrony poradnika na stronę z formularzem. Przy wysyłce formularz dostaje ukryte pole `zrodlo`
+(do 300 znaków), a `wyslij.php` wpisuje je do maila jako linię „Źródło:”. Dzięki temu każde
+zapytanie da się przypisać do kampanii i słowa kluczowego bez logowania do GA4. Bez parametrów
+w adresie nic nie jest zapisywane ani dopisywane.
 
 Od 09.09.2026 na `podziekowanie.html` trafia też formularz zgody na publikację opinii, z parametrem
 `?zgoda=1` i bez `?ok=1`. Jeśli konwersja w GA4 lub Google Ads jest zdefiniowana na samym adresie
@@ -45,7 +59,8 @@ z `z_kalkulatora = 1`, udział `phone_clicked` wg `miejsce`, odsetek `form_error
 
 ## Cookies i pamięć
 
-Strona nie ustawia własnych cookies. `sessionStorage` przechowuje dwie flagi na czas sesji:
-`dx_calc` (wynik kalkulatora, żeby pokazać baner „masz już koszt i geologię”) i `dx_geo`
-(kliknięto GEO). Nic nie jest wysyłane na serwer. Skrypty własne mają atrybut
+Strona nie ustawia własnych cookies. `sessionStorage` przechowuje trzy wpisy na czas sesji:
+`dx_calc` (wynik kalkulatora, żeby pokazać baner „masz już koszt i geologię”), `dx_geo`
+(kliknięto GEO) i `dx_zrodlo` (parametry kampanii z adresu, tylko gdy były w adresie).
+Na serwer trafia wyłącznie `dx_zrodlo`, i tylko razem z formularzem, który użytkownik sam wysyła. Skrypty własne mają atrybut
 `data-cookieconsent="ignore"`, więc Cookiebot ich nie blokuje.

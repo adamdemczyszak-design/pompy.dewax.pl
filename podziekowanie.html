@@ -108,4 +108,13 @@ font-family:'Montserrat';font-weight:800;font-size:15px;text-decoration:none;tra
   document.title = 'Dziękujemy za zgodę | DEWAX';
 })();
 </script>
+<script data-cookieconsent="ignore">
+/* Konwersja wyceny: wyłącznie ?ok=1 (wyslij.php dodaje ten parametr tylko po realnej wysyłce maila).
+   Zdarzenie GA4 „generate_lead” oznacz w GA4 jako kluczowe i zaimportuj do Google Ads (docs/GOOGLE-ADS.md).
+   Wejścia bez parametru (odrzucone boty) i ?zgoda=1 (zgoda na opinię) nie wysyłają zdarzenia. */
+(function(){
+  if (!/[?&]ok=1(&|$)/.test(location.search)) return;
+  if (typeof gtag === 'function') gtag('event', 'generate_lead', { formularz: 'wycena' });
+})();
+</script>
 </body></html>

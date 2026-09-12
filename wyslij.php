@@ -116,6 +116,7 @@ $metraz      = pole('metraz', 10);
 $telefon     = pole('telefon', 30);
 $wiadomosc   = mb_substr(trim((string)($_POST['wiadomosc'] ?? '')), 0, 2000);
 $ogrzewanie  = pole('ogrzewanie', 60);
+$zrodlo      = pole('zrodlo', 300);       // parametry kampanii z adresu strony (utm_*, gclid, lp), wpisuje js/dewax.js
 $zgodaDane   = ($_POST['zgoda_dane'] ?? '') === 'tak';
 $zgodaTel    = ($_POST['zgoda_telefon'] ?? '') === 'tak';
 
@@ -149,6 +150,7 @@ $tresc .= "Miejscowość:  $miejscowosc\n";
 $tresc .= "Metraż:       " . ($metraz !== '' ? "$metraz m2" : '— nie podano —') . "\n";
 $tresc .= "Zgoda tel.:   " . ($zgodaTel ? 'TAK — można dzwonić' : 'NIE — tylko e-mail') . "\n";
 if ($ogrzewanie !== '') $tresc .= "Ogrzewanie:   $ogrzewanie\n";
+if ($zrodlo !== '')     $tresc .= "Źródło:       $zrodlo\n";   // np. utm_source=google&utm_medium=cpc&utm_campaign=gruntowa&utm_term=...
 if ($wiadomosc !== '')  $tresc .= "\nO domu:\n$wiadomosc\n";
 $tresc .= "\n" . str_repeat('-', 46) . "\n";
 $tresc .= 'Wysłano: ' . date('Y-m-d H:i:s') . "\n";

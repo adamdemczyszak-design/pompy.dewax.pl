@@ -3,7 +3,8 @@
    Cookiebot), formularz wyceny, pasek mobilny, wspólny stan „koszt + geologia".
    Bez bibliotek zewnętrznych. Nie ustawia cookies; korzysta z sessionStorage
    (kategoria „niezbędne/funkcjonalne”) wyłącznie do zapamiętania, że użytkownik
-   w tej sesji ukończył kalkulator i otworzył DEWAX GEO.
+   w tej sesji ukończył kalkulator, otworzył DEWAX GEO oraz z jakiej kampanii wszedł
+   (parametry utm_* i gclid z adresu, dopisywane do zgłoszenia z formularza).
    ===================================================================== */
 (function () {
   'use strict';
@@ -18,6 +19,33 @@
     if (w.DX_DEBUG) { try { console.debug('[dx]', name, params || {}); } catch (e) {} }
   };
   function ss(k, v) { try { if (v === undefined) return sessionStorage.getItem(k); sessionStorage.setItem(k, v); } catch (e) { return null; } }
+
+  /* ---------- źródło wejścia (kampanie Google Ads itp.): utm_* i gclid z adresu ----------
+     Zapamiętane na czas sesji, przeniesione na linki do własnych stron (żeby przetrwały przejście
+     na stronę z formularzem) i dopisane do zgłoszenia jako ukryte pole „zrodlo”. wyslij.php
+     wpisuje je do maila, więc wiadomo, która kampania i które słowo przyniosło zapytanie. */
+  var ZRODLO_KLUCZE = ['utm_source', 'utm_medium', 'utm_campaign', 'utm_term', 'utm_content', 'gclid'];
+  function zrodloZAdresu() {
+    var out = [], q;
+    try { q = new URLSearchParams(w.location.search); } catch (e) { return ''; }
+    ZRODLO_KLUCZE.forEach(function (k) { var v = q.get(k); if (v) out.push(k + '=' + encodeURIComponent(v).slice(0, 120)); });
+    if (out.length) out.push('lp=' + encodeURIComponent(w.location.pathname));
+    return out.join('&');
+  }
+  var zrodlo = zrodloZAdresu();
+  if (zrodlo) ss('dx_zrodlo', zrodlo); else zrodlo = ss('dx_zrodlo') || '';
+  dx.zrodlo = zrodlo;
+  if (zrodlo) {
+    $$('a[href]').forEach(function (a) {
+      var h = a.getAttribute('href') || '';
+      if (/^(#|mailto:|tel:|javascript:)/i.test(h)) return;
+      if (/^(https?:)?\/\//i.test(h) && !/^(https?:)?\/\/pompy\.dewax\.pl\//i.test(h)) return;
+      if (/[?&](utm_|gclid=)/.test(h)) return;
+      var m = h.match(/^([^#?]*)(\?[^#]*)?(#.*)?$/);
+      if (!m || !/\.html$|\/$/.test(m[1])) return;
+      a.setAttribute('href', m[1] + (m[2] ? m[2] + '&' : '?') + zrodlo + (m[3] || ''));
+    });
+  }
 
   /* ---------- oba kroki wykonane: pokaż baner „poproś o ofertę” ---------- */
   dx.obaKroki = function () {
@@ -60,6 +88,7 @@
   /* ---------- formularz wyceny: walidacja, komunikaty, blokada podwójnej wysyłki ---------- */
   var f = d.forms['wycena'];
   if (f) {
+    if (zrodlo) { var hz = d.createElement('input'); hz.type = 'hidden'; hz.name = 'zrodlo'; hz.value = zrodlo.slice(0, 300); f.appendChild(hz); }
     var t0 = Date.now();
     var czas = $('#fczas');
     var started = false;

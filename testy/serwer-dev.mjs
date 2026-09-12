@@ -53,7 +53,7 @@ function wyslij(req, res, body) {
     return res.end(strona('Uzupełnij formularz', 'Brakuje kilku danych', `<p>Uzupełnij: <b>${bledy.join(', ')}</b>.</p><p><a href="javascript:history.back()">← Wróć do formularza</a></p>`));
   }
   console.log('\n[wyslij.php - symulacja] Nowe zapytanie o wycenę');
-  for (const k of ['imie', 'email', 'telefon', 'miejscowosc', 'metraz', 'ogrzewanie', 'wiadomosc', 'zgoda_dane', 'zgoda_telefon', 'czas']) console.log(`  ${k.padEnd(14)} ${p.get(k) || '-'}`);
+  for (const k of ['imie', 'email', 'telefon', 'miejscowosc', 'metraz', 'ogrzewanie', 'wiadomosc', 'zgoda_dane', 'zgoda_telefon', 'zrodlo', 'czas']) console.log(`  ${k.padEnd(14)} ${p.get(k) || '-'}`);
   res.writeHead(302, { Location: 'podziekowanie.html' }); res.end();
 }
 
