@@ -9,7 +9,10 @@ Options -Indexes
   RewriteBase /multilan/
 
 
-  # adresy bez rozszerzenia -> pliki .html, takze gdy istnieje katalog o tej samej nazwie (np. realizacje)
+  # stare adresy /realizacje/<slug> -> /realizacja/<slug>
+  RewriteRule ^realizacje/([a-z0-9-]+)/?$ /multilan/realizacja/$1 [R=301,L]
+
+  # adresy bez rozszerzenia -> pliki .html
   RewriteCond %{REQUEST_FILENAME} !-f
   RewriteCond %{REQUEST_FILENAME}.html -f
   RewriteRule ^(.+)$ $1.html [L]
