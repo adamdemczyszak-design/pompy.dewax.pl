@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://multilan.dewax.pl/sitemap-index.xml

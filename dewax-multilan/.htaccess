@@ -1,0 +1,40 @@
+# multilan (dewax.pl/multilan) - strona statyczna z Astro, hosting nazwa.pl (Apache)
+# Ten plik dziala tylko w katalogu /multilan i nie dotyka reguł WordPressa w katalogu nadrzednym.
+
+DirectoryIndex index.html
+Options -Indexes
+
+<IfModule mod_rewrite.c>
+  RewriteEngine On
+  RewriteBase /multilan/
+
+  # adresy bez rozszerzenia -> pliki .html (np. /multilan/kolory -> kolory.html)
+  RewriteCond %{REQUEST_FILENAME} !-f
+  RewriteCond %{REQUEST_FILENAME} !-d
+  RewriteCond %{REQUEST_FILENAME}.html -f
+  RewriteRule ^(.+)$ $1.html [L]
+
+  # /multilan/kolory.html -> /multilan/kolory (jeden adres kanoniczny)
+  RewriteCond %{THE_REQUEST} \s/multilan/([^\s?]+)\.html[\s?] [NC]
+  RewriteRule ^ /multilan/%1 [R=301,L]
+</IfModule>
+
+ErrorDocument 404 /multilan/404.html
+
+<IfModule mod_mime.c>
+  AddType image/avif .avif
+  AddType image/webp .webp
+  AddCharset utf-8 .html .css .js .xml .txt
+</IfModule>
+
+<IfModule mod_headers.c>
+  Header always set X-Content-Type-Options "nosniff"
+  Header always set X-Frame-Options "SAMEORIGIN"
+  Header always set Referrer-Policy "strict-origin-when-cross-origin"
+  <FilesMatch "\.(avif|webp|jpg|jpeg|png|css|js|mp4|woff2)$">
+    Header set Cache-Control "public, max-age=31536000, immutable"
+  </FilesMatch>
+  <FilesMatch "\.html$">
+    Header set Cache-Control "public, max-age=0, must-revalidate"
+  </FilesMatch>
+</IfModule>
