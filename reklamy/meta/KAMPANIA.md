@@ -253,3 +253,22 @@ Co z tego wynika i co zostało zrobione:
    w Menedżerze reklam (konto `1413741105666132`), żeby nie myliła się z kampanią Multilan.
 5. **Po zbudowaniu na nowym koncie:** ta sama lista startowa (test piksela `965779382154454`
    w Menedżerze zdarzeń, Cookiebot, weryfikacja domeny) i ten sam plan prowadzenia.
+
+### Wykonanie na koncie 955522616312255 (12.09.2026, przez Windsor.ai)
+
+Właściciel podłączył Meta Ads w Windsor.ai i włączył akcje zapisu; piksel pomp wszedł na produkcję
+(wdrożenie run 21). Zbudowane i **włączone** tego samego dnia:
+
+| Element | Id | Ustawienia |
+|---|---|---|
+| Kampania | `120248421653200027` „DEWAX pompy \| Leady \| Kalkulator kosztu \| 2026-09” | OUTCOME_LEADS, budżet kampanii 60 zł/dzień, limit wydatków 2 000 zł, najniższy koszt bez limitu stawki |
+| Zestaw A | `120248421938940027` „A \| 200 km od Dobrzycy + Warszawa (14 kół) \| Lead” | te same 14 kół co wyżej, wiek 30–65 jako twardy zakres (Advantage+ audience wyłączone, bo akcje Windsor nie przekazują sugestii wieku), konwersje w witrynie na zdarzenie Lead z piksela `965779382154454`, rozliczenie za wyświetlenia |
+| R1 Dzień wiercenia | `120248421960750027` | obraz z `main`: `reklamy/meta/dzien-wiercenia-4x5.jpg`, teksty jak w sekcji „Reklamy” |
+| R2 Dom, który już stoi | `120248421962800027` | `odwiert-przy-domu-4x5.jpg` |
+| R3 Kotłownia | `120248421964470027` | `kotlownia-thermokrafft-4x5.jpg` |
+| R4 Karuzela | `120248421966200027` | 4 karty `k1…k4-*-1x1.jpg`, pełna specyfikacja kreacji (object_story_spec) |
+
+Strona nadawcy: „Dewax gruntowe pompy ciepła” `105889812346061`. Zestaw przyjął się bez pól DSA,
+więc konto ma domyślnego beneficjenta i płatnika albo Meta uzupełniła je z danych konta; sprawdzić
+w Menedżerze reklam przy pierwszym przeglądzie. Kampania `120249004354710355` na koncie
+`1413741105666132` pozostaje wstrzymana i można ją usunąć.

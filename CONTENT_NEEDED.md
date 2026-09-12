@@ -148,7 +148,7 @@ Piksel Meta `1032857169399673` jest wpięty w stronę (kategoria marketing, `doc
 
 | # | Co | Uwaga |
 |---|---|---|
-| 10.1 | Konto reklamowe i strona (Page) | **Decyzja 12.09:** kampania ma iść z konta „Dewax gruntowe pompy ciepła” `955522616312255`. Integracja Meta tego konta jeszcze nie obsługuje, więc kampania na „nowe konto reklamowe 1” jest wstrzymana, a przeniesienie idzie przez Windsor.ai (po podłączeniu Meta Ads: `https://onboard.windsor.ai/connect?connector=facebook&next=/facebook/authorize`) albo ręcznie w Menedżerze reklam. Szczegóły: `reklamy/meta/KAMPANIA.md`, sekcja „Przeniesienie”. |
+| 10.1 | Konto reklamowe i strona (Page) | **Zrobione 12.09:** kampania `120248421653200027` zbudowana przez Windsor.ai na koncie „Dewax gruntowe pompy ciepła” `955522616312255` i włączona. Kampania `120249004354710355` na „nowe konto reklamowe 1” wstrzymana, do usunięcia. Szczegóły: `reklamy/meta/KAMPANIA.md`, sekcja „Przeniesienie”. |
 | 10.1a | Domyślny beneficjent i płatnik (DSA) na koncie `955522616312255` | Ustawienia konta reklamowego, sekcja o przejrzystości w UE: wpisać „DEWAX Sp. z o.o.” jako beneficjenta i płatnika. Bez tego zestawy reklam tworzone przez Windsor.ai (które nie ma pola DSA) mogą zostać odrzucone. |
 | 10.2 | Budżet | Ustawiony 12.09.2026 za zgodą właściciela: 60 zł/dzień, limit wydatków 2 000 zł; zestaw A (200 km od Dobrzycy plus Warszawa) i reklamy R1–R4 wstrzymane. Zmiany w Menedżerze reklam. |
 | 10.3 | Zgoda operatora na zdjęcia w reklamach | `zdjecia/77.jpg` i `76.jpg` (operator przy wiertnicy) są już na stronie; upewnić się, że zgoda obejmuje także reklamy płatne na Facebooku i Instagramie. |
