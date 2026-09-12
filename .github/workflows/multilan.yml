@@ -1,0 +1,66 @@
+name: Wdrozenie multilan na dewax.pl/multilan
+
+# Wgrywa katalog dewax-multilan/ (zbudowana strona Multilan z repozytorium multilan.dewax.pl)
+# do katalogu /multilan na hostingu dewax.pl. Uruchamia sie po kazdej zmianie w dewax-multilan/
+# albo recznie (Actions -> Run workflow). Nie dotyka reszty dewax.pl ani pompy.dewax.pl.
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'dewax-multilan/**'
+      - '.github/workflows/multilan.yml'
+  workflow_dispatch:
+
+concurrency:
+  group: multilan-dewax
+  cancel-in-progress: false
+
+jobs:
+  wgraj:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Instaluj lftp
+        run: sudo apt-get update -qq && sudo apt-get install -y -qq lftp
+
+      - name: Sprawdz, co wgrywamy
+        run: |
+          set -eu
+          test -f dewax-multilan/index.html || { echo "::error::brak dewax-multilan/index.html - najpierw zbuduj strone (scripts/wdroz-dewax.sh)"; exit 1; }
+          test -f dewax-multilan/.htaccess || { echo "::error::brak dewax-multilan/.htaccess"; exit 1; }
+          echo "plikow: $(find dewax-multilan -type f | wc -l), rozmiar: $(du -sh dewax-multilan | cut -f1)"
+          grep -q 'name="robots" content="noindex' dewax-multilan/index.html && echo "strona z noindex (przed startem)" || echo "strona indeksowalna"
+
+      - name: Wgraj katalog multilan przez FTP
+        env:
+          FTP_HOST: ${{ secrets.FTP_HOST }}
+          FTP_LOGIN: ${{ secrets.FTP_LOGIN }}
+          LFTP_PASSWORD: ${{ secrets.FTP_HASLO }}
+          KAT: ${{ vars.KATALOG_DEWAX || '/' }}
+        run: |
+          set -eu
+          echo "katalog docelowy: ${KAT%/}/multilan"
+          lftp --env-password -u "$FTP_LOGIN" "ftp://$FTP_HOST" <<LFTP
+          set ssl:verify-certificate no
+          set ftp:ssl-allow yes
+          set net:timeout 25
+          set net:max-retries 3
+          set mirror:parallel-transfer-count 4
+          mirror -R --delete --verbose=1 dewax-multilan ${KAT%/}/multilan
+          bye
+          LFTP
+
+      - name: Test przez HTTP
+        run: |
+          set -u
+          sleep 5
+          blad=0
+          for u in "" "dla-zarzadcow" "realizacje/gorzno" "kolory"; do
+            kod=$(curl -s -o /dev/null -w "%{http_code}" "https://dewax.pl/multilan/$u")
+            echo "/multilan/$u -> $kod"
+            [ "$kod" = "200" ] || blad=1
+          done
+          kod404=$(curl -s -o /dev/null -w "%{http_code}" "https://dewax.pl/multilan/nie-ma-takiej-strony"); echo "/multilan/nie-ma-takiej-strony -> $kod404 (oczekiwane 404)"
+          curl -s "https://dewax.pl/multilan/" | grep -q "Multilan" && echo "OK: tresc strony glownej" || { echo "::error::strona glowna bez tresci"; blad=1; }
+          exit $blad
