@@ -1,8 +1,9 @@
 # Kampania Meta Ads: pompy.dewax.pl
 
-Stan na 12 września 2026. Kampania, zestaw reklam i cztery reklamy są założone za zgodą właściciela,
-z budżetem, ale w stanie wstrzymanym. Nic nie wydaje pieniędzy, dopóki właściciel nie włączy kampanii
-w Menedżerze reklam, a włączyć ją wolno dopiero po wdrożeniu piksela na produkcję.
+Stan na 12 września 2026. Kampania, zestaw reklam i cztery reklamy są założone za zgodą właściciela
+i **włączone 12.09.2026 na jego polecenie** (kampania, zestaw i reklamy w statusie ACTIVE). Reklamy
+przechodzą weryfikację Meta, zwykle do 24 godzin; dopiero potem zaczynają się wyświetlać i wydawać
+budżet. Gałąź z pikselem została tego samego dnia scalona na `main` (wdrożenie run 20).
 
 ## Cel i logika
 
@@ -170,7 +171,9 @@ Nagłówek: **Moje Ciepło: nabór do 31.12.2026** · Opis: „Policz koszt syst
    limit 2 000 zł, zestaw A, reklamy R1–R4, wszystko wstrzymane). Przed startem przejrzeć zestaw
    w Menedżerze reklam: ostrzeżenie o pikselu bez aktywności zniknie po wdrożeniu, strona nadawcy
    ma być właściwa.
-5. **Włączyć kampanię** dopiero po punkcie 1. Pierwsze 14 dni bez zmian (nauka algorytmu).
+5. **Włączyć kampanię: zrobione 12.09.2026** na polecenie właściciela, równolegle ze scaleniem gałęzi
+   na `main`. Pierwsze 14 dni bez zmian (nauka algorytmu). Punkty 2–3 (test piksela, Cookiebot,
+   weryfikacja domeny, strona nadawcy) pozostają do wykonania przez właściciela.
 
 ## Kreacje w koncie
 
