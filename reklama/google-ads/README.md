@@ -2,6 +2,10 @@
 
 Plan i instrukcja obsługi: `docs/GOOGLE-ADS.md`. Ten katalog nie jest wdrażany na serwer.
 
+Stan 12.09.2026: kampanie z `kampania.py` są już wgrane do konta przez API (identyfikatory
+w `docs/GOOGLE-ADS.md`, punkt 0). Pliki `import/` służą teraz jako kopia zapasowa i droga
+do odtworzenia kampanii w Google Ads Editor, gdyby API było niedostępne.
+
 | Plik | Co to |
 |---|---|
 | `kampania.py` | jedno źródło prawdy: kampanie, budżety, grupy, słowa kluczowe, wykluczenia, teksty reklam, linki, objaśnienia, rozszerzenie usług, telefon, województwa, okręgi zapasowe |

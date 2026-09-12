@@ -5,7 +5,34 @@ Jedno źródło prawdy dla struktury i tekstów: `reklama/google-ads/kampania.py
 Google Ads Editor: `reklama/google-ads/import/`. Obrazy: `reklama/google-ads/obrazy/`.
 Katalog `reklama/` nie wchodzi do pakietu wdrożenia na serwer (`wdrozenie.yml` go nie kopiuje).
 
-## 1. Co jest w koncie dziś
+## 0. Wgrane do konta 12 września 2026 (wszystko wstrzymane)
+
+Kampanie utworzone przez API (Supermetrics: struktura, słowa, wykluczenia, reklamy, rozszerzenia;
+Windsor.ai: pułapy CPC, lokalizacje z mnożnikiem, zasób połączenia). Stara kampania
+„Pompy gruntowe - Konin 200km” (24130520616) została wstrzymana.
+
+| Kampania | Id | Budżet/dzień | Pułap CPC | Grupy reklam (id) |
+|---|---|---|---|---|
+| DEWAX \| Gruntowa pompa ciepła | 24238597854 | 55 zł | 6 zł | Gruntowa ogólnie 199799185669, Cena i koszt 199799094189, Montaż i wykonawca 208567126508, Gruntowa czy powietrzna 195396439410, Pompy Thermokrafft R290 195396440770 |
+| DEWAX \| Odwierty i dolne źródło | 24244183184 | 25 zł | 6 zł | Odwierty pod pompę ciepła 197330604422, Dolne źródło 201747877884, Sondy koszowe Helix 197330412942 |
+| DEWAX \| Dotacje | 24244201406 | 10 zł | 4 zł | Dotacje na gruntową pompę 205765090048 |
+| DEWAX \| Marka | 24238579395 | 5 zł | 3 zł | DEWAX 195396246610 |
+| DEWAX \| Regiony | 24249730492 | 10 zł | 4 zł | Wielkopolska 203858994847, Łódzkie 200176185597, Kujawsko-Pomorskie 203858997767, Dolny Śląsk 203173282307, Śląsk 199799867029, Mazowsze 197893234777 |
+
+Wspólne dla wszystkich: sieć wyszukiwania bez partnerów i bez sieci reklamowej, język polski,
+lokalizacje wielkopolskie 20861, łódzkie 20850, kujawsko-pomorskie 20848, dolnośląskie 20847,
+śląskie 20859, mazowieckie 20853 (mnożnik 0,85), opcja „obecność”, Maksymalizacja kliknięć,
+134 wykluczenia wspólne (w Odwiertach, Dotacjach i Regionach dodatkowo „powietrzna”; w czterech
+grupach kampanii Gruntowa na poziomie grupy), 8 linków do podstron, 10 objaśnień, rozszerzenie
+„Katalog usług” (w API nagłówek nazywa się „Service catalog”, Google wyświetla go po polsku),
+zasób połączenia 62 741 32 27, sufiks adresu z utm. Grupy reklam i reklamy są włączone,
+kampanie wstrzymane, więc nic się nie wyświetla do czasu włączenia kampanii.
+
+Do zrobienia ręcznie w panelu: obrazy (punkt 5), weryfikacja reklamodawcy, konwersje (punkt 2)
+i włączenie kampanii po sprawdzeniu płatności (punkt 9). W Supermetrics ustawiono
+„Going live: wymaga zatwierdzenia człowieka”, więc włączenie przez API i tak czeka na Twoje „tak”.
+
+## 1. Co było w koncie przed zmianą
 
 Konto Google Ads „Dewax”, numer 120-637-0043, waluta PLN, autotagowanie włączone, identyfikator
 śledzenia konwersji 220609683804 (tag `AW-220609683804`). Odczyt przez Windsor.ai, 12.09.2026.
@@ -203,14 +230,16 @@ nie mierzyć sukcesu kliknięciami.
 
 ## 8. Jak wgrać kampanię do konta
 
-**A. Przez API (Windsor.ai, robi to Claude, ok. 100 operacji, wszystko wstrzymane).**
-Wymaga jednorazowo: Windsor.ai → Settings → API Access → „Enable write actions for Claude, ChatGPT & API”
-(https://onboard.windsor.ai/app/settings/account). 12.09.2026 ten przełącznik był wyłączony,
-dlatego kampanie nie zostały jeszcze utworzone. Po włączeniu kolejność: utworzenie 5 kampanii
-z budżetami (wstrzymane) → język polski → pułap CPC → lokalizacje → 16 grup → 444 słowa → wykluczenia
-(kampanie i grupy) → 16 reklam → linki, objaśnienia, rozszerzenie usług i połączenie w każdej
-kampanii → kontrola ustawień sieci → raport z identyfikatorami. Włączenie kampanii to osobna,
-świadoma decyzja właściciela po ustawieniu konwersji i sprawdzeniu płatności.
+**A. Przez API (zrobione 12.09.2026, punkt 0).** Dwie drogi, obie wymagały włączenia zapisu
+przez właściciela: Supermetrics (Google Ads zalogowane w Supermetrics, „Campaign Write Access”
+dla konta Dewax z opcją „Going live”, jedno wywołanie tworzy kampanię z grupami, słowami,
+wykluczeniami, reklamami i rozszerzeniami) oraz Windsor.ai (Settings → API Access → „Enable write
+actions”, osobne operacje: pułap CPC, lokalizacje z mnożnikiem, zasób połączenia, wstrzymanie
+i włączanie). Uwagi techniczne: rozszerzenie usług przyjmuje nagłówek tylko po angielsku
+(„Service catalog”), grupy reklam powstają wstrzymane i trzeba je włączyć osobnym wywołaniem,
+ścieżki wyświetlanego adresu (path1/path2) API zignorowało, można je dopisać w panelu.
+Zmiana tekstów: edytuj `kampania.py`, a potem poproś o aktualizację przez API albo zaimportuj
+`05-reklamy-rsa.csv` w Editorze.
 
 **B. Przez Google Ads Editor (darmowy program Google, 15 minut).**
 Konto → Importuj → Z pliku, po kolei pliki `01` do `09` z `reklama/google-ads/import/`.
@@ -223,8 +252,9 @@ Szczegóły: `reklama/google-ads/README.md`.
 
 ## 9. Lista dla właściciela
 
-1. **Windsor.ai:** włączyć zapis (punkt 8A) albo zdecydować się na import przez Editor (8B).
-2. **Konto Google Ads:** sprawdzić, dlaczego kampania „Konin 200km” jest niekwalifikująca się od 26.08
+1. **Zrobione 12.09.2026:** zapis włączony w Supermetrics i Windsor, pięć kampanii wgranych
+   i wstrzymanych, stara kampania wstrzymana (punkt 0).
+2. **Konto Google Ads:** sprawdzić, dlaczego kampania „Konin 200km” była niekwalifikująca się od 26.08
    (Rozliczenia, weryfikacja reklamodawcy, powiadomienia). Bez tego nowe kampanie też nie ruszą.
 3. **Konwersje:** wykonać punkt 2 (połączenie GA4, zdarzenia kluczowe, import, połączenia z reklam).
 4. **Budżet:** potwierdzić 105 zł/dzień albo podać inną kwotę; proporcje w punkcie 6.

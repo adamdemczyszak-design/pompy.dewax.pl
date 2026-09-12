@@ -148,8 +148,8 @@ jeszcze wgrana do konta. Bez pozycji 10.1 i 10.2 nic się nie wyświetli.
 
 | # | Co | Dlaczego |
 |---|---|---|
-| 10.1 | **Windsor.ai: włączyć zapis** (Settings → API Access → „Enable write actions for Claude, ChatGPT & API”) albo wybrać import przez Google Ads Editor z plików `reklama/google-ads/import/`. | 12.09.2026 próba utworzenia kampanii przez API została odrzucona: zapis wyłączony dla użytkownika. |
-| 10.2 | **Sprawdzić, dlaczego kampania „Pompy gruntowe - Konin 200km” jest niekwalifikująca się od 26.08.2026** (Rozliczenia, weryfikacja reklamodawcy, powiadomienia w panelu). | Konto nie wyświetla reklam od 26.08. Ta sama przyczyna zablokuje nowe kampanie. |
+| 10.1 | **Zrobione 12.09.2026.** Zapis włączony w Supermetrics (Campaign Write Access, „Going live”) i Windsor.ai; pięć kampanii wgranych, wstrzymanych, z identyfikatorami w `docs/GOOGLE-ADS.md` punkt 0. Stara kampania wstrzymana. | Włączenie kampanii pozostaje decyzją właściciela (punkty 10.2 do 10.4). |
+| 10.2 | **Sprawdzić, dlaczego kampania „Pompy gruntowe - Konin 200km” była niekwalifikująca się od 26.08.2026** (Rozliczenia, weryfikacja reklamodawcy, powiadomienia w panelu). | Konto nie wyświetlało reklam od 26.08. Ta sama przyczyna zablokuje nowe kampanie. |
 | 10.3 | **Konwersje:** połączyć GA4 z Google Ads, oznaczyć `generate_lead` jako kluczowe zdarzenie, zaimportować do Google Ads, dodać konwersję „Połączenia z reklam”. | Dotychczasowa kampania wydała 885 zł bez jednej zmierzonej konwersji, bo w koncie nie ma działań powodujących konwersję. |
 | 10.4 | **Budżet:** potwierdzić 105 zł/dzień (ok. 3 200 zł/mies.) albo podać inną kwotę. | Kampanie powstają wstrzymane; włączenie to decyzja właściciela. |
 | 10.5 | **Telefon w reklamach:** potwierdzić 62 741 32 27 i to, kto odbiera w godzinach 8:00 do 16:00. | Zasób połączenia liczy rozmowy powyżej 60 s jako konwersje. |
