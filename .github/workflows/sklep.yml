@@ -17,7 +17,7 @@ on:
         default: '/migracja/ftp.d1063384-23091.wuti.pl/webspace/httpdocs/sklep.dewax.pl/'
       baza:
         description: 'katalog WordPressa sklepu (tryb wgraj)'
-        default: '/migracja/ftp.d1063384-23091.wuti.pl/webspace/httpdocs/sklep.dewax.pl/Wordpress'
+        default: '/migracja/ftp.d1063384-23091.wuti.pl/webspace/httpdocs/sklep.dewax.pl/Wordpress/wordpress'
 
 jobs:
   sklep:
@@ -52,6 +52,10 @@ jobs:
           set ssl:verify-certificate no
           set ftp:ssl-allow yes
           set net:timeout 25
+          rm -f /migracja/ftp.d1063384-23091.wuti.pl/webspace/httpdocs/sklep.dewax.pl/Wordpress/wp-content/languages/plugins/woocommerce-pl_PL.mo
+          rmdir /migracja/ftp.d1063384-23091.wuti.pl/webspace/httpdocs/sklep.dewax.pl/Wordpress/wp-content/languages/plugins
+          rmdir /migracja/ftp.d1063384-23091.wuti.pl/webspace/httpdocs/sklep.dewax.pl/Wordpress/wp-content/languages
+          rmdir /migracja/ftp.d1063384-23091.wuti.pl/webspace/httpdocs/sklep.dewax.pl/Wordpress/wp-content
           mkdir -p ${BAZA%/}/wp-content/languages/plugins
           put -O ${BAZA%/}/wp-content/languages/plugins sklep-tlumaczenia/woocommerce-pl_PL.mo
           cls -l ${BAZA%/}/wp-content/languages/plugins/woocommerce-pl_PL.mo
