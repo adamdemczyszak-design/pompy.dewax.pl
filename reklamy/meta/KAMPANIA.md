@@ -164,7 +164,21 @@ Nagłówek: **Moje Ciepło: nabór do 31.12.2026** · Opis: „Policz koszt syst
 
 ## Kreacje w koncie
 
-Uzupełniane po wgraniu obrazów do biblioteki konta i utworzeniu kreacji (id, podglądy).
+Utworzone 12.09.2026 na koncie `1413741105666132` ze strony „Dewax gruntowe pompy ciepła”
+(`105889812346061`). Obrazy Meta pobrała z publicznych adresów tej gałęzi (`reklamy/meta/*.jpg`)
+i zapisała po swojej stronie, więc po scaleniu na `main` adresy źródłowe nie mają już znaczenia.
+
+| Reklama | Id kreacji | Podgląd (kanał mobilny; link wymaga zalogowania do Facebooka i po pewnym czasie wygasa) |
+|---|---|---|
+| R1 Dzień wiercenia | `1118102437550084` | https://business.facebook.com/ads/api/preview_iframe.php?d=AQJe8yMTEBTntWv1wYU3PVx7Nr3VvBl0FoupUNaIxJ2gnj5Z49gFxzQgghy9eFvLBPuXioBKMGtr_MIElwpTqpSn8OP5-iuQi0CJut_cyO8WOldgg0Zqt9tXSBcNAhuOIgdaFsfehcKjlIjvGnBUUMRkMf4viLN9kZxTffib3fWLP3si2jA09HvfuKRk1qqEJH2dk6Sn__YewPRtSHhRS6LRBDB3_p0G6leqLZPXLcv8hA&t=AQLuk9U-jc1PXR-oCz0 |
+| R2 Dom, który już stoi | `2495774117578323` | https://business.facebook.com/ads/api/preview_iframe.php?d=AQIGFrPOVlU8Y-w18aWsNxlExZzHndPjOwMuaamzVt-Czp_OVboDLs97CbGf_vbFQBJtSElclnnpDduVkIXRsJSALIzio_BQ6Geibh-xuFRw247RfWy19s_SPUEv5Bc1gY9Ad9cKd9RQKvZFJOtELbPsQ-DlX_dkgJpOAYKoqm--onNb-S9gE5JVDMrQxg1HKBvKyktJAQSgCPHnbjY3ry1q2ian2jkhuw-q_JcTrNqz-A&t=AQK17bQZ13BfWIM1m24 |
+| R3 Kotłownia | `1603924627788594` | https://business.facebook.com/ads/api/preview_iframe.php?d=AQJ4F81afWapSHAfFlUtIhTWZRlxPxCvW7pPjMJjpUR3g9RHGNaN4XdiS2jIhnPfb1wYF4gWrd4PIhsjWNuNpnT6cHA17ub6kG-k7RJDPyrGmifhljLY0TvDg8Renk9CJfIeU1GdtquLQ-qXhUIE2Ww78aQH3s4UYNP0jrTV99a1dBujE33519iihs0ClMkXTKuOFmqfOwV-K0VAkdNfjwR8vJXcGTvaUs674lXH8fI7cQ&t=AQIHdNExoaigwzTim8M |
+| R4 Karuzela „Zobacz, co dostajesz” | `1076299701657815` | https://business.facebook.com/ads/api/preview_iframe.php?d=AQIG4Dxqbu5QpG9j6YuswyA5zqyxdrQDTqF3ModZMgKchNwB_6EwO6DL7rtMtcM7xf_nXurOPzXGkdUwkHIpjIWEZP1rSWU51vg_WuDxlOkEJpmaQpQrZUTzqGKOYrxl58oO11HTvFt62zNlE-nfmHVhUQrq9Wf99jdZQM39EjWOqf78vH09JIVpyUXY3qgu30kZRmUKYu2DSYZMqMqjdldRrb_O4GnQzTHWbJ3n1Bqllg&t=AQI6vd49IzQzZvuTuI0 |
+
+W Menedżerze reklam kreacje są w bibliotece pod nazwami „DEWAX pompy | R1…R4”. Przy tworzeniu reklamy
+w zestawie wystarczy wybrać „Użyj istniejącej kreacji”. Deklaracja o treściach AI: obrazy to prawdziwe
+zdjęcia bez obróbki generatywnej, więc właściciel może w razie pytania Meta zaznaczyć, że reklama nie
+zawiera treści wygenerowanych przez AI (pole `self_ai_disclosure` zostało celowo niewypełnione).
 
 ## Plan prowadzenia
 
