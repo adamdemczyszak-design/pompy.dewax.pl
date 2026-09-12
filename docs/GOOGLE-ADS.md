@@ -5,7 +5,7 @@ Jedno źródło prawdy dla struktury i tekstów: `reklama/google-ads/kampania.py
 Google Ads Editor: `reklama/google-ads/import/`. Obrazy: `reklama/google-ads/obrazy/`.
 Katalog `reklama/` nie wchodzi do pakietu wdrożenia na serwer (`wdrozenie.yml` go nie kopiuje).
 
-## 0. Wgrane do konta 12 września 2026 (kampanie włączone, konto czeka na środki)
+## 0. Wgrane do konta 12 września 2026 (kampanie włączone, konto wstrzymane do weryfikacji)
 
 Kampanie utworzone przez API (Supermetrics: struktura, słowa, wykluczenia, reklamy, rozszerzenia;
 Windsor.ai: pułapy CPC, lokalizacje z mnożnikiem, zasób połączenia). Stara kampania
@@ -21,8 +21,9 @@ Windsor.ai: pułapy CPC, lokalizacje z mnożnikiem, zasób połączenia). Stara 
 
 Budżety po decyzji właściciela z 12.09.2026: 60 zł dziennie łącznie (pierwotna propozycja 105 zł,
 proporcje z punktu 6 zachowane). Kampanie włączone 12.09.2026 na polecenie właściciela; reklamy
-zatwierdzone przez Google tego samego dnia. Konto jest przedpłacone: środki skończyły się 25.08.2026
-(punkt 11), doładowanie z 12.09 czeka na zaksięgowanie.
+zatwierdzone przez Google tego samego dnia. Konto jest przedpłacone: środki skończyły się 25.08.2026,
+wpłata 500 zł z 12.09 jest zaksięgowana (saldo 464,80 zł). Wyświetlanie blokuje co innego: Google
+wstrzymał konto do czasu weryfikacji reklamodawcy (punkt 9, pozycja 2; przebieg w punkcie 11).
 
 Wspólne dla wszystkich: sieć wyszukiwania bez partnerów i bez sieci reklamowej, język polski,
 lokalizacje wielkopolskie 20861, łódzkie 20850, kujawsko-pomorskie 20848, dolnośląskie 20847,
@@ -31,9 +32,10 @@ lokalizacje wielkopolskie 20861, łódzkie 20850, kujawsko-pomorskie 20848, doln
 grupach kampanii Gruntowa na poziomie grupy), 8 linków do podstron, 10 objaśnień, rozszerzenie
 „Katalog usług” (w API nagłówek nazywa się „Service catalog”, Google wyświetla go po polsku),
 zasób połączenia 62 741 32 27, sufiks adresu z utm. Grupy reklam, reklamy i kampanie są włączone;
-dopóki na koncie nie ma środków, Google trzyma każdą kampanię w stanie „niekwalifikująca się”.
+dopóki konto jest wstrzymane (weryfikacja reklamodawcy), Google trzyma każdą kampanię w stanie
+„niekwalifikująca się”, a API tej blokady nie pokazuje (status konta w API: ENABLED).
 
-Do zrobienia ręcznie w panelu: płatność (punkt 9), obrazy (punkt 5), weryfikacja reklamodawcy,
+Do zrobienia ręcznie w panelu: weryfikacja reklamodawcy (punkt 9, pozycja 2), obrazy (punkt 5),
 konwersje (punkt 2). W Supermetrics ustawiono „Going live: wymaga zatwierdzenia człowieka”, więc
 każde włączenie przez API czeka na Twoje „tak”.
 
@@ -263,13 +265,20 @@ Szczegóły: `reklama/google-ads/README.md`.
 
 1. **Zrobione 12.09.2026:** zapis włączony w Supermetrics i Windsor, pięć kampanii wgranych
    i włączonych z budżetem 60 zł dziennie, stara kampania wstrzymana (punkt 0).
-2. **Płatność:** konto jest przedpłacone i od 25.08.2026 nie ma środków (punkt 11). Po doładowaniu
-   sprawdzić w Rozliczenia → Podsumowanie, czy wpłata ma status „zrealizowana”: karta księguje się
-   w kilka godzin, przelew do 5 dni roboczych. Do tego czasu wszystkie kampanie są „niekwalifikujące się”.
-   Jeśli saldo jest dodatnie, a reklam nadal nie ma, przyczynę pokaże pasek powiadomień na górze konta
-   (weryfikacja reklamodawcy albo profil płatności).
+2. **Weryfikacja reklamodawcy (blokuje wyświetlanie):** 12.09.2026 panel pokazuje „Konto wstrzymane.
+   Aby ponownie wyświetlać reklamy, musisz przejść weryfikację reklamodawcy” (przycisk „Zacznij tutaj”,
+   to samo w Administracja → Weryfikacja reklamodawcy). Google pyta, kogo reprezentuje konto
+   (organizację DEWAX Sp. z o.o., nie agencję), a potem prosi o dokument organizacji (odpis z KRS
+   albo potwierdzenie NIP/REGON) i dokument tożsamości osoby uprawnionej (dowód albo paszport).
+   Nazwa i adres w profilu płatności (Płatności → Ustawienia) muszą zgadzać się z dokumentem;
+   jeśli profil jest „osoba prywatna”, weryfikacja idzie na dane tej osoby. Google rozpatruje zwykle
+   w 1 do 3 dni roboczych; po zatwierdzeniu kampanie ruszają same, nic nie trzeba włączać.
+   Środki są: 464,80 zł po wpłacie 500 zł 12.09 (sierpień: 885,20 zł kosztu przy 850 zł wpłat,
+   stąd stop 25.08 i 35,20 zł potrącone z nowej wpłaty).
 3. **Konwersje:** wykonać punkt 2 (połączenie GA4, zdarzenia kluczowe, import, połączenia z reklam).
-4. **Budżet:** ustalony 12.09.2026 na 60 zł dziennie (punkt 6); zmiana to jedno zdanie, wykonanie przez API.
+4. **Budżet i środki:** 60 zł dziennie (punkt 6), zmiana to jedno zdanie, wykonanie przez API.
+   Saldo 464,80 zł starczy na ok. 7 dni; żeby konto nie stanęło w środku dnia jak 25.08, włączyć
+   płatności automatyczne kartą (Płatności → Ustawienia) albo doładowywać ok. 1 800 zł na miesiąc.
 5. **Telefon:** potwierdzić, że 62 741 32 27 ma być numerem w reklamach i że ktoś odbiera
    w godzinach 8:00 do 16:00 (reklamy z zasobem połączenia wyświetlają się także poza tymi
    godzinami; można ustawić harmonogram samego zasobu).
@@ -297,4 +306,5 @@ Szczegóły: `reklama/google-ads/README.md`.
 |---|---|
 | 14.08 do 25.08.2026 | Stara kampania „Konin 200km” wyświetlała się codziennie: 223 do 469 wyświetleń, 21 do 51 kliknięć, 35 do 96 zł dziennie (łącznie 4 365 wyświetleń, 472 kliknięcia, 885 zł). 25.08 wydała 35 zł z 75 zł i stanęła w środku dnia: skończyły się środki na koncie przedpłaconym. Od 26.08 zero wyświetleń w całym koncie. |
 | 12.09.2026 | Pięć nowych kampanii wgranych przez API, reklamy zatwierdzone, kampanie włączone (60 zł dziennie), stara wstrzymana. Właściciel doładował konto po południu. |
-| 12.09.2026, 20:30 | Kontrola po doładowaniu: nadal zero wyświetleń. Przez API wszystko jest w porządku: konto ENABLED, grupy, reklamy i słowa „kwalifikujące się”, strategia w fazie uczenia, deklaracja reklam politycznych UE ustawiona, pułapy CPC i budżety zgodne z punktem 0. Każda kampania (także stara, wstrzymana) ma dodatkowy powód „niekwalifikująca się”, którego API nie nazywa: blokada na poziomie konta, czyli wpłata jeszcze niezaksięgowana. Następna kontrola 13.09 ok. 13:00. |
+| 12.09.2026, 20:30 | Kontrola po doładowaniu: nadal zero wyświetleń. Przez API wszystko jest w porządku: konto ENABLED, grupy, reklamy i słowa „kwalifikujące się”, strategia w fazie uczenia, deklaracja reklam politycznych UE ustawiona, pułapy CPC i budżety zgodne z punktem 0. Każda kampania (także stara, wstrzymana) ma dodatkowy powód „niekwalifikująca się”, którego API nie nazywa: blokada na poziomie konta. |
+| 12.09.2026, 20:30, zrzut ekranu właściciela | Panel wyjaśnia blokadę: „Konto wstrzymane. Aby ponownie wyświetlać reklamy, musisz przejść weryfikację reklamodawcy”. Środki są zaksięgowane: wpłata 500 zł kartą 12.09, saldo 464,80 zł (sierpień: koszt 885,20 zł przy wpłatach 850 zł, więc 25.08 skończyły się pieniądze, a 35,20 zł potrącono z nowej wpłaty). Do zrobienia przez właściciela: weryfikacja (punkt 9, pozycja 2). Następna kontrola 13.09 ok. 13:00. |
