@@ -49,3 +49,24 @@ Strona nie ustawia własnych cookies. `sessionStorage` przechowuje dwie flagi na
 `dx_calc` (wynik kalkulatora, żeby pokazać baner „masz już koszt i geologię”) i `dx_geo`
 (kliknięto GEO). Nic nie jest wysyłane na serwer. Skrypty własne mają atrybut
 `data-cookieconsent="ignore"`, więc Cookiebot ich nie blokuje.
+
+## Piksel Meta (od 12.09.2026)
+
+Zestaw danych „dewax.pl”, id `1032857169399673` (Business Manager „Dewax”). Kod bazowy siedzi w bloku
+zgody w `<head>` każdej strony jako `<script type="text/plain" data-cookieconsent="marketing">`, więc
+Cookiebot uruchamia go dopiero po zgodzie marketingowej. Bez zgody piksel nie ładuje się wcale i nic
+nie wysyła (nie ma odpowiednika Consent Mode), dlatego liczby w Menedżerze zdarzeń będą niższe niż w GA4.
+Bez znacznika `noscript`, bo obrazka nie da się bramkować zgodą.
+
+| Zdarzenie Meta | Kiedy | Skąd |
+|---|---|---|
+| `PageView` | każda odsłona | kod bazowy |
+| `KalkulatorUkonczony` (własne; `value` = cenaOd, `currency` PLN, `moc`, `model`, `metry`, `otwory`, `cenaDo`) | jak `calculator_completed` | `dx.track` w `js/dewax.js` |
+| `GeoOtwarte` (własne; `miejsce`) | jak `geo_clicked` | `dx.track` |
+| `Contact` (standardowe; `miejsce`) | jak `phone_clicked` | `dx.track` |
+| `WycenaWyslana` (własne; `z_kalkulatora`, `telefon`) | jak `quote_submitted`, przed wysyłką | `dx.track` |
+| `Lead` (standardowe; `content_name: wycena`) | odsłona `podziekowanie.html?ok=1`, czyli potwierdzone dostarczenie do `wyslij.php`; `?zgoda=1` nie liczy się | skrypt w `podziekowanie.html` |
+
+Kampania Meta Ads optymalizuje na `Lead`. Gdy kalkulator zbierze ok. 50 zdarzeń tygodniowo, warto
+rozważyć optymalizację na `KalkulatorUkonczony` (w zestawie reklam: `custom_event_type: OTHER`,
+`custom_event_str: KalkulatorUkonczony`). Założenia kampanii: `reklamy/meta/KAMPANIA.md`.

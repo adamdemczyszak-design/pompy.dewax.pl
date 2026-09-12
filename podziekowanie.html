@@ -39,6 +39,15 @@
         async defer
         src="//js.hs-scripts.com/49004516.js"
         data-cookieconsent="marketing"></script>
+<!-- 5. Piksel Meta (zestaw danych „dewax.pl”, id 1032857169399673). Kategoria marketing:
+     Cookiebot uruchamia go dopiero po zgodzie marketingowej (type="text/plain").
+     Bez znacznika noscript, bo obrazka nie da się bramkować zgodą.
+     Zdarzenia wysyła dx.track w js/dewax.js, Lead wysyła podziekowanie.html?ok=1. -->
+<script type="text/plain" data-cookieconsent="marketing">
+!function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,document,'script','https://connect.facebook.net/en_US/fbevents.js');
+fbq('init', '1032857169399673');
+fbq('track', 'PageView');
+</script>
 <!-- === DEWAX: zgoda i pomiar — koniec === -->
 <title>Dziękujemy za zapytanie — DEWAX</title>
 <meta name="robots" content="noindex">
@@ -106,6 +115,17 @@ font-family:'Montserrat';font-weight:800;font-size:15px;text-decoration:none;tra
   if (ul) ul.innerHTML = '<li>Sprawdzimy treść i zakres zgody, niczego nie dopiszemy od siebie</li><li>Opinia pojawi się na stronie w zaznaczonym przez Ciebie zakresie</li><li>Zgodę możesz wycofać w każdej chwili mailem na sprzedaz@dewax.pl, wtedy opinię usuniemy</li>';
   if (b2) { b2.textContent = 'Wróć do formularza zgody'; b2.setAttribute('href', 'zgoda-na-publikacje-opinii.html'); b2.removeAttribute('target'); }
   document.title = 'Dziękujemy za zgodę | DEWAX';
+})();
+</script>
+<script data-cookieconsent="ignore">
+/* Piksel Meta: zdarzenie Lead wyłącznie dla potwierdzonej wyceny (?ok=1), nie dla zgody na opinię.
+   fbq istnieje tylko po zgodzie marketingowej, a Cookiebot bywa odczytany z opóźnieniem, stąd ponowienia. */
+(function(){
+  if (!/[?&]ok=1/.test(location.search)) return;
+  var done = false;
+  function lead(){ if (done || typeof window.fbq !== 'function') return; done = true; window.fbq('track', 'Lead', { content_name: 'wycena' }); }
+  lead(); window.addEventListener('CookiebotOnLoad', lead); window.addEventListener('CookiebotOnAccept', lead);
+  setTimeout(lead, 1500); setTimeout(lead, 4000);
 })();
 </script>
 </body></html>

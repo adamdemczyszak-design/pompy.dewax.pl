@@ -140,3 +140,18 @@ Infrastruktura gotowa, treści brak. Sekcja `#opinie` w `index.html` jest ukryta
 | 9.2 | Konwersja w GA4 / Google Ads | Sprawdzić, czy jest zdefiniowana na adresie `podziekowanie.html` bez parametru; jeśli tak, zawęzić do `?ok=1` (patrz docs/ANALITYKA.md). |
 | 9.3 | Polityka prywatności | Dopisać cel „publikacja opinii za zgodą” do listy celów przetwarzania przy najbliższej edycji dokumentu. |
 | 9.4 | Test wysyłki na produkcji | Po wdrożeniu wysłać jedną testową zgodę i sprawdzić, czy mail dociera na sprzedaz@dewax.pl z tematem „Zgoda na publikację opinii”. |
+
+## 10. Kampania Meta Ads (12.09.2026): do potwierdzenia przez właściciela
+
+Piksel Meta `1032857169399673` jest wpięty w stronę (kategoria marketing, `docs/ANALITYKA.md`), kampania
+`120249004354710355` czeka wstrzymana i bez budżetu. Pełny opis: `reklamy/meta/KAMPANIA.md`.
+
+| # | Co | Uwaga |
+|---|---|---|
+| 10.1 | Konto reklamowe i strona (Page) | Kampania stoi na koncie „nowe konto reklamowe 1” (firma Dewax), bo tylko ono działa przez integrację; konto „Dewax gruntowe pompy ciepła” jeszcze nie. Potwierdzić konto i stronę, z której mają iść reklamy („DEWAX” albo „Dewax gruntowe pompy ciepła”). |
+| 10.2 | Budżet | Propozycja: 60 zł/dzień, limit wydatków 2 000 zł. Wpisać w Menedżerze reklam albo pozwolić dokończyć przez integrację. |
+| 10.3 | Zgoda operatora na zdjęcia w reklamach | `zdjecia/77.jpg` i `76.jpg` (operator przy wiertnicy) są już na stronie; upewnić się, że zgoda obejmuje także reklamy płatne na Facebooku i Instagramie. |
+| 10.4 | Reklama „Moje Ciepło do 31.12.2026” | Utworzyć dopiero po sprawdzeniu, że nabór i kwoty (21 000 zł) są aktualne. |
+| 10.5 | Piksel na dewax.pl (WordPress) | Kampania Multilan na tym samym koncie optymalizuje na konwersję z piksela, który tam nie działa. Wpiąć ten sam piksel w WordPressa, z bramkowaniem zgodą. |
+| 10.6 | Cookiebot | Po wdrożeniu ponownie przeskanować domenę, żeby cookie `_fbp` trafiło do deklaracji cookies. |
+| 10.7 | Weryfikacja domeny w Meta | Ustawienia firmowe, Bezpieczeństwo marki, Domeny: dodać i zweryfikować `dewax.pl` (obejmuje pompy.dewax.pl). |

@@ -1,6 +1,6 @@
 /* =====================================================================
-   DEWAX · skrypt wspólny: nawigacja, pomiar zdarzeń (gtag, za zgodą przez
-   Cookiebot), formularz wyceny, pasek mobilny, wspólny stan „koszt + geologia".
+   DEWAX · skrypt wspólny: nawigacja, pomiar zdarzeń (gtag oraz piksel Meta, za zgodą
+   przez Cookiebot), formularz wyceny, pasek mobilny, wspólny stan „koszt + geologia".
    Bez bibliotek zewnętrznych. Nie ustawia cookies; korzysta z sessionStorage
    (kategoria „niezbędne/funkcjonalne”) wyłącznie do zapamiętania, że użytkownik
    w tej sesji ukończył kalkulator i otworzył DEWAX GEO.
@@ -13,8 +13,28 @@
 
   /* ---------- pomiar: jedna funkcja, ta sama konwencja co dotychczas (gtag) ---------- */
   var dx = w.dx = w.dx || {};
+  /* Piksel Meta (zestaw danych „dewax.pl”, id 1032857169399673) ładuje się wyłącznie po zgodzie
+     marketingowej w Cookiebocie, więc fbq bywa niezdefiniowane: wtedy zdarzenie po prostu nie wychodzi.
+     Mapa: zdarzenie GA4 -> [metoda fbq, nazwa zdarzenia Meta, przekazywane parametry]. Standardowe:
+     Contact (telefon), Lead (wysyła podziekowanie.html?ok=1). Własne: KalkulatorUkonczony, GeoOtwarte,
+     WycenaWyslana. */
+  var META = {
+    calculator_completed: ['trackCustom', 'KalkulatorUkonczony', ['moc', 'model', 'metry', 'otwory', 'cenaOd', 'cenaDo']],
+    geo_clicked: ['trackCustom', 'GeoOtwarte', ['miejsce']],
+    phone_clicked: ['track', 'Contact', ['miejsce']],
+    quote_submitted: ['trackCustom', 'WycenaWyslana', ['z_kalkulatora', 'telefon']]
+  };
   dx.track = function (name, params) {
     try { if (typeof w.gtag === 'function') w.gtag('event', name, params || {}); } catch (e) {}
+    try {
+      var m = META[name];
+      if (m && typeof w.fbq === 'function') {
+        var p = {}, src = params || {};
+        m[2].forEach(function (k) { if (src[k] !== undefined) p[k] = src[k]; });
+        if (name === 'calculator_completed' && src.cenaOd) { p.value = src.cenaOd; p.currency = 'PLN'; }
+        w.fbq(m[0], m[1], p);
+      }
+    } catch (e) {}
     if (w.DX_DEBUG) { try { console.debug('[dx]', name, params || {}); } catch (e) {} }
   };
   function ss(k, v) { try { if (v === undefined) return sessionStorage.getItem(k); sessionStorage.setItem(k, v); } catch (e) { return null; } }
