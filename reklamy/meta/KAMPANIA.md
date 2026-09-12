@@ -1,7 +1,8 @@
 # Kampania Meta Ads: pompy.dewax.pl
 
-Stan na 12 września 2026. Kampania przygotowana do akceptacji właściciela. Nic nie wydaje pieniędzy,
-dopóki właściciel nie ustawi budżetu i nie włączy kampanii w Menedżerze reklam.
+Stan na 12 września 2026. Kampania, zestaw reklam i cztery reklamy są założone za zgodą właściciela,
+z budżetem, ale w stanie wstrzymanym. Nic nie wydaje pieniędzy, dopóki właściciel nie włączy kampanii
+w Menedżerze reklam, a włączyć ją wolno dopiero po wdrożeniu piksela na produkcję.
 
 ## Cel i logika
 
@@ -23,7 +24,9 @@ obronić. Bez pauz „—”.
 | Konto „Adam Demczyszak” | `10203979568391826` | Status UNSETTLED (nieuregulowana płatność). Nie używać do kampanii |
 | Strona (Page) | preferowana „Dewax gruntowe pompy ciepła” `105889812346061`; zapasowa „DEWAX” `160091957504131` | Do konta `1413741105666132` przypięta jest tylko strona „DEWAX”. Jeśli kreacje nie przyjmą strony pomp, trzeba ją udostępnić firmie „Dewax” w Ustawieniach firmowych |
 | Piksel (zestaw danych) | `1032857169399673` „dewax.pl” | Założony 4.06.2026, **nigdy nie odpalił**: nie był wpięty w żadną stronę. Od tej gałęzi jest w `<head>` każdej strony pompy.dewax.pl, bramkowany zgodą marketingową Cookiebota. Zdarzenia: `docs/ANALITYKA.md` |
-| Kampania | `120249004354710355` „DEWAX pompy \| Leady \| Kalkulator kosztu \| 2026-09” | Cel: kontakty (OUTCOME_LEADS), aukcja, **PAUSED, bez budżetu**. Budżet, zestawy reklam i reklamy wymagają zgody właściciela (patrz „Co zostało do zrobienia”) |
+| Kampania | `120249004354710355` „DEWAX pompy \| Leady \| Kalkulator kosztu \| 2026-09” | Cel: kontakty (OUTCOME_LEADS), aukcja, budżet kampanii 60 zł/dzień, limit wydatków 2 000 zł, najniższy koszt bez limitu stawki. **PAUSED**: włączenie dopiero po wdrożeniu piksela |
+| Zestaw reklam A | `120249004665300355` „A \| 200 km od Dobrzycy + Warszawa (14 kół) \| Lead” | Decyzja właściciela 12.09.2026: 200 km od Dobrzycy plus Warszawa. Optymalizacja na Lead z piksela, PAUSED |
+| Reklamy | R1 `120249004678800355`, R2 `120249004679490355`, R3 `120249004686060355`, R4 `120249004690330355` | Wszystkie PAUSED, z kreacjami z sekcji „Kreacje w koncie” |
 
 Obserwacja przy okazji: istniejąca kampania Multilan „Nowa kampania z celem Kontakty” optymalizuje na
 konwersję niestandardową „kontakt dewax.pl” z tego samego piksela. Skoro piksel nigdy nie odpalił,
@@ -33,21 +36,27 @@ Piksel trzeba wpiąć także w dewax.pl (WordPress), inaczej optymalizacja tam n
 ## Struktura kampanii
 
 ```
-Kampania: DEWAX pompy | Leady | Kalkulator kosztu | 2026-09
+Kampania: DEWAX pompy | Leady | Kalkulator kosztu | 2026-09   (id 120249004354710355)
   cel OUTCOME_LEADS, aukcja, budżet kampanii (CBO) 60 zł/dzień, limit wydatków 2 000 zł,
   strategia stawek: najniższy koszt bez limitu
-  ├── Zestaw A: Rdzeń 70 km od Dobrzycy
-  │     lokalizacja: promień 70 km od Dobrzycy (51,868 N, 17,618 E), osoby mieszkające tam lub ostatnio tam przebywające
-  │     wiek 30–65 (jako sugestia dla Advantage+ audience), obie płcie, bez zainteresowań (szerokie)
-  │     umiejscowienia: automatyczne (Advantage+), witryna jako miejsce docelowe
-  │     optymalizacja: konwersje w witrynie, zdarzenie Lead z piksela 1032857169399673
-  │     rozliczenie: wyświetlenia, okno atrybucji domyślne (7 dni klik, 1 dzień wyświetlenie)
-  │     DSA: beneficjent i płatnik DEWAX Sp. z o.o.
-  │     reklamy: 1, 2, 3, 4 (niżej)
-  └── Zestaw B: Dalsze regiony (opcjonalny, do włączenia po 2 tygodniach zestawu A)
-        lokalizacje bez nakładania się na zestaw A: Łódź 45 km, Wrocław 35 km, Bydgoszcz 50 km,
-        Toruń 40 km, Katowice 50 km, Warszawa 50 km
-        reszta jak w zestawie A; reklamy 1 i 4
+  └── Zestaw A: 200 km od Dobrzycy + Warszawa   (id 120249004665300355)
+        lokalizacja: Meta ogranicza promień wokół punktu do 80 km, więc obszar 200 km od Dobrzycy
+        (51,868 N, 17,618 E) odwzorowuje 13 kół o promieniach dobranych tak, żeby zewnętrzna krawędź
+        nie wychodziła dalej niż ok. 210 km, plus Warszawa 80 km na życzenie właściciela:
+          Dobrzyca 80, Poznań 80, Wrocław 80, Łódź 80, Wieluń 80, Opole 75, Bydgoszcz 68,
+          Zielona Góra 65, Piła 55, Częstochowa 53, Płock 49, Jelenia Góra 41, Gorzów Wlkp. 21,
+          Warszawa 80 (km); osoby mieszkające tam lub ostatnio tam przebywające
+        wiek 30–65 jako sugestia dla Advantage+ audience (Meta nie pozwala na twardy próg
+        powyżej 25 lat przy Advantage+), obie płcie, bez zainteresowań (szerokie)
+        umiejscowienia: automatyczne (Advantage+), witryna jako miejsce docelowe
+        optymalizacja: konwersje w witrynie, zdarzenie Lead z piksela 1032857169399673
+        rozliczenie: wyświetlenia, okno atrybucji domyślne (7 dni klik, 1 dzień wyświetlenie)
+        DSA: beneficjent i płatnik DEWAX Sp. z o.o.
+        reklamy: R1 120249004678800355, R2 120249004679490355, R3 120249004686060355,
+                 R4 120249004690330355 (wszystkie PAUSED)
+  Zestaw B z pierwotnej propozycji (dalsze regiony) nie powstał: jego miasta mieszczą się
+  w zestawie A albo są poza 200 km (Katowice, Kraków, Szczecin, Kielce, Radom); do rozważenia
+  jako rozszerzenie po pierwszych wynikach.
 ```
 
 Dlaczego tak:
@@ -57,9 +66,11 @@ Dlaczego tak:
   historii, więc pierwsze 2–3 tygodnie to nauka algorytmu; to normalne.
 - **Szeroko, bez zainteresowań.** Meta nie ma dobrego segmentu „buduje dom w Wielkopolsce”. Lepiej dać
   algorytmowi sygnał z piksela (kalkulator, Lead) niż zgadywać zainteresowania.
-- **Promień 70 km, nie cała Polska.** Strategia z 15.08: Pleszew, Jarocin, Krotoszyn, Kalisz, Ostrów
-  są nieobsadzone, Poznań jest najdroższy. 70 km sięga południowych przedmieść Poznania, nie centrum.
-  Zestaw B dokłada miasta z województw, dla których strona ma podstrony `gdzie-dzialamy/`.
+- **200 km od Dobrzycy plus Warszawa, nie cała Polska.** Pierwotna propozycja (70 km i osobny
+  zestaw na dalsze miasta) została zmieniona decyzją właściciela 12.09.2026 na jeden zestaw o zasięgu
+  200 km z dodaną Warszawą. Obszar pokrywa wielkopolskie, łódzkie, kujawsko-pomorskie, dolnośląskie,
+  opolskie, lubuskie, północ śląskiego (Częstochowa) i zachód mazowieckiego, a osobne koło obejmuje
+  aglomerację warszawską. Poza zasięgiem zostają Katowice, Kraków, Szczecin, Kielce i Radom.
 - **Budżet 60 zł/dzień (ok. 1 800 zł/mies.) i limit 2 000 zł.** Limit to bezpiecznik: kampania
   zatrzyma się sama, gdyby nikt na nią nie patrzył. Do zmiany jednym polem w Menedżerze reklam.
 - **Jedna kampania, dwa zestawy.** Przy tym budżecie więcej zestawów tylko rozprasza naukę.
@@ -155,11 +166,10 @@ Nagłówek: **Moje Ciepło: nabór do 31.12.2026** · Opis: „Policz koszt syst
    w deklaracji cookies na stronie polityki prywatności.
 3. **Ustawienia firmowe Meta**: zweryfikować domenę `dewax.pl` (Bezpieczeństwo marki, Domeny) i, jeśli
    kampania ma iść ze strony „Dewax gruntowe pompy ciepła”, udostępnić tę stronę firmie „Dewax”.
-4. **Budżet, zestawy reklam, reklamy.** Integracja zablokowała tworzenie obiektów z budżetem bez zgody
-   właściciela. Do wyboru: (a) właściciel pozwala Claude dokończyć (zestawy A i B, reklamy 1–4 według
-   tego pliku, wszystko wstrzymane), albo (b) właściciel klika sam w Menedżerze reklam:
-   kampania `120249004354710355`, budżet kampanii 60 zł/dzień, limit wydatków 2 000 zł, zestaw A
-   według tabeli wyżej, reklamy z kreacji wymienionych w sekcji „Kreacje w koncie”.
+4. **Budżet, zestaw reklam, reklamy: zrobione 12.09.2026** za zgodą właściciela (budżet 60 zł/dzień,
+   limit 2 000 zł, zestaw A, reklamy R1–R4, wszystko wstrzymane). Przed startem przejrzeć zestaw
+   w Menedżerze reklam: ostrzeżenie o pikselu bez aktywności zniknie po wdrożeniu, strona nadawcy
+   ma być właściwa.
 5. **Włączyć kampanię** dopiero po punkcie 1. Pierwsze 14 dni bez zmian (nauka algorytmu).
 
 ## Kreacje w koncie
@@ -187,7 +197,7 @@ zawiera treści wygenerowanych przez AI (pole `self_ai_disclosure` zostało celo
 | Dzień 3 | Czy reklamy przeszły weryfikację, czy piksel raportuje `PageView` z ruchu reklamowego | Jeśli odrzucone: poprawić tekst, nie obraz |
 | Dzień 7 | Koszt na `KalkulatorUkonczony`, CTR (cel powyżej 1%), odsetek sesji z kalkulatorem w GA4 | Reklama z CTR poniżej 0,6% po 3 000 wyświetleń: wyłączyć |
 | Dzień 14 | Liczba `Lead`, koszt na Lead, `phone_clicked` w GA4 | Poniżej 3 leadów: przełączyć optymalizację na `KalkulatorUkonczony` (zdarzenie własne) na 2 tygodnie, potem wrócić na Lead |
-| Dzień 14 | Zestaw B | Włączyć, jeśli zestaw A ma stabilny koszt na Lead |
+| Dzień 14 | Zasięg | Jeśli koszt na Lead jest stabilny, rozważyć osobny zestaw na Katowice, Kraków lub Szczecin (bez nakładania się na zestaw A) |
 | Dzień 30 | Wynik całości: leady, oględziny, umowy z CRM (HubSpot) | Skalować budżet o maks. 20% tygodniowo, gdy koszt na Lead jest akceptowalny |
 
 Wskaźniki, od których zależy sens kampanii, są po stronie firmy, nie Meta: ile z leadów kończy się

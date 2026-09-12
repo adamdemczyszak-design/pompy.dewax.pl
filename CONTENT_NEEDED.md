@@ -149,7 +149,7 @@ Piksel Meta `1032857169399673` jest wpięty w stronę (kategoria marketing, `doc
 | # | Co | Uwaga |
 |---|---|---|
 | 10.1 | Konto reklamowe i strona (Page) | Kampania stoi na koncie „nowe konto reklamowe 1” (firma Dewax), bo tylko ono działa przez integrację; konto „Dewax gruntowe pompy ciepła” jeszcze nie. Potwierdzić konto i stronę, z której mają iść reklamy („DEWAX” albo „Dewax gruntowe pompy ciepła”). |
-| 10.2 | Budżet | Propozycja: 60 zł/dzień, limit wydatków 2 000 zł. Wpisać w Menedżerze reklam albo pozwolić dokończyć przez integrację. |
+| 10.2 | Budżet | Ustawiony 12.09.2026 za zgodą właściciela: 60 zł/dzień, limit wydatków 2 000 zł; zestaw A (200 km od Dobrzycy plus Warszawa) i reklamy R1–R4 wstrzymane. Zmiany w Menedżerze reklam. |
 | 10.3 | Zgoda operatora na zdjęcia w reklamach | `zdjecia/77.jpg` i `76.jpg` (operator przy wiertnicy) są już na stronie; upewnić się, że zgoda obejmuje także reklamy płatne na Facebooku i Instagramie. |
 | 10.4 | Reklama „Moje Ciepło do 31.12.2026” | Utworzyć dopiero po sprawdzeniu, że nabór i kwoty (21 000 zł) są aktualne. |
 | 10.5 | Piksel na dewax.pl (WordPress) | Kampania Multilan na tym samym koncie optymalizuje na konwersję z piksela, który tam nie działa. Wpiąć ten sam piksel w WordPressa, z bramkowaniem zgodą. |
