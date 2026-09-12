@@ -271,4 +271,7 @@ Właściciel podłączył Meta Ads w Windsor.ai i włączył akcje zapisu; pikse
 Strona nadawcy: „Dewax gruntowe pompy ciepła” `105889812346061`. Zestaw przyjął się bez pól DSA,
 więc konto ma domyślnego beneficjenta i płatnika albo Meta uzupełniła je z danych konta; sprawdzić
 w Menedżerze reklam przy pierwszym przeglądzie. Kampania `120249004354710355` na koncie
-`1413741105666132` pozostaje wstrzymana i można ją usunąć.
+`1413741105666132` została **usunięta 12.09.2026** na polecenie właściciela (status DELETED,
+razem z zestawem i reklamami; cztery kreacje zostały w bibliotece tego konta i nikomu nie
+przeszkadzają). Wszystkie identyfikatory z sekcji „Konto, strona, piksel” i „Struktura kampanii”
+dotyczą więc obiektów historycznych; obowiązują identyfikatory z tabeli wyżej.
