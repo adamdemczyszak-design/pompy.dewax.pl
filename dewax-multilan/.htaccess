@@ -8,9 +8,6 @@ Options -Indexes
   RewriteEngine On
   RewriteBase /multilan/
 
-  # /multilan/realizacje/ (ukosnik na koncu) -> /multilan/realizacje, gdy istnieje plik realizacje.html
-  RewriteCond %{DOCUMENT_ROOT}/multilan/$1.html -f
-  RewriteRule ^(.+)/$ /multilan/$1 [R=301,L]
 
   # adresy bez rozszerzenia -> pliki .html, takze gdy istnieje katalog o tej samej nazwie (np. realizacje)
   RewriteCond %{REQUEST_FILENAME} !-f
