@@ -7,3 +7,4 @@ Thumbs.db
 # zrzuty ekranu do porównania przed/po (duże pliki, generowane lokalnie)
 docs/zrzuty/
 .claude/launch.json
+__pycache__/

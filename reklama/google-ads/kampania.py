@@ -60,7 +60,7 @@ KAMPANIE = [
     {
         'id': 'gruntowa',
         'nazwa': 'DEWAX | Gruntowa pompa ciepła',
-        'budzet_dzienny': 55,
+        'budzet_dzienny': 31,
         'pulap_cpc': 6.0,
         'grupy': [
             {
@@ -178,7 +178,7 @@ KAMPANIE = [
     {
         'id': 'odwierty',
         'nazwa': 'DEWAX | Odwierty i dolne źródło',
-        'budzet_dzienny': 25,
+        'budzet_dzienny': 14,
         'pulap_cpc': 6.0,
         'wykluczenia_kampanii_dodatkowe': ['powietrzna', 'powietrznej', 'powietrzne', 'powietrznych'],
         'grupy': [
@@ -251,7 +251,7 @@ KAMPANIE = [
     {
         'id': 'dotacje',
         'nazwa': 'DEWAX | Dotacje',
-        'budzet_dzienny': 10,
+        'budzet_dzienny': 6,
         'pulap_cpc': 4.0,
         'wykluczenia_kampanii_dodatkowe': ['powietrzna', 'powietrznej', 'powietrzne', 'powietrznych'],
         'grupy': [
@@ -283,7 +283,7 @@ KAMPANIE = [
     {
         'id': 'marka',
         'nazwa': 'DEWAX | Marka',
-        'budzet_dzienny': 5,
+        'budzet_dzienny': 3,
         'pulap_cpc': 3.0,
         'grupy': [
             {
@@ -308,7 +308,7 @@ KAMPANIE = [
     {
         'id': 'regiony',
         'nazwa': 'DEWAX | Regiony',
-        'budzet_dzienny': 10,
+        'budzet_dzienny': 6,
         'pulap_cpc': 4.0,
         'wykluczenia_kampanii_dodatkowe': ['powietrzna', 'powietrznej', 'powietrzne', 'powietrznych'],
         'grupy': [],   # generowane niżej z REGIONY

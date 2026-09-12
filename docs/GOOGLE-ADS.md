@@ -5,7 +5,7 @@ Jedno źródło prawdy dla struktury i tekstów: `reklama/google-ads/kampania.py
 Google Ads Editor: `reklama/google-ads/import/`. Obrazy: `reklama/google-ads/obrazy/`.
 Katalog `reklama/` nie wchodzi do pakietu wdrożenia na serwer (`wdrozenie.yml` go nie kopiuje).
 
-## 0. Wgrane do konta 12 września 2026 (wszystko wstrzymane)
+## 0. Wgrane do konta 12 września 2026 (kampanie włączone, konto czeka na środki)
 
 Kampanie utworzone przez API (Supermetrics: struktura, słowa, wykluczenia, reklamy, rozszerzenia;
 Windsor.ai: pułapy CPC, lokalizacje z mnożnikiem, zasób połączenia). Stara kampania
@@ -21,7 +21,8 @@ Windsor.ai: pułapy CPC, lokalizacje z mnożnikiem, zasób połączenia). Stara 
 
 Budżety po decyzji właściciela z 12.09.2026: 60 zł dziennie łącznie (pierwotna propozycja 105 zł,
 proporcje z punktu 6 zachowane). Kampanie włączone 12.09.2026 na polecenie właściciela; reklamy
-czekają na przegląd zasad Google, konto wymaga doładowania (płatność z góry).
+zatwierdzone przez Google tego samego dnia. Konto jest przedpłacone: środki skończyły się 25.08.2026
+(punkt 11), doładowanie z 12.09 czeka na zaksięgowanie.
 
 Wspólne dla wszystkich: sieć wyszukiwania bez partnerów i bez sieci reklamowej, język polski,
 lokalizacje wielkopolskie 20861, łódzkie 20850, kujawsko-pomorskie 20848, dolnośląskie 20847,
@@ -29,12 +30,12 @@ lokalizacje wielkopolskie 20861, łódzkie 20850, kujawsko-pomorskie 20848, doln
 134 wykluczenia wspólne (w Odwiertach, Dotacjach i Regionach dodatkowo „powietrzna”; w czterech
 grupach kampanii Gruntowa na poziomie grupy), 8 linków do podstron, 10 objaśnień, rozszerzenie
 „Katalog usług” (w API nagłówek nazywa się „Service catalog”, Google wyświetla go po polsku),
-zasób połączenia 62 741 32 27, sufiks adresu z utm. Grupy reklam i reklamy są włączone,
-kampanie wstrzymane, więc nic się nie wyświetla do czasu włączenia kampanii.
+zasób połączenia 62 741 32 27, sufiks adresu z utm. Grupy reklam, reklamy i kampanie są włączone;
+dopóki na koncie nie ma środków, Google trzyma każdą kampanię w stanie „niekwalifikująca się”.
 
-Do zrobienia ręcznie w panelu: obrazy (punkt 5), weryfikacja reklamodawcy, konwersje (punkt 2)
-i włączenie kampanii po sprawdzeniu płatności (punkt 9). W Supermetrics ustawiono
-„Going live: wymaga zatwierdzenia człowieka”, więc włączenie przez API i tak czeka na Twoje „tak”.
+Do zrobienia ręcznie w panelu: płatność (punkt 9), obrazy (punkt 5), weryfikacja reklamodawcy,
+konwersje (punkt 2). W Supermetrics ustawiono „Going live: wymaga zatwierdzenia człowieka”, więc
+każde włączenie przez API czeka na Twoje „tak”.
 
 ## 1. Co było w koncie przed zmianą
 
@@ -261,11 +262,14 @@ Szczegóły: `reklama/google-ads/README.md`.
 ## 9. Lista dla właściciela
 
 1. **Zrobione 12.09.2026:** zapis włączony w Supermetrics i Windsor, pięć kampanii wgranych
-   i wstrzymanych, stara kampania wstrzymana (punkt 0).
-2. **Konto Google Ads:** sprawdzić, dlaczego kampania „Konin 200km” była niekwalifikująca się od 26.08
-   (Rozliczenia, weryfikacja reklamodawcy, powiadomienia). Bez tego nowe kampanie też nie ruszą.
+   i włączonych z budżetem 60 zł dziennie, stara kampania wstrzymana (punkt 0).
+2. **Płatność:** konto jest przedpłacone i od 25.08.2026 nie ma środków (punkt 11). Po doładowaniu
+   sprawdzić w Rozliczenia → Podsumowanie, czy wpłata ma status „zrealizowana”: karta księguje się
+   w kilka godzin, przelew do 5 dni roboczych. Do tego czasu wszystkie kampanie są „niekwalifikujące się”.
+   Jeśli saldo jest dodatnie, a reklam nadal nie ma, przyczynę pokaże pasek powiadomień na górze konta
+   (weryfikacja reklamodawcy albo profil płatności).
 3. **Konwersje:** wykonać punkt 2 (połączenie GA4, zdarzenia kluczowe, import, połączenia z reklam).
-4. **Budżet:** potwierdzić 105 zł/dzień albo podać inną kwotę; proporcje w punkcie 6.
+4. **Budżet:** ustalony 12.09.2026 na 60 zł dziennie (punkt 6); zmiana to jedno zdanie, wykonanie przez API.
 5. **Telefon:** potwierdzić, że 62 741 32 27 ma być numerem w reklamach i że ktoś odbiera
    w godzinach 8:00 do 16:00 (reklamy z zasobem połączenia wyświetlają się także poza tymi
    godzinami; można ustawić harmonogram samego zasobu).
@@ -274,8 +278,8 @@ Szczegóły: `reklama/google-ads/README.md`.
 7. **Polityka prywatności:** przy najbliższej edycji dopisać, że do zgłoszenia z formularza
    dopisujemy źródło wejścia (parametry kampanii i identyfikator kliknięcia Google Ads) oraz
    że przeglądarka trzyma je w `sessionStorage` na czas wizyty (`CONTENT_NEEDED.md`, punkt 10).
-8. **Włączenie:** po punktach 2 i 3 dać znak; kampanie zostaną włączone, stara wstrzymana,
-   a pierwszy przegląd haseł zaplanowany po 7 dniach.
+8. **Włączenie:** zrobione 12.09.2026. Pierwsza kontrola wyświetleń 13.09, przegląd wyszukiwanych
+   haseł 19.09 (zaplanowane automatycznie); wyniki trafiają do punktu 11.
 
 ## 10. Jak czytać wyniki
 
@@ -286,3 +290,11 @@ Szczegóły: `reklama/google-ads/README.md`.
 - **GA4, co miesiąc:** eksploracja ścieżki z `docs/ANALITYKA.md` z segmentem „źródło = google / cpc”:
   ile sesji z reklam kończy kalkulator, ile wchodzi do GEO, ile wysyła formularz. Jeśli kalkulator
   kończy dużo osób, a formularz mało, problem jest na stronie, nie w reklamach.
+
+## 11. Dziennik
+
+| Data | Co się stało |
+|---|---|
+| 14.08 do 25.08.2026 | Stara kampania „Konin 200km” wyświetlała się codziennie: 223 do 469 wyświetleń, 21 do 51 kliknięć, 35 do 96 zł dziennie (łącznie 4 365 wyświetleń, 472 kliknięcia, 885 zł). 25.08 wydała 35 zł z 75 zł i stanęła w środku dnia: skończyły się środki na koncie przedpłaconym. Od 26.08 zero wyświetleń w całym koncie. |
+| 12.09.2026 | Pięć nowych kampanii wgranych przez API, reklamy zatwierdzone, kampanie włączone (60 zł dziennie), stara wstrzymana. Właściciel doładował konto po południu. |
+| 12.09.2026, 20:30 | Kontrola po doładowaniu: nadal zero wyświetleń. Przez API wszystko jest w porządku: konto ENABLED, grupy, reklamy i słowa „kwalifikujące się”, strategia w fazie uczenia, deklaracja reklam politycznych UE ustawiona, pułapy CPC i budżety zgodne z punktem 0. Każda kampania (także stara, wstrzymana) ma dodatkowy powód „niekwalifikująca się”, którego API nie nazywa: blokada na poziomie konta, czyli wpłata jeszcze niezaksięgowana. Następna kontrola 13.09 ok. 13:00. |
