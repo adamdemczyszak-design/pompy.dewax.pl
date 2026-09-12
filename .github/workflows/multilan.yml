@@ -56,11 +56,12 @@ jobs:
           set -u
           sleep 5
           blad=0
-          for u in "" "dla-zarzadcow" "realizacje" "realizacja/gorzno" "kolory"; do
-            kod=$(curl -s -o /dev/null -w "%{http_code}" "https://dewax.pl/multilan/$u")
+          # parametr ?t= omija pamiec CDN nazwa.pl (przekierowania 301 sa tam trzymane 14 dni); -L podaza za przekierowaniami
+          for u in "" "dla-zarzadcow" "realizacje/" "realizacja/gorzno" "kolory"; do
+            kod=$(curl -s -L -o /dev/null -w "%{http_code}" "https://dewax.pl/multilan/$u?t=$RANDOM")
             echo "/multilan/$u -> $kod"
             [ "$kod" = "200" ] || blad=1
           done
-          kod404=$(curl -s -o /dev/null -w "%{http_code}" "https://dewax.pl/multilan/nie-ma-takiej-strony"); echo "/multilan/nie-ma-takiej-strony -> $kod404 (oczekiwane 404)"
-          curl -s "https://dewax.pl/multilan/" | grep -q "Multilan" && echo "OK: tresc strony glownej" || { echo "::error::strona glowna bez tresci"; blad=1; }
+          kod404=$(curl -s -o /dev/null -w "%{http_code}" "https://dewax.pl/multilan/nie-ma-takiej-strony?t=$RANDOM"); echo "/multilan/nie-ma-takiej-strony -> $kod404 (oczekiwane 404)"
+          curl -s "https://dewax.pl/multilan/?t=$RANDOM" | grep -q "Multilan" && echo "OK: tresc strony glownej" || { echo "::error::strona glowna bez tresci"; blad=1; }
           exit $blad
