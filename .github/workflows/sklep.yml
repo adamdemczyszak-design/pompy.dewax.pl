@@ -1,0 +1,58 @@
+name: Sklep (sklep.dewax.pl) - narzedzia FTP
+
+# Sklep WooCommerce stoi w katalogu glownym konta FTP (/). Ten workflow:
+#   tryb=listuj  - tylko wypisuje zawartosc podanego katalogu (nic nie zmienia)
+#   tryb=wgraj   - wgrywa polskie tlumaczenie WooCommerce (sklep-tlumaczenia/woocommerce-pl_PL.mo)
+#                  do /wp-content/languages/plugins/ (plik mozna usunac, zeby cofnac)
+on:
+  workflow_dispatch:
+    inputs:
+      tryb:
+        description: 'listuj albo wgraj'
+        type: choice
+        options: [listuj, wgraj]
+        default: listuj
+      sciezka:
+        description: 'katalog do wypisania (tryb listuj)'
+        default: '/wp-content/uploads/2026/09/'
+
+jobs:
+  sklep:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Instaluj lftp
+        run: sudo apt-get update -qq && sudo apt-get install -y -qq lftp
+      - name: Listuj
+        if: ${{ inputs.tryb == 'listuj' }}
+        env:
+          FTP_HOST: ${{ secrets.FTP_HOST }}
+          FTP_LOGIN: ${{ secrets.FTP_LOGIN }}
+          LFTP_PASSWORD: ${{ secrets.FTP_HASLO }}
+          SCIEZKA: ${{ inputs.sciezka }}
+        run: |
+          set -eu
+          echo "=== $SCIEZKA"
+          lftp --env-password -u "$FTP_LOGIN" "ftp://$FTP_HOST" -e "set ssl:verify-certificate no; set ftp:ssl-allow yes; set net:timeout 20; cls -l $SCIEZKA; bye"
+          echo "=== /wp-content/languages/plugins/ (pliki woocommerce*)"
+          lftp --env-password -u "$FTP_LOGIN" "ftp://$FTP_HOST" -e "set ssl:verify-certificate no; set ftp:ssl-allow yes; set net:timeout 20; cls -l /wp-content/languages/plugins/ | grep -i woocommerce || true; bye" || true
+      - name: Wgraj tlumaczenie
+        if: ${{ inputs.tryb == 'wgraj' }}
+        env:
+          FTP_HOST: ${{ secrets.FTP_HOST }}
+          FTP_LOGIN: ${{ secrets.FTP_LOGIN }}
+          LFTP_PASSWORD: ${{ secrets.FTP_HASLO }}
+        run: |
+          set -eu
+          test -f sklep-tlumaczenia/woocommerce-pl_PL.mo
+          lftp --env-password -u "$FTP_LOGIN" "ftp://$FTP_HOST" <<LFTP
+          set ssl:verify-certificate no
+          set ftp:ssl-allow yes
+          set net:timeout 25
+          mkdir -p /wp-content/languages/plugins
+          put -O /wp-content/languages/plugins sklep-tlumaczenia/woocommerce-pl_PL.mo
+          cls -l /wp-content/languages/plugins/woocommerce-pl_PL.mo
+          bye
+          LFTP
+          sleep 3
+          curl -s "https://sklep.dewax.pl/produkt/zestaw-dekoracyjny-multilan-na-ok-10-m%c2%b2/" | grep -o -i "Dodaj do koszyka\|Add to cart" | head -1
