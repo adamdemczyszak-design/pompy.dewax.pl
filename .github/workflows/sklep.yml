@@ -57,6 +57,9 @@ jobs:
           put -O ${BAZA%/}/wp-content/languages/plugins sklep-tlumaczenia/woocommerce-pl_PL.l10n.php
           cls -l ${BAZA%/}/wp-content/languages/plugins/woocommerce-pl_PL.mo
           cls -l ${BAZA%/}/wp-content/languages/plugins/woocommerce-pl_PL.l10n.php
+          mkdir -p ${BAZA%/}/wp-content/mu-plugins
+          put -O ${BAZA%/}/wp-content/mu-plugins sklep-tlumaczenia/dewax-tlumaczenie-woocommerce.php
+          cls -l ${BAZA%/}/wp-content/mu-plugins/
           bye
           LFTP
           sleep 3
