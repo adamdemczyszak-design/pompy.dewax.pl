@@ -27,7 +27,7 @@ obronić. Bez pauz „—”.
 | Element | Wartość | Uwaga |
 |---|---|---|
 | Konto reklamowe | `1413741105666132` „nowe konto reklamowe 1”, firma „Dewax” (`159657032930324`), PLN | Jedyne konto firmowe dostępne przez integrację. Dziś prowadzi kampanię Multilan (farby), więc kampania pomp ma wyraźną nazwę z prefiksem „DEWAX pompy” |
-| Konto „Dewax gruntowe pompy ciepła” | `955522616312255`, firma „Gruntowe pompy ciepła” | Integracja Meta jeszcze go nie obsługuje („gradually being rolled out”). Jeśli właściciel woli prowadzić kampanię tam, całość niżej da się odtworzyć ręcznie z tego opisu |
+| Konto „Dewax gruntowe pompy ciepła” | `955522616312255`, firma „Gruntowe pompy ciepła” | Integracja Meta jeszcze go nie obsługuje („gradually being rolled out”; dlaczego: ostatnia sekcja pliku). Jeśli właściciel woli prowadzić kampanię tam, całość niżej da się odtworzyć ręcznie z tego opisu |
 | Konto „Adam Demczyszak” | `10203979568391826` | Status UNSETTLED (nieuregulowana płatność). Nie używać do kampanii |
 | Strona (Page) | preferowana „Dewax gruntowe pompy ciepła” `105889812346061`; zapasowa „DEWAX” `160091957504131` | Do konta `1413741105666132` przypięta jest tylko strona „DEWAX”. Jeśli kreacje nie przyjmą strony pomp, trzeba ją udostępnić firmie „Dewax” w Ustawieniach firmowych |
 | Piksel (zestaw danych) | `1032857169399673` „dewax.pl” | Założony 4.06.2026, **nigdy nie odpalił**: nie był wpięty w żadną stronę. Od tej gałęzi jest w `<head>` każdej strony pompy.dewax.pl, bramkowany zgodą marketingową Cookiebota. Zdarzenia: `docs/ANALITYKA.md` |
@@ -225,7 +225,7 @@ Stan wyjściowy: kampania `120249004354710355` na koncie „nowe konto reklamowe
 kilkanaście minut i została wstrzymana, zanim reklamy przeszły weryfikację; wydatki 0 zł. Konto
 docelowe „Dewax gruntowe pompy ciepła” `955522616312255` należy do firmy „Gruntowe pompy ciepła”
 (`3399361570316036`), a integracja Meta w Claude zgłasza dla niego „Ads MCP is gradually being rolled
-out”, więc przez nią nie da się tam niczego założyć ani zmienić.
+out”, więc przez nią nie da się tam niczego założyć ani zmienić. Przyczynę opisuje ostatnia sekcja pliku.
 
 Co z tego wynika i co zostało zrobione:
 
@@ -275,3 +275,94 @@ w Menedżerze reklam przy pierwszym przeglądzie. Kampania `120249004354710355` 
 razem z zestawem i reklamami; cztery kreacje zostały w bibliotece tego konta i nikomu nie
 przeszkadzają). Wszystkie identyfikatory z sekcji „Konto, strona, piksel” i „Struktura kampanii”
 dotyczą więc obiektów historycznych; obowiązują identyfikatory z tabeli wyżej.
+
+## Dlaczego konto 955522616312255 nie działa w Meta Ads MCP (ustalenia z 12.09.2026)
+
+Sprawdzone na polecenie właściciela, wyłącznie w odczycie: Meta Ads MCP (lista kont, firmy, strony,
+zestawy danych, dziennik zmian), Windsor.ai (pola konta i kampanie na koncie `955522616312255`),
+powiadomienia Meta w skrzynce właściciela i publiczne opisy rolloutu. Niczego nie zmieniano.
+
+**Wniosek.** Wykluczenie nie wynika z uprawnień, piksela, strony, weryfikacji firmy ani metody
+płatności. To flaga rolloutu ustawiana przez Meta na obiekcie konta reklamowego:
+`is_ads_mcp_enabled: false` z powodem „Ads MCP is gradually being rolled out. Please check back at
+a later date”. Każde narzędzie MCP wywołane z id tego konta (strony, zestawy danych, byty, dziennik
+zmian) zwraca ten sam błąd, a narzędzia na poziomie firmy „Gruntowe pompy ciepła” i jej piksela
+działają normalnie. Kryteriów Meta nie publikuje (tak zgodnie relacjonują źródła niżej; oficjalnej
+dokumentacji nie dało się pobrać z tego środowiska) i nie ma ustawienia, które tę flagę przełącza.
+
+### Cztery konta użytkownika obok siebie
+
+| Konto | Firma | MCP | Status | Płatność | Wydatki, 12 mies. do 12.09.2026 |
+|---|---|---|---|---|---|
+| `955522616312255` „Dewax gruntowe pompy ciepła” | „Gruntowe pompy ciepła” `3399361570316036` | wyłączone | ACTIVE, `is_queryable: true` | przedpłata: 100 zł 11.08.2025, 1 000 zł 12.08.2026, 500 zł 12.09.2026 | 6 399,82 zł, 269 466 wyświetleń, 6 849 kliknięć (Windsor.ai) |
+| `1413741105666132` „nowe konto reklamowe 1” | „Dewax” `159657032930324` | włączone | ACTIVE | przedpłata: 200 zł + 100 zł 5.06.2026 (Szybkie płatności) | 300 zł, 16 800 wyświetleń, 1 180 kliknięć |
+| `10203979568391826` „Adam Demczyszak” | brak | włączone | UNSETTLED, nie do odpytania | ma metodę płatności | nie sprawdzano |
+| `118225635409400` „Małgorzata Kuś” | brak | włączone | ACTIVE | ma metodę płatności | nie sprawdzano |
+
+### Cztery sprawdzone różnice
+
+1. **Uprawnienia i role.** MCP działa jako Adam Demczyszak (użytkownik `1301318979`), członek
+   czterech firm: „Gruntowe pompy ciepła”, „Dewax”, „adamd”, „Dewax Gruntowe pompy ciepła”. Na
+   wykluczonym koncie ten sam login utworzył 12.09.2026 przez Windsor.ai kampanię
+   `120248421653200027`, która jest ACTIVE i tego samego dnia wydała 20,21 zł. Zapis więc działa,
+   sam MCP raportuje dla tego konta `is_queryable: true`, a blokada jest osobną flagą. Dokładnej
+   nazwy roli API nie pokazuje.
+2. **Piksel i strona.** Firma „Gruntowe pompy ciepła” jest właścicielem piksela `965779382154454`
+   (aktywny, ostatnie zdarzenie 12.09.2026 o 18:24) i nie ma żadnej strony. Strona „Dewax gruntowe
+   pompy ciepła” `105889812346061` nie należy do żadnej z czterech firm użytkownika. Firma „Dewax”
+   ma stronę „DEWAX” `160091957504131` i piksel „dewax.pl” `1032857169399673`, który nigdy nie
+   odpalił; do konta `1413741105666132` przypięte są obie strony. Zapytania o firmę i piksel
+   wykluczonego konta przechodzą, więc blokada nie siedzi na firmie ani na pikselu.
+3. **Weryfikacja firmy.** Ani MCP, ani Windsor.ai nie udostępniają tego statusu. W skrzynce
+   z dwóch lat nie ma żadnego maila Meta o weryfikacji portfolio. Są dwa maile „Zweryfikowaliśmy
+   DEWAX SP Z O O” z 5 i 7.06.2026, ale to weryfikacja beneficjenta i płatnika do DSA, nie
+   Business Verification. Dwa konta osobiste bez żadnej firmy są włączone, więc weryfikacja firmy
+   nie może być warunkiem.
+4. **Metoda płatności.** Wszystkie cztery konta mają `has_payment_method: true`. Wykluczone konto
+   jest na przedpłacie, ale konto firmowe „Dewax” także: jego dziennik zmian pokazuje wpłaty
+   „Money added to balance” przez Szybkie płatności. Konto osobiste ze statusem UNSETTLED jest
+   włączone. Ani rodzaj, ani stan płatności nie decyduje.
+
+### Co naprawdę różni to konto
+
+- **Kolejność odwrotna niż w publicznych relacjach.** To najstarsze i najdroższe konto z czterech:
+  aktywne co najmniej od sierpnia 2025 (potwierdzenia płatności), piksel od 20.01.2025. Włączone
+  konto „Dewax” zaczęło działać 4.06.2026 i wydało 300 zł.
+- **Firma właściciel** jest najnowszym portfolio użytkownika, nie ma żadnej strony, a jej nazwa
+  w API ma spację na końcu: „Gruntowe pompy ciepła ”. To kosmetyka, ale widać ją w każdej
+  odpowiedzi API.
+- **Publicznie wiadomo tyle:** według relacji oficjalny serwer Ads MCP ruszył 29.04.2026 jako
+  beta, rollout jest per konto i sterowany przez Meta, bez opublikowanych kryteriów. Relacje mówią
+  o USA i wyższych wydatkach najpierw i o tym, że część UE czeka. Żadne ustawienie tego nie
+  przełącza.
+- **Od 16.07.2026** w Ustawieniach firmowych jest panel Integracje, pozycja „Ads MCP Server”,
+  w którym właściciel portfolio widzi konta udostępnione agentom AI i może blokować akcje (budżet,
+  tworzenie kampanii, katalogi). Komunikat mówi o rolloucie, nie o regule, ale to jedyne miejsce
+  w interfejsie, w którym widać ekspozycję konta na MCP.
+
+### Co z tym zrobić
+
+- Nic po stronie API nie zmieni flagi. Dla tego konta pozostaje Windsor.ai, który działa w odczycie
+  i zapisie (kampania z 12.09.2026 powstała właśnie tak).
+- Właściciel może sprawdzić dwie rzeczy w Ustawieniach firmowych portfolio „Gruntowe pompy ciepła”:
+  Centrum bezpieczeństwa (status weryfikacji firmy) oraz Integracje, pozycja „Ads MCP Server”
+  (czy konto `955522616312255` tam widnieje i czy nic nie jest zablokowane).
+- Listę kont w MCP warto odpytywać co jakiś czas (`ads_get_ad_accounts`); flaga zmienia się bez
+  powiadomienia. Gdy przełączy się na `true`, kampanię z tabeli wyżej da się prowadzić z Claude
+  bez Windsor.ai.
+- Przy okazji: na tym koncie działa też kampania „Dewax gruntowe pompy ciepła | Leads | Image”
+  `120240091141860027` z 17.03.2026 (ACTIVE, 1 023 zł w 30 dniach do 12.09.2026). Nie ma jej
+  w tym pliku ani w planie prowadzenia; obie kampanie dzielą teraz jedną przedpłatę.
+
+Źródła (stan na 12.09.2026; strony Meta i większość artykułów były niedostępne z tego środowiska,
+treść znana ze streszczeń wyszukiwarki):
+[Meta for Developers, Ads MCP Server overview](https://developers.facebook.com/documentation/ads-commerce/ads-ai-connectors/ads-mcp-server/ads-mcp-server-overview),
+[Meta blog, 16.07.2026](https://developers.facebook.com/blog/post/2026/07/16/meta-ads-mcp-server/),
+[Meta for Business, AI Connectors](https://www.facebook.com/business/news/meta-ads-ai-connectors),
+[Jon Loomer, security controls](https://www.jonloomer.com/meta-ads-ai-connectors-security-controls/),
+[ppc.land](https://ppc.land/meta-opens-ads-mcp-to-any-app-cutting-integration-code-to-zero/),
+[Pipeboard](https://pipeboard.co/meta-ads-mcp-not-enabled),
+[The Ad Spend](https://theadspend.com/blog/meta-ads-mcp-not-enabled),
+[Porter Metrics](https://portermetrics.com/en/tutorial/meta-ads-mcp-ban/),
+[Claude Ads Operator](https://claudeadsoperator.com/blog/is-ads-mcp-enabled-false),
+[Meta Help, płatności ręczne](https://www.facebook.com/business/help/173319523214585).
