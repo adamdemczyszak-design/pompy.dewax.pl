@@ -13,11 +13,15 @@ Windsor.ai: pułapy CPC, lokalizacje z mnożnikiem, zasób połączenia). Stara 
 
 | Kampania | Id | Budżet/dzień | Pułap CPC | Grupy reklam (id) |
 |---|---|---|---|---|
-| DEWAX \| Gruntowa pompa ciepła | 24238597854 | 55 zł | 6 zł | Gruntowa ogólnie 199799185669, Cena i koszt 199799094189, Montaż i wykonawca 208567126508, Gruntowa czy powietrzna 195396439410, Pompy Thermokrafft R290 195396440770 |
-| DEWAX \| Odwierty i dolne źródło | 24244183184 | 25 zł | 6 zł | Odwierty pod pompę ciepła 197330604422, Dolne źródło 201747877884, Sondy koszowe Helix 197330412942 |
-| DEWAX \| Dotacje | 24244201406 | 10 zł | 4 zł | Dotacje na gruntową pompę 205765090048 |
-| DEWAX \| Marka | 24238579395 | 5 zł | 3 zł | DEWAX 195396246610 |
-| DEWAX \| Regiony | 24249730492 | 10 zł | 4 zł | Wielkopolska 203858994847, Łódzkie 200176185597, Kujawsko-Pomorskie 203858997767, Dolny Śląsk 203173282307, Śląsk 199799867029, Mazowsze 197893234777 |
+| DEWAX \| Gruntowa pompa ciepła | 24238597854 | 31 zł | 6 zł | Gruntowa ogólnie 199799185669, Cena i koszt 199799094189, Montaż i wykonawca 208567126508, Gruntowa czy powietrzna 195396439410, Pompy Thermokrafft R290 195396440770 |
+| DEWAX \| Odwierty i dolne źródło | 24244183184 | 14 zł | 6 zł | Odwierty pod pompę ciepła 197330604422, Dolne źródło 201747877884, Sondy koszowe Helix 197330412942 |
+| DEWAX \| Dotacje | 24244201406 | 6 zł | 4 zł | Dotacje na gruntową pompę 205765090048 |
+| DEWAX \| Marka | 24238579395 | 3 zł | 3 zł | DEWAX 195396246610 |
+| DEWAX \| Regiony | 24249730492 | 6 zł | 4 zł | Wielkopolska 203858994847, Łódzkie 200176185597, Kujawsko-Pomorskie 203858997767, Dolny Śląsk 203173282307, Śląsk 199799867029, Mazowsze 197893234777 |
+
+Budżety po decyzji właściciela z 12.09.2026: 60 zł dziennie łącznie (pierwotna propozycja 105 zł,
+proporcje z punktu 6 zachowane). Kampanie włączone 12.09.2026 na polecenie właściciela; reklamy
+czekają na przegląd zasad Google, konto wymaga doładowania (płatność z góry).
 
 Wspólne dla wszystkich: sieć wyszukiwania bez partnerów i bez sieci reklamowej, język polski,
 lokalizacje wielkopolskie 20861, łódzkie 20850, kujawsko-pomorskie 20848, dolnośląskie 20847,
@@ -199,6 +203,10 @@ Na poziomie każdej kampanii, z `kampania.py`:
 - **Nazwa i logo firmy:** dostępne po weryfikacji reklamodawcy (panel prosi o dokumenty firmy).
 
 ## 6. Budżet
+
+Decyzja właściciela (12.09.2026): 60 zł dziennie, czyli ok. 1 800 zł miesięcznie, w podziale
+31 / 14 / 6 / 3 / 6 zł (gruntowa / odwierty / dotacje / marka / regiony). Niżej pierwotna propozycja,
+zostawiona jako punkt odniesienia przy skalowaniu.
 
 Propozycja: 105 zł dziennie, czyli ok. 3 200 zł miesięcznie, sezon grzewczy wrzesień do marca.
 Punkt odniesienia: w sierpniu klik kosztował średnio 1,88 zł. Przy podobnej cenie pełny budżet
