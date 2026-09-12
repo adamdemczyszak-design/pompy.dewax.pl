@@ -5,6 +5,12 @@ i **włączone 12.09.2026 na jego polecenie** (kampania, zestaw i reklamy w stat
 przechodzą weryfikację Meta, zwykle do 24 godzin; dopiero potem zaczynają się wyświetlać i wydawać
 budżet. Gałąź z pikselem została tego samego dnia scalona na `main` (wdrożenie run 20).
 
+**Zmiana po południu 12.09.2026.** Właściciel zdecydował, że kampania ma iść z konta „Dewax gruntowe
+pompy ciepła” (`955522616312255`). Kampania na koncie „nowe konto reklamowe 1” została natychmiast
+**wstrzymana** (nic nie wydała), a plan przeniesienia opisuje sekcja „Przeniesienie na konto
+955522616312255” na końcu pliku. Opis niżej dotyczy kampanii na starym koncie i pozostaje wzorcem
+ustawień dla nowego.
+
 ## Cel i logika
 
 Meta (Facebook, Instagram) to ruch zimny: ludzie nie szukają pompy w tej chwili. Dlatego reklama nie
@@ -212,3 +218,38 @@ Konto nie ma historii dla pomp, piksel startuje od zera, produkt kosztuje 90–1
 obraz pierwszego miesiąca: kilkadziesiąt ukończeń kalkulatora, kilka zapytań o wycenę. Kampania ma
 zbudować sygnał w pikselu i sprawdzić, która obietnica (koszt, dom, który już stoi, kotłownia, dowód
 z działki) działa na tym rynku. Skalowanie ma sens dopiero po pierwszych oględzinach z Meta.
+
+## Przeniesienie na konto 955522616312255 (decyzja właściciela, 12.09.2026)
+
+Stan wyjściowy: kampania `120249004354710355` na koncie „nowe konto reklamowe 1” była włączona
+kilkanaście minut i została wstrzymana, zanim reklamy przeszły weryfikację; wydatki 0 zł. Konto
+docelowe „Dewax gruntowe pompy ciepła” `955522616312255` należy do firmy „Gruntowe pompy ciepła”
+(`3399361570316036`), a integracja Meta w Claude zgłasza dla niego „Ads MCP is gradually being rolled
+out”, więc przez nią nie da się tam niczego założyć ani zmienić.
+
+Co z tego wynika i co zostało zrobione:
+
+1. **Piksel.** Firma „Gruntowe pompy ciepła” ma własny zestaw danych „Dewax gruntowe pompy ciepła Pixel”
+   `965779382154454` (założony 20.01.2025, aktywny: ostatnie zdarzenie 12.09.2026 rano, z innego
+   źródła niż ta strona). Konto `955522616312255` może optymalizować tylko na pikselu swojej firmy,
+   więc strona została przełączona na `965779382154454` (blok w `<head>`, test, dokumentacja; znacznik
+   `dewax.js?v=2026-09-12b`). Piksel „dewax.pl” `1032857169399673` należy do firmy Dewax (farby) i jest
+   właściwym pikselem dla dewax.pl, nie dla tej strony. Zmiana czeka na scalenie na `main`.
+2. **Strona (Page).** „Dewax gruntowe pompy ciepła” `105889812346061` nie należy do żadnej firmy
+   w Ustawieniach firmowych (właściciel jest jej administratorem osobiście). Kreacje na starym koncie
+   przyjęły ją bez problemu; na nowym powinno być tak samo.
+3. **Dwie drogi zbudowania kampanii na nowym koncie:**
+   - **Windsor.ai** (ma akcje zapisu dla Meta Ads: kampania z budżetem, limit wydatków, zestaw
+     z targetowaniem i pikselem, reklamy z obrazem z publicznego adresu, karuzela przez pełną
+     specyfikację kreacji). Wymaga jednorazowego podłączenia konta Meta Ads przez właściciela:
+     `https://onboard.windsor.ai/connect?connector=facebook&next=/facebook/authorize` (logowanie
+     do Facebooka, wybór konta `955522616312255`). Potem całość powstaje z tego pliku bez klikania.
+     Uwaga: akcje Windsor nie mają pól DSA (beneficjent, płatnik), dlatego wcześniej trzeba wpisać
+     „DEWAX Sp. z o.o.” jako domyślnego beneficjenta i płatnika w ustawieniach konta reklamowego.
+   - **Ręcznie w Menedżerze reklam** według sekcji „Struktura kampanii” i „Reklamy” (obrazy:
+     `reklamy/meta/*.jpg`, teksty jak wyżej, 14 kół: współrzędne i promienie w sekcji struktury,
+     piksel `965779382154454`, zdarzenie Lead, budżet 60 zł/dzień, limit 2 000 zł).
+4. **Stara kampania** zostaje wstrzymana jako wzorzec; po uruchomieniu nowej można ją usunąć
+   w Menedżerze reklam (konto `1413741105666132`), żeby nie myliła się z kampanią Multilan.
+5. **Po zbudowaniu na nowym koncie:** ta sama lista startowa (test piksela `965779382154454`
+   w Menedżerze zdarzeń, Cookiebot, weryfikacja domeny) i ten sam plan prowadzenia.

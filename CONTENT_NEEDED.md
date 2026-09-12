@@ -148,10 +148,11 @@ Piksel Meta `1032857169399673` jest wpięty w stronę (kategoria marketing, `doc
 
 | # | Co | Uwaga |
 |---|---|---|
-| 10.1 | Konto reklamowe i strona (Page) | Kampania stoi na koncie „nowe konto reklamowe 1” (firma Dewax), bo tylko ono działa przez integrację; konto „Dewax gruntowe pompy ciepła” jeszcze nie. Potwierdzić konto i stronę, z której mają iść reklamy („DEWAX” albo „Dewax gruntowe pompy ciepła”). |
+| 10.1 | Konto reklamowe i strona (Page) | **Decyzja 12.09:** kampania ma iść z konta „Dewax gruntowe pompy ciepła” `955522616312255`. Integracja Meta tego konta jeszcze nie obsługuje, więc kampania na „nowe konto reklamowe 1” jest wstrzymana, a przeniesienie idzie przez Windsor.ai (po podłączeniu Meta Ads: `https://onboard.windsor.ai/connect?connector=facebook&next=/facebook/authorize`) albo ręcznie w Menedżerze reklam. Szczegóły: `reklamy/meta/KAMPANIA.md`, sekcja „Przeniesienie”. |
+| 10.1a | Domyślny beneficjent i płatnik (DSA) na koncie `955522616312255` | Ustawienia konta reklamowego, sekcja o przejrzystości w UE: wpisać „DEWAX Sp. z o.o.” jako beneficjenta i płatnika. Bez tego zestawy reklam tworzone przez Windsor.ai (które nie ma pola DSA) mogą zostać odrzucone. |
 | 10.2 | Budżet | Ustawiony 12.09.2026 za zgodą właściciela: 60 zł/dzień, limit wydatków 2 000 zł; zestaw A (200 km od Dobrzycy plus Warszawa) i reklamy R1–R4 wstrzymane. Zmiany w Menedżerze reklam. |
 | 10.3 | Zgoda operatora na zdjęcia w reklamach | `zdjecia/77.jpg` i `76.jpg` (operator przy wiertnicy) są już na stronie; upewnić się, że zgoda obejmuje także reklamy płatne na Facebooku i Instagramie. |
 | 10.4 | Reklama „Moje Ciepło do 31.12.2026” | Utworzyć dopiero po sprawdzeniu, że nabór i kwoty (21 000 zł) są aktualne. |
-| 10.5 | Piksel na dewax.pl (WordPress) | Kampania Multilan na tym samym koncie optymalizuje na konwersję z piksela, który tam nie działa. Wpiąć ten sam piksel w WordPressa, z bramkowaniem zgodą. |
+| 10.5 | Piksel na dewax.pl (WordPress) | Kampania Multilan na koncie „nowe konto reklamowe 1” optymalizuje na konwersję z piksela „dewax.pl” `1032857169399673`, który nigdzie nie jest wpięty. Od 12.09 po południu pompy.dewax.pl używa piksela pomp `965779382154454`, więc piksel „dewax.pl” trzeba wpiąć w WordPressa dewax.pl (z bramkowaniem zgodą), inaczej kampania Multilan dalej nie ma sygnału. |
 | 10.6 | Cookiebot | Po wdrożeniu ponownie przeskanować domenę, żeby cookie `_fbp` trafiło do deklaracji cookies. |
 | 10.7 | Weryfikacja domeny w Meta | Ustawienia firmowe, Bezpieczeństwo marki, Domeny: dodać i zweryfikować `dewax.pl` (obejmuje pompy.dewax.pl). |

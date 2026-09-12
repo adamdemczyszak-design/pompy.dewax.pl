@@ -13,7 +13,7 @@
 
   /* ---------- pomiar: jedna funkcja, ta sama konwencja co dotychczas (gtag) ---------- */
   var dx = w.dx = w.dx || {};
-  /* Piksel Meta (zestaw danych „dewax.pl”, id 1032857169399673) ładuje się wyłącznie po zgodzie
+  /* Piksel Meta (zestaw danych „Dewax gruntowe pompy ciepła Pixel”, id 965779382154454) ładuje się wyłącznie po zgodzie
      marketingowej w Cookiebocie, więc fbq bywa niezdefiniowane: wtedy zdarzenie po prostu nie wychodzi.
      Mapa: zdarzenie GA4 -> [metoda fbq, nazwa zdarzenia Meta, przekazywane parametry]. Standardowe:
      Contact (telefon), Lead (wysyła podziekowanie.html?ok=1). Własne: KalkulatorUkonczony, GeoOtwarte,

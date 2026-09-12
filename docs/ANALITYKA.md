@@ -52,7 +52,10 @@ Strona nie ustawia własnych cookies. `sessionStorage` przechowuje dwie flagi na
 
 ## Piksel Meta (od 12.09.2026)
 
-Zestaw danych „dewax.pl”, id `1032857169399673` (Business Manager „Dewax”). Kod bazowy siedzi w bloku
+Zestaw danych „Dewax gruntowe pompy ciepła Pixel”, id `965779382154454` (Business Manager
+„Gruntowe pompy ciepła”, właściciel konta reklamowego 955522616312255). Od 12.09.2026 rano do
+południa strona wysyłała dane do piksela „dewax.pl” `1032857169399673` firmy Dewax (farby); ten piksel
+zostaje dla dewax.pl. Kod bazowy siedzi w bloku
 zgody w `<head>` każdej strony jako `<script type="text/plain" data-cookieconsent="marketing">`, więc
 Cookiebot uruchamia go dopiero po zgodzie marketingowej. Bez zgody piksel nie ładuje się wcale i nic
 nie wysyła (nie ma odpowiednika Consent Mode), dlatego liczby w Menedżerze zdarzeń będą niższe niż w GA4.
