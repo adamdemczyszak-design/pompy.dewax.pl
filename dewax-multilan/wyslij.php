@@ -1,6 +1,7 @@
 <?php
 declare(strict_types=1);
-/* Formularz "Wycena obiektu" - multilan (dewax.pl/multilan), hosting nazwa.pl.
+/* Formularze strony Multilan (dewax.pl/multilan), hosting nazwa.pl.
+   Trzy rodzaje (pole "formularz"): wycena (domyślny), wykonawca, probki.
    Sprawdza pola, odrzuca boty (pułapka + limit czasu), wysyła e-mail na $ODBIORCA.
    Odpowiada JSON (gdy strona wysyła przez fetch) albo przekierowuje na dziekujemy (bez JS).
    Etap 6: dopisać HubSpot (lead_source, rodzaj_obiektu, powierzchnia_m2). */
@@ -43,41 +44,74 @@ function pole(string $k, int $max): string {
     $v = str_replace(["\r", "\n", "%0a", "%0d"], ' ', $v);   // blokada wstrzykiwania nagłówków
     return mb_substr($v, 0, $max);
 }
-$rodzaj  = pole('rodzaj_obiektu', 40);
-$m2      = pole('powierzchnia_m2', 12);
-$miasto  = pole('miejscowosc', 120);
+function wielolinijkowe(string $k, int $max): string {
+    return mb_substr(trim((string)($_POST[$k] ?? '')), 0, $max);
+}
+$formularz = pole('formularz', 20);
+if (!in_array($formularz, ['wycena', 'wykonawca', 'probki'], true)) $formularz = 'wycena';
+
 $imie    = pole('imie_nazwisko', 120);
-$firma   = pole('firma', 200);
 $telefon = pole('telefon', 30);
 $email   = pole('email', 200);
-$uwagi   = mb_substr(trim((string)($_POST['uwagi'] ?? '')), 0, 3000);
 $zgoda   = ($_POST['zgoda'] ?? '') === 'tak';
 $zrodlo  = pole('lead_source', 60) ?: 'multilan.dewax.pl';
 
 $bledy = [];
-if (!in_array($rodzaj, ['klatka schodowa', 'elewacja', 'balkony i loggie', 'taras lub schody', 'inne'], true)) $bledy['rodzaj_obiektu'] = 'Wybierz rodzaj obiektu.';
-if ($m2 !== '' && !(is_numeric($m2) && (float)$m2 > 0 && (float)$m2 < 1000000)) $bledy['powierzchnia_m2'] = 'Podaj liczbę większą od zera albo zostaw puste.';
-if (mb_strlen($miasto) < 2)  $bledy['miejscowosc'] = 'Podaj miejscowość.';
 if (mb_strlen($imie) < 3)    $bledy['imie_nazwisko'] = 'Podaj imię i nazwisko.';
 if (strlen(preg_replace('/\D/', '', $telefon)) < 9) $bledy['telefon'] = 'Podaj numer telefonu (co najmniej 9 cyfr).';
 if (!filter_var($email, FILTER_VALIDATE_EMAIL)) $bledy['email'] = 'Podaj poprawny adres e-mail.';
-if (!$zgoda) $bledy['zgoda'] = 'Zgoda jest wymagana, żebyśmy mogli oddzwonić.';
-if ($bledy) odpowiedz(false, $bledy, 400);
+if (!$zgoda) $bledy['zgoda'] = 'Zgoda jest wymagana.';
 
-/* --- e-mail --- */
-$temat = 'Wycena obiektu: ' . $rodzaj . ($miasto !== '' ? ', ' . $miasto : '');
-$tresc  = "Nowe zgłoszenie z formularza Wycena obiektu (dewax.pl/multilan)\n";
-$tresc .= str_repeat('=', 60) . "\n\n";
-$tresc .= "Rodzaj obiektu:     $rodzaj\n";
-$tresc .= "Powierzchnia:       " . ($m2 !== '' ? $m2 . ' m²' : '- nie podano -') . "\n";
-$tresc .= "Miejscowość:        $miasto\n";
-$tresc .= "Imię i nazwisko:    $imie\n";
-$tresc .= "Firma / wspólnota:  " . ($firma !== '' ? $firma : '- nie podano -') . "\n";
-$tresc .= "Telefon:            $telefon\n";
-$tresc .= "E-mail:             $email\n\n";
-$tresc .= "Uwagi:\n" . ($uwagi !== '' ? $uwagi : '- brak -') . "\n\n";
-$tresc .= str_repeat('-', 60) . "\n";
-$tresc .= "Źródło: $zrodlo\nData: " . date('Y-m-d H:i:s') . "\nIP: " . ($_SERVER['REMOTE_ADDR'] ?? '-') . "\n";
+if ($formularz === 'wycena') {
+    $rodzaj = pole('rodzaj_obiektu', 40);
+    $m2     = pole('powierzchnia_m2', 12);
+    $miasto = pole('miejscowosc', 120);
+    $firma  = pole('firma', 200);
+    $uwagi  = wielolinijkowe('uwagi', 3000);
+    if (!in_array($rodzaj, ['klatka schodowa', 'elewacja', 'balkony i loggie', 'taras lub schody', 'inne'], true)) $bledy['rodzaj_obiektu'] = 'Wybierz rodzaj obiektu.';
+    if ($m2 !== '' && !(is_numeric($m2) && (float)$m2 > 0 && (float)$m2 < 1000000)) $bledy['powierzchnia_m2'] = 'Podaj liczbę większą od zera albo zostaw puste.';
+    if (mb_strlen($miasto) < 2) $bledy['miejscowosc'] = 'Podaj miejscowość.';
+    if ($bledy) odpowiedz(false, $bledy, 400);
+    $temat = 'Wycena obiektu: ' . $rodzaj . ($miasto !== '' ? ', ' . $miasto : '');
+    $tresc  = "Nowe zgłoszenie z formularza Wycena obiektu (dewax.pl/multilan)\n" . str_repeat('=', 60) . "\n\n";
+    $tresc .= "Rodzaj obiektu:     $rodzaj\n";
+    $tresc .= "Powierzchnia:       " . ($m2 !== '' ? $m2 . ' m²' : '- nie podano -') . "\n";
+    $tresc .= "Miejscowość:        $miasto\n";
+    $tresc .= "Imię i nazwisko:    $imie\n";
+    $tresc .= "Firma / wspólnota:  " . ($firma !== '' ? $firma : '- nie podano -') . "\n";
+    $tresc .= "Telefon:            $telefon\nE-mail:             $email\n\n";
+    $tresc .= "Uwagi:\n" . ($uwagi !== '' ? $uwagi : '- brak -') . "\n";
+} elseif ($formularz === 'wykonawca') {
+    $firma  = pole('firma', 200);
+    $nip    = pole('nip', 20);
+    $miasto = pole('miejscowosc', 120);
+    $co     = pole('co_robisz', 40);
+    if (mb_strlen($firma) < 2) $bledy['firma'] = 'Podaj nazwę firmy.';
+    if (strlen(preg_replace('/\D/', '', $nip)) !== 10) $bledy['nip'] = 'Podaj NIP (10 cyfr).';
+    if (mb_strlen($miasto) < 2) $bledy['miejscowosc'] = 'Podaj miasto.';
+    if (!in_array($co, ['elewacje', 'posadzki', 'remonty', 'inne'], true)) $bledy['co_robisz'] = 'Wybierz, czym się zajmujesz.';
+    if ($bledy) odpowiedz(false, $bledy, 400);
+    $temat = 'Konto wykonawcy: ' . $firma . ', ' . $miasto;
+    $tresc  = "Nowe zgłoszenie z formularza Konto wykonawcy (dewax.pl/multilan)\n" . str_repeat('=', 60) . "\n\n";
+    $tresc .= "Imię i nazwisko:    $imie\nFirma:              $firma\nNIP:                $nip\nMiasto:             $miasto\n";
+    $tresc .= "Telefon:            $telefon\nE-mail:             $email\nCo robi:            $co\n";
+} else {
+    $kolory = $_POST['kolory'] ?? [];
+    if (!is_array($kolory)) $kolory = [$kolory];
+    $kolory = array_values(array_filter(array_map(fn($k) => mb_substr(trim((string)$k), 0, 40), $kolory)));
+    $adres  = wielolinijkowe('adres', 500);
+    if (!$kolory) $bledy['kolory'] = 'Zaznacz co najmniej jeden kolor.';
+    if (mb_strlen($adres) < 8) $bledy['adres'] = 'Podaj adres wysyłki.';
+    if ($bledy) odpowiedz(false, $bledy, 400);
+    $temat = 'Próbki kolorów: ' . implode(', ', $kolory);
+    $tresc  = "Nowe zamówienie próbek kolorów (dewax.pl/multilan)\n" . str_repeat('=', 60) . "\n\n";
+    $tresc .= "Kolory:             " . implode(', ', $kolory) . "\n";
+    $tresc .= "Imię i nazwisko:    $imie\nTelefon:            $telefon\nE-mail:             $email\n\n";
+    $tresc .= "Adres wysyłki:\n$adres\n";
+}
+
+$tresc .= "\n" . str_repeat('-', 60) . "\n";
+$tresc .= "Formularz: $formularz\nŹródło: $zrodlo\nData: " . date('Y-m-d H:i:s') . "\nIP: " . ($_SERVER['REMOTE_ADDR'] ?? '-') . "\n";
 
 $naglowki  = "From: Multilan formularz <$NADAWCA>\r\n";
 $naglowki .= "Reply-To: $imie <$email>\r\n";
@@ -87,7 +121,7 @@ $tematKod  = '=?UTF-8?B?' . base64_encode($temat) . '?=';
 $wyslano = @mail($ODBIORCA, $tematKod, $tresc, $naglowki, '-f' . $NADAWCA);
 if (!$wyslano) $wyslano = @mail($ODBIORCA, $tematKod, $tresc, $naglowki);
 if (!$wyslano) {
-    error_log('multilan wyslij.php: mail() zwrocil false');
+    error_log('multilan wyslij.php: mail() zwrocil false (' . $formularz . ')');
     odpowiedz(false, ['_form' => 'Nie udało się wysłać zgłoszenia. Zadzwoń: +48 509 815 112.'], 502);
 }
 odpowiedz(true);
