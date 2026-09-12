@@ -866,6 +866,9 @@ fbq('track', 'PageView');
       <form class="zap" name="wycena" method="POST" action="wyslij.php" novalidate>
         <p class="hp" aria-hidden="true"><label for="bf">Nie wypełniaj tego pola</label><input id="bf" name="bot-field" tabindex="-1" autocomplete="off"></p>
         <input type="hidden" name="czas" value="0" id="fczas">
+        <!-- Atrybucja leadu: parametry utm z adresu reklamy (dewax.js zapisuje je w sessionStorage i wpisuje tu),
+             strona wejścia i hutk (cookie HubSpota, tylko po zgodzie marketingowej). Trafiają mailem i do HubSpota. -->
+        <input type="hidden" name="utm_source" id="f-utm-source"><input type="hidden" name="utm_medium" id="f-utm-medium"><input type="hidden" name="utm_campaign" id="f-utm-campaign"><input type="hidden" name="utm_content" id="f-utm-content"><input type="hidden" name="strona_wejscia" id="f-strona-wejscia"><input type="hidden" name="hutk" id="f-hutk">
         <h3>Zamów dokładną wycenę</h3>
         <p class="intro">Trzy pola obowiązkowe. Resztę wypełnij, jeśli chcesz dokładniejszą odpowiedź. Wynik z kalkulatora dopisze się sam, jeśli kliknąłeś „Chcę dokładną ofertę”.</p>
         <div class="g2">
@@ -931,5 +934,5 @@ fbq('track', 'PageView');
 </div>
 
 <script src="js/kalkulator.js?v=2026-09-04" defer data-cookieconsent="ignore"></script>
-<script src="js/dewax.js?v=2026-09-12b" defer data-cookieconsent="ignore"></script>
+<script src="js/dewax.js?v=2026-09-12c" defer data-cookieconsent="ignore"></script>
 </body></html>

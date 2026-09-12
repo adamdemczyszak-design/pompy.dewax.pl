@@ -170,3 +170,8 @@ ErrorDocument 404 /404.html
 
 # Blokada podglądu katalogów
 Options -Indexes
+
+# Plik z adresem webhooka Make (leady do HubSpota) czyta tylko wyslij.php; z przeglądarki ma być niedostępny.
+<Files "konfig-leadow.php">
+  Require all denied
+</Files>

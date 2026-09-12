@@ -143,16 +143,22 @@ Infrastruktura gotowa, treści brak. Sekcja `#opinie` w `index.html` jest ukryta
 
 ## 10. Kampania Meta Ads (12.09.2026): do potwierdzenia przez właściciela
 
-Piksel Meta `1032857169399673` jest wpięty w stronę (kategoria marketing, `docs/ANALITYKA.md`), kampania
-`120249004354710355` czeka wstrzymana i bez budżetu. Pełny opis: `reklamy/meta/KAMPANIA.md`.
+Piksel Meta `965779382154454` jest wpięty w stronę (kategoria marketing, `docs/ANALITYKA.md`), kampania
+`120248421653200027` działa na koncie `955522616312255` od 12.09.2026. Pełny opis: `reklamy/meta/KAMPANIA.md`.
+Generator kreacji i tor leadów do HubSpota: `reklamy/generator/README.md`.
 
 | # | Co | Uwaga |
 |---|---|---|
 | 10.1 | Konto reklamowe i strona (Page) | **Zrobione 12.09:** kampania `120248421653200027` zbudowana przez Windsor.ai na koncie „Dewax gruntowe pompy ciepła” `955522616312255` i włączona. Kampania `120249004354710355` na „nowe konto reklamowe 1” usunięta 12.09. Szczegóły: `reklamy/meta/KAMPANIA.md`, sekcja „Przeniesienie”. |
 | 10.1a | Domyślny beneficjent i płatnik (DSA) na koncie `955522616312255` | Ustawienia konta reklamowego, sekcja o przejrzystości w UE: wpisać „DEWAX Sp. z o.o.” jako beneficjenta i płatnika. Bez tego zestawy reklam tworzone przez Windsor.ai (które nie ma pola DSA) mogą zostać odrzucone. |
-| 10.2 | Budżet | Ustawiony 12.09.2026 za zgodą właściciela: 60 zł/dzień, limit wydatków 2 000 zł; zestaw A (200 km od Dobrzycy plus Warszawa) i reklamy R1–R4 wstrzymane. Zmiany w Menedżerze reklam. |
+| 10.2 | Budżet | Ustawiony 12.09.2026 za zgodą właściciela: 60 zł/dzień, limit wydatków 2 000 zł; zestaw A (200 km od Dobrzycy plus Warszawa) i reklamy R1–R4 włączone. Zmiany w Menedżerze reklam. |
 | 10.3 | Zgoda operatora na zdjęcia w reklamach | `zdjecia/77.jpg` i `76.jpg` (operator przy wiertnicy) są już na stronie; upewnić się, że zgoda obejmuje także reklamy płatne na Facebooku i Instagramie. |
 | 10.4 | Reklama „Moje Ciepło do 31.12.2026” | Utworzyć dopiero po sprawdzeniu, że nabór i kwoty (21 000 zł) są aktualne. |
 | 10.5 | Piksel na dewax.pl (WordPress) | Kampania Multilan na koncie „nowe konto reklamowe 1” optymalizuje na konwersję z piksela „dewax.pl” `1032857169399673`, który nigdzie nie jest wpięty. Od 12.09 po południu pompy.dewax.pl używa piksela pomp `965779382154454`, więc piksel „dewax.pl” trzeba wpiąć w WordPressa dewax.pl (z bramkowaniem zgodą), inaczej kampania Multilan dalej nie ma sygnału. |
 | 10.6 | Cookiebot | Po wdrożeniu ponownie przeskanować domenę, żeby cookie `_fbp` trafiło do deklaracji cookies. |
 | 10.7 | Weryfikacja domeny w Meta | Ustawienia firmowe, Bezpieczeństwo marki, Domeny: dodać i zweryfikować `dewax.pl` (obejmuje pompy.dewax.pl). |
+| 10.8 | Sekret `MAKE_WEBHOOK_LEADY` w GitHub | Repozytorium → Settings → Secrets and variables → Actions → New repository secret: nazwa `MAKE_WEBHOOK_LEADY`, wartość: adres webhooka scenariusza Make 9799111 (Make → scenariusz → moduł Webhooks → „Copy address to clipboard”). Bez sekretu formularz wysyła tylko mail, leady nie wpadają do HubSpota. Po dodaniu: scalić na `main`, wysłać testowe zgłoszenie, sprawdzić kontakt w HubSpocie (`reklamy/generator/README.md`, „Jak sprawdzić, że lead wpadł”). |
+| 10.9 | Panel generatora na Netlify | Projekt `dewax-generator` jest założony i pusty. Połączyć z repozytorium (Base directory `reklamy/generator`, gałąź `main`), instrukcja w `reklamy/generator/README.md`. |
+| 10.10 | Bloki generatora „do potwierdzenia” | `h04` (stawka 130–145 zł za metr odwiertu z kalkulatora: czy wolno ją podawać w reklamie), `h07` (termin naboru Moje Ciepło 31.12.2026: sprawdzić przed użyciem), `b5` (chłodzenie pasywne: czy każda oferta ma moduł chłodzenia, czy to opcja). Do potwierdzenia kreacje z tymi blokami zostają w bibliotece. |
+| 10.11 | Druga aktywna kampania na koncie pomp | „Dewax gruntowe pompy ciepła \| Leads \| Image” (`120240091141860027`) wydała 964,59 zł w 30 dni i konkuruje o tych samych odbiorców z kampanią z 12.09. Decyzja: wstrzymać albo zostawić (Claude nie zmienia kampanii bez zgody). |
+| 10.12 | Posty z fanpage'a jako surowiec do hooków | Supermetrics (trial) wygasł, Windsor.ai nie ma podłączonego konektora Facebook Page (organic). Albo podłączyć konektor w Windsor.ai, albo wkleić treści postów w zakładce „Źródła i zasady” panelu. |

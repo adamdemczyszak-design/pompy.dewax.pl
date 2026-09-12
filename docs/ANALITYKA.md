@@ -73,3 +73,15 @@ Bez znacznika `noscript`, bo obrazka nie da się bramkować zgodą.
 Kampania Meta Ads optymalizuje na `Lead`. Gdy kalkulator zbierze ok. 50 zdarzeń tygodniowo, warto
 rozważyć optymalizację na `KalkulatorUkonczony` (w zestawie reklam: `custom_event_type: OTHER`,
 `custom_event_str: KalkulatorUkonczony`). Założenia kampanii: `reklamy/meta/KAMPANIA.md`.
+
+## Atrybucja zgłoszeń do kreacji (od 12.09.2026)
+
+Reklamy z generatora (`reklamy/generator`) prowadzą na stronę z parametrami `utm_source`, `utm_medium`,
+`utm_campaign` i `utm_content=KOD` (kod kreacji, np. `h03-b2-c1`). `js/dewax.js` zapamiętuje te parametry
+w `sessionStorage` (klucz `dx_utm`, razem ze stroną wejścia) i przy wysyłce formularza wpisuje je w ukryte
+pola `utm_*`, `strona_wejscia` oraz `hutk` (cookie `hubspotutk`, obecne tylko po zgodzie marketingowej).
+`wyslij.php` dopisuje do maila wiersze „Źródło / Kampania / Kreacja” i przekazuje komplet do HubSpota
+(webhook Make, scenariusz 9799111): kontakt po e-mailu plus notatka z wierszem `Kreacja: KOD`.
+Po tym wierszu liczy się leady i koszt zapytania per kreacja (`reklamy/generator/wyniki.json`).
+GA4 widzi te same parametry jako źródło, medium, kampanię i treść reklamy w standardowych raportach
+pozyskania. `sessionStorage` nie jest cookie i mieści się w kategorii niezbędnej, jak `dx_calc` i `dx_geo`.

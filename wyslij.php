@@ -6,6 +6,31 @@ declare(strict_types=1);
 $ODBIORCA = 'sprzedaz@dewax.pl';
 $NADAWCA  = 'formularz@dewax.pl';   // musi być adresem w domenie dewax.pl (SPF)
 
+/* Lead do HubSpota: po wysłaniu maila zgłoszenie idzie też na webhook Make, a scenariusz Make
+   tworzy lub aktualizuje kontakt w HubSpocie (bez tokenów HubSpota na serwerze).
+   Adres webhooka nie jest w repozytorium: workflow wdrożenia zapisuje go z sekretu GitHub
+   MAKE_WEBHOOK_LEADY do pliku konfig-leadow.php (zablokowanego w .htaccess). Bez pliku
+   albo z pustym adresem ten krok jest pomijany, a mail działa jak dotąd. */
+$MAKE_WEBHOOK = '';
+@include __DIR__ . '/konfig-leadow.php';
+
+function wyslij_lead_do_make(string $url, array $lead): void {
+    if ($url === '' || !function_exists('curl_init')) return;
+    $ch = curl_init($url);
+    curl_setopt_array($ch, [
+        CURLOPT_POST => true,
+        CURLOPT_HTTPHEADER => ['Content-Type: application/json; charset=utf-8'],
+        CURLOPT_POSTFIELDS => json_encode($lead, JSON_UNESCAPED_UNICODE),
+        CURLOPT_RETURNTRANSFER => true,
+        CURLOPT_CONNECTTIMEOUT => 3,
+        CURLOPT_TIMEOUT => 5,
+    ]);
+    $odp = curl_exec($ch);
+    $kod = (int)curl_getinfo($ch, CURLINFO_RESPONSE_CODE);
+    if ($odp === false || $kod >= 300) error_log('pompy.dewax.pl lead -> Make: HTTP ' . $kod . ' ' . curl_error($ch));
+    curl_close($ch);
+}
+
 if ($_SERVER['REQUEST_METHOD'] !== 'POST') { header('Location: index.html'); exit; }
 
 /* --- ochrona przed botami --- */
@@ -118,6 +143,13 @@ $wiadomosc   = mb_substr(trim((string)($_POST['wiadomosc'] ?? '')), 0, 2000);
 $ogrzewanie  = pole('ogrzewanie', 60);
 $zgodaDane   = ($_POST['zgoda_dane'] ?? '') === 'tak';
 $zgodaTel    = ($_POST['zgoda_telefon'] ?? '') === 'tak';
+/* atrybucja z ukrytych pól (utm z reklamy, strona wejścia, cookie HubSpota) */
+$utmSource   = pole('utm_source', 60);
+$utmMedium   = pole('utm_medium', 60);
+$utmCampaign = pole('utm_campaign', 80);
+$utmContent  = pole('utm_content', 80);   // kod kreacji z generatora, np. h01-b2-c3, albo nazwa reklamy
+$stronaWe    = pole('strona_wejscia', 300);
+$hutk        = preg_match('/^[a-f0-9]{32}$/', (string)($_POST['hutk'] ?? '')) ? (string)$_POST['hutk'] : '';
 
 /* --- walidacja --- */
 $bledy = [];
@@ -150,6 +182,11 @@ $tresc .= "Metraż:       " . ($metraz !== '' ? "$metraz m2" : '— nie podano �
 $tresc .= "Zgoda tel.:   " . ($zgodaTel ? 'TAK — można dzwonić' : 'NIE — tylko e-mail') . "\n";
 if ($ogrzewanie !== '') $tresc .= "Ogrzewanie:   $ogrzewanie\n";
 if ($wiadomosc !== '')  $tresc .= "\nO domu:\n$wiadomosc\n";
+if ($utmSource !== '' || $utmContent !== '') {
+    $tresc .= "\nŹródło:       " . ($utmSource !== '' ? "$utmSource / $utmMedium" : '—') . "\n";
+    $tresc .= "Kampania:     " . ($utmCampaign !== '' ? $utmCampaign : '—') . "\n";
+    $tresc .= "Kreacja:      " . ($utmContent !== '' ? $utmContent : '—') . "\n";
+}
 $tresc .= "\n" . str_repeat('-', 46) . "\n";
 $tresc .= 'Wysłano: ' . date('Y-m-d H:i:s') . "\n";
 $tresc .= 'IP: ' . ($_SERVER['REMOTE_ADDR'] ?? '?') . "\n";
@@ -162,6 +199,45 @@ $naglowki .= "X-Mailer: PHP/" . phpversion();
 $temat = '=?UTF-8?B?' . base64_encode("Wycena: $imie, $miejscowosc, $metraz m2") . '?=';
 
 if (@mail($ODBIORCA, $temat, $tresc, $naglowki)) {
+    /* Lead do HubSpota przez Make (patrz komentarz przy $MAKE_WEBHOOK). Nie blokuje przekierowania:
+       gdy Make nie odpowie w 5 s, klient i tak trafia na stronę podziękowania, a mail już wyszedł.
+       Gotowe fragmenty JSON dla HubSpota (hs_upsert, hs_note_json) składamy tutaj, żeby cudzysłowy
+       i nowe linie w wiadomości klienta nie rozbiły zapytań budowanych w Make. */
+    $notatka = "Zapytanie o wycenę z pompy.dewax.pl\n"
+        . "Metraż: " . ($metraz !== '' ? "$metraz m2" : 'nie podano') . "\n"
+        . "Ogrzewanie: " . ($ogrzewanie !== '' ? $ogrzewanie : 'nie podano') . "\n"
+        . "Zgoda na telefon: " . ($zgodaTel ? 'tak' : 'nie') . "\n"
+        . ($wiadomosc !== '' ? "O domu: $wiadomosc\n" : '')
+        . "Źródło: " . ($utmSource !== '' ? "$utmSource / $utmMedium" : 'bezpośrednio lub wyszukiwarka') . "\n"
+        . "Kampania: " . ($utmCampaign !== '' ? $utmCampaign : 'brak') . "\n"
+        . "Kreacja: " . ($utmContent !== '' ? $utmContent : 'brak') . "\n"
+        . ($stronaWe !== '' ? "Strona wejścia: $stronaWe\n" : '')
+        . "Wysłano: " . date('Y-m-d H:i');
+    $wlasciwosci = ['email' => $email, 'firstname' => $imie, 'city' => $miejscowosc, 'message' => $notatka];
+    if ($telefon !== '') $wlasciwosci['phone'] = $telefon;
+    wyslij_lead_do_make($MAKE_WEBHOOK, [
+        'hs_upsert'      => json_encode(['inputs' => [['idProperty' => 'email', 'id' => $email, 'properties' => $wlasciwosci]]], JSON_UNESCAPED_UNICODE),
+        'hs_note_json'   => json_encode(nl2br(htmlspecialchars($notatka, ENT_QUOTES, 'UTF-8'), false), JSON_UNESCAPED_UNICODE),
+        'formularz'      => 'wycena pompy.dewax.pl',
+        'imie'           => $imie,
+        'email'          => $email,
+        'telefon'        => $telefon,
+        'miejscowosc'    => $miejscowosc,
+        'metraz'         => $metraz,
+        'ogrzewanie'     => $ogrzewanie,
+        'wiadomosc'      => $wiadomosc,
+        'zgoda_dane'     => $zgodaDane,
+        'zgoda_telefon'  => $zgodaTel,
+        'utm_source'     => $utmSource,
+        'utm_medium'     => $utmMedium,
+        'utm_campaign'   => $utmCampaign,
+        'utm_content'    => $utmContent,
+        'kreacja'        => $utmContent,
+        'strona_wejscia' => $stronaWe,
+        'hutk'           => $hutk,
+        'ip'             => $_SERVER['REMOTE_ADDR'] ?? '',
+        'wyslano'        => date('c'),
+    ]);
     /* ?ok=1 dostaje WYLACZNIE zgloszenie realnie wyslane mailem.
        Odrzucenia botow wyzej przekierowuja na te sama strone bez tego
        parametru, zeby nie liczyly sie jako konwersja w Google Ads. */

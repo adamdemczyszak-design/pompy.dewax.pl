@@ -7,3 +7,6 @@ Thumbs.db
 # zrzuty ekranu do porównania przed/po (duże pliki, generowane lokalnie)
 docs/zrzuty/
 .claude/launch.json
+
+# adres webhooka Make dla leadow: powstaje na serwerze z sekretu GitHub, nigdy w repozytorium
+konfig-leadow.php

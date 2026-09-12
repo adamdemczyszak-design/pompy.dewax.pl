@@ -98,6 +98,8 @@ jobs:
 
       - name: Zloz pakiet do wgrania
         if: ${{ inputs.testy_tylko != true && inputs.pokaz_katalogi != true }}
+        env:
+          MAKE_WEBHOOK_LEADY: ${{ secrets.MAKE_WEBHOOK_LEADY }}
         run: |
           set -eu
           rm -rf .pakiet && mkdir -p .pakiet
@@ -117,6 +119,14 @@ jobs:
           for W in .pakiet/css/dewax.css .pakiet/js/kalkulator.js .pakiet/js/dewax.js .pakiet/pompy.html .pakiet/dla-instalatorow.html; do
             [ -s "$W" ] || { echo "::error::Pakiet niekompletny: brak $W"; exit 1; }
           done
+          # Adres webhooka Make dla leadow (wyslij.php -> Make -> HubSpot) nie jest w repozytorium:
+          # trafia na serwer z sekretu MAKE_WEBHOOK_LEADY jako plik konfig-leadow.php (zablokowany w .htaccess).
+          if [ -n "${MAKE_WEBHOOK_LEADY:-}" ]; then
+            printf '<?php\n$MAKE_WEBHOOK = %s;\n' "'${MAKE_WEBHOOK_LEADY}'" > .pakiet/konfig-leadow.php
+            echo "Lead do HubSpota: adres webhooka zapisany w konfig-leadow.php" >> "$GITHUB_STEP_SUMMARY"
+          else
+            echo "Lead do HubSpota: brak sekretu MAKE_WEBHOOK_LEADY, formularz wysyla tylko mail" >> "$GITHUB_STEP_SUMMARY"
+          fi
           echo "Pakiet: $(find .pakiet -type f | wc -l) plikow" >> "$GITHUB_STEP_SUMMARY"
           find .pakiet -type f | sort
 

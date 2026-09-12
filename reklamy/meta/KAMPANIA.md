@@ -180,6 +180,11 @@ Nagłówek: **Moje Ciepło: nabór do 31.12.2026** · Opis: „Policz koszt syst
 5. **Włączyć kampanię: zrobione 12.09.2026** na polecenie właściciela, równolegle ze scaleniem gałęzi
    na `main`. Pierwsze 14 dni bez zmian (nauka algorytmu). Punkty 2–3 (test piksela, Cookiebot,
    weryfikacja domeny, strona nadawcy) pozostają do wykonania przez właściciela.
+6. **Sekret `MAKE_WEBHOOK_LEADY` w GitHub i scalenie gałęzi z torem leadów** (12.09.2026): bez sekretu
+   zgłoszenia z formularza nie wpadają do HubSpota, a wyniki generatora nie mają skąd liczyć leadów.
+   Instrukcja i test: `reklamy/generator/README.md`.
+7. **Panel generatora**: połączyć projekt Netlify `dewax-generator` z repozytorium (Base directory
+   `reklamy/generator`) i potwierdzić bloki `h04`, `h07`, `b5` (CONTENT_NEEDED 10.10).
 
 ## Kreacje w koncie
 
@@ -275,3 +280,31 @@ w Menedżerze reklam przy pierwszym przeglądzie. Kampania `120249004354710355` 
 razem z zestawem i reklamami; cztery kreacje zostały w bibliotece tego konta i nikomu nie
 przeszkadzają). Wszystkie identyfikatory z sekcji „Konto, strona, piksel” i „Struktura kampanii”
 dotyczą więc obiektów historycznych; obowiązują identyfikatory z tabeli wyżej.
+
+## Generator kreacji i atrybucja leadów (12.09.2026)
+
+Kolejne reklamy nie powstają ręcznie, tylko z panelu `reklamy/generator` (opis w
+`reklamy/generator/README.md`). Macierz: 10 hooków (problem, ciekawość, lokalnie, konkret cenowy,
+zdjęcie z placu, obalenie mitu, pilność, porównanie, pytanie, historia) × 6 korzyści (koszt
+ogrzewania, jeden wykonawca, brak komina, brak jednostki na elewacji, chłodzenie latem, niezależność
+od pogody) × 3 CTA (policz koszt, sprawdź działkę, bez telefonu) = 180 kreacji w tym samym
+rejestrze co R1–R4. Do Meta idzie najwyżej 8 naraz; reszta czeka w kolejce.
+
+Każda kreacja ma kod `hXX-bY-cZ`, który występuje w trzech miejscach i spina wydatki z leadami:
+
+| Gdzie | Jak |
+|---|---|
+| Nazwa reklamy w Meta | `KOD \| hook \| korzyść` (wydatki, wyświetlenia i kliknięcia per kreacja z Windsor.ai) |
+| Adres docelowy | `utm_source=facebook&utm_medium=paid_social&utm_campaign=pompy-leady-2026-09&utm_content=KOD` |
+| Zgłoszenie z formularza | `js/dewax.js` zapamiętuje utm z adresu wejścia w sessionStorage i wpisuje w ukryte pola formularza; `wyslij.php` dopisuje „Kreacja: KOD” do maila i do notatki w HubSpocie |
+
+Lead trafia do HubSpota automatycznie: `wyslij.php` → webhook Make (adres z sekretu GitHub
+`MAKE_WEBHOOK_LEADY`, plik `konfig-leadow.php` poza repozytorium) → scenariusz Make 9799111 →
+kontakt (upsert po e-mailu) i notatka w portalu 49004516. Koszt zapytania per kreacja = wydatki
+z Meta ÷ liczba kontaktów z „Kreacja: KOD”; wynik w zakładce „Wyniki” panelu (`wyniki.json`,
+odświeżany na polecenie „zaktualizuj wyniki generatora”).
+
+Reklamy R1–R4 zostały bez `utm_content` (adres `https://pompy.dewax.pl/`), bo zmiana adresu w Meta
+tworzy nową kreację i cofa weryfikację; ich leady widać w HubSpocie tylko jako zgłoszenia bez kodu.
+Jeśli właściciel zechce je atrybuować, adresy R1–R4 dostaną `utm_content=R1…R4` przy najbliższej
+zmianie kreacji.

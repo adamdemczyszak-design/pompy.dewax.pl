@@ -39,6 +39,16 @@
   };
   function ss(k, v) { try { if (v === undefined) return sessionStorage.getItem(k); sessionStorage.setItem(k, v); } catch (e) { return null; } }
 
+  /* ---------- atrybucja: utm z adresu reklamy trzymane przez sesję, wpisywane w ukryte pola formularza ---------- */
+  var UTM = ['utm_source', 'utm_medium', 'utm_campaign', 'utm_content'];
+  try {
+    var q = new URLSearchParams(location.search), znal = {};
+    UTM.forEach(function (k) { var v = q.get(k); if (v) znal[k] = v.slice(0, 120); });
+    if (Object.keys(znal).length) { znal.strona_wejscia = (location.pathname + location.search).slice(0, 300); ss('dx_utm', JSON.stringify(znal)); }
+  } catch (e) {}
+  dx.atrybucja = function () { try { return JSON.parse(ss('dx_utm') || '{}'); } catch (e) { return {}; } };
+  function cookie(n) { var m = d.cookie.match('(?:^|; )' + n + '=([^;]*)'); return m ? decodeURIComponent(m[1]) : ''; }
+
   /* ---------- oba kroki wykonane: pokaż baner „poproś o ofertę” ---------- */
   dx.obaKroki = function () {
     var calc = !!ss('dx_calc'), geo = ss('dx_geo') === '1';
@@ -119,6 +129,12 @@
       if (f.getAttribute('data-sending') === '1') { e.preventDefault(); return; }
       f.setAttribute('data-sending', '1');
       if (czas) czas.value = Math.round((Date.now() - t0) / 1000);
+      /* atrybucja: utm z sesji, strona wejścia, cookie HubSpota (jest tylko po zgodzie marketingowej) */
+      try {
+        var at = dx.atrybucja();
+        UTM.concat(['strona_wejscia']).forEach(function (k) { if (f[k] && at[k]) f[k].value = at[k]; });
+        if (f.hutk) f.hutk.value = cookie('hubspotutk');
+      } catch (err) {}
       if (btn) { btn.setAttribute('aria-disabled', 'true'); btn.textContent = 'Wysyłanie…'; }
       status.className = 'status ok'; status.textContent = 'Wysyłamy zapytanie…';
       dx.track('quote_submitted', { z_kalkulatora: /Z kalkulatora/.test(f.wiadomosc ? f.wiadomosc.value : '') ? 1 : 0, telefon: f.telefon && f.telefon.value ? 1 : 0 });
