@@ -14,7 +14,10 @@ on:
         default: listuj
       sciezka:
         description: 'katalog do wypisania (tryb listuj)'
-        default: '/wp-content/uploads/2026/09/'
+        default: '/migracja/ftp.d1063384-23091.wuti.pl/webspace/httpdocs/sklep.dewax.pl/'
+      baza:
+        description: 'katalog WordPressa sklepu (tryb wgraj)'
+        default: '/migracja/ftp.d1063384-23091.wuti.pl/webspace/httpdocs/sklep.dewax.pl/Wordpress'
 
 jobs:
   sklep:
@@ -34,24 +37,24 @@ jobs:
           set -eu
           echo "=== $SCIEZKA"
           lftp --env-password -u "$FTP_LOGIN" "ftp://$FTP_HOST" -e "set ssl:verify-certificate no; set ftp:ssl-allow yes; set net:timeout 20; cls -l $SCIEZKA; bye"
-          echo "=== /wp-content/languages/plugins/ (pliki woocommerce*)"
-          lftp --env-password -u "$FTP_LOGIN" "ftp://$FTP_HOST" -e "set ssl:verify-certificate no; set ftp:ssl-allow yes; set net:timeout 20; cls -l /wp-content/languages/plugins/ | grep -i woocommerce || true; bye" || true
       - name: Wgraj tlumaczenie
         if: ${{ inputs.tryb == 'wgraj' }}
         env:
           FTP_HOST: ${{ secrets.FTP_HOST }}
           FTP_LOGIN: ${{ secrets.FTP_LOGIN }}
           LFTP_PASSWORD: ${{ secrets.FTP_HASLO }}
+          BAZA: ${{ inputs.baza }}
         run: |
           set -eu
           test -f sklep-tlumaczenia/woocommerce-pl_PL.mo
+          echo "katalog sklepu: $BAZA"
           lftp --env-password -u "$FTP_LOGIN" "ftp://$FTP_HOST" <<LFTP
           set ssl:verify-certificate no
           set ftp:ssl-allow yes
           set net:timeout 25
-          mkdir -p /wp-content/languages/plugins
-          put -O /wp-content/languages/plugins sklep-tlumaczenia/woocommerce-pl_PL.mo
-          cls -l /wp-content/languages/plugins/woocommerce-pl_PL.mo
+          mkdir -p ${BAZA%/}/wp-content/languages/plugins
+          put -O ${BAZA%/}/wp-content/languages/plugins sklep-tlumaczenia/woocommerce-pl_PL.mo
+          cls -l ${BAZA%/}/wp-content/languages/plugins/woocommerce-pl_PL.mo
           bye
           LFTP
           sleep 3
