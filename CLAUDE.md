@@ -53,8 +53,10 @@ dostaną stary plik do nowego HTML-a. Kontrola: dowolny nowy parametr w adresie 
   (zdarzenie `geo_clicked`).
 - **Kreator ofertowy** `https://dewax-kreator.netlify.app/`: chroniony, dla partnerów.
   Linkowany wyłącznie z `dla-instalatorow.html`. Nie promuj go klientom indywidualnym.
-- GA4 `G-XHZDND4X1W`, Cookiebot `7a55c023-…`, HubSpot `49004516`: blok zgody w `<head>`
-  każdej strony musi być identyczny (test `strona.test.mjs` to sprawdza).
+- GA4 `G-XHZDND4X1W`, Cookiebot `7a55c023-…`, HubSpot `49004516`, piksel Meta `1032857169399673`
+  (od 12.09.2026, kategoria marketing, zdarzenia przez `dx.track`): blok zgody w `<head>`
+  każdej strony musi być identyczny (test `strona.test.mjs` to sprawdza). Kampania Meta Ads:
+  `reklamy/meta/KAMPANIA.md`.
 
 ## Kalkulator: nie zmieniaj wyników
 
