@@ -8,9 +8,12 @@ Options -Indexes
   RewriteEngine On
   RewriteBase /multilan/
 
-  # adresy bez rozszerzenia -> pliki .html (np. /multilan/kolory -> kolory.html)
+  # /multilan/realizacje/ (ukosnik na koncu) -> /multilan/realizacje, gdy istnieje plik realizacje.html
+  RewriteCond %{DOCUMENT_ROOT}/multilan/$1.html -f
+  RewriteRule ^(.+)/$ /multilan/$1 [R=301,L]
+
+  # adresy bez rozszerzenia -> pliki .html, takze gdy istnieje katalog o tej samej nazwie (np. realizacje)
   RewriteCond %{REQUEST_FILENAME} !-f
-  RewriteCond %{REQUEST_FILENAME} !-d
   RewriteCond %{REQUEST_FILENAME}.html -f
   RewriteRule ^(.+)$ $1.html [L]
 
@@ -31,7 +34,7 @@ ErrorDocument 404 /multilan/404.html
   Header always set X-Content-Type-Options "nosniff"
   Header always set X-Frame-Options "SAMEORIGIN"
   Header always set Referrer-Policy "strict-origin-when-cross-origin"
-  <FilesMatch "\.(avif|webp|jpg|jpeg|png|css|js|mp4|woff2)$">
+  <FilesMatch "\.(avif|webp|jpg|jpeg|png|css|js|mp4|woff2|pdf)$">
     Header set Cache-Control "public, max-age=31536000, immutable"
   </FilesMatch>
   <FilesMatch "\.html$">
