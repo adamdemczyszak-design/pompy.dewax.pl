@@ -85,9 +85,8 @@ wyświetlenia i kliknięcia per reklama, liczy w HubSpocie kontakty z `Kreacja: 
 }
 ```
 
-Reklamy R1–R4 z 12.09.2026 mają klucze `R1`–`R4`; ich adresy nie mają `utm_content`, więc leady z nich
-nie dają się przypisać do kreacji (tylko do kampanii po `utm_source`, jeśli właściciel dopisze
-parametry do adresów w Meta).
+Reklamy R1–R4 z 12.09.2026 mają w `wyniki.json` klucze `R1`–`R4`; ich adresy mają `utm_content`
+równe `dzien-wiercenia`, `dom-ktory-juz-stoi`, `kotlownia` i `karuzela`, po których liczy się ich leady.
 
 ## Lead do HubSpota: gdzie to jest podpięte
 

@@ -304,7 +304,10 @@ kontakt (upsert po e-mailu) i notatka w portalu 49004516. Koszt zapytania per kr
 z Meta ÷ liczba kontaktów z „Kreacja: KOD”; wynik w zakładce „Wyniki” panelu (`wyniki.json`,
 odświeżany na polecenie „zaktualizuj wyniki generatora”).
 
-Reklamy R1–R4 zostały bez `utm_content` (adres `https://pompy.dewax.pl/`), bo zmiana adresu w Meta
-tworzy nową kreację i cofa weryfikację; ich leady widać w HubSpocie tylko jako zgłoszenia bez kodu.
-Jeśli właściciel zechce je atrybuować, adresy R1–R4 dostaną `utm_content=R1…R4` przy najbliższej
-zmianie kreacji.
+Reklamy R1–R4 mają `utm_content` równe `dzien-wiercenia`, `dom-ktory-juz-stoi`, `kotlownia`
+i `karuzela` (sekcja „Reklamy”), więc ich leady widać w HubSpocie tak samo jak leady kreacji
+z generatora. Integracja HubSpot z Facebookiem dopisuje do adresów reklam własne parametry `hsa_*`
+(konto, kampania, zestaw, reklama), a kod śledzący HubSpot na stronie zbiera zgłoszenia z formularza
+wyceny jako „non-HubSpot form” (zdarzenie „…DEWAX Dobrzyca: .zap”). Kontakt z takiego zgłoszenia ma
+w HubSpocie źródło „Paid social” i w pierwszym adresie wejścia identyfikator reklamy oraz `utm_content`.
+Sprawdzone 13.09.2026: pierwsze kontakty z kampanii z 12.09 są w HubSpocie tą drogą.
