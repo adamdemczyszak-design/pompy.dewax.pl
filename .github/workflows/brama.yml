@@ -101,11 +101,11 @@ jobs:
           put brama/pompy.webp -o ${KAT%/}/pompy.webp
           put brama/granit.webp -o ${KAT%/}/granit.webp
           put brama/farba.webp -o ${KAT%/}/farba.webp
-          put brama/brama.jpg -o ${KAT%/}/brama.jpg
-          put brama/brama.webp -o ${KAT%/}/brama.webp
-          put brama/brama-lewa.webp -o ${KAT%/}/brama-lewa.webp
-          put brama/brama-prawa.webp -o ${KAT%/}/brama-prawa.webp
-          put brama/og-brama.jpg -o ${KAT%/}/og-brama.jpg
+          put brama/brama-2.jpg -o ${KAT%/}/brama-2.jpg
+          put brama/brama-2.webp -o ${KAT%/}/brama-2.webp
+          put brama/brama-lewa-2.webp -o ${KAT%/}/brama-lewa-2.webp
+          put brama/brama-prawa-2.webp -o ${KAT%/}/brama-prawa-2.webp
+          put brama/og-brama-2.jpg -o ${KAT%/}/og-brama-2.jpg
           put brama/logo-biale-kropki.png -o ${KAT%/}/logo-biale-kropki.png
           put brama/robots.txt -o ${KAT%/}/robots.txt
           put htaccess-nowy.txt -o ${KAT%/}/.htaccess
