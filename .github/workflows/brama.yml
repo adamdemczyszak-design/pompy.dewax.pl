@@ -121,7 +121,7 @@ jobs:
           ZLE=0
           spr() { echo "$1: $2 (oczekiwane $3)"; [ "$2" = "$3" ] || ZLE=$((ZLE+1)); }
           curl -s -L --max-time 30 https://dewax.pl/ -o glowna.html
-          if grep -q "ENGINEERING" glowna.html && grep -q "PAINT" glowna.html; then
+          if grep -qi "ENGINEERING" glowna.html && grep -qi "PAINT" glowna.html; then
             echo "dewax.pl: BRAMA WIDOCZNA"
           else
             echo "::error::dewax.pl: brama NIEwidoczna"
