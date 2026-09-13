@@ -34,7 +34,7 @@ jobs:
           # Zdejmij blok bramy z poprzednich wdrozen, zeby kopia zapasowa byla ZAWSZE oryginalem.
           if grep -q "^# brama DEWAX" htaccess-zserwera.txt; then
             echo ">>> plik zawiera juz blok bramy — usuwam go przed zrobieniem kopii"
-            sed -e '/^# brama DEWAX START/,/^# brama DEWAX END/d' -e '/^# brama DEWAX: strona wyboru dzialu/d' htaccess-zserwera.txt > bez-bloku.txt
+            sed -e '/^# brama DEWAX START/,/^# brama DEWAX END/d' -e '/^# brama DEWAX CSP START/,/^# brama DEWAX CSP END/d' -e '/^# brama DEWAX: strona wyboru dzialu/d' htaccess-zserwera.txt > bez-bloku.txt
             awk 'BEGIN{u=0} { if (u==0 && $0=="DirectoryIndex index.html index.php") { u=1; next } print }' bez-bloku.txt > htaccess-oryginal.txt
           else
             cp htaccess-zserwera.txt htaccess-oryginal.txt
@@ -83,6 +83,12 @@ jobs:
             echo "# brama DEWAX END"
             echo
             cat htaccess-oryginal.txt
+            echo
+            echo "# brama DEWAX CSP START - polityka bezpieczenstwa dla dewax.pl (bramka + stara strona farb): Google Analytics 4, piksel Meta, Google Fonts"
+            echo "<IfModule mod_headers.c>"
+            echo "Header always set Content-Security-Policy \"default-src 'self'; script-src 'self' 'unsafe-inline' https://www.googletagmanager.com https://connect.facebook.net; connect-src 'self' https://*.google-analytics.com https://*.analytics.google.com https://www.googletagmanager.com https://stats.g.doubleclick.net https://www.facebook.com https://connect.facebook.net; img-src 'self' data: https://pompy.dewax.pl https://*.google-analytics.com https://www.googletagmanager.com https://www.facebook.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; frame-src https://www.openstreetmap.org; form-action 'self'; frame-ancestors 'self'; base-uri 'self'\""
+            echo "</IfModule>"
+            echo "# brama DEWAX CSP END"
           } > htaccess-nowy.txt
           echo "--- nowy .htaccess ---"
           head -12 htaccess-nowy.txt
@@ -95,6 +101,11 @@ jobs:
           put brama/pompy.webp -o ${KAT%/}/pompy.webp
           put brama/granit.webp -o ${KAT%/}/granit.webp
           put brama/farba.webp -o ${KAT%/}/farba.webp
+          put brama/brama.jpg -o ${KAT%/}/brama.jpg
+          put brama/brama.webp -o ${KAT%/}/brama.webp
+          put brama/brama-lewa.webp -o ${KAT%/}/brama-lewa.webp
+          put brama/brama-prawa.webp -o ${KAT%/}/brama-prawa.webp
+          put brama/og-brama.jpg -o ${KAT%/}/og-brama.jpg
           put brama/logo-biale-kropki.png -o ${KAT%/}/logo-biale-kropki.png
           put brama/robots.txt -o ${KAT%/}/robots.txt
           put htaccess-nowy.txt -o ${KAT%/}/.htaccess

@@ -1,98 +1,78 @@
 <!DOCTYPE html><html lang="pl"><head>
 <meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <title>DEWAX</title>
-<meta name="description" content="DEWAX — Engineering i Paint. Wybierz dział.">
+<meta name="description" content="DEWAX: Engineering (gruntowe pompy ciepła, odwierty) i Paint (farby i tynki dekoracyjne). Wybierz obszar.">
 <link rel="canonical" href="https://dewax.pl/">
 <meta property="og:title" content="DEWAX">
 <meta property="og:description" content="DEWAX Engineering · DEWAX Paint">
 <meta property="og:url" content="https://dewax.pl/">
+<meta property="og:image" content="https://dewax.pl/og-brama.jpg">
 <meta property="og:type" content="website"><meta property="og:locale" content="pl_PL">
-<meta name="theme-color" content="#000050">
+<meta name="theme-color" content="#0b0a12">
 <link rel="icon" href="https://pompy.dewax.pl/favicon.png">
-<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;800&display=swap" rel="stylesheet">
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
-:root{--navy:#000050;--blue:#4087BD}
-html{-webkit-text-size-adjust:100%}
-body{font-family:'Montserrat',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:#0B0A12;min-height:100vh}
-img{max-width:100%;height:auto;display:block}
-a{text-decoration:none;color:inherit}
-
-.polowy{display:grid;grid-template-columns:1fr 1fr;min-height:100vh}
-@media(max-width:760px){.polowy{grid-template-columns:1fr;grid-template-rows:1fr 1fr}}
-
-.dzial{position:relative;display:flex;align-items:flex-end;justify-content:center;overflow:hidden;isolation:isolate;min-height:50vh}
-.dzial .tlo{position:absolute;inset:0;z-index:-1;transition:transform .6s ease}
-.dzial:hover .tlo,.dzial:focus-visible .tlo{transform:scale(1.035)}
-.dzial:focus-visible{outline:3px solid var(--blue);outline-offset:-3px}
-@media(prefers-reduced-motion:reduce){.dzial .tlo{transition:none}.dzial:hover .tlo{transform:none}}
-.dzial .tlo img{width:100%;height:100%;object-fit:cover}
-
-.eng .tlo img{object-position:50% 32%}
-.eng .tlo::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,55,.30) 0%,rgba(0,0,55,.48) 55%,rgba(0,0,60,.92) 100%)}
-.paint .tlo img{object-position:50% 50%}
-.paint .tlo::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(14,12,18,.30) 0%,rgba(14,12,18,.48) 55%,rgba(10,9,14,.92) 100%)}
-
-.paint .produkt{position:absolute;left:50%;top:9%;transform:translateX(-50%);height:46%;width:auto;z-index:1;filter:drop-shadow(0 22px 36px rgba(0,0,0,.55));transition:transform .6s ease}
-.paint:hover .produkt{transform:translateX(-50%) translateY(-6px)}
-@media(prefers-reduced-motion:reduce){.paint .produkt{transition:none}.paint:hover .produkt{transform:translateX(-50%)}}
-
-.dzial .in{position:relative;text-align:center;color:#fff;padding:0 24px 11vh}
-@media(max-width:760px){.dzial .in{padding-bottom:8vh}}
-.dzial .in img{height:52px;width:auto;margin:0 auto 14px}
-@media(max-width:760px){.dzial .in img{height:42px}}
-.dzial .nazwa{display:block;font-weight:700;font-size:clamp(19px,2.1vw,28px);letter-spacing:.42em;text-indent:.42em;color:#fff;margin-bottom:34px}
-@media(max-width:760px){.dzial .nazwa{margin-bottom:24px}}
-.dzial .cta{display:inline-flex;align-items:center;gap:10px;font-weight:800;font-size:14px;letter-spacing:.14em;padding:15px 34px;border:1.5px solid rgba(255,255,255,.6);border-radius:4px;background:rgba(255,255,255,.06);transition:.18s}
-.dzial .cta::after{content:"→";font-size:16px}
-.dzial:hover .cta{background:#fff;color:#111;border-color:#fff}
-
-.stopka{position:fixed;left:0;right:0;bottom:8px;text-align:center;font-size:10.5px;letter-spacing:.08em;color:rgba(255,255,255,.4);font-weight:700;pointer-events:none;z-index:2}
+html,body{height:100%}
+body{font-family:system-ui,-apple-system,"Segoe UI",Arial,sans-serif;background:#0b0a12;color:#fff;min-height:100vh;display:flex;flex-direction:column}
+a{color:inherit;text-decoration:none}
+.brama{position:relative;flex:1;display:grid;grid-template-columns:1fr 1fr;min-height:0}
+.tlo{position:absolute;inset:0;overflow:hidden}
+.tlo picture,.tlo img{display:block;width:100%;height:100%;object-fit:cover;object-position:center}
+.dzial{position:relative;display:block;min-height:0}
+.dzial:focus-visible{outline:4px solid #fff;outline-offset:-4px}
+.dzial img{display:block;width:100%;height:100%;object-fit:cover}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}
+.stopka{position:relative;padding:12px 16px;text-align:center;font-size:12px;letter-spacing:.06em;color:#d6d3e6;background:#0b0a12}
+.stopka a{border-bottom:1px solid rgba(255,255,255,.35)}
+.stopka span{margin:0 8px}
+.polowa{display:none}
+@media (max-width:760px){
+  .tlo{display:none}
+  .brama{grid-template-columns:1fr;grid-template-rows:1fr 1fr}
+  .polowa{display:block}
+}
 </style>
-</head><body>
-
-<main class="polowy">
-  <a class="dzial eng" href="https://pompy.dewax.pl/" aria-label="DEWAX Engineering">
-    <div class="tlo"><img src="pompy.webp" alt="" width="800" height="1029" fetchpriority="high"></div>
-    <div class="in">
-      <img src="logo-biale-kropki.png" alt="DEWAX" width="300" height="84">
-      <span class="nazwa">ENGINEERING</span>
-      <span class="cta">WEJDŹ</span>
-    </div>
+</head>
+<body>
+<main class="brama" aria-label="Wybierz obszar: DEWAX Engineering albo DEWAX Paint">
+  <div class="tlo" aria-hidden="true">
+    <picture>
+      <source srcset="/brama.webp" type="image/webp">
+      <img src="/brama.jpg" alt="" fetchpriority="high" width="1672" height="941">
+    </picture>
+  </div>
+  <a class="dzial" href="https://pompy.dewax.pl/" aria-label="DEWAX Engineering: gruntowe pompy ciepła i odwierty. Odkryj Engineering">
+    <img class="polowa" src="/brama-lewa.webp" alt="DEWAX Engineering: gruntowe pompy ciepła, odwierty. Odkryj Engineering" width="836" height="941">
+    <span class="sr">DEWAX Engineering, gruntowe pompy ciepła i odwierty</span>
   </a>
-
-  <a class="dzial paint" href="/multilan/" aria-label="DEWAX Paint: farba Multilan">
-    <div class="tlo"><img src="granit.webp" alt="" width="1300" height="867" fetchpriority="high"></div>
-    <img class="produkt" src="farba.webp" alt="" width="760" height="979" loading="lazy">
-    <div class="in">
-      <img src="logo-biale-kropki.png" alt="DEWAX" width="300" height="84">
-      <span class="nazwa">PAINT</span>
-      <span class="cta">WEJDŹ</span>
-    </div>
+  <a class="dzial" href="/multilan/" aria-label="DEWAX Paint: farby i tynki dekoracyjne, Multilan. Odkryj Paint">
+    <img class="polowa" src="/brama-prawa.webp" alt="DEWAX Paint: farby i tynki dekoracyjne. Odkryj Paint" width="836" height="941">
+    <span class="sr">DEWAX Paint, farby i tynki dekoracyjne</span>
   </a>
 </main>
+<footer class="stopka">DEWAX Sp. z o.o.<span>•</span>Dobrzyca<span>•</span><a href="/multilan/polityka-prywatnosci">Polityka prywatności</a></footer>
 
-<div class="stopka">DEWAX Sp. z o.o. · Dobrzyca</div>
-
-<div data-cookies hidden style="position:fixed;left:12px;right:12px;bottom:12px;z-index:9999;max-width:720px;margin:0 auto;background:#0B0A12;color:#fff;border:1px solid #4087BD;border-radius:12px;padding:14px 16px;font:14px/1.45 'Montserrat',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;box-shadow:0 8px 30px rgba(0,0,0,.4)"><p style="margin:0 0 10px">Używamy plików cookie do statystyk i pomiaru skuteczności reklam (Google, Meta). Możesz się zgodzić albo odmówić. <a href="/multilan/polityka-prywatnosci" style="color:#9cc6e8">Polityka prywatności</a></p><div style="display:flex;gap:10px;flex-wrap:wrap"><button type="button" data-tak style="background:#4087BD;color:#fff;border:0;border-radius:8px;padding:9px 16px;font-weight:700;cursor:pointer">Zgadzam się</button><button type="button" data-nie style="background:transparent;color:#fff;border:1px solid #666;border-radius:8px;padding:9px 16px;cursor:pointer">Odmawiam</button></div></div>
-<!-- Piksel Meta "dewax.pl" (zestaw danych firmy Dewax, id 1032857169399673). Uruchamiany tylko po zgodzie
-     zapisanej w localStorage pod kluczem multilan_cookies (ten sam klucz co strona /multilan). -->
-<script>(function(){
-  var PIXEL='1032857169399673', KLUCZ='multilan_cookies', zal=false;
-  function zgoda(){try{return localStorage.getItem(KLUCZ)}catch(e){return null}}
-  function zapisz(v){try{localStorage.setItem(KLUCZ,v)}catch(e){}}
-  function ladujPixel(){
-    if(zal)return; zal=true;
-    !function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,document,'script','https://connect.facebook.net/en_US/fbevents.js');
-    fbq('init',PIXEL); fbq('track','PageView');
+<div id="cookies" hidden role="dialog" aria-live="polite" aria-label="Zgoda na cookies" style="position:fixed;left:12px;right:12px;bottom:12px;z-index:50;max-width:860px;margin:0 auto;background:#fff;color:#2B2B2B;padding:16px 18px;box-shadow:0 8px 28px rgba(0,0,0,.35);display:none;gap:14px 22px;align-items:center;justify-content:space-between;flex-wrap:wrap;font-size:14px;line-height:1.5">
+  <div style="flex:1 1 320px"><b>Cookies i statystyki</b><br>Liczymy wejścia w Google Analytics i Meta (Facebook), żeby wiedzieć, skąd przychodzą klienci. Włączamy je tylko za Twoją zgodą. <a href="/multilan/polityka-prywatnosci" style="color:#17006B;border-bottom:1px solid #17006B">Polityka prywatności</a>.</div>
+  <div style="display:flex;gap:10px;flex-wrap:wrap"><button type="button" id="c-tak" style="background:#17006B;color:#fff;border:0;border-radius:8px;padding:11px 18px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;font-size:13px;cursor:pointer">Zgadzam się</button><button type="button" id="c-nie" style="background:#fff;color:#2B2B2B;border:2px solid #DDD;border-radius:8px;padding:11px 18px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;font-size:13px;cursor:pointer">Tylko niezbędne</button></div>
+</div>
+<script>
+/* Pomiar na bramce: piksel Meta (i GA4, gdy wpisany) ladowany dopiero po zgodzie; ten sam klucz zgody co na dewax.pl/multilan */
+(function(){
+  var GA4='', PIXEL='1032857169399673', KLUCZ='multilan_cookies';
+  function zgoda(){ try{ return localStorage.getItem(KLUCZ); }catch(e){ return null; } }
+  function zapisz(v){ try{ localStorage.setItem(KLUCZ,v); }catch(e){} }
+  var zal=false;
+  function laduj(){
+    if(zal) return; zal=true;
+    if(GA4){ window.dataLayer=window.dataLayer||[]; function gtag(){dataLayer.push(arguments);} window.gtag=window.gtag||gtag; gtag('js',new Date()); gtag('config',GA4,{linker:{domains:['dewax.pl','sklep.dewax.pl']}}); var s=document.createElement('script'); s.async=true; s.src='https://www.googletagmanager.com/gtag/js?id='+encodeURIComponent(GA4); document.head.appendChild(s); }
+    if(PIXEL){ !function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,document,'script','https://connect.facebook.net/en_US/fbevents.js'); fbq('init',PIXEL); fbq('track','PageView'); }
   }
-  if(zgoda()==='tak')ladujPixel();
-  var b=document.querySelector('[data-cookies]');
-  if(b&&zgoda()===null){
-    b.hidden=false;
-    b.querySelector('[data-tak]').addEventListener('click',function(){zapisz('tak');ladujPixel();b.hidden=true});
-    b.querySelector('[data-nie]').addEventListener('click',function(){zapisz('nie');b.hidden=true});
-  }
-})();</script>
+  if(zgoda()==='tak') laduj();
+  var b=document.getElementById('cookies');
+  if(b && (GA4||PIXEL) && zgoda()===null){ b.hidden=false; b.style.display='flex';
+    document.getElementById('c-tak').addEventListener('click',function(){ zapisz('tak'); laduj(); b.style.display='none'; });
+    document.getElementById('c-nie').addEventListener('click',function(){ zapisz('nie'); b.style.display='none'; }); }
+})();
+</script>
 </body></html>
