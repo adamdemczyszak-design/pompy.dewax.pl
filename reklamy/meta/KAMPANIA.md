@@ -294,6 +294,32 @@ wszystkich reklam zostało 189,50 zł. Przy 60 zł/dzień starczy do ok. 16.09; 
 ręcznie w Ustawieniach płatności (Windsor.ai nie ma takiej akcji). Limit kampanii 2 000 zł bez zmian.
 Starsza kampania zostaje wstrzymana.
 
+### Remarketing w Meta: co jest przygotowane, czego brakuje (13.09.2026)
+
+Stan faktyczny: na koncie `955522616312255` nie ma grup odbiorców do remarketingu. Z sesji Claude nie da
+się ich założyć: Meta Ads MCP nie obsługuje tego konta („Ads MCP is gradually being rolled out”),
+a Windsor.ai nie ma akcji tworzenia grup odbiorców. Piksel od 12.09 zbiera zdarzenia (w 7 dni do 13.09:
+ok. 600 `PageView`, ok. 45 `KalkulatorUkonczony`, 7 `Lead`), więc grupa „odwiedzający 30 dni” ma już
+kilkaset osób.
+
+Do zrobienia przez właściciela w Menedżerze reklam (ok. 10 minut), potem Claude zakłada zestaw i reklamy
+przez Windsor.ai w ramach tego samego budżetu 60 zł/dzień (CBO dzieli go między zestawy):
+
+1. Menedżer reklam → Odbiorcy → Utwórz grupę odbiorców → Grupa niestandardowa → Witryna → piksel
+   „Dewax gruntowe pompy ciepła Pixel” → „Wszyscy odwiedzający witrynę”, 30 dni → nazwa
+   `Odwiedzili pompy.dewax.pl 30 dni`.
+2. Druga grupa: ten sam piksel → zdarzenie `Lead`, 180 dni → nazwa `Wysłali zapytanie 180 dni`
+   (do wykluczenia, żeby nie pokazywać reklam osobom, które już wysłały formularz).
+3. Trzecia, opcjonalna: zdarzenie `KalkulatorUkonczony`, 30 dni → `Ukończyli kalkulator 30 dni`
+   (najcieplejsza grupa; przyda się też jako wzorzec do lookalike, gdy przekroczy 100 osób).
+4. Przesłać Claude identyfikatory grup (Odbiorcy → kolumna „Identyfikator”).
+
+Plan zestawu B (do założenia po punkcie 4): kampania `120248421653200027`, nazwa
+`B | Remarketing 30 dni | Lead`, odbiorcy: grupa 1 z wykluczeniem grupy 2, wiek 30–65, optymalizacja
+na `Lead`, kreacje `rm-1` i `rm-2` z generatora (napisane 13.09, w rejestrze R1–R4, ton „byłeś u nas,
+decyzja dojrzewa”). Grupa lookalike: dopiero gdy grupa źródłowa (`Lead` albo `KalkulatorUkonczony`)
+przekroczy 100 osób; też do założenia w Menedżerze reklam.
+
 ## Generator kreacji i atrybucja leadów (12.09.2026)
 
 Kolejne reklamy nie powstają ręcznie, tylko z panelu `reklamy/generator` (opis w
