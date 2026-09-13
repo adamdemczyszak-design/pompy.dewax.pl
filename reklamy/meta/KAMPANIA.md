@@ -281,6 +281,17 @@ razem z zestawem i reklamami; cztery kreacje zostały w bibliotece tego konta i 
 przeszkadzają). Wszystkie identyfikatory z sekcji „Konto, strona, piksel” i „Struktura kampanii”
 dotyczą więc obiektów historycznych; obowiązują identyfikatory z tabeli wyżej.
 
+### Budżet od 13.09.2026 (decyzja właściciela)
+
+Po dwóch dniach kampania z 12.09 miała 7 zapytań z formularza za 102 zł (koszt zapytania 14,57 zł, wszystkie
+z R3 „Kotłownia”), a równolegle działająca starsza kampania „Dewax gruntowe pompy ciepła | Leads | Image”
+(`120240091141860027`, formularze Lead Ads, 70 zł/dzień) wydała 201 zł na 3–4 leady. Na polecenie
+właściciela 13.09.2026 przez Windsor.ai: starsza kampania **wstrzymana** (odwracalne: `enable_campaign`),
+a kampania z 12.09 dostała jej budżet: **130 zł/dzień** (było 60). Limit wydatków 2 000 zł został bez
+zmian, więc przy 130 zł/dzień wyczerpie się około 27–28.09; przed tym terminem właściciel decyduje
+o podniesieniu limitu. Zmiana budżetu o ponad 20% cofa zestaw do fazy nauki, więc pierwsze 2–3 dni
+po zmianie mogą być słabsze.
+
 ## Generator kreacji i atrybucja leadów (12.09.2026)
 
 Kolejne reklamy nie powstają ręcznie, tylko z panelu `reklamy/generator` (opis w
