@@ -32,15 +32,28 @@ deweloperskiego: `npm start`, `npm run check`. Szczegóły: `README.md`.
 | `zgoda-na-publikacje-opinii.html`, sekcja `#opinie` w `index.html` | (od 09.09.2026) infrastruktura opinii bez treści: sekcja ukryta atrybutem `hidden` z wpisem SZABLON, formularz zgody przez `wyslij.php` (`formularz=zgoda-opinia`). **Nigdy nie wpisywać opinii bez pisemnej zgody**; szablon `Review` w JSON-LD wkleić dopiero z prawdziwą opinią |
 | `js/kalkulator.js` | algorytm kalkulatora; czysta funkcja `oblicz(S)`; test regresji `testy/kalkulator.test.mjs` porównuje z `testy/kalkulator-wzorzec.json` |
 | `CONTENT_NEEDED.md` | czego brakuje i co potwierdzić przed publikacją |
-| `docs/ANALITYKA.md` | zdarzenia GA4 i plan mierzenia |
+| `docs/ANALITYKA.md` | zdarzenia GA4 i plan mierzenia; od 12.09.2026 także `generate_lead` (konwersja na `podziekowanie.html?ok=1`) i linia „Źródło:” w mailu z formularza (parametry utm/gclid przenoszone przez `js/dewax.js`) |
+| `docs/GOOGLE-ADS.md`, `reklama/google-ads/` | (od 12.09.2026) kampania Google Ads: plan, stan konta, konwersje, struktura w `kampania.py` (jedno źródło prawdy), `narzedzia.py kontrola` (limity 30/90 znaków, zasady Google), `narzedzia.py eksport` (CSV do Google Ads Editor), obrazy z prawdziwych zdjęć. Katalog `reklama/` nie jest wdrażany na serwer |
 | `tresci/strategia.md` | strategia z 15.08: psychologia klienta, konkurencja, źródła, czego nie wolno twierdzić |
 
 ## CDN nazwa.pl
 
 Przed stroną stoi CDN: HTML `no-cache`, ale CSS do 30 dni, JS i `sitemap.xml` do 14 dni.
 Adresy arkusza i skryptów mają znacznik wersji (`css/dewax.css?v=RRRR-MM-DD`).
-**Zmieniasz `css/` albo `js/` → podnieś znacznik w trzech stronach**, inaczej klienci
+**Zmieniasz `css/` albo `js/` → podnieś znacznik na wszystkich stronach, które ten plik ładują**
+(16 plików HTML; `grep -rl 'dewax.js?v=' --include=*.html .`), inaczej klienci
 dostaną stary plik do nowego HTML-a. Kontrola: dowolny nowy parametr w adresie omija CDN.
+
+## Google Ads (od 12.09.2026)
+
+Konto „Dewax” 120-637-0043 (PLN), odczyt i zapis przez Windsor.ai (zapis wymaga włączenia w ustawieniach
+Windsor). Struktura, słowa, wykluczenia i teksty reklam żyją w `reklama/google-ads/kampania.py`;
+zmiana = edycja tego pliku + `narzedzia.py eksport`. Teksty reklam podlegają tym samym zasadom co strona
+(OUTCOME-FIRST, bez pauz, bez wymyślonych liczb) plus zasadom Google: nagłówek do 30 znaków, opis do 90,
+bez wykrzykników w nagłówkach, bez numeru telefonu w treści. Nie obiecywać „załatwimy dotację” ani
+„bezpłatnej wyceny”. Konwersja główna: `generate_lead` (GA4) + połączenia z reklam; kampanie w wyszukiwarce,
+bez sieci reklamowej i partnerów; targetowanie: 6 województw ze strony. Kampanie tworzymy wstrzymane,
+włączenie to decyzja właściciela.
 
 ## Narzędzia zewnętrzne
 

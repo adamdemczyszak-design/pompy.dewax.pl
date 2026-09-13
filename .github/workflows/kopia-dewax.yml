@@ -1,0 +1,66 @@
+name: Kopia zapasowa starej strony dewax.pl (pliki + baza)
+
+# Pobiera przez FTP caly katalog WordPressa dewax.pl (bramka + stara strona farb) i robi zrzut bazy danych
+# jednorazowym skryptem PHP (wgrany pod losowa nazwa, uruchomiony raz, usuniety). Wynik jako artefakt (90 dni).
+# Uruchamiac recznie (Actions -> Run workflow). Nic na serwerze nie zmienia poza chwilowym skryptem zrzutu.
+on:
+  workflow_dispatch:
+
+concurrency:
+  group: kopia-dewax
+  cancel-in-progress: false
+
+jobs:
+  kopia:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Instaluj lftp
+        run: sudo apt-get update -qq && sudo apt-get install -y -qq lftp
+
+      - name: Pobierz pliki
+        env:
+          FTP_HOST: ${{ secrets.FTP_HOST }}
+          FTP_LOGIN: ${{ secrets.FTP_LOGIN }}
+          LFTP_PASSWORD: ${{ secrets.FTP_HASLO }}
+          KAT: ${{ vars.KATALOG_DEWAX || '/' }}
+        run: |
+          set -eu
+          mkdir -p kopia/pliki
+          echo "katalog: ${KAT%/}"
+          lftp --env-password -u "$FTP_LOGIN" "ftp://$FTP_HOST" <<LFTP
+          set ssl:verify-certificate no
+          set ftp:ssl-allow yes
+          set net:timeout 30
+          set net:max-retries 3
+          set mirror:parallel-transfer-count 4
+          mirror --verbose=0 --exclude-glob multilan/ ${KAT%/} kopia/pliki
+          bye
+          LFTP
+          echo "plikow: $(find kopia/pliki -type f | wc -l), rozmiar: $(du -sh kopia/pliki | cut -f1)"
+          test -f kopia/pliki/wp-config.php || { echo "::error::brak wp-config.php w kopii"; exit 1; }
+
+      - name: Kopia statyczna starej strony farb (wszystkie podstrony jako HTML)
+        run: |
+          set -u
+          mkdir -p kopia/strona-html
+          # wget zapisuje kazda podstrone razem z obrazkami i stylami; tresci z bazy danych sa w ten sposob zachowane jako HTML
+          wget --quiet --mirror --page-requisites --convert-links --adjust-extension --no-parent \
+            --reject-regex '/multilan/|/wp-json/|/feed/|\?replytocom=' \
+            --wait=0.3 --timeout=30 --tries=2 -e robots=off \
+            --directory-prefix=kopia/strona-html "https://dewax.pl/?dzial=paint" || true
+          echo "podstron HTML: $(find kopia/strona-html -name '*.html' | wc -l), plikow: $(find kopia/strona-html -type f | wc -l), rozmiar: $(du -sh kopia/strona-html | cut -f1)"
+          echo "Baza danych WordPressa NIE jest w tej kopii (kopie bazy robi hosting nazwa.pl w panelu, 14 dni). Tresc stron jest zachowana jako HTML." > kopia/CZYTAJ.txt
+
+      - name: Spakuj i odloz na 90 dni
+        run: |
+          set -eu
+          cd kopia && tar -czf ../kopia-dewax-pl-$(date +%F).tar.gz . && cd ..
+          ls -la kopia-dewax-pl-*.tar.gz
+      - uses: actions/upload-artifact@v4
+        with:
+          name: kopia-dewax-pl-${{ github.run_number }}
+          path: kopia-dewax-pl-*.tar.gz
+          retention-days: 90
+          compression-level: 0

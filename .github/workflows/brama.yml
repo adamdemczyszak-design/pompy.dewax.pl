@@ -34,7 +34,7 @@ jobs:
           # Zdejmij blok bramy z poprzednich wdrozen, zeby kopia zapasowa byla ZAWSZE oryginalem.
           if grep -q "^# brama DEWAX" htaccess-zserwera.txt; then
             echo ">>> plik zawiera juz blok bramy — usuwam go przed zrobieniem kopii"
-            sed -e '/^# brama DEWAX START/,/^# brama DEWAX END/d' -e '/^# brama DEWAX: strona wyboru dzialu/d' htaccess-zserwera.txt > bez-bloku.txt
+            sed -e '/^# brama DEWAX START/,/^# brama DEWAX END/d' -e '/^# brama DEWAX CSP START/,/^# brama DEWAX CSP END/d' -e '/^# brama DEWAX: strona wyboru dzialu/d' htaccess-zserwera.txt > bez-bloku.txt
             awk 'BEGIN{u=0} { if (u==0 && $0=="DirectoryIndex index.html index.php") { u=1; next } print }' bez-bloku.txt > htaccess-oryginal.txt
           else
             cp htaccess-zserwera.txt htaccess-oryginal.txt
@@ -66,12 +66,29 @@ jobs:
             echo "<IfModule mod_rewrite.c>"
             echo "RewriteEngine On"
             echo "RewriteBase /"
+            echo "# stara strona farb -> nowa strona Multilan (start 13.09.2026); ?dzial=paint zostaje jako ukryte wejscie"
+            echo "RewriteRule ^(o-firmie|strefa-dystrybutora)/?\$ /multilan/ [R=301,L]"
+            echo "RewriteRule ^przykladowe-realizacje/?\$ /multilan/realizacje/?lista [R=301,L]"
+            echo "RewriteRule ^strefa-fachowca/?\$ /multilan/dla-wykonawcow [R=301,L]"
+            echo "RewriteRule ^(do-pobrania|karta-techniczna-multilan-02-2019)/?\$ /multilan/do-pobrania [R=301,L]"
+            echo "RewriteRule ^kontakt/?\$ /multilan/kontakt [R=301,L]"
+            echo "RewriteRule ^polityka-prywatnosci/?\$ /multilan/polityka-prywatnosci [R=301,L]"
+            echo "RewriteRule ^zamow-tester/?\$ /multilan/kolory [R=301,L]"
+            echo "RewriteRule ^znajdz-sklep/?\$ /multilan/kontakt [R=301,L]"
+            echo "RewriteCond %{QUERY_STRING} ^p=[0-9]+\$"
+            echo "RewriteRule ^\$ /multilan/? [R=301,L]"
             echo "RewriteCond %{QUERY_STRING} (^|&)dzial=paint(&|\$)"
             echo "RewriteRule ^\$ index.php [L]"
             echo "</IfModule>"
             echo "# brama DEWAX END"
             echo
             cat htaccess-oryginal.txt
+            echo
+            echo "# brama DEWAX CSP START - polityka bezpieczenstwa dla dewax.pl (bramka + stara strona farb): Google Analytics 4, piksel Meta, Google Fonts"
+            echo "<IfModule mod_headers.c>"
+            echo "Header always set Content-Security-Policy \"default-src 'self'; script-src 'self' 'unsafe-inline' https://www.googletagmanager.com https://connect.facebook.net; connect-src 'self' https://*.google-analytics.com https://*.analytics.google.com https://www.googletagmanager.com https://stats.g.doubleclick.net https://www.facebook.com https://connect.facebook.net; img-src 'self' data: https://pompy.dewax.pl https://*.google-analytics.com https://www.googletagmanager.com https://www.facebook.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; frame-src https://www.openstreetmap.org; form-action 'self'; frame-ancestors 'self'; base-uri 'self'\""
+            echo "</IfModule>"
+            echo "# brama DEWAX CSP END"
           } > htaccess-nowy.txt
           echo "--- nowy .htaccess ---"
           head -12 htaccess-nowy.txt
@@ -84,7 +101,13 @@ jobs:
           put brama/pompy.webp -o ${KAT%/}/pompy.webp
           put brama/granit.webp -o ${KAT%/}/granit.webp
           put brama/farba.webp -o ${KAT%/}/farba.webp
+          put brama/brama-2.jpg -o ${KAT%/}/brama-2.jpg
+          put brama/brama-2.webp -o ${KAT%/}/brama-2.webp
+          put brama/brama-lewa-2.webp -o ${KAT%/}/brama-lewa-2.webp
+          put brama/brama-prawa-2.webp -o ${KAT%/}/brama-prawa-2.webp
+          put brama/og-brama-2.jpg -o ${KAT%/}/og-brama-2.jpg
           put brama/logo-biale-kropki.png -o ${KAT%/}/logo-biale-kropki.png
+          put brama/robots.txt -o ${KAT%/}/robots.txt
           put htaccess-nowy.txt -o ${KAT%/}/.htaccess
           chmod 644 ${KAT%/}/index.html ${KAT%/}/.htaccess
           cls -la ${KAT%/}/index.html ${KAT%/}/.htaccess
@@ -98,7 +121,7 @@ jobs:
           ZLE=0
           spr() { echo "$1: $2 (oczekiwane $3)"; [ "$2" = "$3" ] || ZLE=$((ZLE+1)); }
           curl -s -L --max-time 30 https://dewax.pl/ -o glowna.html
-          if grep -q "ENGINEERING" glowna.html && grep -q "PAINT" glowna.html; then
+          if grep -qi "ENGINEERING" glowna.html && grep -qi "PAINT" glowna.html; then
             echo "dewax.pl: BRAMA WIDOCZNA"
           else
             echo "::error::dewax.pl: brama NIEwidoczna"

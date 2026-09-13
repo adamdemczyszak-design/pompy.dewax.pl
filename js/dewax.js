@@ -3,8 +3,8 @@
    przez Cookiebot), formularz wyceny, pasek mobilny, wspólny stan „koszt + geologia".
    Bez bibliotek zewnętrznych. Nie ustawia cookies; korzysta z sessionStorage
    (kategoria „niezbędne/funkcjonalne”) wyłącznie do zapamiętania, że użytkownik
-   w tej sesji ukończył kalkulator i otworzył DEWAX GEO, oraz parametrów utm z adresu
-   wejścia (wpisywanych w ukryte pola formularza wyceny).
+   w tej sesji ukończył kalkulator, otworzył DEWAX GEO oraz z jakiej kampanii wszedł
+   (parametry utm_* i gclid z adresu, dopisywane do zgłoszenia z formularza).
    ===================================================================== */
 (function () {
   'use strict';
@@ -40,14 +40,32 @@
   };
   function ss(k, v) { try { if (v === undefined) return sessionStorage.getItem(k); sessionStorage.setItem(k, v); } catch (e) { return null; } }
 
-  /* ---------- atrybucja: utm z adresu reklamy trzymane przez sesję, wpisywane w ukryte pola formularza ---------- */
-  var UTM = ['utm_source', 'utm_medium', 'utm_campaign', 'utm_content'];
-  try {
-    var q = new URLSearchParams(location.search), znal = {};
-    UTM.forEach(function (k) { var v = q.get(k); if (v) znal[k] = v.slice(0, 120); });
-    if (Object.keys(znal).length) ss('dx_utm', JSON.stringify(znal));
-  } catch (e) {}
-  dx.atrybucja = function () { try { return JSON.parse(ss('dx_utm') || '{}'); } catch (e) { return {}; } };
+  /* ---------- źródło wejścia (kampanie Google Ads itp.): utm_* i gclid z adresu ----------
+     Zapamiętane na czas sesji, przeniesione na linki do własnych stron (żeby przetrwały przejście
+     na stronę z formularzem) i dopisane do zgłoszenia jako ukryte pole „zrodlo”. wyslij.php
+     wpisuje je do maila, więc wiadomo, która kampania i które słowo przyniosło zapytanie. */
+  var ZRODLO_KLUCZE = ['utm_source', 'utm_medium', 'utm_campaign', 'utm_term', 'utm_content', 'gclid'];
+  function zrodloZAdresu() {
+    var out = [], q;
+    try { q = new URLSearchParams(w.location.search); } catch (e) { return ''; }
+    ZRODLO_KLUCZE.forEach(function (k) { var v = q.get(k); if (v) out.push(k + '=' + encodeURIComponent(v).slice(0, 120)); });
+    if (out.length) out.push('lp=' + encodeURIComponent(w.location.pathname));
+    return out.join('&');
+  }
+  var zrodlo = zrodloZAdresu();
+  if (zrodlo) ss('dx_zrodlo', zrodlo); else zrodlo = ss('dx_zrodlo') || '';
+  dx.zrodlo = zrodlo;
+  if (zrodlo) {
+    $$('a[href]').forEach(function (a) {
+      var h = a.getAttribute('href') || '';
+      if (/^(#|mailto:|tel:|javascript:)/i.test(h)) return;
+      if (/^(https?:)?\/\//i.test(h) && !/^(https?:)?\/\/pompy\.dewax\.pl\//i.test(h)) return;
+      if (/[?&](utm_|gclid=)/.test(h)) return;
+      var m = h.match(/^([^#?]*)(\?[^#]*)?(#.*)?$/);
+      if (!m || !/\.html$|\/$/.test(m[1])) return;
+      a.setAttribute('href', m[1] + (m[2] ? m[2] + '&' : '?') + zrodlo + (m[3] || ''));
+    });
+  }
 
   /* ---------- oba kroki wykonane: pokaż baner „poproś o ofertę” ---------- */
   dx.obaKroki = function () {
@@ -90,6 +108,7 @@
   /* ---------- formularz wyceny: walidacja, komunikaty, blokada podwójnej wysyłki ---------- */
   var f = d.forms['wycena'];
   if (f) {
+    if (zrodlo) { var hz = d.createElement('input'); hz.type = 'hidden'; hz.name = 'zrodlo'; hz.value = zrodlo.slice(0, 300); f.appendChild(hz); }
     var t0 = Date.now();
     var czas = $('#fczas');
     var started = false;
@@ -129,8 +148,6 @@
       if (f.getAttribute('data-sending') === '1') { e.preventDefault(); return; }
       f.setAttribute('data-sending', '1');
       if (czas) czas.value = Math.round((Date.now() - t0) / 1000);
-      /* atrybucja: utm z sesji do ukrytych pól (w mailu jako Źródło / Kampania / Kreacja) */
-      try { var at = dx.atrybucja(); UTM.forEach(function (k) { if (f[k] && at[k]) f[k].value = at[k]; }); } catch (err) {}
       if (btn) { btn.setAttribute('aria-disabled', 'true'); btn.textContent = 'Wysyłanie…'; }
       status.className = 'status ok'; status.textContent = 'Wysyłamy zapytanie…';
       dx.track('quote_submitted', { z_kalkulatora: /Z kalkulatora/.test(f.wiadomosc ? f.wiadomosc.value : '') ? 1 : 0, telefon: f.telefon && f.telefon.value ? 1 : 0 });

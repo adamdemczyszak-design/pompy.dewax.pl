@@ -162,3 +162,19 @@ Generator kreacji i tor leadów do HubSpota: `reklamy/generator/README.md`.
 | 10.10 | Bloki generatora „do potwierdzenia” | `h04` (stawka 130–145 zł za metr odwiertu z kalkulatora: czy wolno ją podawać w reklamie), `h07` (termin naboru Moje Ciepło 31.12.2026: sprawdzić przed użyciem), `b5` (chłodzenie pasywne: czy każda oferta ma moduł chłodzenia, czy to opcja). Do potwierdzenia kreacje z tymi blokami zostają w bibliotece. |
 | 10.11 | Druga aktywna kampania na koncie pomp | „Dewax gruntowe pompy ciepła \| Leads \| Image” (`120240091141860027`) wydała 964,59 zł w 30 dni i konkuruje o tych samych odbiorców z kampanią z 12.09. Decyzja: wstrzymać albo zostawić (Claude nie zmienia kampanii bez zgody). |
 | 10.12 | Posty z fanpage'a jako surowiec do hooków | Supermetrics (trial) wygasł, Windsor.ai nie ma podłączonego konektora Facebook Page (organic). Albo podłączyć konektor w Windsor.ai, albo wkleić treści postów w zakładce „Źródła i zasady” panelu. |
+
+## 11. Google Ads (12.09.2026): decyzje i czynności właściciela
+
+Kampania jest wgrana i włączona (12.09.2026, `docs/GOOGLE-ADS.md` punkt 0). Bez pozycji 11.2
+(doładowanie konta) nic się nie wyświetli, bez 11.3 (konwersje) nic nie zmierzymy.
+
+| # | Co | Dlaczego |
+|---|---|---|
+| 11.1 | **Zrobione 12.09.2026.** Zapis włączony w Supermetrics (Campaign Write Access, „Going live”) i Windsor.ai; pięć kampanii wgranych, wstrzymanych, z identyfikatorami w `docs/GOOGLE-ADS.md` punkt 0. Stara kampania wstrzymana. | Włączenie kampanii pozostaje decyzją właściciela (punkty 10.2 do 10.4). |
+| 11.2 | **Sprawdzić, dlaczego kampania „Pompy gruntowe - Konin 200km” była niekwalifikująca się od 26.08.2026** (Rozliczenia, weryfikacja reklamodawcy, powiadomienia w panelu). | Konto nie wyświetlało reklam od 26.08. Ta sama przyczyna zablokuje nowe kampanie. |
+| 11.3 | **Konwersje:** połączyć GA4 z Google Ads, oznaczyć `generate_lead` jako kluczowe zdarzenie, zaimportować do Google Ads, dodać konwersję „Połączenia z reklam”. | Dotychczasowa kampania wydała 885 zł bez jednej zmierzonej konwersji, bo w koncie nie ma działań powodujących konwersję. |
+| 11.4 | **Zrobione 12.09.2026:** właściciel ustalił 60 zł/dzień łącznie (31 / 14 / 6 / 3 / 6 zł), kampanie włączone na jego polecenie. Konto wymaga doładowania (płatność z góry), bez tego reklamy nie ruszą. | Zmiana budżetu: jedno zdanie, wykonanie przez API. |
+| 11.5 | **Telefon w reklamach:** potwierdzić 62 741 32 27 i to, kto odbiera w godzinach 8:00 do 16:00. | Zasób połączenia liczy rozmowy powyżej 60 s jako konwersje. |
+| 11.6 | **Obrazy i logo:** wgrać pliki z `reklama/google-ads/obrazy/`; przejść weryfikację reklamodawcy; jeśli jest logo w wektorze (SVG/PDF), przekazać. | Obrazy podnoszą CTR; nazwa i logo firmy w reklamie wymagają weryfikacji. |
+| 11.7 | **Polityka prywatności:** przy najbliższej edycji dopisać, że do zgłoszenia dopisujemy źródło wejścia (parametry kampanii i identyfikator kliknięcia Google Ads), trzymane w `sessionStorage` na czas wizyty. | Nowe pole `zrodlo` w mailu z formularza (docs/ANALITYKA.md). |
+| 11.8 | **Wykluczenia miast:** lista wykluczonych miast poza obszarem (Kraków, Gdańsk, Szczecin, Lublin, Rzeszów, Białystok, Olsztyn, Kielce, Opole, Zielona Góra…) zakłada, że DEWAX nie jeździ poza 6 województw. Jeśli jeździ, skreślić z listy w `reklama/google-ads/kampania.py`. | Wykluczenie działa na słowo w zapytaniu, nie na lokalizację użytkownika. |

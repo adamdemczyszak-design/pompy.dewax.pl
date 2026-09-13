@@ -118,6 +118,13 @@ font-family:'Montserrat';font-weight:800;font-size:15px;text-decoration:none;tra
 })();
 </script>
 <script data-cookieconsent="ignore">
+/* Konwersja wyceny: wyłącznie ?ok=1 (wyslij.php dodaje ten parametr tylko po realnej wysyłce maila).
+   Zdarzenie GA4 „generate_lead” oznacz w GA4 jako kluczowe i zaimportuj do Google Ads (docs/GOOGLE-ADS.md).
+   Wejścia bez parametru (odrzucone boty) i ?zgoda=1 (zgoda na opinię) nie wysyłają zdarzenia. */
+(function(){
+  if (!/[?&]ok=1(&|$)/.test(location.search)) return;
+  if (typeof gtag === 'function') gtag('event', 'generate_lead', { formularz: 'wycena' });
+})();
 /* Piksel Meta: zdarzenie Lead wyłącznie dla potwierdzonej wyceny (?ok=1), nie dla zgody na opinię.
    fbq istnieje tylko po zgodzie marketingowej, a Cookiebot bywa odczytany z opóźnieniem, stąd ponowienia. */
 (function(){

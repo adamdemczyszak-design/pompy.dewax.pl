@@ -115,7 +115,8 @@ Jak sprawdzić, że lead wpadł:
 
 1. Wejdź na `https://pompy.dewax.pl/?utm_source=facebook&utm_medium=paid_social&utm_campaign=test&utm_content=h01-b2-c3`,
    zaakceptuj cookies marketingowe i wyślij formularz wyceny ze swoim e-mailem.
-2. Mail na `sprzedaz@dewax.pl` ma wiersze `Źródło: facebook / paid_social`, `Kampania: test`, `Kreacja: h01-b2-c3`.
+2. Mail na `sprzedaz@dewax.pl` ma wiersz `Źródło: utm_source=facebook&utm_medium=paid_social&utm_campaign=test&utm_content=h01-b2-c3&lp=/`
+   i wiersz `Kreacja: h01-b2-c3`.
 3. HubSpot → Kontakty → wyszukaj swój e-mail: w osi czasu jest „Form submission” z formularza `.zap`,
    we właściwościach „Original source” = Paid social, a pierwszy adres wejścia zawiera `utm_content=h01-b2-c3`.
 4. Gdy kontaktu nie ma: najczęściej cookies zostały odrzucone. Sprawdź też w HubSpocie, czy zbieranie

@@ -296,7 +296,7 @@ Każda kreacja ma kod `hXX-bY-cZ`, który występuje w trzech miejscach i spina 
 |---|---|
 | Nazwa reklamy w Meta | `KOD \| hook \| korzyść` (wydatki, wyświetlenia i kliknięcia per kreacja z Windsor.ai) |
 | Adres docelowy | `utm_source=facebook&utm_medium=paid_social&utm_campaign=pompy-leady-2026-09&utm_content=KOD` |
-| Zgłoszenie z formularza | `js/dewax.js` zapamiętuje utm z adresu wejścia w sessionStorage i wpisuje w ukryte pola formularza; `wyslij.php` dopisuje „Kreacja: KOD” do maila. W HubSpocie kontakt zebrany kodem śledzącym ma `utm_content` w pierwszym adresie wejścia |
+| Zgłoszenie z formularza | `js/dewax.js` zapamiętuje parametry kampanii z adresu wejścia (`dx_zrodlo`) i dopisuje je do zgłoszenia jako pole `zrodlo`; `wyslij.php` wpisuje do maila „Źródło:” i „Kreacja: KOD” (`utm_content`). W HubSpocie kontakt zebrany kodem śledzącym ma `utm_content` w pierwszym adresie wejścia |
 
 Lead trafia do HubSpota bez dodatkowych połączeń: kod śledzący HubSpot na stronie (po zgodzie
 marketingowej) zbiera zgłoszenie z formularza jako „non-HubSpot form”, a integracja HubSpot z Facebookiem

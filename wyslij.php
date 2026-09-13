@@ -116,15 +116,11 @@ $metraz      = pole('metraz', 10);
 $telefon     = pole('telefon', 30);
 $wiadomosc   = mb_substr(trim((string)($_POST['wiadomosc'] ?? '')), 0, 2000);
 $ogrzewanie  = pole('ogrzewanie', 60);
+$zrodlo      = pole('zrodlo', 300);       // parametry kampanii z adresu strony (utm_*, gclid, lp), wpisuje js/dewax.js
+parse_str($zrodlo, $zrodloPola);           // utm_content = kod kreacji z generatora (np. h01-b2-c3) albo nazwa reklamy Meta
+$kreacja     = mb_substr(trim((string)($zrodloPola['utm_content'] ?? '')), 0, 80);
 $zgodaDane   = ($_POST['zgoda_dane'] ?? '') === 'tak';
 $zgodaTel    = ($_POST['zgoda_telefon'] ?? '') === 'tak';
-/* atrybucja z ukrytych pól: parametry utm z adresu reklamy (dewax.js wpisuje je z sessionStorage).
-   Trafiają tylko do maila (wiersze Źródło / Kampania / Kreacja). Do HubSpota zgłoszenie zbiera
-   kod śledzący HubSpot na stronie, po zgodzie marketingowej; osobnego połączenia nie ma. */
-$utmSource   = pole('utm_source', 60);
-$utmMedium   = pole('utm_medium', 60);
-$utmCampaign = pole('utm_campaign', 80);
-$utmContent  = pole('utm_content', 80);   // kod kreacji z generatora, np. h01-b2-c3, albo nazwa reklamy
 
 /* --- walidacja --- */
 $bledy = [];
@@ -156,12 +152,9 @@ $tresc .= "Miejscowość:  $miejscowosc\n";
 $tresc .= "Metraż:       " . ($metraz !== '' ? "$metraz m2" : '— nie podano —') . "\n";
 $tresc .= "Zgoda tel.:   " . ($zgodaTel ? 'TAK — można dzwonić' : 'NIE — tylko e-mail') . "\n";
 if ($ogrzewanie !== '') $tresc .= "Ogrzewanie:   $ogrzewanie\n";
+if ($zrodlo !== '')     $tresc .= "Źródło:       $zrodlo\n";   // np. utm_source=google&utm_medium=cpc&utm_campaign=gruntowa&utm_term=...
+if ($kreacja !== '')    $tresc .= "Kreacja:      $kreacja\n";   // po tym kodzie liczy się leady na kreację (reklamy/generator)
 if ($wiadomosc !== '')  $tresc .= "\nO domu:\n$wiadomosc\n";
-if ($utmSource !== '' || $utmContent !== '') {
-    $tresc .= "\nŹródło:       " . ($utmSource !== '' ? "$utmSource / $utmMedium" : '—') . "\n";
-    $tresc .= "Kampania:     " . ($utmCampaign !== '' ? $utmCampaign : '—') . "\n";
-    $tresc .= "Kreacja:      " . ($utmContent !== '' ? $utmContent : '—') . "\n";
-}
 $tresc .= "\n" . str_repeat('-', 46) . "\n";
 $tresc .= 'Wysłano: ' . date('Y-m-d H:i:s') . "\n";
 $tresc .= 'IP: ' . ($_SERVER['REMOTE_ADDR'] ?? '?') . "\n";

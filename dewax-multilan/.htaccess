@@ -8,9 +8,12 @@ Options -Indexes
   RewriteEngine On
   RewriteBase /multilan/
 
-  # adresy bez rozszerzenia -> pliki .html (np. /multilan/kolory -> kolory.html)
+
+  # stare adresy /realizacje/<slug> -> /realizacja/<slug>
+  RewriteRule ^realizacje/([a-z0-9-]+)/?$ /multilan/realizacja/$1 [R=301,L]
+
+  # adresy bez rozszerzenia -> pliki .html
   RewriteCond %{REQUEST_FILENAME} !-f
-  RewriteCond %{REQUEST_FILENAME} !-d
   RewriteCond %{REQUEST_FILENAME}.html -f
   RewriteRule ^(.+)$ $1.html [L]
 
@@ -31,7 +34,9 @@ ErrorDocument 404 /multilan/404.html
   Header always set X-Content-Type-Options "nosniff"
   Header always set X-Frame-Options "SAMEORIGIN"
   Header always set Referrer-Policy "strict-origin-when-cross-origin"
-  <FilesMatch "\.(avif|webp|jpg|jpeg|png|css|js|mp4|woff2)$">
+  # CSP dla /multilan (nadpisuje ostrzejsza polityke z katalogu nadrzednego): Google Fonts, Google Analytics 4, mapa OpenStreetMap
+  Header always set Content-Security-Policy "default-src 'self'; script-src 'self' 'unsafe-inline' https://www.googletagmanager.com https://connect.facebook.net; connect-src 'self' https://*.google-analytics.com https://*.analytics.google.com https://www.googletagmanager.com https://stats.g.doubleclick.net https://www.facebook.com https://connect.facebook.net; img-src 'self' data: https://*.google-analytics.com https://www.googletagmanager.com https://www.facebook.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; frame-src https://www.openstreetmap.org; media-src 'self'; form-action 'self'; frame-ancestors 'self'; base-uri 'self'"
+  <FilesMatch "\.(avif|webp|jpg|jpeg|png|css|js|mp4|woff2|pdf)$">
     Header set Cache-Control "public, max-age=31536000, immutable"
   </FilesMatch>
   <FilesMatch "\.html$">

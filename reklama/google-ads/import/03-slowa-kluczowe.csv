@@ -1,0 +1,445 @@
+Campaign,Ad Group,Keyword,Criterion Type,Status
+DEWAX | Gruntowa pompa ciepła,Gruntowa ogólnie,gruntowa pompa ciepła,Exact,Enabled
+DEWAX | Gruntowa pompa ciepła,Gruntowa ogólnie,pompa ciepła gruntowa,Exact,Enabled
+DEWAX | Gruntowa pompa ciepła,Gruntowa ogólnie,gruntowe pompy ciepła,Exact,Enabled
+DEWAX | Gruntowa pompa ciepła,Gruntowa ogólnie,pompy ciepła gruntowe,Exact,Enabled
+DEWAX | Gruntowa pompa ciepła,Gruntowa ogólnie,pompa gruntowa,Exact,Enabled
+DEWAX | Gruntowa pompa ciepła,Gruntowa ogólnie,pompa ciepła głębinowa,Exact,Enabled
+DEWAX | Gruntowa pompa ciepła,Gruntowa ogólnie,głębinowa pompa ciepła,Exact,Enabled
+DEWAX | Gruntowa pompa ciepła,Gruntowa ogólnie,gruntowa pompa ciepła,Phrase,Enabled
+DEWAX | Gruntowa pompa ciepła,Gruntowa ogólnie,pompa ciepła gruntowa,Phrase,Enabled
+DEWAX | Gruntowa pompa ciepła,Gruntowa ogólnie,gruntowe pompy ciepła,Phrase,Enabled
+DEWAX | Gruntowa pompa ciepła,Gruntowa ogólnie,pompa gruntowa,Phrase,Enabled
+DEWAX | Gruntowa pompa ciepła,Gruntowa ogólnie,pompy gruntowe,Phrase,Enabled
+DEWAX | Gruntowa pompa ciepła,Gruntowa ogólnie,pompa ciepła głębinowa,Phrase,Enabled
+DEWAX | Gruntowa pompa ciepła,Gruntowa ogólnie,głębinowa pompa ciepła,Phrase,Enabled
+DEWAX | Gruntowa pompa ciepła,Gruntowa ogólnie,pompa ciepła ziemna,Phrase,Enabled
+DEWAX | Gruntowa pompa ciepła,Gruntowa ogólnie,ziemna pompa ciepła,Phrase,Enabled
+DEWAX | Gruntowa pompa ciepła,Gruntowa ogólnie,pompa ciepła geotermalna,Phrase,Enabled
+DEWAX | Gruntowa pompa ciepła,Gruntowa ogólnie,geotermalna pompa ciepła,Phrase,Enabled
+DEWAX | Gruntowa pompa ciepła,Gruntowa ogólnie,pompa ciepła z ziemi,Phrase,Enabled
+DEWAX | Gruntowa pompa ciepła,Gruntowa ogólnie,ogrzewanie z ziemi,Phrase,Enabled
+DEWAX | Gruntowa pompa ciepła,Gruntowa ogólnie,pompa ciepła solanka woda,Phrase,Enabled
+DEWAX | Gruntowa pompa ciepła,Gruntowa ogólnie,pompa ciepła glikol woda,Phrase,Enabled
+DEWAX | Gruntowa pompa ciepła,Gruntowa ogólnie,pompa ciepła z odwiertem,Phrase,Enabled
+DEWAX | Gruntowa pompa ciepła,Gruntowa ogólnie,pompa ciepła z odwiertami,Phrase,Enabled
+DEWAX | Gruntowa pompa ciepła,Gruntowa ogólnie,ogrzewanie gruntowe domu,Phrase,Enabled
+DEWAX | Gruntowa pompa ciepła,Gruntowa ogólnie,pompa ciepła z gruntu,Phrase,Enabled
+DEWAX | Gruntowa pompa ciepła,Gruntowa ogólnie,ogrzewanie głębinowe,Phrase,Enabled
+DEWAX | Gruntowa pompa ciepła,Cena i koszt,gruntowa pompa ciepła cena,Exact,Enabled
+DEWAX | Gruntowa pompa ciepła,Cena i koszt,pompa ciepła gruntowa cena,Exact,Enabled
+DEWAX | Gruntowa pompa ciepła,Cena i koszt,ile kosztuje gruntowa pompa ciepła,Exact,Enabled
+DEWAX | Gruntowa pompa ciepła,Cena i koszt,koszt gruntowej pompy ciepła,Exact,Enabled
+DEWAX | Gruntowa pompa ciepła,Cena i koszt,pompa gruntowa cena,Exact,Enabled
+DEWAX | Gruntowa pompa ciepła,Cena i koszt,gruntowa pompa ciepła cena z montażem,Exact,Enabled
+DEWAX | Gruntowa pompa ciepła,Cena i koszt,gruntowa pompa ciepła cena,Phrase,Enabled
+DEWAX | Gruntowa pompa ciepła,Cena i koszt,pompa ciepła gruntowa cena,Phrase,Enabled
+DEWAX | Gruntowa pompa ciepła,Cena i koszt,gruntowa pompa ciepła koszt,Phrase,Enabled
+DEWAX | Gruntowa pompa ciepła,Cena i koszt,koszt gruntowej pompy ciepła,Phrase,Enabled
+DEWAX | Gruntowa pompa ciepła,Cena i koszt,ile kosztuje gruntowa pompa ciepła,Phrase,Enabled
+DEWAX | Gruntowa pompa ciepła,Cena i koszt,ile kosztuje pompa ciepła gruntowa,Phrase,Enabled
+DEWAX | Gruntowa pompa ciepła,Cena i koszt,pompa gruntowa cena,Phrase,Enabled
+DEWAX | Gruntowa pompa ciepła,Cena i koszt,pompa gruntowa koszt,Phrase,Enabled
+DEWAX | Gruntowa pompa ciepła,Cena i koszt,koszt pompy gruntowej,Phrase,Enabled
+DEWAX | Gruntowa pompa ciepła,Cena i koszt,gruntowa pompa ciepła cena z montażem,Phrase,Enabled
+DEWAX | Gruntowa pompa ciepła,Cena i koszt,pompa ciepła gruntowa cena z montażem,Phrase,Enabled
+DEWAX | Gruntowa pompa ciepła,Cena i koszt,cena gruntowej pompy ciepła,Phrase,Enabled
+DEWAX | Gruntowa pompa ciepła,Cena i koszt,gruntowe pompy ciepła cena,Phrase,Enabled
+DEWAX | Gruntowa pompa ciepła,Cena i koszt,pompa ciepła głębinowa cena,Phrase,Enabled
+DEWAX | Gruntowa pompa ciepła,Cena i koszt,ile kosztuje pompa ciepła głębinowa,Phrase,Enabled
+DEWAX | Gruntowa pompa ciepła,Cena i koszt,ile kosztuje pompa gruntowa,Phrase,Enabled
+DEWAX | Gruntowa pompa ciepła,Cena i koszt,pompa ciepła gruntowa koszt instalacji,Phrase,Enabled
+DEWAX | Gruntowa pompa ciepła,Cena i koszt,gruntowa pompa ciepła koszty eksploatacji,Phrase,Enabled
+DEWAX | Gruntowa pompa ciepła,Cena i koszt,ile prądu zużywa gruntowa pompa ciepła,Phrase,Enabled
+DEWAX | Gruntowa pompa ciepła,Cena i koszt,koszt montażu gruntowej pompy ciepła,Phrase,Enabled
+DEWAX | Gruntowa pompa ciepła,Cena i koszt,pompa ciepła z odwiertami cena,Phrase,Enabled
+DEWAX | Gruntowa pompa ciepła,Cena i koszt,pompa ciepła z odwiertem cena,Phrase,Enabled
+DEWAX | Gruntowa pompa ciepła,Cena i koszt,ile kosztuje pompa ciepła z odwiertem,Phrase,Enabled
+DEWAX | Gruntowa pompa ciepła,Montaż i wykonawca,montaż gruntowej pompy ciepła,Exact,Enabled
+DEWAX | Gruntowa pompa ciepła,Montaż i wykonawca,gruntowa pompa ciepła z montażem,Exact,Enabled
+DEWAX | Gruntowa pompa ciepła,Montaż i wykonawca,montaż pompy ciepła gruntowej,Exact,Enabled
+DEWAX | Gruntowa pompa ciepła,Montaż i wykonawca,montaż gruntowej pompy ciepła,Phrase,Enabled
+DEWAX | Gruntowa pompa ciepła,Montaż i wykonawca,montaż pompy ciepła gruntowej,Phrase,Enabled
+DEWAX | Gruntowa pompa ciepła,Montaż i wykonawca,gruntowa pompa ciepła z montażem,Phrase,Enabled
+DEWAX | Gruntowa pompa ciepła,Montaż i wykonawca,pompa ciepła gruntowa z montażem,Phrase,Enabled
+DEWAX | Gruntowa pompa ciepła,Montaż i wykonawca,pompa gruntowa z montażem,Phrase,Enabled
+DEWAX | Gruntowa pompa ciepła,Montaż i wykonawca,wykonawca gruntowej pompy ciepła,Phrase,Enabled
+DEWAX | Gruntowa pompa ciepła,Montaż i wykonawca,firma gruntowe pompy ciepła,Phrase,Enabled
+DEWAX | Gruntowa pompa ciepła,Montaż i wykonawca,instalacja gruntowej pompy ciepła,Phrase,Enabled
+DEWAX | Gruntowa pompa ciepła,Montaż i wykonawca,gruntowe pompy ciepła montaż,Phrase,Enabled
+DEWAX | Gruntowa pompa ciepła,Montaż i wykonawca,montaż pomp ciepła gruntowych,Phrase,Enabled
+DEWAX | Gruntowa pompa ciepła,Montaż i wykonawca,kto montuje gruntowe pompy ciepła,Phrase,Enabled
+DEWAX | Gruntowa pompa ciepła,Montaż i wykonawca,gruntowa pompa ciepła wykonawca,Phrase,Enabled
+DEWAX | Gruntowa pompa ciepła,Montaż i wykonawca,wymiana pieca na gruntową pompę ciepła,Phrase,Enabled
+DEWAX | Gruntowa pompa ciepła,Montaż i wykonawca,gruntowa pompa ciepła do starego domu,Phrase,Enabled
+DEWAX | Gruntowa pompa ciepła,Montaż i wykonawca,gruntowa pompa ciepła nowy dom,Phrase,Enabled
+DEWAX | Gruntowa pompa ciepła,Gruntowa czy powietrzna,pompa ciepła gruntowa czy powietrzna,Exact,Enabled
+DEWAX | Gruntowa pompa ciepła,Gruntowa czy powietrzna,gruntowa czy powietrzna pompa ciepła,Exact,Enabled
+DEWAX | Gruntowa pompa ciepła,Gruntowa czy powietrzna,pompa gruntowa czy powietrzna,Exact,Enabled
+DEWAX | Gruntowa pompa ciepła,Gruntowa czy powietrzna,gruntowa pompa ciepła czy warto,Exact,Enabled
+DEWAX | Gruntowa pompa ciepła,Gruntowa czy powietrzna,pompa ciepła gruntowa czy powietrzna,Phrase,Enabled
+DEWAX | Gruntowa pompa ciepła,Gruntowa czy powietrzna,gruntowa czy powietrzna pompa ciepła,Phrase,Enabled
+DEWAX | Gruntowa pompa ciepła,Gruntowa czy powietrzna,pompa gruntowa czy powietrzna,Phrase,Enabled
+DEWAX | Gruntowa pompa ciepła,Gruntowa czy powietrzna,powietrzna czy gruntowa,Phrase,Enabled
+DEWAX | Gruntowa pompa ciepła,Gruntowa czy powietrzna,gruntowa pompa ciepła a powietrzna,Phrase,Enabled
+DEWAX | Gruntowa pompa ciepła,Gruntowa czy powietrzna,pompa ciepła gruntowa vs powietrzna,Phrase,Enabled
+DEWAX | Gruntowa pompa ciepła,Gruntowa czy powietrzna,czy warto gruntowa pompa ciepła,Phrase,Enabled
+DEWAX | Gruntowa pompa ciepła,Gruntowa czy powietrzna,gruntowa pompa ciepła czy warto,Phrase,Enabled
+DEWAX | Gruntowa pompa ciepła,Gruntowa czy powietrzna,gruntowa pompa ciepła opinie,Phrase,Enabled
+DEWAX | Gruntowa pompa ciepła,Gruntowa czy powietrzna,gruntowa pompa ciepła wady i zalety,Phrase,Enabled
+DEWAX | Gruntowa pompa ciepła,Gruntowa czy powietrzna,czy pompa ciepła gruntowa się opłaca,Phrase,Enabled
+DEWAX | Gruntowa pompa ciepła,Gruntowa czy powietrzna,głębinowa czy powietrzna pompa ciepła,Phrase,Enabled
+DEWAX | Gruntowa pompa ciepła,Gruntowa czy powietrzna,różnica między pompą ciepła powietrzną a gruntową,Phrase,Enabled
+DEWAX | Gruntowa pompa ciepła,Gruntowa czy powietrzna,która pompa ciepła lepsza gruntowa czy powietrzna,Phrase,Enabled
+DEWAX | Gruntowa pompa ciepła,Gruntowa czy powietrzna,gruntowa pompa ciepła zużycie prądu,Phrase,Enabled
+DEWAX | Gruntowa pompa ciepła,Gruntowa czy powietrzna,sprawność gruntowej pompy ciepła,Phrase,Enabled
+DEWAX | Gruntowa pompa ciepła,Pompy Thermokrafft R290,thermokrafft,Exact,Enabled
+DEWAX | Gruntowa pompa ciepła,Pompy Thermokrafft R290,thermokrafft pompa ciepła,Exact,Enabled
+DEWAX | Gruntowa pompa ciepła,Pompy Thermokrafft R290,gruntowa pompa ciepła r290,Exact,Enabled
+DEWAX | Gruntowa pompa ciepła,Pompy Thermokrafft R290,thermokrafft,Phrase,Enabled
+DEWAX | Gruntowa pompa ciepła,Pompy Thermokrafft R290,thermokrafft pompa ciepła,Phrase,Enabled
+DEWAX | Gruntowa pompa ciepła,Pompy Thermokrafft R290,pompa ciepła thermokrafft,Phrase,Enabled
+DEWAX | Gruntowa pompa ciepła,Pompy Thermokrafft R290,gruntowa pompa ciepła r290,Phrase,Enabled
+DEWAX | Gruntowa pompa ciepła,Pompy Thermokrafft R290,pompa ciepła r290 gruntowa,Phrase,Enabled
+DEWAX | Gruntowa pompa ciepła,Pompy Thermokrafft R290,polska gruntowa pompa ciepła,Phrase,Enabled
+DEWAX | Gruntowa pompa ciepła,Pompy Thermokrafft R290,gruntowa pompa ciepła buderus,Phrase,Enabled
+DEWAX | Gruntowa pompa ciepła,Pompy Thermokrafft R290,pompa ciepła gruntowa buderus,Phrase,Enabled
+DEWAX | Gruntowa pompa ciepła,Pompy Thermokrafft R290,buderus logatherm wps,Phrase,Enabled
+DEWAX | Gruntowa pompa ciepła,Pompy Thermokrafft R290,gruntowa pompa ciepła inverter,Phrase,Enabled
+DEWAX | Gruntowa pompa ciepła,Pompy Thermokrafft R290,gruntowa pompa ciepła z chłodzeniem,Phrase,Enabled
+DEWAX | Gruntowa pompa ciepła,Pompy Thermokrafft R290,gruntowa pompa ciepła 10 kw,Phrase,Enabled
+DEWAX | Gruntowa pompa ciepła,Pompy Thermokrafft R290,gruntowa pompa ciepła 8 kw,Phrase,Enabled
+DEWAX | Gruntowa pompa ciepła,Pompy Thermokrafft R290,gruntowa pompa ciepła 12 kw,Phrase,Enabled
+DEWAX | Gruntowa pompa ciepła,Pompy Thermokrafft R290,gruntowa pompa ciepła 6 kw,Phrase,Enabled
+DEWAX | Odwierty i dolne źródło,Odwierty pod pompę ciepła,odwierty pod pompę ciepła,Exact,Enabled
+DEWAX | Odwierty i dolne źródło,Odwierty pod pompę ciepła,odwiert pod pompę ciepła,Exact,Enabled
+DEWAX | Odwierty i dolne źródło,Odwierty pod pompę ciepła,odwierty pod pompy ciepła,Exact,Enabled
+DEWAX | Odwierty i dolne źródło,Odwierty pod pompę ciepła,odwierty pod pompę ciepła cena,Exact,Enabled
+DEWAX | Odwierty i dolne źródło,Odwierty pod pompę ciepła,ile kosztuje odwiert pod pompę ciepła,Exact,Enabled
+DEWAX | Odwierty i dolne źródło,Odwierty pod pompę ciepła,wiercenie pod pompę ciepła,Exact,Enabled
+DEWAX | Odwierty i dolne źródło,Odwierty pod pompę ciepła,odwierty pod pompę ciepła,Phrase,Enabled
+DEWAX | Odwierty i dolne źródło,Odwierty pod pompę ciepła,odwiert pod pompę ciepła,Phrase,Enabled
+DEWAX | Odwierty i dolne źródło,Odwierty pod pompę ciepła,odwierty pod pompy ciepła,Phrase,Enabled
+DEWAX | Odwierty i dolne źródło,Odwierty pod pompę ciepła,odwierty do pompy ciepła,Phrase,Enabled
+DEWAX | Odwierty i dolne źródło,Odwierty pod pompę ciepła,odwiert do pompy ciepła,Phrase,Enabled
+DEWAX | Odwierty i dolne źródło,Odwierty pod pompę ciepła,odwierty pod pompę ciepła cena,Phrase,Enabled
+DEWAX | Odwierty i dolne źródło,Odwierty pod pompę ciepła,odwiert pod pompę ciepła cena,Phrase,Enabled
+DEWAX | Odwierty i dolne źródło,Odwierty pod pompę ciepła,cena odwiertu pod pompę ciepła,Phrase,Enabled
+DEWAX | Odwierty i dolne źródło,Odwierty pod pompę ciepła,koszt odwiertu pod pompę ciepła,Phrase,Enabled
+DEWAX | Odwierty i dolne źródło,Odwierty pod pompę ciepła,ile kosztuje odwiert pod pompę ciepła,Phrase,Enabled
+DEWAX | Odwierty i dolne źródło,Odwierty pod pompę ciepła,ile kosztuje metr odwiertu pod pompę ciepła,Phrase,Enabled
+DEWAX | Odwierty i dolne źródło,Odwierty pod pompę ciepła,ile odwiertów pod pompę ciepła,Phrase,Enabled
+DEWAX | Odwierty i dolne źródło,Odwierty pod pompę ciepła,ile odwiertów do pompy ciepła,Phrase,Enabled
+DEWAX | Odwierty i dolne źródło,Odwierty pod pompę ciepła,wiercenie pod pompę ciepła,Phrase,Enabled
+DEWAX | Odwierty i dolne źródło,Odwierty pod pompę ciepła,wiercenie odwiertów pod pompy ciepła,Phrase,Enabled
+DEWAX | Odwierty i dolne źródło,Odwierty pod pompę ciepła,odwierty pionowe pod pompy ciepła,Phrase,Enabled
+DEWAX | Odwierty i dolne źródło,Odwierty pod pompę ciepła,odwierty pod gruntową pompę ciepła,Phrase,Enabled
+DEWAX | Odwierty i dolne źródło,Odwierty pod pompę ciepła,głębokość odwiertu pod pompę ciepła,Phrase,Enabled
+DEWAX | Odwierty i dolne źródło,Odwierty pod pompę ciepła,jak głęboko wiercić pod pompę ciepła,Phrase,Enabled
+DEWAX | Odwierty i dolne źródło,Odwierty pod pompę ciepła,odwierty geotermalne pod pompę ciepła,Phrase,Enabled
+DEWAX | Odwierty i dolne źródło,Odwierty pod pompę ciepła,firma wiertnicza pompy ciepła,Phrase,Enabled
+DEWAX | Odwierty i dolne źródło,Odwierty pod pompę ciepła,projekt geologiczny pod pompę ciepła,Phrase,Enabled
+DEWAX | Odwierty i dolne źródło,Odwierty pod pompę ciepła,odwierty do pomp ciepła cennik,Phrase,Enabled
+DEWAX | Odwierty i dolne źródło,Odwierty pod pompę ciepła,pompa ciepła odwierty cena,Phrase,Enabled
+DEWAX | Odwierty i dolne źródło,Odwierty pod pompę ciepła,odwiert pionowy pompa ciepła,Phrase,Enabled
+DEWAX | Odwierty i dolne źródło,Dolne źródło,dolne źródło pompy ciepła,Exact,Enabled
+DEWAX | Odwierty i dolne źródło,Dolne źródło,dolne źródło pompa ciepła,Exact,Enabled
+DEWAX | Odwierty i dolne źródło,Dolne źródło,pompa ciepła dolne źródło,Exact,Enabled
+DEWAX | Odwierty i dolne źródło,Dolne źródło,dolne źródło pompy ciepła,Phrase,Enabled
+DEWAX | Odwierty i dolne źródło,Dolne źródło,dolne źródło pompa ciepła,Phrase,Enabled
+DEWAX | Odwierty i dolne źródło,Dolne źródło,dolne źródło ciepła,Phrase,Enabled
+DEWAX | Odwierty i dolne źródło,Dolne źródło,pompa ciepła dolne źródło,Phrase,Enabled
+DEWAX | Odwierty i dolne źródło,Dolne źródło,dolne źródło gruntowe,Phrase,Enabled
+DEWAX | Odwierty i dolne źródło,Dolne źródło,wykonanie dolnego źródła,Phrase,Enabled
+DEWAX | Odwierty i dolne źródło,Dolne źródło,sondy pionowe pompa ciepła,Phrase,Enabled
+DEWAX | Odwierty i dolne źródło,Dolne źródło,sonda pionowa pompa ciepła,Phrase,Enabled
+DEWAX | Odwierty i dolne źródło,Dolne źródło,kolektor poziomy pompa ciepła,Phrase,Enabled
+DEWAX | Odwierty i dolne źródło,Dolne źródło,pompa ciepła z kolektorem poziomym,Phrase,Enabled
+DEWAX | Odwierty i dolne źródło,Dolne źródło,gruntowa pompa ciepła pozioma,Phrase,Enabled
+DEWAX | Odwierty i dolne źródło,Dolne źródło,pompa ciepła gruntowa pozioma,Phrase,Enabled
+DEWAX | Odwierty i dolne źródło,Dolne źródło,wymiennik gruntowy pompa ciepła,Phrase,Enabled
+DEWAX | Odwierty i dolne źródło,Dolne źródło,pompa ciepła woda woda,Phrase,Enabled
+DEWAX | Odwierty i dolne źródło,Dolne źródło,pompa ciepła ze studni,Phrase,Enabled
+DEWAX | Odwierty i dolne źródło,Dolne źródło,kolektor pionowy pompa ciepła,Phrase,Enabled
+DEWAX | Odwierty i dolne źródło,Dolne źródło,sondy gruntowe pompa ciepła,Phrase,Enabled
+DEWAX | Odwierty i dolne źródło,Dolne źródło,pompa ciepła z wymiennikiem gruntowym,Phrase,Enabled
+DEWAX | Odwierty i dolne źródło,Sondy koszowe Helix,sondy koszowe,Exact,Enabled
+DEWAX | Odwierty i dolne źródło,Sondy koszowe Helix,sonda koszowa pompa ciepła,Exact,Enabled
+DEWAX | Odwierty i dolne źródło,Sondy koszowe Helix,sondy koszowe,Phrase,Enabled
+DEWAX | Odwierty i dolne źródło,Sondy koszowe Helix,sonda koszowa,Phrase,Enabled
+DEWAX | Odwierty i dolne źródło,Sondy koszowe Helix,sondy koszowe pompa ciepła,Phrase,Enabled
+DEWAX | Odwierty i dolne źródło,Sondy koszowe Helix,sonda koszowa pompa ciepła,Phrase,Enabled
+DEWAX | Odwierty i dolne źródło,Sondy koszowe Helix,sondy spiralne pompa ciepła,Phrase,Enabled
+DEWAX | Odwierty i dolne źródło,Sondy koszowe Helix,kolektor spiralny pompa ciepła,Phrase,Enabled
+DEWAX | Odwierty i dolne źródło,Sondy koszowe Helix,helix pompa ciepła,Phrase,Enabled
+DEWAX | Odwierty i dolne źródło,Sondy koszowe Helix,sonda helix,Phrase,Enabled
+DEWAX | Odwierty i dolne źródło,Sondy koszowe Helix,wymiennik spiralny pompa ciepła,Phrase,Enabled
+DEWAX | Odwierty i dolne źródło,Sondy koszowe Helix,pompa ciepła bez odwiertu,Phrase,Enabled
+DEWAX | Odwierty i dolne źródło,Sondy koszowe Helix,gruntowa pompa ciepła bez odwiertu,Phrase,Enabled
+DEWAX | Odwierty i dolne źródło,Sondy koszowe Helix,gruntowa pompa ciepła mała działka,Phrase,Enabled
+DEWAX | Dotacje,Dotacje na gruntową pompę,dotacja gruntowa pompa ciepła,Exact,Enabled
+DEWAX | Dotacje,Dotacje na gruntową pompę,dofinansowanie gruntowa pompa ciepła,Exact,Enabled
+DEWAX | Dotacje,Dotacje na gruntową pompę,moje ciepło pompa ciepła,Exact,Enabled
+DEWAX | Dotacje,Dotacje na gruntową pompę,dotacja na gruntową pompę ciepła,Exact,Enabled
+DEWAX | Dotacje,Dotacje na gruntową pompę,dotacja gruntowa pompa ciepła,Phrase,Enabled
+DEWAX | Dotacje,Dotacje na gruntową pompę,dotacja na gruntową pompę ciepła,Phrase,Enabled
+DEWAX | Dotacje,Dotacje na gruntową pompę,dofinansowanie gruntowa pompa ciepła,Phrase,Enabled
+DEWAX | Dotacje,Dotacje na gruntową pompę,dofinansowanie do gruntowej pompy ciepła,Phrase,Enabled
+DEWAX | Dotacje,Dotacje na gruntową pompę,gruntowa pompa ciepła dofinansowanie,Phrase,Enabled
+DEWAX | Dotacje,Dotacje na gruntową pompę,pompa ciepła gruntowa dotacja,Phrase,Enabled
+DEWAX | Dotacje,Dotacje na gruntową pompę,moje ciepło pompa gruntowa,Phrase,Enabled
+DEWAX | Dotacje,Dotacje na gruntową pompę,moje ciepło gruntowa pompa ciepła,Phrase,Enabled
+DEWAX | Dotacje,Dotacje na gruntową pompę,moje ciepło pompa ciepła,Phrase,Enabled
+DEWAX | Dotacje,Dotacje na gruntową pompę,moje ciepło 2026,Phrase,Enabled
+DEWAX | Dotacje,Dotacje na gruntową pompę,czyste powietrze gruntowa pompa ciepła,Phrase,Enabled
+DEWAX | Dotacje,Dotacje na gruntową pompę,czyste powietrze pompa gruntowa,Phrase,Enabled
+DEWAX | Dotacje,Dotacje na gruntową pompę,ulga termomodernizacyjna pompa ciepła gruntowa,Phrase,Enabled
+DEWAX | Dotacje,Dotacje na gruntową pompę,dotacja odwierty pompa ciepła,Phrase,Enabled
+DEWAX | Dotacje,Dotacje na gruntową pompę,moje ciepło odwierty,Phrase,Enabled
+DEWAX | Dotacje,Dotacje na gruntową pompę,dotacje na gruntowe pompy ciepła,Phrase,Enabled
+DEWAX | Dotacje,Dotacje na gruntową pompę,dofinansowanie pompa gruntowa,Phrase,Enabled
+DEWAX | Dotacje,Dotacje na gruntową pompę,jakie dofinansowanie do gruntowej pompy ciepła,Phrase,Enabled
+DEWAX | Dotacje,Dotacje na gruntową pompę,dotacja pompa ciepła nowy dom,Phrase,Enabled
+DEWAX | Dotacje,Dotacje na gruntową pompę,dofinansowanie pompa ciepła nowy dom,Phrase,Enabled
+DEWAX | Marka,DEWAX,dewax,Exact,Enabled
+DEWAX | Marka,DEWAX,dewax pompy ciepła,Exact,Enabled
+DEWAX | Marka,DEWAX,dewax dobrzyca,Exact,Enabled
+DEWAX | Marka,DEWAX,dewax,Phrase,Enabled
+DEWAX | Marka,DEWAX,dewax pompy ciepła,Phrase,Enabled
+DEWAX | Marka,DEWAX,dewax dobrzyca,Phrase,Enabled
+DEWAX | Marka,DEWAX,dewax odwierty,Phrase,Enabled
+DEWAX | Marka,DEWAX,dewax pompy,Phrase,Enabled
+DEWAX | Marka,DEWAX,pan krecik pompy ciepła,Phrase,Enabled
+DEWAX | Marka,DEWAX,dewax geo,Phrase,Enabled
+DEWAX | Marka,DEWAX,dewax gruntowe pompy ciepła,Phrase,Enabled
+DEWAX | Marka,DEWAX,pompy dewax,Phrase,Enabled
+DEWAX | Regiony,Region: Wielkopolska,gruntowa pompa ciepła kalisz,Exact,Enabled
+DEWAX | Regiony,Region: Wielkopolska,odwierty pod pompę ciepła kalisz,Exact,Enabled
+DEWAX | Regiony,Region: Wielkopolska,gruntowa pompa ciepła kalisz,Phrase,Enabled
+DEWAX | Regiony,Region: Wielkopolska,pompa ciepła gruntowa kalisz,Phrase,Enabled
+DEWAX | Regiony,Region: Wielkopolska,odwierty pod pompę ciepła kalisz,Phrase,Enabled
+DEWAX | Regiony,Region: Wielkopolska,pompa gruntowa kalisz,Phrase,Enabled
+DEWAX | Regiony,Region: Wielkopolska,gruntowa pompa ciepła ostrów wielkopolski,Phrase,Enabled
+DEWAX | Regiony,Region: Wielkopolska,pompa ciepła gruntowa ostrów wielkopolski,Phrase,Enabled
+DEWAX | Regiony,Region: Wielkopolska,odwierty pod pompę ciepła ostrów wielkopolski,Phrase,Enabled
+DEWAX | Regiony,Region: Wielkopolska,pompa gruntowa ostrów wielkopolski,Phrase,Enabled
+DEWAX | Regiony,Region: Wielkopolska,gruntowa pompa ciepła pleszew,Phrase,Enabled
+DEWAX | Regiony,Region: Wielkopolska,pompa ciepła gruntowa pleszew,Phrase,Enabled
+DEWAX | Regiony,Region: Wielkopolska,odwierty pod pompę ciepła pleszew,Phrase,Enabled
+DEWAX | Regiony,Region: Wielkopolska,pompa gruntowa pleszew,Phrase,Enabled
+DEWAX | Regiony,Region: Wielkopolska,gruntowa pompa ciepła jarocin,Phrase,Enabled
+DEWAX | Regiony,Region: Wielkopolska,pompa ciepła gruntowa jarocin,Phrase,Enabled
+DEWAX | Regiony,Region: Wielkopolska,odwierty pod pompę ciepła jarocin,Phrase,Enabled
+DEWAX | Regiony,Region: Wielkopolska,pompa gruntowa jarocin,Phrase,Enabled
+DEWAX | Regiony,Region: Wielkopolska,gruntowa pompa ciepła krotoszyn,Phrase,Enabled
+DEWAX | Regiony,Region: Wielkopolska,pompa ciepła gruntowa krotoszyn,Phrase,Enabled
+DEWAX | Regiony,Region: Wielkopolska,odwierty pod pompę ciepła krotoszyn,Phrase,Enabled
+DEWAX | Regiony,Region: Wielkopolska,pompa gruntowa krotoszyn,Phrase,Enabled
+DEWAX | Regiony,Region: Wielkopolska,gruntowa pompa ciepła konin,Phrase,Enabled
+DEWAX | Regiony,Region: Wielkopolska,pompa ciepła gruntowa konin,Phrase,Enabled
+DEWAX | Regiony,Region: Wielkopolska,odwierty pod pompę ciepła konin,Phrase,Enabled
+DEWAX | Regiony,Region: Wielkopolska,pompa gruntowa konin,Phrase,Enabled
+DEWAX | Regiony,Region: Wielkopolska,gruntowa pompa ciepła poznań,Phrase,Enabled
+DEWAX | Regiony,Region: Wielkopolska,pompa ciepła gruntowa poznań,Phrase,Enabled
+DEWAX | Regiony,Region: Wielkopolska,odwierty pod pompę ciepła poznań,Phrase,Enabled
+DEWAX | Regiony,Region: Wielkopolska,pompa gruntowa poznań,Phrase,Enabled
+DEWAX | Regiony,Region: Wielkopolska,gruntowa pompa ciepła leszno,Phrase,Enabled
+DEWAX | Regiony,Region: Wielkopolska,pompa ciepła gruntowa leszno,Phrase,Enabled
+DEWAX | Regiony,Region: Wielkopolska,odwierty pod pompę ciepła leszno,Phrase,Enabled
+DEWAX | Regiony,Region: Wielkopolska,pompa gruntowa leszno,Phrase,Enabled
+DEWAX | Regiony,Region: Wielkopolska,gruntowa pompa ciepła gniezno,Phrase,Enabled
+DEWAX | Regiony,Region: Wielkopolska,pompa ciepła gruntowa gniezno,Phrase,Enabled
+DEWAX | Regiony,Region: Wielkopolska,odwierty pod pompę ciepła gniezno,Phrase,Enabled
+DEWAX | Regiony,Region: Wielkopolska,pompa gruntowa gniezno,Phrase,Enabled
+DEWAX | Regiony,Region: Wielkopolska,gruntowa pompa ciepła kępno,Phrase,Enabled
+DEWAX | Regiony,Region: Wielkopolska,pompa ciepła gruntowa kępno,Phrase,Enabled
+DEWAX | Regiony,Region: Wielkopolska,odwierty pod pompę ciepła kępno,Phrase,Enabled
+DEWAX | Regiony,Region: Wielkopolska,pompa gruntowa kępno,Phrase,Enabled
+DEWAX | Regiony,Region: Wielkopolska,gruntowe pompy ciepła wielkopolskie,Phrase,Enabled
+DEWAX | Regiony,Region: Wielkopolska,odwierty pod pompy ciepła wielkopolskie,Phrase,Enabled
+DEWAX | Regiony,Region: Wielkopolska,pompa ciepła gruntowa wielkopolskie,Phrase,Enabled
+DEWAX | Regiony,Region: Wielkopolska,gruntowa pompa ciepła wielkopolska,Phrase,Enabled
+DEWAX | Regiony,Region: Wielkopolska,odwierty pod pompę ciepła wielkopolska,Phrase,Enabled
+DEWAX | Regiony,Region: Łódzkie,gruntowa pompa ciepła łódź,Exact,Enabled
+DEWAX | Regiony,Region: Łódzkie,odwierty pod pompę ciepła łódź,Exact,Enabled
+DEWAX | Regiony,Region: Łódzkie,gruntowa pompa ciepła łódź,Phrase,Enabled
+DEWAX | Regiony,Region: Łódzkie,pompa ciepła gruntowa łódź,Phrase,Enabled
+DEWAX | Regiony,Region: Łódzkie,odwierty pod pompę ciepła łódź,Phrase,Enabled
+DEWAX | Regiony,Region: Łódzkie,pompa gruntowa łódź,Phrase,Enabled
+DEWAX | Regiony,Region: Łódzkie,gruntowa pompa ciepła sieradz,Phrase,Enabled
+DEWAX | Regiony,Region: Łódzkie,pompa ciepła gruntowa sieradz,Phrase,Enabled
+DEWAX | Regiony,Region: Łódzkie,odwierty pod pompę ciepła sieradz,Phrase,Enabled
+DEWAX | Regiony,Region: Łódzkie,pompa gruntowa sieradz,Phrase,Enabled
+DEWAX | Regiony,Region: Łódzkie,gruntowa pompa ciepła wieluń,Phrase,Enabled
+DEWAX | Regiony,Region: Łódzkie,pompa ciepła gruntowa wieluń,Phrase,Enabled
+DEWAX | Regiony,Region: Łódzkie,odwierty pod pompę ciepła wieluń,Phrase,Enabled
+DEWAX | Regiony,Region: Łódzkie,pompa gruntowa wieluń,Phrase,Enabled
+DEWAX | Regiony,Region: Łódzkie,gruntowa pompa ciepła piotrków trybunalski,Phrase,Enabled
+DEWAX | Regiony,Region: Łódzkie,pompa ciepła gruntowa piotrków trybunalski,Phrase,Enabled
+DEWAX | Regiony,Region: Łódzkie,odwierty pod pompę ciepła piotrków trybunalski,Phrase,Enabled
+DEWAX | Regiony,Region: Łódzkie,pompa gruntowa piotrków trybunalski,Phrase,Enabled
+DEWAX | Regiony,Region: Łódzkie,gruntowa pompa ciepła zduńska wola,Phrase,Enabled
+DEWAX | Regiony,Region: Łódzkie,pompa ciepła gruntowa zduńska wola,Phrase,Enabled
+DEWAX | Regiony,Region: Łódzkie,odwierty pod pompę ciepła zduńska wola,Phrase,Enabled
+DEWAX | Regiony,Region: Łódzkie,pompa gruntowa zduńska wola,Phrase,Enabled
+DEWAX | Regiony,Region: Łódzkie,gruntowa pompa ciepła bełchatów,Phrase,Enabled
+DEWAX | Regiony,Region: Łódzkie,pompa ciepła gruntowa bełchatów,Phrase,Enabled
+DEWAX | Regiony,Region: Łódzkie,odwierty pod pompę ciepła bełchatów,Phrase,Enabled
+DEWAX | Regiony,Region: Łódzkie,pompa gruntowa bełchatów,Phrase,Enabled
+DEWAX | Regiony,Region: Łódzkie,gruntowa pompa ciepła pabianice,Phrase,Enabled
+DEWAX | Regiony,Region: Łódzkie,pompa ciepła gruntowa pabianice,Phrase,Enabled
+DEWAX | Regiony,Region: Łódzkie,odwierty pod pompę ciepła pabianice,Phrase,Enabled
+DEWAX | Regiony,Region: Łódzkie,pompa gruntowa pabianice,Phrase,Enabled
+DEWAX | Regiony,Region: Łódzkie,gruntowa pompa ciepła zgierz,Phrase,Enabled
+DEWAX | Regiony,Region: Łódzkie,pompa ciepła gruntowa zgierz,Phrase,Enabled
+DEWAX | Regiony,Region: Łódzkie,odwierty pod pompę ciepła zgierz,Phrase,Enabled
+DEWAX | Regiony,Region: Łódzkie,pompa gruntowa zgierz,Phrase,Enabled
+DEWAX | Regiony,Region: Łódzkie,gruntowe pompy ciepła łódzkie,Phrase,Enabled
+DEWAX | Regiony,Region: Łódzkie,odwierty pod pompy ciepła łódzkie,Phrase,Enabled
+DEWAX | Regiony,Region: Łódzkie,pompa ciepła gruntowa łódzkie,Phrase,Enabled
+DEWAX | Regiony,Region: Łódzkie,gruntowa pompa ciepła łódzkie,Phrase,Enabled
+DEWAX | Regiony,Region: Łódzkie,odwierty pod pompę ciepła łódzkie,Phrase,Enabled
+DEWAX | Regiony,Region: Kujawsko-Pomorskie,gruntowa pompa ciepła bydgoszcz,Exact,Enabled
+DEWAX | Regiony,Region: Kujawsko-Pomorskie,odwierty pod pompę ciepła bydgoszcz,Exact,Enabled
+DEWAX | Regiony,Region: Kujawsko-Pomorskie,gruntowa pompa ciepła bydgoszcz,Phrase,Enabled
+DEWAX | Regiony,Region: Kujawsko-Pomorskie,pompa ciepła gruntowa bydgoszcz,Phrase,Enabled
+DEWAX | Regiony,Region: Kujawsko-Pomorskie,odwierty pod pompę ciepła bydgoszcz,Phrase,Enabled
+DEWAX | Regiony,Region: Kujawsko-Pomorskie,pompa gruntowa bydgoszcz,Phrase,Enabled
+DEWAX | Regiony,Region: Kujawsko-Pomorskie,gruntowa pompa ciepła toruń,Phrase,Enabled
+DEWAX | Regiony,Region: Kujawsko-Pomorskie,pompa ciepła gruntowa toruń,Phrase,Enabled
+DEWAX | Regiony,Region: Kujawsko-Pomorskie,odwierty pod pompę ciepła toruń,Phrase,Enabled
+DEWAX | Regiony,Region: Kujawsko-Pomorskie,pompa gruntowa toruń,Phrase,Enabled
+DEWAX | Regiony,Region: Kujawsko-Pomorskie,gruntowa pompa ciepła włocławek,Phrase,Enabled
+DEWAX | Regiony,Region: Kujawsko-Pomorskie,pompa ciepła gruntowa włocławek,Phrase,Enabled
+DEWAX | Regiony,Region: Kujawsko-Pomorskie,odwierty pod pompę ciepła włocławek,Phrase,Enabled
+DEWAX | Regiony,Region: Kujawsko-Pomorskie,pompa gruntowa włocławek,Phrase,Enabled
+DEWAX | Regiony,Region: Kujawsko-Pomorskie,gruntowa pompa ciepła inowrocław,Phrase,Enabled
+DEWAX | Regiony,Region: Kujawsko-Pomorskie,pompa ciepła gruntowa inowrocław,Phrase,Enabled
+DEWAX | Regiony,Region: Kujawsko-Pomorskie,odwierty pod pompę ciepła inowrocław,Phrase,Enabled
+DEWAX | Regiony,Region: Kujawsko-Pomorskie,pompa gruntowa inowrocław,Phrase,Enabled
+DEWAX | Regiony,Region: Kujawsko-Pomorskie,gruntowa pompa ciepła grudziądz,Phrase,Enabled
+DEWAX | Regiony,Region: Kujawsko-Pomorskie,pompa ciepła gruntowa grudziądz,Phrase,Enabled
+DEWAX | Regiony,Region: Kujawsko-Pomorskie,odwierty pod pompę ciepła grudziądz,Phrase,Enabled
+DEWAX | Regiony,Region: Kujawsko-Pomorskie,pompa gruntowa grudziądz,Phrase,Enabled
+DEWAX | Regiony,Region: Kujawsko-Pomorskie,gruntowa pompa ciepła brodnica,Phrase,Enabled
+DEWAX | Regiony,Region: Kujawsko-Pomorskie,pompa ciepła gruntowa brodnica,Phrase,Enabled
+DEWAX | Regiony,Region: Kujawsko-Pomorskie,odwierty pod pompę ciepła brodnica,Phrase,Enabled
+DEWAX | Regiony,Region: Kujawsko-Pomorskie,pompa gruntowa brodnica,Phrase,Enabled
+DEWAX | Regiony,Region: Kujawsko-Pomorskie,gruntowe pompy ciepła kujawsko-pomorskie,Phrase,Enabled
+DEWAX | Regiony,Region: Kujawsko-Pomorskie,odwierty pod pompy ciepła kujawsko-pomorskie,Phrase,Enabled
+DEWAX | Regiony,Region: Kujawsko-Pomorskie,pompa ciepła gruntowa kujawsko-pomorskie,Phrase,Enabled
+DEWAX | Regiony,Region: Kujawsko-Pomorskie,gruntowa pompa ciepła kujawsko-pomorskie,Phrase,Enabled
+DEWAX | Regiony,Region: Kujawsko-Pomorskie,odwierty pod pompę ciepła kujawsko-pomorskie,Phrase,Enabled
+DEWAX | Regiony,Region: Dolny Śląsk,gruntowa pompa ciepła wrocław,Exact,Enabled
+DEWAX | Regiony,Region: Dolny Śląsk,odwierty pod pompę ciepła wrocław,Exact,Enabled
+DEWAX | Regiony,Region: Dolny Śląsk,gruntowa pompa ciepła wrocław,Phrase,Enabled
+DEWAX | Regiony,Region: Dolny Śląsk,pompa ciepła gruntowa wrocław,Phrase,Enabled
+DEWAX | Regiony,Region: Dolny Śląsk,odwierty pod pompę ciepła wrocław,Phrase,Enabled
+DEWAX | Regiony,Region: Dolny Śląsk,pompa gruntowa wrocław,Phrase,Enabled
+DEWAX | Regiony,Region: Dolny Śląsk,gruntowa pompa ciepła legnica,Phrase,Enabled
+DEWAX | Regiony,Region: Dolny Śląsk,pompa ciepła gruntowa legnica,Phrase,Enabled
+DEWAX | Regiony,Region: Dolny Śląsk,odwierty pod pompę ciepła legnica,Phrase,Enabled
+DEWAX | Regiony,Region: Dolny Śląsk,pompa gruntowa legnica,Phrase,Enabled
+DEWAX | Regiony,Region: Dolny Śląsk,gruntowa pompa ciepła oleśnica,Phrase,Enabled
+DEWAX | Regiony,Region: Dolny Śląsk,pompa ciepła gruntowa oleśnica,Phrase,Enabled
+DEWAX | Regiony,Region: Dolny Śląsk,odwierty pod pompę ciepła oleśnica,Phrase,Enabled
+DEWAX | Regiony,Region: Dolny Śląsk,pompa gruntowa oleśnica,Phrase,Enabled
+DEWAX | Regiony,Region: Dolny Śląsk,gruntowa pompa ciepła świdnica,Phrase,Enabled
+DEWAX | Regiony,Region: Dolny Śląsk,pompa ciepła gruntowa świdnica,Phrase,Enabled
+DEWAX | Regiony,Region: Dolny Śląsk,odwierty pod pompę ciepła świdnica,Phrase,Enabled
+DEWAX | Regiony,Region: Dolny Śląsk,pompa gruntowa świdnica,Phrase,Enabled
+DEWAX | Regiony,Region: Dolny Śląsk,gruntowa pompa ciepła wałbrzych,Phrase,Enabled
+DEWAX | Regiony,Region: Dolny Śląsk,pompa ciepła gruntowa wałbrzych,Phrase,Enabled
+DEWAX | Regiony,Region: Dolny Śląsk,odwierty pod pompę ciepła wałbrzych,Phrase,Enabled
+DEWAX | Regiony,Region: Dolny Śląsk,pompa gruntowa wałbrzych,Phrase,Enabled
+DEWAX | Regiony,Region: Dolny Śląsk,gruntowa pompa ciepła jelenia góra,Phrase,Enabled
+DEWAX | Regiony,Region: Dolny Śląsk,pompa ciepła gruntowa jelenia góra,Phrase,Enabled
+DEWAX | Regiony,Region: Dolny Śląsk,odwierty pod pompę ciepła jelenia góra,Phrase,Enabled
+DEWAX | Regiony,Region: Dolny Śląsk,pompa gruntowa jelenia góra,Phrase,Enabled
+DEWAX | Regiony,Region: Dolny Śląsk,gruntowa pompa ciepła oława,Phrase,Enabled
+DEWAX | Regiony,Region: Dolny Śląsk,pompa ciepła gruntowa oława,Phrase,Enabled
+DEWAX | Regiony,Region: Dolny Śląsk,odwierty pod pompę ciepła oława,Phrase,Enabled
+DEWAX | Regiony,Region: Dolny Śląsk,pompa gruntowa oława,Phrase,Enabled
+DEWAX | Regiony,Region: Dolny Śląsk,gruntowa pompa ciepła trzebnica,Phrase,Enabled
+DEWAX | Regiony,Region: Dolny Śląsk,pompa ciepła gruntowa trzebnica,Phrase,Enabled
+DEWAX | Regiony,Region: Dolny Śląsk,odwierty pod pompę ciepła trzebnica,Phrase,Enabled
+DEWAX | Regiony,Region: Dolny Śląsk,pompa gruntowa trzebnica,Phrase,Enabled
+DEWAX | Regiony,Region: Dolny Śląsk,gruntowe pompy ciepła dolnośląskie,Phrase,Enabled
+DEWAX | Regiony,Region: Dolny Śląsk,odwierty pod pompy ciepła dolnośląskie,Phrase,Enabled
+DEWAX | Regiony,Region: Dolny Śląsk,pompa ciepła gruntowa dolnośląskie,Phrase,Enabled
+DEWAX | Regiony,Region: Dolny Śląsk,gruntowa pompa ciepła dolny śląsk,Phrase,Enabled
+DEWAX | Regiony,Region: Dolny Śląsk,odwierty pod pompę ciepła dolny śląsk,Phrase,Enabled
+DEWAX | Regiony,Region: Śląsk,gruntowa pompa ciepła częstochowa,Exact,Enabled
+DEWAX | Regiony,Region: Śląsk,odwierty pod pompę ciepła częstochowa,Exact,Enabled
+DEWAX | Regiony,Region: Śląsk,gruntowa pompa ciepła częstochowa,Phrase,Enabled
+DEWAX | Regiony,Region: Śląsk,pompa ciepła gruntowa częstochowa,Phrase,Enabled
+DEWAX | Regiony,Region: Śląsk,odwierty pod pompę ciepła częstochowa,Phrase,Enabled
+DEWAX | Regiony,Region: Śląsk,pompa gruntowa częstochowa,Phrase,Enabled
+DEWAX | Regiony,Region: Śląsk,gruntowa pompa ciepła katowice,Phrase,Enabled
+DEWAX | Regiony,Region: Śląsk,pompa ciepła gruntowa katowice,Phrase,Enabled
+DEWAX | Regiony,Region: Śląsk,odwierty pod pompę ciepła katowice,Phrase,Enabled
+DEWAX | Regiony,Region: Śląsk,pompa gruntowa katowice,Phrase,Enabled
+DEWAX | Regiony,Region: Śląsk,gruntowa pompa ciepła gliwice,Phrase,Enabled
+DEWAX | Regiony,Region: Śląsk,pompa ciepła gruntowa gliwice,Phrase,Enabled
+DEWAX | Regiony,Region: Śląsk,odwierty pod pompę ciepła gliwice,Phrase,Enabled
+DEWAX | Regiony,Region: Śląsk,pompa gruntowa gliwice,Phrase,Enabled
+DEWAX | Regiony,Region: Śląsk,gruntowa pompa ciepła bielsko-biała,Phrase,Enabled
+DEWAX | Regiony,Region: Śląsk,pompa ciepła gruntowa bielsko-biała,Phrase,Enabled
+DEWAX | Regiony,Region: Śląsk,odwierty pod pompę ciepła bielsko-biała,Phrase,Enabled
+DEWAX | Regiony,Region: Śląsk,pompa gruntowa bielsko-biała,Phrase,Enabled
+DEWAX | Regiony,Region: Śląsk,gruntowa pompa ciepła rybnik,Phrase,Enabled
+DEWAX | Regiony,Region: Śląsk,pompa ciepła gruntowa rybnik,Phrase,Enabled
+DEWAX | Regiony,Region: Śląsk,odwierty pod pompę ciepła rybnik,Phrase,Enabled
+DEWAX | Regiony,Region: Śląsk,pompa gruntowa rybnik,Phrase,Enabled
+DEWAX | Regiony,Region: Śląsk,gruntowa pompa ciepła tychy,Phrase,Enabled
+DEWAX | Regiony,Region: Śląsk,pompa ciepła gruntowa tychy,Phrase,Enabled
+DEWAX | Regiony,Region: Śląsk,odwierty pod pompę ciepła tychy,Phrase,Enabled
+DEWAX | Regiony,Region: Śląsk,pompa gruntowa tychy,Phrase,Enabled
+DEWAX | Regiony,Region: Śląsk,gruntowa pompa ciepła lubliniec,Phrase,Enabled
+DEWAX | Regiony,Region: Śląsk,pompa ciepła gruntowa lubliniec,Phrase,Enabled
+DEWAX | Regiony,Region: Śląsk,odwierty pod pompę ciepła lubliniec,Phrase,Enabled
+DEWAX | Regiony,Region: Śląsk,pompa gruntowa lubliniec,Phrase,Enabled
+DEWAX | Regiony,Region: Śląsk,gruntowe pompy ciepła śląskie,Phrase,Enabled
+DEWAX | Regiony,Region: Śląsk,odwierty pod pompy ciepła śląskie,Phrase,Enabled
+DEWAX | Regiony,Region: Śląsk,pompa ciepła gruntowa śląskie,Phrase,Enabled
+DEWAX | Regiony,Region: Śląsk,gruntowa pompa ciepła śląsk,Phrase,Enabled
+DEWAX | Regiony,Region: Śląsk,odwierty pod pompę ciepła śląsk,Phrase,Enabled
+DEWAX | Regiony,Region: Mazowsze,gruntowa pompa ciepła warszawa,Exact,Enabled
+DEWAX | Regiony,Region: Mazowsze,odwierty pod pompę ciepła warszawa,Exact,Enabled
+DEWAX | Regiony,Region: Mazowsze,gruntowa pompa ciepła warszawa,Phrase,Enabled
+DEWAX | Regiony,Region: Mazowsze,pompa ciepła gruntowa warszawa,Phrase,Enabled
+DEWAX | Regiony,Region: Mazowsze,odwierty pod pompę ciepła warszawa,Phrase,Enabled
+DEWAX | Regiony,Region: Mazowsze,pompa gruntowa warszawa,Phrase,Enabled
+DEWAX | Regiony,Region: Mazowsze,gruntowa pompa ciepła płock,Phrase,Enabled
+DEWAX | Regiony,Region: Mazowsze,pompa ciepła gruntowa płock,Phrase,Enabled
+DEWAX | Regiony,Region: Mazowsze,odwierty pod pompę ciepła płock,Phrase,Enabled
+DEWAX | Regiony,Region: Mazowsze,pompa gruntowa płock,Phrase,Enabled
+DEWAX | Regiony,Region: Mazowsze,gruntowa pompa ciepła radom,Phrase,Enabled
+DEWAX | Regiony,Region: Mazowsze,pompa ciepła gruntowa radom,Phrase,Enabled
+DEWAX | Regiony,Region: Mazowsze,odwierty pod pompę ciepła radom,Phrase,Enabled
+DEWAX | Regiony,Region: Mazowsze,pompa gruntowa radom,Phrase,Enabled
+DEWAX | Regiony,Region: Mazowsze,gruntowa pompa ciepła siedlce,Phrase,Enabled
+DEWAX | Regiony,Region: Mazowsze,pompa ciepła gruntowa siedlce,Phrase,Enabled
+DEWAX | Regiony,Region: Mazowsze,odwierty pod pompę ciepła siedlce,Phrase,Enabled
+DEWAX | Regiony,Region: Mazowsze,pompa gruntowa siedlce,Phrase,Enabled
+DEWAX | Regiony,Region: Mazowsze,gruntowa pompa ciepła ostrołęka,Phrase,Enabled
+DEWAX | Regiony,Region: Mazowsze,pompa ciepła gruntowa ostrołęka,Phrase,Enabled
+DEWAX | Regiony,Region: Mazowsze,odwierty pod pompę ciepła ostrołęka,Phrase,Enabled
+DEWAX | Regiony,Region: Mazowsze,pompa gruntowa ostrołęka,Phrase,Enabled
+DEWAX | Regiony,Region: Mazowsze,gruntowa pompa ciepła pruszków,Phrase,Enabled
+DEWAX | Regiony,Region: Mazowsze,pompa ciepła gruntowa pruszków,Phrase,Enabled
+DEWAX | Regiony,Region: Mazowsze,odwierty pod pompę ciepła pruszków,Phrase,Enabled
+DEWAX | Regiony,Region: Mazowsze,pompa gruntowa pruszków,Phrase,Enabled
+DEWAX | Regiony,Region: Mazowsze,gruntowa pompa ciepła grodzisk mazowiecki,Phrase,Enabled
+DEWAX | Regiony,Region: Mazowsze,pompa ciepła gruntowa grodzisk mazowiecki,Phrase,Enabled
+DEWAX | Regiony,Region: Mazowsze,odwierty pod pompę ciepła grodzisk mazowiecki,Phrase,Enabled
+DEWAX | Regiony,Region: Mazowsze,pompa gruntowa grodzisk mazowiecki,Phrase,Enabled
+DEWAX | Regiony,Region: Mazowsze,gruntowa pompa ciepła piaseczno,Phrase,Enabled
+DEWAX | Regiony,Region: Mazowsze,pompa ciepła gruntowa piaseczno,Phrase,Enabled
+DEWAX | Regiony,Region: Mazowsze,odwierty pod pompę ciepła piaseczno,Phrase,Enabled
+DEWAX | Regiony,Region: Mazowsze,pompa gruntowa piaseczno,Phrase,Enabled
+DEWAX | Regiony,Region: Mazowsze,gruntowe pompy ciepła mazowieckie,Phrase,Enabled
+DEWAX | Regiony,Region: Mazowsze,odwierty pod pompy ciepła mazowieckie,Phrase,Enabled
+DEWAX | Regiony,Region: Mazowsze,pompa ciepła gruntowa mazowieckie,Phrase,Enabled
+DEWAX | Regiony,Region: Mazowsze,gruntowa pompa ciepła mazowsze,Phrase,Enabled
+DEWAX | Regiony,Region: Mazowsze,odwierty pod pompę ciepła mazowsze,Phrase,Enabled
