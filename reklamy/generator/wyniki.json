@@ -1,11 +1,11 @@
 {
-  "aktualizacja": "2026-09-13",
+  "aktualizacja": "2026-09-13 15:00",
   "zrodlo": "HubSpot (kontakty z formularza .zap, utm_content w pierwszym adresie wejścia) + Windsor.ai (Meta Ads, konto 955522616312255), okres 12–13.09.2026",
-  "uwaga": "Leady tylko od osób, które zaakceptowały cookies marketingowe (kod HubSpota). Zgłoszenia bez zgody są tylko w mailu na sprzedaz@dewax.pl. Kliknięcia = kliknięcia w link (link_clicks).",
+  "uwaga": "Leady tylko od osób, które zaakceptowały cookies marketingowe (kod HubSpota). Zgłoszenia bez zgody są tylko w mailu na sprzedaz@dewax.pl. Kliknięcia = kliknięcia w link (link_clicks). Od 13.09 ok. 14:30 budżet kampanii 130 zł/dzień, starsza kampania Lead Ads wstrzymana.",
   "kreacje": {
-    "R1": { "nazwa": "R1 Dzień wiercenia (utm_content=dzien-wiercenia)", "wyswietlenia": 266, "klikniecia": 15, "wydatki": 7.48, "leady": 0 },
-    "R2": { "nazwa": "R2 Dom, który już stoi (utm_content=dom-ktory-juz-stoi)", "wyswietlenia": 401, "klikniecia": 20, "wydatki": 9.6, "leady": 0 },
-    "R3": { "nazwa": "R3 Kotłownia (utm_content=kotlownia)", "wyswietlenia": 2812, "klikniecia": 133, "wydatki": 75.17, "leady": 6 },
-    "R4": { "nazwa": "R4 Karuzela (utm_content=karuzela)", "wyswietlenia": 19, "klikniecia": 0, "wydatki": 0.43, "leady": 0 }
+    "R1": { "nazwa": "R1 Dzień wiercenia (utm_content=dzien-wiercenia)", "wyswietlenia": 285, "klikniecia": 15, "wydatki": 7.61, "leady": 0 },
+    "R2": { "nazwa": "R2 Dom, który już stoi (utm_content=dom-ktory-juz-stoi)", "wyswietlenia": 471, "klikniecia": 21, "wydatki": 10.52, "leady": 0 },
+    "R3": { "nazwa": "R3 Kotłownia (utm_content=kotlownia)", "wyswietlenia": 3603, "klikniecia": 166, "wydatki": 87.53, "leady": 7 },
+    "R4": { "nazwa": "R4 Karuzela (utm_content=karuzela)", "wyswietlenia": 21, "klikniecia": 0, "wydatki": 0.43, "leady": 0 }
   }
 }
