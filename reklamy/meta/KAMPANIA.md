@@ -180,9 +180,9 @@ Nagłówek: **Moje Ciepło: nabór do 31.12.2026** · Opis: „Policz koszt syst
 5. **Włączyć kampanię: zrobione 12.09.2026** na polecenie właściciela, równolegle ze scaleniem gałęzi
    na `main`. Pierwsze 14 dni bez zmian (nauka algorytmu). Punkty 2–3 (test piksela, Cookiebot,
    weryfikacja domeny, strona nadawcy) pozostają do wykonania przez właściciela.
-6. **Sekret `MAKE_WEBHOOK_LEADY` w GitHub i scalenie gałęzi z torem leadów** (12.09.2026): bez sekretu
-   zgłoszenia z formularza nie wpadają do HubSpota, a wyniki generatora nie mają skąd liczyć leadów.
-   Instrukcja i test: `reklamy/generator/README.md`.
+6. **Leady w HubSpocie bez dodatkowych połączeń** (13.09.2026): kod śledzący HubSpot na stronie zbiera
+   zgłoszenia z formularza wyceny, a integracja HubSpot z Facebookiem przypisuje je do reklam. Tor przez
+   Make z 12.09 został wycofany. Do zmierzenia zostaje luka po odrzuconych cookies (CONTENT_NEEDED 10.8).
 7. **Panel generatora**: połączyć projekt Netlify `dewax-generator` z repozytorium (Base directory
    `reklamy/generator`) i potwierdzić bloki `h04`, `h07`, `b5` (CONTENT_NEEDED 10.10).
 
@@ -296,13 +296,13 @@ Każda kreacja ma kod `hXX-bY-cZ`, który występuje w trzech miejscach i spina 
 |---|---|
 | Nazwa reklamy w Meta | `KOD \| hook \| korzyść` (wydatki, wyświetlenia i kliknięcia per kreacja z Windsor.ai) |
 | Adres docelowy | `utm_source=facebook&utm_medium=paid_social&utm_campaign=pompy-leady-2026-09&utm_content=KOD` |
-| Zgłoszenie z formularza | `js/dewax.js` zapamiętuje utm z adresu wejścia w sessionStorage i wpisuje w ukryte pola formularza; `wyslij.php` dopisuje „Kreacja: KOD” do maila i do notatki w HubSpocie |
+| Zgłoszenie z formularza | `js/dewax.js` zapamiętuje utm z adresu wejścia w sessionStorage i wpisuje w ukryte pola formularza; `wyslij.php` dopisuje „Kreacja: KOD” do maila. W HubSpocie kontakt zebrany kodem śledzącym ma `utm_content` w pierwszym adresie wejścia |
 
-Lead trafia do HubSpota automatycznie: `wyslij.php` → webhook Make (adres z sekretu GitHub
-`MAKE_WEBHOOK_LEADY`, plik `konfig-leadow.php` poza repozytorium) → scenariusz Make 9799111 →
-kontakt (upsert po e-mailu) i notatka w portalu 49004516. Koszt zapytania per kreacja = wydatki
-z Meta ÷ liczba kontaktów z „Kreacja: KOD”; wynik w zakładce „Wyniki” panelu (`wyniki.json`,
-odświeżany na polecenie „zaktualizuj wyniki generatora”).
+Lead trafia do HubSpota bez dodatkowych połączeń: kod śledzący HubSpot na stronie (po zgodzie
+marketingowej) zbiera zgłoszenie z formularza jako „non-HubSpot form”, a integracja HubSpot z Facebookiem
+przypisuje kontakt do reklamy. Koszt zapytania per kreacja = wydatki z Meta ÷ liczba kontaktów
+z `utm_content=KOD` w pierwszym adresie wejścia; wynik w zakładce „Wyniki” panelu (`wyniki.json`,
+odświeżany na polecenie „zaktualizuj wyniki generatora”). Tor przez Make z 12.09 został wycofany 13.09.
 
 Reklamy R1–R4 mają `utm_content` równe `dzien-wiercenia`, `dom-ktory-juz-stoi`, `kotlownia`
 i `karuzela` (sekcja „Reklamy”), więc ich leady widać w HubSpocie tak samo jak leady kreacji

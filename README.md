@@ -50,7 +50,7 @@ wykonano skryptami Playwright poza repozytorium; wyniki i zrzuty leżą w `docs/
 | `css/dewax.css` | jeden arkusz dla wszystkich stron (tokeny marki, komponenty, responsywność, druk) |
 | `js/kalkulator.js` | algorytm kalkulatora (czysta funkcja `oblicz(S)`, eksport do testów) + interfejs kroków |
 | `js/dewax.js` | nawigacja, pomiar zdarzeń (gtag, piksel Meta), walidacja formularza, atrybucja (utm z adresu wejścia do ukrytych pól formularza), pasek mobilny, wspólny stan „koszt + geologia” |
-| `wyslij.php` | obsługa formularzy (wycena, zgoda na opinię): mail na `sprzedaz@dewax.pl`, a od 12.09.2026 także lead do HubSpota przez webhook Make; adres webhooka z pliku `konfig-leadow.php`, tworzonego przy wdrożeniu z sekretu GitHub `MAKE_WEBHOOK_LEADY` (poza repozytorium, zablokowany w `.htaccess`) |
+| `wyslij.php` | obsługa formularzy (wycena, zgoda na opinię): mail na `sprzedaz@dewax.pl`; od 12.09.2026 w mailu wiersze „Źródło / Kampania / Kreacja” z parametrów utm (ukryte pola formularza). Do HubSpota zgłoszenie zbiera kod śledzący HubSpot na stronie, bez osobnego połączenia (`docs/ANALITYKA.md`) |
 | `podziekowanie.html`, `404.html`, `polityka-prywatnosci.html`, `.htaccess`, `robots.txt`, `sitemap.xml`, `og.jpg`, `favicon.png` | bez zmian funkcjonalnych (404 i sitemap uzupełnione o nowe podstrony) |
 | `reklamy/meta/` | kampania Meta Ads: opis (`KAMPANIA.md`), grafiki z prawdziwych zdjęć (`przygotuj.py`) |
 | `reklamy/generator/` | panel generatora kreacji Meta (180 kreacji, kolejka do Meta, wyniki per kreacja) i opis toru leadów do HubSpota (`README.md`); stoi na Netlify (`dewax-generator`), nie wchodzi do pakietu wdrożenia na nazwa.pl |

@@ -76,12 +76,23 @@ rozważyć optymalizację na `KalkulatorUkonczony` (w zestawie reklam: `custom_e
 
 ## Atrybucja zgłoszeń do kreacji (od 12.09.2026)
 
-Reklamy z generatora (`reklamy/generator`) prowadzą na stronę z parametrami `utm_source`, `utm_medium`,
-`utm_campaign` i `utm_content=KOD` (kod kreacji, np. `h03-b2-c1`). `js/dewax.js` zapamiętuje te parametry
-w `sessionStorage` (klucz `dx_utm`, razem ze stroną wejścia) i przy wysyłce formularza wpisuje je w ukryte
-pola `utm_*`, `strona_wejscia` oraz `hutk` (cookie `hubspotutk`, obecne tylko po zgodzie marketingowej).
-`wyslij.php` dopisuje do maila wiersze „Źródło / Kampania / Kreacja” i przekazuje komplet do HubSpota
-(webhook Make, scenariusz 9799111): kontakt po e-mailu plus notatka z wierszem `Kreacja: KOD`.
-Po tym wierszu liczy się leady i koszt zapytania per kreacja (`reklamy/generator/wyniki.json`).
-GA4 widzi te same parametry jako źródło, medium, kampanię i treść reklamy w standardowych raportach
-pozyskania. `sessionStorage` nie jest cookie i mieści się w kategorii niezbędnej, jak `dx_calc` i `dx_geo`.
+Reklamy prowadzą na stronę z parametrami `utm_source=facebook`, `utm_medium=paid_social`,
+`utm_campaign=pompy-leady-2026-09` i `utm_content=KOD` (R1–R4: `dzien-wiercenia`, `dom-ktory-juz-stoi`,
+`kotlownia`, `karuzela`; kreacje z generatora: kod `hXX-bY-cZ`). Integracja HubSpot z Facebookiem dokleja
+do tych adresów jeszcze parametry `hsa_*` z identyfikatorami konta, kampanii, zestawu i reklamy.
+
+Trzy miejsca, w których to widać:
+
+- **Mail ze zgłoszeniem.** `js/dewax.js` zapamiętuje parametry utm z adresu wejścia w `sessionStorage`
+  (klucz `dx_utm`) i przy wysyłce wpisuje je w ukryte pola formularza; `wyslij.php` dopisuje do maila
+  wiersze „Źródło / Kampania / Kreacja”. Działa bez cookies, dla każdego zgłoszenia.
+- **HubSpot.** Kod śledzący HubSpot (ładowany po zgodzie marketingowej) zbiera zgłoszenie z formularza
+  wyceny jako „non-HubSpot form” (zdarzenie „…DEWAX Dobrzyca: .zap”), tworzy kontakt, zapisuje mu pierwszy
+  adres wejścia (`hs_analytics_first_url`) z `utm_content` i `hsa_ad` i ustawia źródło „Paid social”.
+  Kto odrzuci cookies marketingowe, nie trafia do HubSpota tą drogą (mail dochodzi). Osobnego połączenia
+  nie ma: tor przez Make z 12.09.2026 został wycofany 13.09.2026.
+- **GA4.** Te same parametry jako źródło, medium, kampania i treść reklamy w raportach pozyskania.
+
+Leady per kreacja do `reklamy/generator/wyniki.json` liczy się z HubSpota po `utm_content` w pierwszym
+adresie wejścia kontaktu; wydatki per reklama z Meta (Windsor.ai). `sessionStorage` nie jest cookie
+i mieści się w kategorii niezbędnej, jak `dx_calc` i `dx_geo`.

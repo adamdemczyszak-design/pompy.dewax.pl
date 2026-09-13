@@ -67,7 +67,7 @@
   </section>
 
   <section id="p-wyniki" class="panel" hidden>
-    <div class="intro"><p id="wyniki-data" class="mut"></p><p>Leady liczone z HubSpota po kodzie kreacji zapisanym w zgłoszeniu (pole „Kreacja” w wiadomości kontaktu). Wydatki i wyświetlenia z Meta po nazwie reklamy zaczynającej się od kodu kreacji. Koszt zapytania = wydatki ÷ leady. Dane odświeża Claude na polecenie „zaktualizuj wyniki generatora” (zapis do wyniki.json).</p></div>
+    <div class="intro"><p id="wyniki-data" class="mut"></p><p>Leady liczone z HubSpota po <span class="mono">utm_content</span> w pierwszym adresie wejścia kontaktu (kod śledzący HubSpot zbiera formularz po zgodzie na cookies marketingowe; zgłoszenia bez zgody widać tylko w mailu). Wydatki i wyświetlenia z Meta po nazwie reklamy zaczynającej się od kodu kreacji. Koszt zapytania = wydatki ÷ leady. Dane odświeża Claude na polecenie „zaktualizuj wyniki generatora” (zapis do wyniki.json).</p></div>
     <div class="tbl"><table id="wyniki">
       <thead><tr><th>Kod</th><th>Kreacja</th><th>Status</th><th>W Meta od</th><th class="num">Wyświetlenia</th><th class="num">Kliknięcia</th><th class="num">Wydatki</th><th class="num">Leady</th><th class="num">Koszt zapytania</th></tr></thead>
       <tbody></tbody><tfoot></tfoot>

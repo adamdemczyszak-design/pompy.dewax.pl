@@ -68,57 +68,55 @@ każdy blok ma podane źródło (zakładka „Źródła i zasady”).
 
 ## Wyniki i koszt zapytania
 
-Zakładka „Wyniki” czyta `wyniki.json`. Leady liczone są z HubSpota: każde zgłoszenie z formularza
-ma w notatce kontaktu wiersz `Kreacja: KOD` (patrz niżej). Wydatki, wyświetlenia i kliknięcia
-pochodzą z Meta po nazwie reklamy zaczynającej się od kodu (Windsor.ai, konto `955522616312255`).
-Koszt zapytania = wydatki ÷ leady.
+Zakładka „Wyniki” czyta `wyniki.json`. Leady liczone są z HubSpota: kod śledzący HubSpot na stronie zbiera
+zgłoszenia z formularza wyceny (po zgodzie marketingowej) i zapisuje kontaktowi pierwszy adres wejścia
+z `utm_content=KOD`. Wydatki, wyświetlenia i kliknięcia pochodzą z Meta (Windsor.ai, konto
+`955522616312255`) po nazwie i identyfikatorze reklamy. Koszt zapytania = wydatki ÷ leady. Bez dodatkowych
+połączeń.
 
-Aktualizacja na polecenie „zaktualizuj wyniki generatora”: Claude pobiera z Windsor.ai wydatki,
-wyświetlenia i kliknięcia per reklama, liczy w HubSpocie kontakty z `Kreacja: KOD`, zapisuje
-`wyniki.json` i scala na `main`. Format pliku:
+Aktualizacja na polecenie „zaktualizuj wyniki generatora”:
+
+1. HubSpot: kontakty utworzone od startu kampanii (12.09.2026), których `hs_analytics_first_url` zawiera
+   `utm_content=` (narzędzie `search_crm_objects`, filtr `createdate` od daty startu). Kod kreacji z tego
+   adresu grupuje kontakty; `hsa_ad` w tym samym adresie wskazuje reklamę w Meta.
+2. Meta przez Windsor.ai (konektor `facebook`): `spend`, `impressions`, `clicks`, `link_clicks` per `ad_id`
+   i `ad_name` od daty startu, filtr `campaign_id`.
+3. Zapis do `wyniki.json` i scalenie na `main`. Format:
 
 ```json
 {
-  "aktualizacja": "2026-09-12",
-  "zrodlo": "Windsor.ai (Meta Ads, konto 955522616312255) + HubSpot (notatki z Kreacja:)",
-  "kreacje": { "h01-b2-c3": { "nazwa": "…", "wyswietlenia": 0, "klikniecia": 0, "wydatki": 0, "leady": 0 } }
+  "aktualizacja": "2026-09-13",
+  "zrodlo": "HubSpot (utm_content w pierwszym adresie wejścia kontaktu) + Windsor.ai (Meta Ads, konto 955522616312255)",
+  "kreacje": { "R3": { "nazwa": "R3 Kotłownia (utm_content=kotlownia)", "wyswietlenia": 0, "klikniecia": 0, "wydatki": 0, "leady": 0 } }
 }
 ```
 
-Reklamy R1–R4 z 12.09.2026 mają w `wyniki.json` klucze `R1`–`R4`; ich adresy mają `utm_content`
-równe `dzien-wiercenia`, `dom-ktory-juz-stoi`, `kotlownia` i `karuzela`, po których liczy się ich leady.
+Reklamy R1–R4 z 12.09.2026 mają klucze `R1`–`R4` i `utm_content` równe `dzien-wiercenia`,
+`dom-ktory-juz-stoi`, `kotlownia`, `karuzela`. Kreacje z generatora mają klucz równy kodowi (`h03-b2-c1`).
 
-## Lead do HubSpota: gdzie to jest podpięte
+## Lead do HubSpota: jak to działa i jak sprawdzić
 
-```
-formularz wyceny (index.html)            ukryte pola utm_source, utm_medium, utm_campaign, utm_content,
-        │                                strona_wejscia, hutk; js/dewax.js wpisuje je przy wysyłce
-        │                                z sessionStorage (utm zapamiętane z adresu wejścia)
-        ▼
-wyslij.php (nazwa.pl)                    mail na sprzedaz@dewax.pl jak dotąd (z wierszami Źródło,
-        │                                Kampania, Kreacja), potem POST JSON na webhook Make.
-        │                                Adres webhooka: konfig-leadow.php, plik tworzony przy
-        │                                wdrożeniu z sekretu GitHub MAKE_WEBHOOK_LEADY (wdrozenie.yml),
-        │                                zablokowany w .htaccess, poza repozytorium. Bez sekretu
-        │                                krok jest pomijany, mail działa.
-        ▼
-Make, scenariusz 9799111                 webhook 4369822 → filtr „jest e-mail i gotowy JSON” →
-„pompy.dewax.pl: lead z formularza       HubSpot: batch upsert kontaktu po e-mailu (email, firstname,
- wyceny do HubSpota”                     city, message, phone) → HubSpot: notatka przy kontakcie
-        ▼                                (metraż, ogrzewanie, zgoda na telefon, o domu, źródło,
-HubSpot, portal 49004516                 kampania, kreacja, strona wejścia, czas wysłania)
-```
+Osobnego połączenia nie ma. Wystarczają dwie rzeczy, które już są w HubSpocie:
+
+- **Kod śledzący HubSpot** (`js.hs-scripts.com/49004516.js`, w bloku zgody każdej strony, kategoria
+  marketing) zbiera zgłoszenie z formularza wyceny jako „non-HubSpot form”. W HubSpocie to zdarzenie
+  „Gruntowa pompa ciepła z odwiertem… | DEWAX Dobrzyca: .zap”. Kontakt dostaje pierwszy adres wejścia
+  z parametrami `utm_*` i `hsa_*` oraz źródło „Paid social”.
+- **Integracja HubSpot z Facebookiem** dokleja do adresów reklam parametry `hsa_*` i przypisuje kontakt
+  do reklamy (HubSpot → Marketing → Ads). Formularze Lead Ads wewnątrz Facebooka trafiają do HubSpota
+  tą samą integracją.
+
+Ograniczenie: kod HubSpota ładuje się dopiero po zgodzie na cookies marketingowe. Kto odrzuci cookies,
+wysyła formularz, mail dochodzi na `sprzedaz@dewax.pl` (z wierszem „Kreacja”), ale kontakt w HubSpocie
+nie powstaje. Wielkość tej luki: `CONTENT_NEEDED.md`, punkt 10.8. Gdyby była duża, domknięcie bez Make
+i bez sekretu: `wyslij.php` wysyła zgłoszenie do formularza HubSpot przez Forms API po stronie serwera.
 
 Jak sprawdzić, że lead wpadł:
 
-1. Wejdź na `https://pompy.dewax.pl/?utm_source=facebook&utm_medium=paid_social&utm_campaign=test&utm_content=h01-b2-c3`
-   i wyślij formularz wyceny ze swoim e-mailem.
+1. Wejdź na `https://pompy.dewax.pl/?utm_source=facebook&utm_medium=paid_social&utm_campaign=test&utm_content=h01-b2-c3`,
+   zaakceptuj cookies marketingowe i wyślij formularz wyceny ze swoim e-mailem.
 2. Mail na `sprzedaz@dewax.pl` ma wiersze `Źródło: facebook / paid_social`, `Kampania: test`, `Kreacja: h01-b2-c3`.
-3. Make → scenariusz „pompy.dewax.pl: lead z formularza wyceny do HubSpota” → Historia: wykonanie
-   z trzema modułami zakończone bez błędu.
-4. HubSpot → Kontakty → wyszukaj swój e-mail: kontakt istnieje (nowy albo zaktualizowany), w osi czasu
-   jest notatka „Zgłoszenie z formularza wyceny pompy.dewax.pl” z wierszem `Kreacja: h01-b2-c3`.
-5. Gdy kontaktu nie ma: w podsumowaniu ostatniego wdrożenia (GitHub → Actions) sprawdź wiersz
-   „Lead do HubSpota”. „brak sekretu MAKE_WEBHOOK_LEADY” oznacza, że sekret nie jest dodany.
-   Błąd po stronie serwera trafia do dziennika PHP nazwa.pl jako `pompy.dewax.pl lead -> Make: HTTP …`.
-   Błąd po stronie Make widać w Historii scenariusza.
+3. HubSpot → Kontakty → wyszukaj swój e-mail: w osi czasu jest „Form submission” z formularza `.zap`,
+   we właściwościach „Original source” = Paid social, a pierwszy adres wejścia zawiera `utm_content=h01-b2-c3`.
+4. Gdy kontaktu nie ma: najczęściej cookies zostały odrzucone. Sprawdź też w HubSpocie, czy zbieranie
+   formularzy spoza HubSpota jest włączone (Settings → Marketing → Forms → „Collect data from website forms”).
