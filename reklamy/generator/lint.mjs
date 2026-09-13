@@ -33,6 +33,13 @@ for (const b of T.korzysci) { sprawdzTekst(`korzyść ${b.id}`, b.tekst); sprawd
 for (const c of T.cta) { sprawdzTekst(`CTA ${c.id}`, c.tekst); sprawdzTekst(`CTA ${c.id} nagłówek`, c.naglowek, { naglowek: true }); sprawdzTekst(`CTA ${c.id} opis`, c.opis, { opis: true }); }
 /* Wzorzec to reklamy już zatwierdzone przez Meta: sprawdzamy tylko ton, nie limity długości. */
 for (const w of T.wzorzec) sprawdzTekst(`wzorzec ${w.kod}`, w.tekst);
+/* Kreacje specjalne poza macierzą (np. Buderus): te same zasady co dla złożeń, z limitami długości. */
+for (const sp of T.specjalne || []) {
+  sprawdzTekst(`kreacja ${sp.kod}`, sp.tekst);
+  sprawdzTekst(`kreacja ${sp.kod} nagłówek`, sp.naglowek, { naglowek: true });
+  sprawdzTekst(`kreacja ${sp.kod} opis`, sp.opis, { opis: true });
+  if (sp.tekst.length > Z.maksZnakowTekstu) bledy.push(`kreacja ${sp.kod}: ${sp.tekst.length} znaków (maks ${Z.maksZnakowTekstu})`);
+}
 
 let n = 0, maks = 0, najdluzszy = '';
 for (const h of T.hooki) for (const b of T.korzysci) for (const c of T.cta) {
@@ -42,8 +49,8 @@ for (const h of T.hooki) for (const b of T.korzysci) for (const c of T.cta) {
   if (tekst.length > Z.maksZnakowTekstu) bledy.push(`złożenie ${h.id}-${b.id}-${c.id}: ${tekst.length} znaków (maks ${Z.maksZnakowTekstu})`);
 }
 
-console.log(`Bloki: ${T.hooki.length} hooków, ${T.korzysci.length} korzyści, ${T.cta.length} CTA. Złożeń: ${n}. Najdłuższe: ${najdluzszy} (${maks} znaków).`);
-const zUwaga = [...T.hooki, ...T.korzysci, ...T.cta].filter(x => x.uwaga).map(x => x.id);
+console.log(`Bloki: ${T.hooki.length} hooków, ${T.korzysci.length} korzyści, ${T.cta.length} CTA. Złożeń: ${n}, kreacji specjalnych: ${(T.specjalne || []).length}. Najdłuższe złożenie: ${najdluzszy} (${maks} znaków).`);
+const zUwaga = [...T.hooki, ...T.korzysci, ...T.cta, ...(T.specjalne || []).map(sp => ({ id: sp.kod, uwaga: sp.uwaga }))].filter(x => x.uwaga).map(x => x.id);
 if (zUwaga.length) console.log(`Bloki wymagające potwierdzenia właściciela (uwaga): ${zUwaga.join(', ')}`);
 if (bledy.length) { console.error(`\nBłędy (${bledy.length}):`); for (const b of bledy) console.error('  ✗ ' + b); process.exit(1); }
 console.log('✓ Ton: bez pauz, bez wykrzykników, bez słów zakazanych, zdania w limicie.');

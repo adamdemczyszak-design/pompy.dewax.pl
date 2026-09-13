@@ -39,6 +39,15 @@
   }
   var KREACJE = [];
   T.hooki.forEach(function (h) { T.korzysci.forEach(function (b) { T.cta.forEach(function (c) { KREACJE.push(zloz(h, b, c)); }); }); });
+  /* kreacje specjalne (np. Buderus): gotowy tekst poza macierzą, ten sam format, te same zasady tonu */
+  (T.specjalne || []).forEach(function (sp) {
+    var foto = T.zdjecia.filter(function (z) { return z.id === sp.foto; })[0] || T.zdjecia[0];
+    KREACJE.push({
+      kod: sp.kod, h: { id: sp.kod, typ: sp.typ, nazwa: sp.nazwa }, b: { id: '', nazwa: sp.korzysc }, c: { id: '', nazwa: sp.wezwanie, kotwica: sp.kotwica || '' },
+      tekst: sp.tekst, naglowek: sp.naglowek, opis: sp.opis, link: link(sp.kod, { kotwica: sp.kotwica || '' }), foto: foto,
+      nazwaReklamy: sp.kod + ' | ' + sp.nazwa, uwagi: sp.uwaga ? [sp.kod + ': ' + sp.uwaga] : []
+    });
+  });
   var wgKodu = {}; KREACJE.forEach(function (k) { wgKodu[k.kod] = k; });
 
   /* ---------- lint tonu (te same zasady co lint.mjs) ---------- */
@@ -170,7 +179,7 @@
 
   function rysujZrodla() {
     var el = $('#zrodla-lista');
-    var bloki = [].concat(T.hooki.map(function (h) { return { id: h.id, typ: 'hook · ' + h.typ, z: h.zrodlo, u: h.uwaga }; }), T.korzysci.map(function (b) { return { id: b.id, typ: 'korzyść · ' + b.nazwa, z: b.zrodlo, u: b.uwaga }; }), T.cta.map(function (c) { return { id: c.id, typ: 'CTA · ' + c.nazwa, z: c.zrodlo, u: c.uwaga }; }));
+    var bloki = [].concat((T.specjalne || []).map(function (sp) { return { id: sp.kod, typ: 'kreacja specjalna · ' + sp.nazwa, z: sp.zrodlo, u: sp.uwaga }; }), T.hooki.map(function (h) { return { id: h.id, typ: 'hook · ' + h.typ, z: h.zrodlo, u: h.uwaga }; }), T.korzysci.map(function (b) { return { id: b.id, typ: 'korzyść · ' + b.nazwa, z: b.zrodlo, u: b.uwaga }; }), T.cta.map(function (c) { return { id: c.id, typ: 'CTA · ' + c.nazwa, z: c.zrodlo, u: c.uwaga }; }));
     el.innerHTML = bloki.map(function (b) { return '<li><span class="mono">' + b.id + '</span> <b>' + esc(b.typ) + '</b><br><span class="mut">' + esc(b.z) + '</span>' + (b.u ? '<br><span class="pill p-uwaga">do potwierdzenia</span> <span class="mut">' + esc(b.u) + '</span>' : '') + '</li>'; }).join('');
     $('#zdjecia-lista').innerHTML = T.zdjecia.map(function (z) { return '<li>' + (MIN[z.id] ? '<img src="' + MIN[z.id] + '" alt="' + esc(z.nazwa) + '" loading="lazy">' : '') + '<div><b>' + esc(z.nazwa) + '</b><br><span class="mono mut">' + esc(z.plik) + '</span> · ' + esc(z.format) + '<br><span class="mut">' + esc(z.opis) + '</span></div></li>'; }).join('');
     $('#zakazane').textContent = T.zasady.zakazane.join(', ') + ' oraz znaki: ' + T.zasady.zakazaneZnaki.join(' ');

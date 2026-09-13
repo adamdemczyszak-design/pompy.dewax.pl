@@ -8,7 +8,7 @@
    ===================================================================== */
 window.DX_TRESCI = {
 
-  wersja: '2026-09-12',
+  wersja: '2026-09-13',
   strona: 'https://pompy.dewax.pl/',
   utm: { source: 'facebook', medium: 'paid_social', campaign: 'pompy-leady-2026-09' },
 
@@ -104,10 +104,27 @@ window.DX_TRESCI = {
     { id: 'wiercenie-pluczka', nazwa: 'Wiercenie na płuczkę', plik: 'zdjecia/75.jpg', zrodlo: 'zdjecia/75.jpg', format: 'pion 3:4 (do przycięcia)', opis: 'Wiertnica nad otworem, woda z urobkiem wokół rury.' },
     { id: 'sonda-helix', nazwa: 'Sonda koszowa Helix', plik: 'img/helix.webp', zrodlo: 'img/helix.webp', format: 'poziom (do przycięcia)', opis: 'Rura zwinięta w spiralę w szerokim otworze przed wypełnieniem.' },
     { id: 'kotlownia-k1', nazwa: 'Kotłownia nowego domu', plik: 'img/k1.webp', zrodlo: 'img/k1.webp', format: '4:3 (do przycięcia)', opis: 'Pompa Thermokrafft z rozdzielaczem i przyłączami dolnego źródła.' },
-    { id: 'maszt-wiertnicy', nazwa: 'Maszt wiertnicy na tle nieba', plik: 'img/hero_wide.webp', zrodlo: 'img/hero_wide.webp', format: 'poziom', opis: 'Maszt z głowicą i przewodami hydraulicznymi.' }
+    { id: 'maszt-wiertnicy', nazwa: 'Maszt wiertnicy na tle nieba', plik: 'img/hero_wide.webp', zrodlo: 'img/hero_wide.webp', format: 'poziom', opis: 'Maszt z głowicą i przewodami hydraulicznymi.' },
+    { id: 'buderus', nazwa: 'Pompa Buderus (zdjęcie do dostarczenia)', plik: 'DO DOSTARCZENIA: reklamy/meta/buderus/ (zdjęcie produktu z portalu partnerskiego Buderus albo własna kotłownia z pompą Buderus)', zrodlo: 'portal partnerski Buderus (właściciel) lub zdjęcie DEWAX', format: '4:5 lub 1:1', opis: 'Bez zdjęcia z materiałów partnerskich albo własnej realizacji z pompą Buderus kreacje bud-1…bud-3 nie idą do Meta.' }
   ],
 
   /* Zasady tonu sprawdzane przez lint (panel i lint.mjs). */
+  /* Kreacje specjalne poza macierzą: gotowy tekst w tym samym rejestrze i pod tymi samymi zasadami.
+     Buderus jest tu dowodem (znana marka), nie bohaterem: najpierw efekt dla klienta, potem marka. */
+  specjalne: [
+    { kod: 'bud-1', typ: 'marka', nazwa: 'Buderus: jedna umowa', korzysc: 'jeden wykonawca', wezwanie: 'policz koszt', kotwica: '',
+      tekst: 'Buderus w kotłowni, nasza wiertnica na działce.\n\nGruntową pompę Buderus montujemy razem z dolnym źródłem, na jednej umowie. Odwierty, glikol, próba ciśnieniowa, pompa, uruchomienie: jedna firma i jedna odpowiedzialność. Gdy coś nie gra, nie ma sporu, czy winny jest wiertacz, czy monter. Dzwonisz do nas.\n\nPolicz koszt całego systemu w 2 minuty. Kalkulator pokazuje pompę, metry odwiertów i cenę, zanim ktokolwiek do Ciebie zadzwoni.',
+      naglowek: 'Gruntowa pompa Buderus z odwiertem', opis: 'Jedna firma, jedna umowa', foto: 'buderus',
+      zrodlo: 'pompy.html, sekcja „Buderus” (montujemy również gruntowe pompy Buderus, cena w wycenie); index.html, FAQ „Montujecie tylko Thermokrafft?”; dolne-zrodlo-pompy-ciepla.html (dolne źródło pod Buderus wykonujemy sami); index.html, porównanie grunt/powietrze', uwaga: 'Przed wysłaniem: (1) właściciel potwierdza dokładny status partnerski Buderus (Autoryzowany Partner Handlowy, Top Partner albo Autoryzowany Instalator) i model, który DEWAX montuje; (2) zdjęcie z portalu partnerskiego Buderus albo własne; (3) logo Buderus tylko według zasad co-brandingu z portalu. W tekście celowo nie ma tytułu partnerskiego ani parametrów urządzenia.' },
+    { kod: 'bud-2', typ: 'marka', nazwa: 'Buderus: z gruntu, nie z powietrza', korzysc: 'niezależność od pogody', wezwanie: 'sprawdź działkę', kotwica: '#geo',
+      tekst: 'Znasz Buderusa z kotłów gazowych. Ten sam producent robi gruntowe pompy ciepła, a my je montujemy w Wielkopolsce i sąsiednich województwach.\n\nGrunt kilkadziesiąt metrów pod domem ma tę samą temperaturę w styczniu i w lipcu. Pompa pracuje równo przez cały sezon, bez spadku mocy przy mrozie. Rachunek za ciepło jest przewidywalny.\n\nSprawdź geologię swojej działki, zanim ktoś sprzeda Ci pompę bez odwiertu. Raport z danych PIG-PIB, bez logowania.',
+      naglowek: 'Buderus z gruntu, nie z powietrza', opis: 'Równo w styczniu i w lipcu', foto: 'buderus',
+      zrodlo: 'pompy.html, sekcja „Buderus” (montujemy również gruntowe pompy Buderus, cena w wycenie); index.html, FAQ „Montujecie tylko Thermokrafft?”; dolne-zrodlo-pompy-ciepla.html (dolne źródło pod Buderus wykonujemy sami); index.html, porównanie grunt/powietrze', uwaga: 'Przed wysłaniem: (1) właściciel potwierdza dokładny status partnerski Buderus (Autoryzowany Partner Handlowy, Top Partner albo Autoryzowany Instalator) i model, który DEWAX montuje; (2) zdjęcie z portalu partnerskiego Buderus albo własne; (3) logo Buderus tylko według zasad co-brandingu z portalu. W tekście celowo nie ma tytułu partnerskiego ani parametrów urządzenia.' },
+    { kod: 'bud-3', typ: 'marka', nazwa: 'Buderus: cicho w domu', korzysc: 'brak jednostki na elewacji', wezwanie: 'bez telefonu', kotwica: '',
+      tekst: 'Gruntowy Buderus stoi w kotłowni. Na elewacji nic nie wisi, pod oknem sypialni nic nie szumi, sąsiad nie ma o co pytać.\n\nCiepło i ciepła woda z jednego urządzenia, dolne źródło pod trawnikiem, którego później nie widać. Dolne źródło wykonujemy sami, własną wiertnicą, i zostajemy na serwis.\n\nWycena bez telefonu: wypełnij formularz, odpowiemy mailem z ceną pompy Buderus i odwiertów dla Twojego domu.',
+      naglowek: 'Cicho w domu, czysto na elewacji', opis: 'Nic nie wisi na ścianie', foto: 'buderus',
+      zrodlo: 'pompy.html, sekcja „Buderus” (montujemy również gruntowe pompy Buderus, cena w wycenie); index.html, FAQ „Montujecie tylko Thermokrafft?”; dolne-zrodlo-pompy-ciepla.html (dolne źródło pod Buderus wykonujemy sami); index.html, porównanie grunt/powietrze', uwaga: 'Przed wysłaniem: (1) właściciel potwierdza dokładny status partnerski Buderus (Autoryzowany Partner Handlowy, Top Partner albo Autoryzowany Instalator) i model, który DEWAX montuje; (2) zdjęcie z portalu partnerskiego Buderus albo własne; (3) logo Buderus tylko według zasad co-brandingu z portalu. W tekście celowo nie ma tytułu partnerskiego ani parametrów urządzenia.' }
+  ],
   zasady: {
     zakazane: ['odkryj', 'nowoczesn', 'innowac', 'rewoluc', 'ekolog', 'postaw na', 'kompleksow', 'najlepsz', 'najtańsz', 'super', 'wyjątkow', 'gwarantujemy', 'zwrot inwestycji', 'zwraca się', 'bezemisyjn', 'przyszłość ogrzewania', 'nie czekaj', 'już dziś', 'promocj', 'okazj', 'tylko teraz'],
     zakazaneZnaki: ['—', '!', '…'],
