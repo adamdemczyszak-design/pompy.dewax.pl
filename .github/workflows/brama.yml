@@ -66,6 +66,17 @@ jobs:
             echo "<IfModule mod_rewrite.c>"
             echo "RewriteEngine On"
             echo "RewriteBase /"
+            echo "# stara strona farb -> nowa strona Multilan (start 13.09.2026); ?dzial=paint zostaje jako ukryte wejscie"
+            echo "RewriteRule ^(o-firmie|strefa-dystrybutora)/?\$ /multilan/ [R=301,L]"
+            echo "RewriteRule ^przykladowe-realizacje/?\$ /multilan/realizacje/?lista [R=301,L]"
+            echo "RewriteRule ^strefa-fachowca/?\$ /multilan/dla-wykonawcow [R=301,L]"
+            echo "RewriteRule ^(do-pobrania|karta-techniczna-multilan-02-2019)/?\$ /multilan/do-pobrania [R=301,L]"
+            echo "RewriteRule ^kontakt/?\$ /multilan/kontakt [R=301,L]"
+            echo "RewriteRule ^polityka-prywatnosci/?\$ /multilan/polityka-prywatnosci [R=301,L]"
+            echo "RewriteRule ^zamow-tester/?\$ /multilan/kolory [R=301,L]"
+            echo "RewriteRule ^znajdz-sklep/?\$ /multilan/kontakt [R=301,L]"
+            echo "RewriteCond %{QUERY_STRING} ^p=[0-9]+\$"
+            echo "RewriteRule ^\$ /multilan/? [R=301,L]"
             echo "RewriteCond %{QUERY_STRING} (^|&)dzial=paint(&|\$)"
             echo "RewriteRule ^\$ index.php [L]"
             echo "</IfModule>"
@@ -85,6 +96,7 @@ jobs:
           put brama/granit.webp -o ${KAT%/}/granit.webp
           put brama/farba.webp -o ${KAT%/}/farba.webp
           put brama/logo-biale-kropki.png -o ${KAT%/}/logo-biale-kropki.png
+          put brama/robots.txt -o ${KAT%/}/robots.txt
           put htaccess-nowy.txt -o ${KAT%/}/.htaccess
           chmod 644 ${KAT%/}/index.html ${KAT%/}/.htaccess
           cls -la ${KAT%/}/index.html ${KAT%/}/.htaccess

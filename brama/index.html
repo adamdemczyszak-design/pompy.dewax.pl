@@ -62,7 +62,7 @@ a{text-decoration:none;color:inherit}
     </div>
   </a>
 
-  <a class="dzial paint" href="/?dzial=paint" aria-label="DEWAX Paint">
+  <a class="dzial paint" href="/multilan/" aria-label="DEWAX Paint: farba Multilan">
     <div class="tlo"><img src="granit.webp" alt="" width="1300" height="867" fetchpriority="high"></div>
     <img class="produkt" src="farba.webp" alt="" width="760" height="979" loading="lazy">
     <div class="in">
@@ -75,4 +75,24 @@ a{text-decoration:none;color:inherit}
 
 <div class="stopka">DEWAX Sp. z o.o. · Dobrzyca</div>
 
+<div data-cookies hidden style="position:fixed;left:12px;right:12px;bottom:12px;z-index:9999;max-width:720px;margin:0 auto;background:#0B0A12;color:#fff;border:1px solid #4087BD;border-radius:12px;padding:14px 16px;font:14px/1.45 'Montserrat',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;box-shadow:0 8px 30px rgba(0,0,0,.4)"><p style="margin:0 0 10px">Używamy plików cookie do statystyk i pomiaru skuteczności reklam (Google, Meta). Możesz się zgodzić albo odmówić. <a href="/multilan/polityka-prywatnosci" style="color:#9cc6e8">Polityka prywatności</a></p><div style="display:flex;gap:10px;flex-wrap:wrap"><button type="button" data-tak style="background:#4087BD;color:#fff;border:0;border-radius:8px;padding:9px 16px;font-weight:700;cursor:pointer">Zgadzam się</button><button type="button" data-nie style="background:transparent;color:#fff;border:1px solid #666;border-radius:8px;padding:9px 16px;cursor:pointer">Odmawiam</button></div></div>
+<!-- Piksel Meta "dewax.pl" (zestaw danych firmy Dewax, id 1032857169399673). Uruchamiany tylko po zgodzie
+     zapisanej w localStorage pod kluczem multilan_cookies (ten sam klucz co strona /multilan). -->
+<script>(function(){
+  var PIXEL='1032857169399673', KLUCZ='multilan_cookies', zal=false;
+  function zgoda(){try{return localStorage.getItem(KLUCZ)}catch(e){return null}}
+  function zapisz(v){try{localStorage.setItem(KLUCZ,v)}catch(e){}}
+  function ladujPixel(){
+    if(zal)return; zal=true;
+    !function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,document,'script','https://connect.facebook.net/en_US/fbevents.js');
+    fbq('init',PIXEL); fbq('track','PageView');
+  }
+  if(zgoda()==='tak')ladujPixel();
+  var b=document.querySelector('[data-cookies]');
+  if(b&&zgoda()===null){
+    b.hidden=false;
+    b.querySelector('[data-tak]').addEventListener('click',function(){zapisz('tak');ladujPixel();b.hidden=true});
+    b.querySelector('[data-nie]').addEventListener('click',function(){zapisz('nie');b.hidden=true});
+  }
+})();</script>
 </body></html>
