@@ -287,10 +287,12 @@ Po dwóch dniach kampania z 12.09 miała 7 zapytań z formularza za 102 zł (kos
 z R3 „Kotłownia”), a równolegle działająca starsza kampania „Dewax gruntowe pompy ciepła | Leads | Image”
 (`120240091141860027`, formularze Lead Ads, 70 zł/dzień) wydała 201 zł na 3–4 leady. Na polecenie
 właściciela 13.09.2026 przez Windsor.ai: starsza kampania **wstrzymana** (odwracalne: `enable_campaign`),
-a kampania z 12.09 dostała jej budżet: **130 zł/dzień** (było 60). Limit wydatków 2 000 zł został bez
-zmian, więc przy 130 zł/dzień wyczerpie się około 27–28.09; przed tym terminem właściciel decyduje
-o podniesieniu limitu. Zmiana budżetu o ponad 20% cofa zestaw do fazy nauki, więc pierwsze 2–3 dni
-po zmianie mogą być słabsze.
+a kampania z 12.09 dostała jej budżet: 130 zł/dzień. Tego samego dnia po południu właściciel
+zdecydował inaczej: **60 zł/dzień, nie więcej** (ustawione przez Windsor.ai ok. 15:20). Powód: limit
+wydatków całego konta reklamowego wynosi 16 763,50 zł, a wydane jest 16 574,00 zł, czyli do zatrzymania
+wszystkich reklam zostało 189,50 zł. Przy 60 zł/dzień starczy do ok. 16.09; limit konta podnosi się
+ręcznie w Ustawieniach płatności (Windsor.ai nie ma takiej akcji). Limit kampanii 2 000 zł bez zmian.
+Starsza kampania zostaje wstrzymana.
 
 ## Generator kreacji i atrybucja leadów (12.09.2026)
 
