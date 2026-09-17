@@ -253,7 +253,9 @@ KAMPANIE = [
         'nazwa': 'DEWAX | Dotacje',
         'budzet_dzienny': 6,
         'pulap_cpc': 4.0,
-        'wykluczenia_kampanii_dodatkowe': ['powietrzna', 'powietrznej', 'powietrzne', 'powietrznych'],
+        'wykluczenia_kampanii_dodatkowe': ['powietrzna', 'powietrznej', 'powietrzne', 'powietrznych',
+                                            # 15.09.2026: hasła o samym programie Moje Ciepło (wniosek, warunki), nie o zakupie pompy
+                                            'wniosek', 'wnioski', 'gov', 'dokumenty', 'krok po kroku', 'do kiedy', 'warunki', 'dla kogo', 'regulamin'],
         'grupy': [
             {
                 'id': 'dotacje',
@@ -375,10 +377,10 @@ for _k in KAMPANIE:
 # wyszukiwanych haseł z kampanii z sierpnia 2026 (595 haseł) i na ofercie DEWAX (tylko gruntowe).
 WYKLUCZENIA_WSPOLNE = {
     'inne typy pomp i urządzeń': ['powietrze woda', 'powietrze powietrze', 'monoblok', 'split', 'klimatyzacja', 'klimatyzator', 'klimatyzatory',
-                                  'basen', 'basenowa', 'basenowe', 'do cwu', 'cwu', 'bojler', 'podgrzewacz', 'grzałka', 'hybrydowa', 'kocioł gazowy cena'],
+                                  'basen', 'basenowa', 'basenowe', 'do cwu', 'cwu', 'bojler', 'podgrzewacz', 'grzałka', 'hybrydowa', 'kocioł gazowy cena', 'gwc'],
     'informacje, DIY, schematy': ['schemat', 'schematy', 'instrukcja', 'jak podłączyć', 'podłączenie', 'sterownik', 'samodzielny montaż', 'zrób sam',
                                   'jak działa', 'zasada działania', 'na czym polega', 'co to jest', 'definicja', 'wikipedia', 'forum', 'ranking',
-                                  'pdf', 'test'],
+                                  'pdf', 'test', 'jak dziala', 'co to'],
     'praca, kursy, serwis, części': ['praca', 'zatrudnię', 'zatrudnimy', 'kurs', 'szkolenie', 'uprawnienia', 'serwis', 'naprawa', 'awaria', 'błąd',
                                      'kod błędu', 'usterka', 'części', 'część', 'sprężarka', 'używana', 'używane', 'używany', 'olx', 'allegro',
                                      'sprzedam', 'najtańsza', 'najtańsze', 'tania', 'tanie', 'chińska', 'przemysłowa', 'przemysłowe', 'hala'],
@@ -389,7 +391,7 @@ WYKLUCZENIA_WSPOLNE = {
     'producenci i konkurenci (DEWAX montuje Thermokrafft i Buderus)': ['nibe', 'vaillant', 'viessmann', 'daikin', 'stiebel', 'stiebel eltron', 'thermia',
                       'galmet', 'gejzer', 'dimplex', 'ctc', 'mitsubishi', 'panasonic', 'bosch', 'kaisai', 'haier', 'york', 'qvantum', 'apic', 'a-pic',
                       'konceptus', 'vitocal', 'altherma', 'calibra', 'geodan', 'flexotherm', 'flexocompact', 'wolf', 'samsung', 'gree', 'midea',
-                      'hewalex', 'ciepłozziemi', 'jurkowski', 'sevro', 'pan studniarz'],
+                      'hewalex', 'ciepłozziemi', 'jurkowski', 'sevro', 'pan studniarz', 'ecoforest', 'maxima', 'de dietrich'],
 }
 
 # Zasoby (rozszerzenia) na poziomie kampanii, te same we wszystkich kampaniach.

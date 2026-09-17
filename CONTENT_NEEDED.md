@@ -159,15 +159,15 @@ Piksel Meta `1032857169399673` jest wpięty w stronę (kategoria marketing, `doc
 
 ## 11. Google Ads (12.09.2026): decyzje i czynności właściciela
 
-Kampania jest wgrana i włączona (12.09.2026, `docs/GOOGLE-ADS.md` punkt 0). Bez pozycji 11.2
-(doładowanie konta) nic się nie wyświetli, bez 11.3 (konwersje) nic nie zmierzymy.
+Kampania wyświetla się od 14.09.2026 (`docs/GOOGLE-ADS.md` punkt 0 i 11). Bez pozycji 11.4 (środki)
+reklamy staną, bez 11.3 (konwersje) nic nie zmierzymy.
 
 | # | Co | Dlaczego |
 |---|---|---|
 | 11.1 | **Zrobione 12.09.2026.** Zapis włączony w Supermetrics (Campaign Write Access, „Going live”) i Windsor.ai; pięć kampanii wgranych i włączonych, z identyfikatorami w `docs/GOOGLE-ADS.md` punkt 0. Stara kampania wstrzymana. | Reklamy zatwierdzone przez Google 12.09; wyświetlanie zależy od 11.2. |
-| 11.2 | **Weryfikacja reklamodawcy (blokuje wyświetlanie).** 12.09.2026 panel: „Konto wstrzymane. Aby ponownie wyświetlać reklamy, musisz przejść weryfikację reklamodawcy”, przycisk „Zacznij tutaj” (także Administracja → Weryfikacja reklamodawcy). Google pyta, kogo reprezentuje konto (organizację DEWAX Sp. z o.o.), potem prosi o dokument organizacji (odpis z KRS lub NIP/REGON) i dokument tożsamości osoby uprawnionej; dane w profilu płatności muszą zgadzać się z dokumentem. Rozpatrzenie zwykle 1 do 3 dni roboczych, po zatwierdzeniu kampanie ruszają same. Środki są: saldo 464,80 zł po wpłacie 500 zł (12.09); w sierpniu koszt 885,20 zł przy wpłatach 850 zł, stąd stop 25.08. | Bez weryfikacji Google nie wyświetli żadnej kampanii, niezależnie od ustawień i salda. Dziennik: `docs/GOOGLE-ADS.md` punkt 11. |
+| 11.2 | **Weryfikacja reklamodawcy: zrobione 14.09.2026.** Konto było wstrzymane od 12.09 do 14.09 („Konto wstrzymane. Aby ponownie wyświetlać reklamy, musisz przejść weryfikację reklamodawcy”); po weryfikacji kampanie ruszyły same. Gdyby pasek wrócił: Administracja → Weryfikacja reklamodawcy. | Wstrzymanie konta API pokazuje tylko jako powód „UNKNOWN” przy kampaniach; prawdziwy powód widać w panelu. Dziennik: `docs/GOOGLE-ADS.md` punkt 11. |
 | 11.3 | **Konwersje:** połączyć GA4 z Google Ads, oznaczyć `generate_lead` jako kluczowe zdarzenie, zaimportować do Google Ads, dodać konwersję „Połączenia z reklam”. | Dotychczasowa kampania wydała 885 zł bez jednej zmierzonej konwersji, bo w koncie nie ma działań powodujących konwersję. |
-| 11.4 | **Zrobione 12.09.2026:** właściciel ustalił 60 zł/dzień łącznie (31 / 14 / 6 / 3 / 6 zł), kampanie włączone na jego polecenie. Konto doładowane 12.09 (500 zł, saldo 464,80 zł, ok. 7 dni przy 60 zł); żeby nie stanęło w środku dnia jak 25.08, włączyć płatności automatyczne kartą albo doładowywać ok. 1 800 zł na miesiąc. | Zmiana budżetu: jedno zdanie, wykonanie przez API. |
+| 11.4 | **Zrobione 12.09.2026:** właściciel ustalił 60 zł/dzień łącznie (31 / 14 / 6 / 3 / 6 zł), kampanie włączone na jego polecenie. Konto doładowane 12.09 (500 zł); Google wydaje w niektóre dni dwukrotność budżetu, więc 17.09 zostało ok. 140 zł. **Pilne: doładować albo włączyć płatności automatyczne kartą (Płatności → Ustawienia), inaczej reklamy staną 18 lub 19.09.** | Zmiana budżetu: jedno zdanie, wykonanie przez API. |
 | 11.5 | **Telefon w reklamach:** potwierdzić 62 741 32 27 i to, kto odbiera w godzinach 8:00 do 16:00. | Zasób połączenia liczy rozmowy powyżej 60 s jako konwersje. |
 | 11.6 | **Obrazy i logo:** wgrać pliki z `reklama/google-ads/obrazy/` (po weryfikacji z 11.2 Google pokaże w reklamach także nazwę i logo firmy); jeśli jest logo w wektorze (SVG/PDF), przekazać. | Obrazy podnoszą CTR; nazwa i logo firmy w reklamie wymagają weryfikacji. |
 | 11.7 | **Polityka prywatności:** przy najbliższej edycji dopisać, że do zgłoszenia dopisujemy źródło wejścia (parametry kampanii i identyfikator kliknięcia Google Ads), trzymane w `sessionStorage` na czas wizyty. | Nowe pole `zrodlo` w mailu z formularza (docs/ANALITYKA.md). |

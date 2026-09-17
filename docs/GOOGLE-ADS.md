@@ -5,7 +5,7 @@ Jedno źródło prawdy dla struktury i tekstów: `reklama/google-ads/kampania.py
 Google Ads Editor: `reklama/google-ads/import/`. Obrazy: `reklama/google-ads/obrazy/`.
 Katalog `reklama/` nie wchodzi do pakietu wdrożenia na serwer (`wdrozenie.yml` go nie kopiuje).
 
-## 0. Wgrane do konta 12 września 2026 (kampanie włączone, konto wstrzymane do weryfikacji)
+## 0. Wgrane do konta 12 września 2026 (wyświetlają się od 14 września)
 
 Kampanie utworzone przez API (Supermetrics: struktura, słowa, wykluczenia, reklamy, rozszerzenia;
 Windsor.ai: pułapy CPC, lokalizacje z mnożnikiem, zasób połączenia). Stara kampania
@@ -22,21 +22,21 @@ Windsor.ai: pułapy CPC, lokalizacje z mnożnikiem, zasób połączenia). Stara 
 Budżety po decyzji właściciela z 12.09.2026: 60 zł dziennie łącznie (pierwotna propozycja 105 zł,
 proporcje z punktu 6 zachowane). Kampanie włączone 12.09.2026 na polecenie właściciela; reklamy
 zatwierdzone przez Google tego samego dnia. Konto jest przedpłacone: środki skończyły się 25.08.2026,
-wpłata 500 zł z 12.09 jest zaksięgowana (saldo 464,80 zł). Wyświetlanie blokuje co innego: Google
-wstrzymał konto do czasu weryfikacji reklamodawcy (punkt 9, pozycja 2; przebieg w punkcie 11).
+wpłata 500 zł z 12.09 dała saldo 464,80 zł. Od 12.09 do 14.09 konto było wstrzymane do weryfikacji
+reklamodawcy; po jej przejściu kampanie wyświetlają się od 14.09 (liczby w punkcie 11).
 
 Wspólne dla wszystkich: sieć wyszukiwania bez partnerów i bez sieci reklamowej, język polski,
 lokalizacje wielkopolskie 20861, łódzkie 20850, kujawsko-pomorskie 20848, dolnośląskie 20847,
 śląskie 20859, mazowieckie 20853 (mnożnik 0,85), opcja „obecność”, Maksymalizacja kliknięć,
-134 wykluczenia wspólne (w Odwiertach, Dotacjach i Regionach dodatkowo „powietrzna”; w czterech
+140 wykluczeń wspólnych (w Odwiertach, Dotacjach i Regionach dodatkowo „powietrzna”; w czterech
 grupach kampanii Gruntowa na poziomie grupy), 8 linków do podstron, 10 objaśnień, rozszerzenie
 „Katalog usług” (w API nagłówek nazywa się „Service catalog”, Google wyświetla go po polsku),
 zasób połączenia 62 741 32 27, sufiks adresu z utm. Grupy reklam, reklamy i kampanie są włączone;
-dopóki konto jest wstrzymane (weryfikacja reklamodawcy), Google trzyma każdą kampanię w stanie
-„niekwalifikująca się”, a API tej blokady nie pokazuje (status konta w API: ENABLED).
+Uwaga na przyszłość: wstrzymanie konta (weryfikacja, brak środków) API pokazuje tylko jako powód
+„UNKNOWN” przy każdej kampanii, status konta w API zostaje ENABLED; prawdziwy powód widać w panelu.
 
-Do zrobienia ręcznie w panelu: weryfikacja reklamodawcy (punkt 9, pozycja 2), obrazy (punkt 5),
-konwersje (punkt 2). W Supermetrics ustawiono „Going live: wymaga zatwierdzenia człowieka”, więc
+Do zrobienia ręcznie w panelu: konwersje (punkt 2), obrazy (punkt 5), płatności automatyczne
+(punkt 9, pozycja 4). W Supermetrics ustawiono „Going live: wymaga zatwierdzenia człowieka”, więc
 każde włączenie przez API czeka na Twoje „tak”.
 
 ## 1. Co było w koncie przed zmianą
@@ -145,7 +145,7 @@ na powietrzne pompy. Pełna lista: `reklama/google-ads/import/03-slowa-kluczowe.
 
 ### Wykluczenia
 
-134 wykluczenia wspólne dla wszystkich kampanii, w sześciu grupach (inne typy urządzeń; informacje
+140 wykluczeń wspólnych dla wszystkich kampanii (134 z 12.09 i 6 dodanych 15.09 po pierwszych hasłach), w sześciu grupach (inne typy urządzeń; informacje
 i DIY; praca, serwis, części, używane; studnie i pompy do wody; miasta poza obszarem; producenci
 i konkurenci) plus „powietrzna” w kampaniach, które nie mają grupy porównawczej. Lista:
 `reklama/google-ads/import/04-wykluczenia.csv`. Zbudowana na raporcie haseł z sierpnia, więc
@@ -265,20 +265,14 @@ Szczegóły: `reklama/google-ads/README.md`.
 
 1. **Zrobione 12.09.2026:** zapis włączony w Supermetrics i Windsor, pięć kampanii wgranych
    i włączonych z budżetem 60 zł dziennie, stara kampania wstrzymana (punkt 0).
-2. **Weryfikacja reklamodawcy (blokuje wyświetlanie):** 12.09.2026 panel pokazuje „Konto wstrzymane.
-   Aby ponownie wyświetlać reklamy, musisz przejść weryfikację reklamodawcy” (przycisk „Zacznij tutaj”,
-   to samo w Administracja → Weryfikacja reklamodawcy). Google pyta, kogo reprezentuje konto
-   (organizację DEWAX Sp. z o.o., nie agencję), a potem prosi o dokument organizacji (odpis z KRS
-   albo potwierdzenie NIP/REGON) i dokument tożsamości osoby uprawnionej (dowód albo paszport).
-   Nazwa i adres w profilu płatności (Płatności → Ustawienia) muszą zgadzać się z dokumentem;
-   jeśli profil jest „osoba prywatna”, weryfikacja idzie na dane tej osoby. Google rozpatruje zwykle
-   w 1 do 3 dni roboczych; po zatwierdzeniu kampanie ruszają same, nic nie trzeba włączać.
-   Środki są: 464,80 zł po wpłacie 500 zł 12.09 (sierpień: 885,20 zł kosztu przy 850 zł wpłat,
-   stąd stop 25.08 i 35,20 zł potrącone z nowej wpłaty).
+2. **Weryfikacja reklamodawcy: zrobione 14.09.2026.** Od 12.09 do 14.09 konto było wstrzymane („Konto
+   wstrzymane. Aby ponownie wyświetlać reklamy, musisz przejść weryfikację reklamodawcy”); po weryfikacji
+   kampanie ruszyły same. Gdyby pasek wrócił: Administracja → Weryfikacja reklamodawcy.
 3. **Konwersje:** wykonać punkt 2 (połączenie GA4, zdarzenia kluczowe, import, połączenia z reklam).
 4. **Budżet i środki:** 60 zł dziennie (punkt 6), zmiana to jedno zdanie, wykonanie przez API.
-   Saldo 464,80 zł starczy na ok. 7 dni; żeby konto nie stanęło w środku dnia jak 25.08, włączyć
-   płatności automatyczne kartą (Płatności → Ustawienia) albo doładowywać ok. 1 800 zł na miesiąc.
+   Google może wydać w jednym dniu do dwukrotności budżetu (14.09 i 15.09 poszło po ok. 105 zł), więc
+   przedpłata 500 zł kończy się w 5 do 6 dni, nie w 8. Żeby konto nie stanęło w środku dnia jak 25.08,
+   włączyć płatności automatyczne kartą (Płatności → Ustawienia) albo doładowywać ok. 1 800 zł na miesiąc.
 5. **Telefon:** potwierdzić, że 62 741 32 27 ma być numerem w reklamach i że ktoś odbiera
    w godzinach 8:00 do 16:00 (reklamy z zasobem połączenia wyświetlają się także poza tymi
    godzinami; można ustawić harmonogram samego zasobu).
@@ -309,3 +303,6 @@ Szczegóły: `reklama/google-ads/README.md`.
 | 12.09.2026, 20:30 | Kontrola po doładowaniu: nadal zero wyświetleń. Przez API wszystko jest w porządku: konto ENABLED, grupy, reklamy i słowa „kwalifikujące się”, strategia w fazie uczenia, deklaracja reklam politycznych UE ustawiona, pułapy CPC i budżety zgodne z punktem 0. Każda kampania (także stara, wstrzymana) ma dodatkowy powód „niekwalifikująca się”, którego API nie nazywa: blokada na poziomie konta. |
 | 12.09.2026, 20:30, zrzut ekranu właściciela | Panel wyjaśnia blokadę: „Konto wstrzymane. Aby ponownie wyświetlać reklamy, musisz przejść weryfikację reklamodawcy”. Środki są zaksięgowane: wpłata 500 zł kartą 12.09, saldo 464,80 zł (sierpień: koszt 885,20 zł przy wpłatach 850 zł, więc 25.08 skończyły się pieniądze, a 35,20 zł potrącono z nowej wpłaty). Do zrobienia przez właściciela: weryfikacja (punkt 9, pozycja 2). Następna kontrola 13.09 ok. 13:00. |
 | 13.09.2026, 13:10 | Kontrola po 24 h: bez zmian. Zero wyświetleń, kampanie „niekwalifikujące się” z powodem na poziomie konta (weryfikacja reklamodawcy jeszcze niezaliczona), reklamy zatwierdzone, brak wyszukiwanych haseł. Następna kontrola 15.09 ok. 13:00, przegląd haseł 19.09. |
+| 14.09.2026 | Weryfikacja reklamodawcy przeszła, kampanie wyświetlają się od 14.09. Pierwszy dzień: 336 wyświetleń, 61 kliknięć, 106 zł (Google wydał dwukrotność budżetu dziennego, co jest dozwolone w rozliczeniu miesięcznym). |
+| 15.09.2026, 13:00 | Kontrola: 4 z 5 kampanii się wyświetlają (Regiony: 0 wyświetleń, frazy z miastami są za rzadkie). Pierwsze hasła: w Dotacjach dużo pytań o sam program Moje Ciepło (wniosek, warunki, gov), w Gruntowej marki obce (ecoforest, maxima, de dietrich) i zapytania „jak dziala”, „co to” bez polskich znaków (wykluczenia z polskimi znakami ich nie łapią). Dodano 6 wykluczeń wspólnych i 9 dla Dotacji (`kampania.py`; przez API do Gruntowej 15.09, do pozostałych 17.09 po przerwie sesji). |
+| 17.09.2026, 18:00 | Cztery dni wyświetlania (14 do 17.09): 1 825 wyświetleń, 259 kliknięć, 321 zł, średni klik 1,24 zł. Gruntowa: 830 / 164 / 184 zł (klik 1,12 zł, CTR 20 %); Odwierty: 370 / 40 / 86 zł (klik 2,16 zł); Dotacje: 588 / 47 / 37 zł (klik 0,78 zł); Marka: 33 / 8 / 14 zł; Regiony: 4 / 0 / 0. Udział w wyświetleniach 29 do 39 %, utracony przez budżet 61 do 71 % w trzech głównych kampaniach. Wydatek dzienny: 106, 103, 68, 44 zł (do 18:00). Szacowane saldo ok. 140 zł, wystarczy do 18 lub 19.09: właściciel poproszony o doładowanie albo płatności automatyczne. Konwersji nie mierzymy (brak połączenia GA4, punkt 2); zgłoszenia z formularza idą na sprzedaz@dewax.pl. Następna kontrola 18.09 17:00, przegląd haseł 19.09. |

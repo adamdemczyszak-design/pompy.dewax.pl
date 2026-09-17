@@ -582,7 +582,16 @@
     "powietrzna",
     "powietrznej",
     "powietrzne",
-    "powietrznych"
+    "powietrznych",
+    "wniosek",
+    "wnioski",
+    "gov",
+    "dokumenty",
+    "krok po kroku",
+    "do kiedy",
+    "warunki",
+    "dla kogo",
+    "regulamin"
    ],
    "grupy": [
     {
@@ -1190,7 +1199,8 @@
    "podgrzewacz",
    "grzałka",
    "hybrydowa",
-   "kocioł gazowy cena"
+   "kocioł gazowy cena",
+   "gwc"
   ],
   "informacje, DIY, schematy": [
    "schemat",
@@ -1210,7 +1220,9 @@
    "forum",
    "ranking",
    "pdf",
-   "test"
+   "test",
+   "jak dziala",
+   "co to"
   ],
   "praca, kursy, serwis, części": [
    "praca",
@@ -1316,7 +1328,10 @@
    "ciepłozziemi",
    "jurkowski",
    "sevro",
-   "pan studniarz"
+   "pan studniarz",
+   "ecoforest",
+   "maxima",
+   "de dietrich"
   ]
  },
  "linki": [
