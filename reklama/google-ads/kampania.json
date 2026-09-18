@@ -135,7 +135,7 @@
     {
      "id": "cena",
      "nazwa": "Cena i koszt",
-     "url": "https://pompy.dewax.pl/gruntowa-pompa-ciepla-cena.html",
+     "url": "https://pompy.dewax.pl/",
      "sciezki": [
       "gruntowa",
       "cena"
@@ -266,7 +266,7 @@
     {
      "id": "porownanie",
      "nazwa": "Gruntowa czy powietrzna",
-     "url": "https://pompy.dewax.pl/pompa-ciepla-czy-warto.html",
+     "url": "https://pompy.dewax.pl/",
      "sciezki": [
       "gruntowa",
       "czy-warto"
@@ -323,7 +323,7 @@
     {
      "id": "thermokrafft",
      "nazwa": "Pompy Thermokrafft R290",
-     "url": "https://pompy.dewax.pl/pompy.html",
+     "url": "https://pompy.dewax.pl/",
      "sciezki": [
       "pompy",
       "thermokrafft"
@@ -397,7 +397,7 @@
     {
      "id": "odwierty",
      "nazwa": "Odwierty pod pompę ciepła",
-     "url": "https://pompy.dewax.pl/odwierty-pod-pompe-ciepla.html",
+     "url": "https://pompy.dewax.pl/",
      "sciezki": [
       "odwierty",
       "pompa-ciepla"
@@ -465,7 +465,7 @@
     {
      "id": "dolne-zrodlo",
      "nazwa": "Dolne źródło",
-     "url": "https://pompy.dewax.pl/dolne-zrodlo-pompy-ciepla.html",
+     "url": "https://pompy.dewax.pl/",
      "sciezki": [
       "dolne-zrodlo",
       "pompa-ciepla"
@@ -523,7 +523,7 @@
     {
      "id": "helix",
      "nazwa": "Sondy koszowe Helix",
-     "url": "https://pompy.dewax.pl/sondy-koszowe-helix.html",
+     "url": "https://pompy.dewax.pl/",
      "sciezki": [
       "sondy-koszowe",
       "helix"
@@ -597,7 +597,7 @@
     {
      "id": "dotacje",
      "nazwa": "Dotacje na gruntową pompę",
-     "url": "https://pompy.dewax.pl/dotacje-pompa-ciepla.html",
+     "url": "https://pompy.dewax.pl/",
      "sciezki": [
       "dotacje",
       "pompa-ciepla"

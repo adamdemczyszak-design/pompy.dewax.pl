@@ -5,7 +5,7 @@ Jedno źródło prawdy dla struktury i tekstów: `reklama/google-ads/kampania.py
 Google Ads Editor: `reklama/google-ads/import/`. Obrazy: `reklama/google-ads/obrazy/`.
 Katalog `reklama/` nie wchodzi do pakietu wdrożenia na serwer (`wdrozenie.yml` go nie kopiuje).
 
-## 0. Wgrane do konta 12 września 2026 (wyświetlają się od 14 września)
+## 0. Wgrane do konta 12 września 2026 (od 18.09 wszystkie reklamy prowadzą na stronę główną)
 
 Kampanie utworzone przez API (Supermetrics: struktura, słowa, wykluczenia, reklamy, rozszerzenia;
 Windsor.ai: pułapy CPC, lokalizacje z mnożnikiem, zasób połączenia). Stara kampania
@@ -34,6 +34,12 @@ grupach kampanii Gruntowa na poziomie grupy), 8 linków do podstron, 10 objaśni
 zasób połączenia 62 741 32 27, sufiks adresu z utm. Grupy reklam, reklamy i kampanie są włączone;
 Uwaga na przyszłość: wstrzymanie konta (weryfikacja, brak środków) API pokazuje tylko jako powód
 „UNKNOWN” przy każdej kampanii, status konta w API zostaje ENABLED; prawdziwy powód widać w panelu.
+
+Od 18.09.2026 wszystkie reklamy prowadzą na stronę główną (kalkulator i formularz), bo podstrony
+poradnika bez formularza dały 0 zgłoszeń z 203 kliknięć (dziennik, 17.09). W 7 grupach powstały nowe
+reklamy z adresem strony głównej, stare są wstrzymane. Kampania Regiony wstrzymana. Gdy formularz na
+podstronach będzie wdrożony i zbierze zgłoszenia, można wrócić do podstron w grupach „Cena i koszt”,
+„Odwierty” i „Dotacje” (dawne adresy w komentarzach w `kampania.py`).
 
 Do zrobienia ręcznie w panelu: konwersje (punkt 2), obrazy (punkt 5), płatności automatyczne
 (punkt 9, pozycja 4). W Supermetrics ustawiono „Going live: wymaga zatwierdzenia człowieka”, więc
@@ -282,7 +288,10 @@ Szczegóły: `reklama/google-ads/README.md`.
    dopisujemy źródło wejścia (parametry kampanii i identyfikator kliknięcia Google Ads) oraz
    że przeglądarka trzyma je w `sessionStorage` na czas wizyty (`CONTENT_NEEDED.md`, punkt 10).
 8. **Włączenie:** zrobione 12.09.2026. Pierwsza kontrola wyświetleń 13.09, przegląd wyszukiwanych
-   haseł 19.09 (zaplanowane automatycznie); wyniki trafiają do punktu 11.
+   haseł 19.09 (zaplanowane automatycznie); wyniki trafiają do punktu 11. Od 21.09 co poniedziałek
+   o 7:30 raport dla właściciela (wydatki, kliknięcia, zgłoszenia z HubSpota per kanał, koszt zgłoszenia).
+9. **Formularz na podstronach:** dodany 18.09.2026 na 7 podstron poradnika i 6 stron wojewódzkich,
+   testy przeszły; scalenie na `main` (wdrożenie automatyczne) po słowie „wdróż” od właściciela.
 
 ## 10. Jak czytać wyniki
 
@@ -305,4 +314,6 @@ Szczegóły: `reklama/google-ads/README.md`.
 | 13.09.2026, 13:10 | Kontrola po 24 h: bez zmian. Zero wyświetleń, kampanie „niekwalifikujące się” z powodem na poziomie konta (weryfikacja reklamodawcy jeszcze niezaliczona), reklamy zatwierdzone, brak wyszukiwanych haseł. Następna kontrola 15.09 ok. 13:00, przegląd haseł 19.09. |
 | 14.09.2026 | Weryfikacja reklamodawcy przeszła, kampanie wyświetlają się od 14.09. Pierwszy dzień: 336 wyświetleń, 61 kliknięć, 106 zł (Google wydał dwukrotność budżetu dziennego, co jest dozwolone w rozliczeniu miesięcznym). |
 | 15.09.2026, 13:00 | Kontrola: 4 z 5 kampanii się wyświetlają (Regiony: 0 wyświetleń, frazy z miastami są za rzadkie). Pierwsze hasła: w Dotacjach dużo pytań o sam program Moje Ciepło (wniosek, warunki, gov), w Gruntowej marki obce (ecoforest, maxima, de dietrich) i zapytania „jak dziala”, „co to” bez polskich znaków (wykluczenia z polskimi znakami ich nie łapią). Dodano 6 wykluczeń wspólnych i 9 dla Dotacji (`kampania.py`; przez API do Gruntowej 15.09, do pozostałych 17.09 po przerwie sesji). |
-| 17.09.2026, 18:00 | Cztery dni wyświetlania (14 do 17.09): 1 825 wyświetleń, 259 kliknięć, 321 zł, średni klik 1,24 zł. Gruntowa: 830 / 164 / 184 zł (klik 1,12 zł, CTR 20 %); Odwierty: 370 / 40 / 86 zł (klik 2,16 zł); Dotacje: 588 / 47 / 37 zł (klik 0,78 zł); Marka: 33 / 8 / 14 zł; Regiony: 4 / 0 / 0. Udział w wyświetleniach 29 do 39 %, utracony przez budżet 61 do 71 % w trzech głównych kampaniach. Wydatek dzienny: 106, 103, 68, 44 zł (do 18:00). Szacowane saldo ok. 140 zł, wystarczy do 18 lub 19.09: właściciel poproszony o doładowanie albo płatności automatyczne. Konwersji nie mierzymy (brak połączenia GA4, punkt 2); zgłoszenia z formularza idą na sprzedaz@dewax.pl. Następna kontrola 18.09 17:00, przegląd haseł 19.09. |
+| 17.09.2026, 18:00 | Cztery dni wyświetlania (14 do 17.09): 1 825 wyświetleń, 259 kliknięć, 321 zł, średni klik 1,24 zł. Gruntowa: 830 / 164 / 184 zł (klik 1,12 zł, CTR 20 %); Odwierty: 370 / 40 / 86 zł (klik 2,16 zł); Dotacje: 588 / 47 / 37 zł (klik 0,78 zł); Marka: 33 / 8 / 14 zł; Regiony: 4 / 0 / 0. Udział w wyświetleniach 29 do 39 %, utracony przez budżet 61 do 71 % w trzech głównych kampaniach. Wydatek dzienny: 106, 103, 68, 44 zł (do 18:00). Szacowane saldo ok. 140 zł, wystarczy do 18 lub 19.09: właściciel poproszony o doładowanie albo płatności automatyczne. Konwersji nie mierzymy (brak połączenia GA4, punkt 2); zgłoszenia z formularza idą na sprzedaz@dewax.pl. |
+| 17.09.2026, wieczór | Właściciel pyta, gdzie poszły pieniądze. HubSpot (zbiera zgłoszenia z formularza na stronie): od 12.09 24 kontakty, w tym 17 zgłoszeń z kampanii Meta (293 zł, 620 kliknięć, 17 zł za zgłoszenie, 16 z reklamy „Kotłownia”) i 0 z Google (321 zł, 262 kliknięcia, 0 połączeń z reklam). 77 % kliknięć z Google (203, ok. 250 zł) lądowało na podstronach poradnika bez formularza; HubSpot: 93 % wyjść bez drugiej strony. Strona główna zamienia 2,7 % wizyt na zgłoszenie. Wniosek: błąd w miejscu lądowania, nie w słowach ani reklamach. Meta od 15.09 wieczorem bez zgłoszeń, wydatek spada (45, 24, 0 zł). Decyzja właściciela: Google na stronę główną, formularz na podstrony, restart, raport co poniedziałek, sprawdzić Metę. |
+| 18.09.2026, 6:30 | Wykonane: Gruntowa, Odwierty i Dotacje wstrzymane na czas zmian; w 7 grupach lądujących na podstronach nowe reklamy z adresem strony głównej (id 825121024738, 825121024990, 825121025200, 825079726932, 825205504283, 825121028629, 825079728423, ścieżki wyświetlane bez zmian), stare reklamy wstrzymane, kampanie włączone ponownie (nowe reklamy czekają na przegląd Google). Regiony zostają wstrzymane (4 wyświetlenia w 4 dni, strony wojewódzkie też bez formularza). Marka bez zmian. Formularz wyceny dodany na 13 podstron (gałąź robocza, testy 106/106). Rutyna „raport co poniedziałek” założona. Meta: integracja Meta Ads MCP nie obsługuje jeszcze konta 955522616312255, statusy do sprawdzenia przez Windsor. |

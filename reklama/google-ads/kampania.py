@@ -87,7 +87,7 @@ KAMPANIE = [
             {
                 'id': 'cena',
                 'nazwa': 'Cena i koszt',
-                'url': DOMENA + 'gruntowa-pompa-ciepla-cena.html',
+                'url': DOMENA,  # 18.09.2026: podstrona gruntowa-pompa-ciepla-cena.html bez formularza dała 0 zgłoszeń; teraz strona główna (kalkulator i formularz)
                 'sciezki': ('gruntowa', 'cena'),
                 'exact': ['gruntowa pompa ciepła cena', 'pompa ciepła gruntowa cena', 'ile kosztuje gruntowa pompa ciepła',
                           'koszt gruntowej pompy ciepła', 'pompa gruntowa cena', 'gruntowa pompa ciepła cena z montażem'],
@@ -132,7 +132,7 @@ KAMPANIE = [
             {
                 'id': 'porownanie',
                 'nazwa': 'Gruntowa czy powietrzna',
-                'url': DOMENA + 'pompa-ciepla-czy-warto.html',
+                'url': DOMENA,  # 18.09.2026: podstrona pompa-ciepla-czy-warto.html bez formularza dała 0 zgłoszeń; teraz strona główna (kalkulator i formularz)
                 'sciezki': ('gruntowa', 'czy-warto'),
                 'exact': ['pompa ciepła gruntowa czy powietrzna', 'gruntowa czy powietrzna pompa ciepła', 'pompa gruntowa czy powietrzna',
                           'gruntowa pompa ciepła czy warto'],
@@ -155,7 +155,7 @@ KAMPANIE = [
             {
                 'id': 'thermokrafft',
                 'nazwa': 'Pompy Thermokrafft R290',
-                'url': DOMENA + 'pompy.html',
+                'url': DOMENA,  # 18.09.2026: podstrona pompy.html bez formularza dała 0 zgłoszeń; teraz strona główna (kalkulator i formularz)
                 'sciezki': ('pompy', 'thermokrafft'),
                 'exact': ['thermokrafft', 'thermokrafft pompa ciepła', 'gruntowa pompa ciepła r290'],
                 'phrase': ['thermokrafft', 'thermokrafft pompa ciepła', 'pompa ciepła thermokrafft', 'gruntowa pompa ciepła r290',
@@ -185,7 +185,7 @@ KAMPANIE = [
             {
                 'id': 'odwierty',
                 'nazwa': 'Odwierty pod pompę ciepła',
-                'url': DOMENA + 'odwierty-pod-pompe-ciepla.html',
+                'url': DOMENA,  # 18.09.2026: podstrona odwierty-pod-pompe-ciepla.html bez formularza dała 0 zgłoszeń; teraz strona główna (kalkulator i formularz)
                 'sciezki': ('odwierty', 'pompa-ciepla'),
                 'exact': ['odwierty pod pompę ciepła', 'odwiert pod pompę ciepła', 'odwierty pod pompy ciepła', 'odwierty pod pompę ciepła cena',
                           'ile kosztuje odwiert pod pompę ciepła', 'wiercenie pod pompę ciepła'],
@@ -210,7 +210,7 @@ KAMPANIE = [
             {
                 'id': 'dolne-zrodlo',
                 'nazwa': 'Dolne źródło',
-                'url': DOMENA + 'dolne-zrodlo-pompy-ciepla.html',
+                'url': DOMENA,  # 18.09.2026: podstrona dolne-zrodlo-pompy-ciepla.html bez formularza dała 0 zgłoszeń; teraz strona główna (kalkulator i formularz)
                 'sciezki': ('dolne-zrodlo', 'pompa-ciepla'),
                 'exact': ['dolne źródło pompy ciepła', 'dolne źródło pompa ciepła', 'pompa ciepła dolne źródło'],
                 'phrase': ['dolne źródło pompy ciepła', 'dolne źródło pompa ciepła', 'dolne źródło ciepła', 'pompa ciepła dolne źródło',
@@ -231,7 +231,7 @@ KAMPANIE = [
             {
                 'id': 'helix',
                 'nazwa': 'Sondy koszowe Helix',
-                'url': DOMENA + 'sondy-koszowe-helix.html',
+                'url': DOMENA,  # 18.09.2026: podstrona sondy-koszowe-helix.html bez formularza dała 0 zgłoszeń; teraz strona główna (kalkulator i formularz)
                 'sciezki': ('sondy-koszowe', 'helix'),
                 'exact': ['sondy koszowe', 'sonda koszowa pompa ciepła'],
                 'phrase': ['sondy koszowe', 'sonda koszowa', 'sondy koszowe pompa ciepła', 'sonda koszowa pompa ciepła', 'sondy spiralne pompa ciepła',
@@ -260,7 +260,7 @@ KAMPANIE = [
             {
                 'id': 'dotacje',
                 'nazwa': 'Dotacje na gruntową pompę',
-                'url': DOMENA + 'dotacje-pompa-ciepla.html',
+                'url': DOMENA,  # 18.09.2026: podstrona dotacje-pompa-ciepla.html bez formularza dała 0 zgłoszeń; teraz strona główna (kalkulator i formularz)
                 'sciezki': ('dotacje', 'pompa-ciepla'),
                 'exact': ['dotacja gruntowa pompa ciepła', 'dofinansowanie gruntowa pompa ciepła', 'moje ciepło pompa ciepła',
                           'dotacja na gruntową pompę ciepła'],

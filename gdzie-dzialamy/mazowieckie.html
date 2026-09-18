@@ -123,7 +123,7 @@ fbq('track', 'PageView');
       <aside class="geo-box" aria-label="Kontakt">
         <h3>Umów oględziny w województwie mazowieckim</h3>
         <div class="tel-box" style="margin-top:6px"><div class="t"><a href="tel:+48627413227" data-miejsce="woj-mazowieckie">62 741 32 27</a></div><div class="s">Pon.–pt. 8:00–16:00 · <a href="mailto:sprzedaz@dewax.pl">sprzedaz@dewax.pl</a></div><div class="f">DEWAX Sp. z o.o. · ul. Ostrowska 1, 63-330 Dobrzyca<br>KRS 0000298299 · NIP 6080071501</div></div>
-        <p style="margin-top:14px"><a class="btn b-pri" href="../index.html#kontakt">Napisz przez formularz</a></p>
+        <p style="margin-top:14px"><a class="btn b-pri" href="#kontakt">Napisz przez formularz</a></p>
         <p class="geo-cave" style="margin-top:14px"><b>Co dostaniesz.</b> Widełki ceny i wstępną liczbę metrów w jeden dzień roboczy, termin oględzin, a po nich ofertę z osobnymi pozycjami. Telefon nie jest wymagany.</p>
       </aside>
     </div>
@@ -140,6 +140,56 @@ fbq('track', 'PageView');
 </section>
 </main>
 
+<section id="kontakt" aria-labelledby="h-kontakt">
+  <div class="wrap">
+    <div class="kontakt-grid">
+      <div>
+        <p class="eyebrow">Dokładna wycena</p>
+        <h2 id="h-kontakt" class="head">Poproś o dokładną wycenę i termin oględzin</h2>
+        <p class="lead">Napisz, co budujesz albo modernizujesz, a dostaniesz widełki ceny i wstępną liczbę metrów odwiertu, bez zobowiązań. Dokładny projekt powstaje po obejrzeniu działki: wjazd wiertnicy, miejsce na otwory i trasa rur nie dają się wyssać z formularza.</p>
+        <div class="both"><p>Masz już wstępny koszt i informacje geologiczne.<span>To dobry moment na dokładną ofertę i termin oględzin.</span></p></div>
+        <ol class="co-dalej">
+          <li><div><b>Odpisujemy w jeden dzień roboczy</b>, na podany e-mail.</div></li>
+          <li><div><b>Liczymy i sprawdzamy:</b> zapotrzebowanie domu, wstępną długość źródła, geologię w bazie PIG-PIB.</div></li>
+          <li><div><b>Umawiamy oględziny</b>, jeśli liczby Ci pasują. Po nich dostajesz ofertę z osobnymi pozycjami.</div></li>
+        </ol>
+        <div class="tel-box">
+          <div class="t"><a href="tel:+48627413227" data-miejsce="kontakt">62 741 32 27</a></div>
+          <div class="s">Pon.–pt. 8:00–16:00 · <a href="mailto:sprzedaz@dewax.pl">sprzedaz@dewax.pl</a></div>
+          <div class="f">DEWAX Sp. z o.o. · ul. Ostrowska 1, 63-330 Dobrzyca<br>KRS 0000298299 · NIP 6080071501 · REGON 300706044</div>
+        </div>
+      </div>
+
+      <form class="zap" name="wycena" method="POST" action="../wyslij.php" novalidate>
+        <p class="hp" aria-hidden="true"><label for="bf">Nie wypełniaj tego pola</label><input id="bf" name="bot-field" tabindex="-1" autocomplete="off"></p>
+        <input type="hidden" name="czas" value="0" id="fczas">
+        <h3>Zamów dokładną wycenę</h3>
+        <p class="intro">Trzy pola obowiązkowe. Resztę wypełnij, jeśli chcesz dokładniejszą odpowiedź. Jeśli liczyłeś koszt na stronie głównej, wynik dopisze się sam.</p>
+        <div class="g2">
+          <div class="row"><label class="et" for="f-imie"><span>Imię</span></label><input id="f-imie" name="imie" type="text" required autocomplete="given-name" aria-describedby="e-imie"><p class="err" id="e-imie" role="alert"></p></div>
+          <div class="row"><label class="et" for="f-email"><span>E-mail</span></label><input id="f-email" name="email" type="email" required autocomplete="email" inputmode="email" aria-describedby="e-email"><p class="err" id="e-email" role="alert"></p></div>
+        </div>
+        <div class="g2">
+          <div class="row"><label class="et" for="f-miejscowosc"><span>Miejscowość inwestycji</span></label><input id="f-miejscowosc" name="miejscowosc" type="text" required autocomplete="address-level2" aria-describedby="e-miejscowosc"><p class="err" id="e-miejscowosc" role="alert"></p></div>
+          <div class="row"><label class="et" for="f-metraz"><span>Metraż domu w m²</span><span class="opt">opcjonalnie</span></label><input id="f-metraz" name="metraz" type="number" inputmode="numeric" min="20" max="2000" autocomplete="off" aria-describedby="e-metraz"><p class="err" id="e-metraz" role="alert"></p></div>
+        </div>
+        <div class="row"><label class="et" for="f-telefon"><span>Telefon, jeśli wolisz rozmowę</span><span class="opt">opcjonalnie</span></label><input id="f-telefon" name="telefon" type="tel" autocomplete="tel" inputmode="tel"></div>
+        <div class="row"><label class="et" for="f-wiadomosc"><span>Dwa słowa o domu</span><span class="opt">opcjonalnie</span></label><textarea id="f-wiadomosc" name="wiadomosc" rows="3" placeholder="nowy czy stary, podłogówka czy grzejniki, czym grzejesz dziś"></textarea></div>
+        <div class="zgoda">
+          <input type="checkbox" id="zg-dane" name="zgoda_dane" value="tak" required>
+          <label for="zg-dane"><b>Zgadzam się na kontakt w sprawie tego zapytania.</b> DEWAX Sp. z o.o. użyje moich danych, żeby przygotować wycenę i odpowiedzieć.</label>
+        </div>
+        <div class="zgoda">
+          <input type="checkbox" id="zg-tel" name="zgoda_telefon" value="tak">
+          <label for="zg-tel">Możecie do mnie zadzwonić, jeśli łatwiej wyjaśnić to przez telefon. <b>Nieobowiązkowe.</b></label>
+        </div>
+        <button class="btn b-pri b-lg b-wide" type="submit">Wyślij zapytanie</button>
+        <p class="status" aria-live="polite"></p>
+        <p class="fine">Administratorem danych jest DEWAX Sp. z o.o., ul. Ostrowska 1, 63-330 Dobrzyca. Użyjemy ich wyłącznie do przygotowania wyceny i kontaktu w tej sprawie, nie przekazujemy ich nikomu i nie zapisujemy na listę mailingową. Zgodę możesz wycofać w każdej chwili, masz też prawo wglądu do danych, ich sprostowania i usunięcia. Szczegóły w <a href="/polityka-prywatnosci.html">polityce prywatności</a>.</p>
+      </form>
+    </div>
+  </div>
+</section>
 <footer class="ft"><div class="wrap">
   <div class="cols">
     <div><img src="../img/logo-biale.png" alt="DEWAX Sp. z o.o." loading="lazy" width="300" height="84" style="height:32px;width:auto;margin-bottom:14px"><p style="max-width:40ch;margin-bottom:12px">Ciepły dom i ciepła woda z gruntu pod Twoją działką, na jednej umowie: projekt, odwiert, montaż, serwis. Od 2007 roku w Dobrzycy.</p><p class="small">DEWAX Sp. z o.o. · ul. Ostrowska 1, 63-330 Dobrzyca<br>Sąd Rejonowy Poznań – Nowe Miasto i Wilda w Poznaniu, IX Wydział Gospodarczy KRS<br>KRS 0000298299 · NIP 6080071501 · REGON 300706044 · Kapitał zakładowy: 50 000,00 zł</p></div>
