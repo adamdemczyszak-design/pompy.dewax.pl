@@ -26,6 +26,7 @@ DEWAX | Gruntowa pompa ciepła,Gruntowa ogólnie,pompa ciepła z odwiertami,Phra
 DEWAX | Gruntowa pompa ciepła,Gruntowa ogólnie,ogrzewanie gruntowe domu,Phrase,Enabled
 DEWAX | Gruntowa pompa ciepła,Gruntowa ogólnie,pompa ciepła z gruntu,Phrase,Enabled
 DEWAX | Gruntowa pompa ciepła,Gruntowa ogólnie,ogrzewanie głębinowe,Phrase,Enabled
+DEWAX | Gruntowa pompa ciepła,Gruntowa ogólnie,pionowa pompa ciepła,Phrase,Enabled
 DEWAX | Gruntowa pompa ciepła,Cena i koszt,gruntowa pompa ciepła cena,Exact,Enabled
 DEWAX | Gruntowa pompa ciepła,Cena i koszt,pompa ciepła gruntowa cena,Exact,Enabled
 DEWAX | Gruntowa pompa ciepła,Cena i koszt,ile kosztuje gruntowa pompa ciepła,Exact,Enabled
@@ -55,6 +56,8 @@ DEWAX | Gruntowa pompa ciepła,Cena i koszt,koszt montażu gruntowej pompy ciep�
 DEWAX | Gruntowa pompa ciepła,Cena i koszt,pompa ciepła z odwiertami cena,Phrase,Enabled
 DEWAX | Gruntowa pompa ciepła,Cena i koszt,pompa ciepła z odwiertem cena,Phrase,Enabled
 DEWAX | Gruntowa pompa ciepła,Cena i koszt,ile kosztuje pompa ciepła z odwiertem,Phrase,Enabled
+DEWAX | Gruntowa pompa ciepła,Cena i koszt,ile kosztuje założenie pompy ciepła,Phrase,Enabled
+DEWAX | Gruntowa pompa ciepła,Cena i koszt,koszt założenia pompy ciepła,Phrase,Enabled
 DEWAX | Gruntowa pompa ciepła,Montaż i wykonawca,montaż gruntowej pompy ciepła,Exact,Enabled
 DEWAX | Gruntowa pompa ciepła,Montaż i wykonawca,gruntowa pompa ciepła z montażem,Exact,Enabled
 DEWAX | Gruntowa pompa ciepła,Montaż i wykonawca,montaż pompy ciepła gruntowej,Exact,Enabled
@@ -142,6 +145,9 @@ DEWAX | Odwierty i dolne źródło,Odwierty pod pompę ciepła,projekt geologicz
 DEWAX | Odwierty i dolne źródło,Odwierty pod pompę ciepła,odwierty do pomp ciepła cennik,Phrase,Enabled
 DEWAX | Odwierty i dolne źródło,Odwierty pod pompę ciepła,pompa ciepła odwierty cena,Phrase,Enabled
 DEWAX | Odwierty i dolne źródło,Odwierty pod pompę ciepła,odwiert pionowy pompa ciepła,Phrase,Enabled
+DEWAX | Odwierty i dolne źródło,Odwierty pod pompę ciepła,cena odwiertów pod pompy ciepła,Phrase,Enabled
+DEWAX | Odwierty i dolne źródło,Odwierty pod pompę ciepła,koszt odwiertów pod pompy ciepła,Phrase,Enabled
+DEWAX | Odwierty i dolne źródło,Odwierty pod pompę ciepła,odwierty pod pompy ciepła cena,Phrase,Enabled
 DEWAX | Odwierty i dolne źródło,Dolne źródło,dolne źródło pompy ciepła,Exact,Enabled
 DEWAX | Odwierty i dolne źródło,Dolne źródło,dolne źródło pompa ciepła,Exact,Enabled
 DEWAX | Odwierty i dolne źródło,Dolne źródło,pompa ciepła dolne źródło,Exact,Enabled
@@ -163,6 +169,7 @@ DEWAX | Odwierty i dolne źródło,Dolne źródło,pompa ciepła ze studni,Phras
 DEWAX | Odwierty i dolne źródło,Dolne źródło,kolektor pionowy pompa ciepła,Phrase,Enabled
 DEWAX | Odwierty i dolne źródło,Dolne źródło,sondy gruntowe pompa ciepła,Phrase,Enabled
 DEWAX | Odwierty i dolne źródło,Dolne źródło,pompa ciepła z wymiennikiem gruntowym,Phrase,Enabled
+DEWAX | Odwierty i dolne źródło,Dolne źródło,pompa ciepła z wody gruntowej,Phrase,Enabled
 DEWAX | Odwierty i dolne źródło,Sondy koszowe Helix,sondy koszowe,Exact,Enabled
 DEWAX | Odwierty i dolne źródło,Sondy koszowe Helix,sonda koszowa pompa ciepła,Exact,Enabled
 DEWAX | Odwierty i dolne źródło,Sondy koszowe Helix,sondy koszowe,Phrase,Enabled

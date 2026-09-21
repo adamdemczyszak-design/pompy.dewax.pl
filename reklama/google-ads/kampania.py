@@ -74,7 +74,9 @@ KAMPANIE = [
                            'pompa ciepła głębinowa', 'głębinowa pompa ciepła', 'pompa ciepła ziemna', 'ziemna pompa ciepła',
                            'pompa ciepła geotermalna', 'geotermalna pompa ciepła', 'pompa ciepła z ziemi', 'ogrzewanie z ziemi',
                            'pompa ciepła solanka woda', 'pompa ciepła glikol woda', 'pompa ciepła z odwiertem', 'pompa ciepła z odwiertami',
-                           'ogrzewanie gruntowe domu', 'pompa ciepła z gruntu', 'ogrzewanie głębinowe'],
+                           'ogrzewanie gruntowe domu', 'pompa ciepła z gruntu', 'ogrzewanie głębinowe',
+                           # 19.09.2026: z raportu haseł (kliknięcia bez słowa kluczowego)
+                           'pionowa pompa ciepła'],
                 'naglowki': ['Gruntowa pompa ciepła', H['policz'], H['umowa'], H['wiertnica'], 'Ciepły dom bez gazu i węgla',
                              'Bez jednostki zewnętrznej', 'Chłodzenie latem z gruntu', H['dewax'], H['geo'], H['telefon'],
                              H['woj'], H['protokol'], 'Jedna firma za cały system', 'Ile kosztuje u Ciebie?', 'Pompa ciepła z odwiertem'],
@@ -97,7 +99,9 @@ KAMPANIE = [
                            'cena gruntowej pompy ciepła', 'gruntowe pompy ciepła cena', 'pompa ciepła głębinowa cena', 'ile kosztuje pompa ciepła głębinowa',
                            'ile kosztuje pompa gruntowa', 'pompa ciepła gruntowa koszt instalacji', 'gruntowa pompa ciepła koszty eksploatacji',
                            'ile prądu zużywa gruntowa pompa ciepła', 'koszt montażu gruntowej pompy ciepła', 'pompa ciepła z odwiertami cena',
-                           'pompa ciepła z odwiertem cena', 'ile kosztuje pompa ciepła z odwiertem'],
+                           'pompa ciepła z odwiertem cena', 'ile kosztuje pompa ciepła z odwiertem',
+                           # 19.09.2026: z raportu haseł (kliknięcia bez słowa kluczowego)
+                           'ile kosztuje założenie pompy ciepła', 'koszt założenia pompy ciepła'],
                 'naglowki': ['Gruntowa pompa ciepła: cena', 'Thermokrafft od 23 990 zł', 'Odwiert 130 do 145 zł/m netto', 'Dom 150 m²: 51 do 55 tys. zł',
                              H['policz'], 'Cena z odwiertem i montażem', 'Trudny grunt: zapis w umowie', 'Oferta pozycja po pozycji',
                              'Ile prądu zużyje pompa', 'Wycena po oględzinach działki', 'VAT 8% z montażem w domu', H['odpowiedz'],
@@ -196,7 +200,9 @@ KAMPANIE = [
                            'wiercenie odwiertów pod pompy ciepła', 'odwierty pionowe pod pompy ciepła', 'odwierty pod gruntową pompę ciepła',
                            'głębokość odwiertu pod pompę ciepła', 'jak głęboko wiercić pod pompę ciepła', 'odwierty geotermalne pod pompę ciepła',
                            'firma wiertnicza pompy ciepła', 'projekt geologiczny pod pompę ciepła', 'odwierty do pomp ciepła cennik',
-                           'pompa ciepła odwierty cena', 'odwiert pionowy pompa ciepła'],
+                           'pompa ciepła odwierty cena', 'odwiert pionowy pompa ciepła',
+                           # 19.09.2026: z raportu haseł (kliknięcia bez słowa kluczowego)
+                           'cena odwiertów pod pompy ciepła', 'koszt odwiertów pod pompy ciepła', 'odwierty pod pompy ciepła cena'],
                 'naglowki': ['Odwierty pod pompę ciepła', 'Własna wiertnica, własna ekipa', '130 do 145 zł za metr netto', 'Ile metrów potrzebuje dom',
                              'Dzień wiercenia krok po kroku', 'Do 100 m na otwór', H['protokol'], 'Co zostaje na działce',
                              'Odwiert przy gotowym domu', 'Płuczka albo młotek', 'Formalności robimy my', H['umowa'],
@@ -217,7 +223,9 @@ KAMPANIE = [
                            'dolne źródło gruntowe', 'wykonanie dolnego źródła', 'sondy pionowe pompa ciepła', 'sonda pionowa pompa ciepła',
                            'kolektor poziomy pompa ciepła', 'pompa ciepła z kolektorem poziomym', 'gruntowa pompa ciepła pozioma',
                            'pompa ciepła gruntowa pozioma', 'wymiennik gruntowy pompa ciepła', 'pompa ciepła woda woda', 'pompa ciepła ze studni',
-                           'kolektor pionowy pompa ciepła', 'sondy gruntowe pompa ciepła', 'pompa ciepła z wymiennikiem gruntowym'],
+                           'kolektor pionowy pompa ciepła', 'sondy gruntowe pompa ciepła', 'pompa ciepła z wymiennikiem gruntowym',
+                           # 19.09.2026: z raportu haseł (kliknięcia bez słowa kluczowego)
+                           'pompa ciepła z wody gruntowej'],
                 'naglowki': ['Dolne źródło pompy ciepła', '4 technologie, 1 wykonawca', 'Odwiert, Helix, kolektor, woda', 'Długość źródła z geologii',
                              'Za krótkie źródło psuje system', 'Sondy koszowe DEWAX Helix', 'Kolektor poziomy albo pionowy', 'Układy woda-woda',
                              'Próba szczelności z protokołem', H['wiertnica'], 'Policz metry w 2 minuty', H['umowa'], H['dewax'],
@@ -255,7 +263,10 @@ KAMPANIE = [
         'pulap_cpc': 4.0,
         'wykluczenia_kampanii_dodatkowe': ['powietrzna', 'powietrznej', 'powietrzne', 'powietrznych',
                                             # 15.09.2026: hasła o samym programie Moje Ciepło (wniosek, warunki), nie o zakupie pompy
-                                            'wniosek', 'wnioski', 'gov', 'dokumenty', 'krok po kroku', 'do kiedy', 'warunki', 'dla kogo', 'regulamin'],
+                                            'wniosek', 'wnioski', 'gov', 'dokumenty', 'krok po kroku', 'do kiedy', 'warunki', 'dla kogo', 'regulamin',
+                                            # 19.09.2026: pytania o sam program (nabór, formularz), nie o pompę
+                                            'program', 'przedłużony', 'przedluzony', 'koszt kwalifikowany', 'jakie ep', 'jak złożyć', 'jak zlozyc',
+                                            'jak wypełnić', 'jak wypelnic', 'wymogi', '2027', 'zwrot za'],
         'grupy': [
             {
                 'id': 'dotacje',
@@ -377,10 +388,12 @@ for _k in KAMPANIE:
 # wyszukiwanych haseł z kampanii z sierpnia 2026 (595 haseł) i na ofercie DEWAX (tylko gruntowe).
 WYKLUCZENIA_WSPOLNE = {
     'inne typy pomp i urządzeń': ['powietrze woda', 'powietrze powietrze', 'monoblok', 'split', 'klimatyzacja', 'klimatyzator', 'klimatyzatory',
-                                  'basen', 'basenowa', 'basenowe', 'do cwu', 'cwu', 'bojler', 'podgrzewacz', 'grzałka', 'hybrydowa', 'kocioł gazowy cena', 'gwc'],
+                                  'basen', 'basenowa', 'basenowe', 'do cwu', 'cwu', 'bojler', 'podgrzewacz', 'grzałka', 'hybrydowa', 'kocioł gazowy cena', 'gwc', 'rekuperacja', 'rekuperacji'],
     'informacje, DIY, schematy': ['schemat', 'schematy', 'instrukcja', 'jak podłączyć', 'podłączenie', 'sterownik', 'samodzielny montaż', 'zrób sam',
                                   'jak działa', 'zasada działania', 'na czym polega', 'co to jest', 'definicja', 'wikipedia', 'forum', 'ranking',
-                                  'pdf', 'test', 'jak dziala', 'co to'],
+                                  'pdf', 'test', 'jak dziala', 'co to',
+                                   # 19.09.2026: z raportu haseł
+                                   'zrób to sam', 'diy', 'rodzaje', 'jak wygląda', 'jak wyglada', 'na jakiej zasadzie'],  # bez „wady i zalety”: to słowo kluczowe grupy Gruntowa czy powietrzna
     'praca, kursy, serwis, części': ['praca', 'zatrudnię', 'zatrudnimy', 'kurs', 'szkolenie', 'uprawnienia', 'serwis', 'naprawa', 'awaria', 'błąd',
                                      'kod błędu', 'usterka', 'części', 'część', 'sprężarka', 'używana', 'używane', 'używany', 'olx', 'allegro',
                                      'sprzedam', 'najtańsza', 'najtańsze', 'tania', 'tanie', 'chińska', 'przemysłowa', 'przemysłowe', 'hala'],
@@ -391,7 +404,7 @@ WYKLUCZENIA_WSPOLNE = {
     'producenci i konkurenci (DEWAX montuje Thermokrafft i Buderus)': ['nibe', 'vaillant', 'viessmann', 'daikin', 'stiebel', 'stiebel eltron', 'thermia',
                       'galmet', 'gejzer', 'dimplex', 'ctc', 'mitsubishi', 'panasonic', 'bosch', 'kaisai', 'haier', 'york', 'qvantum', 'apic', 'a-pic',
                       'konceptus', 'vitocal', 'altherma', 'calibra', 'geodan', 'flexotherm', 'flexocompact', 'wolf', 'samsung', 'gree', 'midea',
-                      'hewalex', 'ciepłozziemi', 'jurkowski', 'sevro', 'pan studniarz', 'ecoforest', 'maxima', 'de dietrich'],
+                      'hewalex', 'ciepłozziemi', 'jurkowski', 'sevro', 'pan studniarz', 'ecoforest', 'maxima', 'de dietrich', 'alpha innotec', 'geo wir', 'geowir'],
 }
 
 # Zasoby (rozszerzenia) na poziomie kampanii, te same we wszystkich kampaniach.

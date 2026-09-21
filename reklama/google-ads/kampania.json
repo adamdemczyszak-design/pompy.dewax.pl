@@ -100,7 +100,8 @@
       "pompa ciepła z odwiertami",
       "ogrzewanie gruntowe domu",
       "pompa ciepła z gruntu",
-      "ogrzewanie głębinowe"
+      "ogrzewanie głębinowe",
+      "pionowa pompa ciepła"
      ],
      "naglowki": [
       "Gruntowa pompa ciepła",
@@ -171,7 +172,9 @@
       "koszt montażu gruntowej pompy ciepła",
       "pompa ciepła z odwiertami cena",
       "pompa ciepła z odwiertem cena",
-      "ile kosztuje pompa ciepła z odwiertem"
+      "ile kosztuje pompa ciepła z odwiertem",
+      "ile kosztuje założenie pompy ciepła",
+      "koszt założenia pompy ciepła"
      ],
      "naglowki": [
       "Gruntowa pompa ciepła: cena",
@@ -435,7 +438,10 @@
       "projekt geologiczny pod pompę ciepła",
       "odwierty do pomp ciepła cennik",
       "pompa ciepła odwierty cena",
-      "odwiert pionowy pompa ciepła"
+      "odwiert pionowy pompa ciepła",
+      "cena odwiertów pod pompy ciepła",
+      "koszt odwiertów pod pompy ciepła",
+      "odwierty pod pompy ciepła cena"
      ],
      "naglowki": [
       "Odwierty pod pompę ciepła",
@@ -493,7 +499,8 @@
       "pompa ciepła ze studni",
       "kolektor pionowy pompa ciepła",
       "sondy gruntowe pompa ciepła",
-      "pompa ciepła z wymiennikiem gruntowym"
+      "pompa ciepła z wymiennikiem gruntowym",
+      "pompa ciepła z wody gruntowej"
      ],
      "naglowki": [
       "Dolne źródło pompy ciepła",
@@ -591,7 +598,19 @@
     "do kiedy",
     "warunki",
     "dla kogo",
-    "regulamin"
+    "regulamin",
+    "program",
+    "przedłużony",
+    "przedluzony",
+    "koszt kwalifikowany",
+    "jakie ep",
+    "jak złożyć",
+    "jak zlozyc",
+    "jak wypełnić",
+    "jak wypelnic",
+    "wymogi",
+    "2027",
+    "zwrot za"
    ],
    "grupy": [
     {
@@ -1200,7 +1219,9 @@
    "grzałka",
    "hybrydowa",
    "kocioł gazowy cena",
-   "gwc"
+   "gwc",
+   "rekuperacja",
+   "rekuperacji"
   ],
   "informacje, DIY, schematy": [
    "schemat",
@@ -1222,7 +1243,13 @@
    "pdf",
    "test",
    "jak dziala",
-   "co to"
+   "co to",
+   "zrób to sam",
+   "diy",
+   "rodzaje",
+   "jak wygląda",
+   "jak wyglada",
+   "na jakiej zasadzie"
   ],
   "praca, kursy, serwis, części": [
    "praca",
@@ -1331,7 +1358,10 @@
    "pan studniarz",
    "ecoforest",
    "maxima",
-   "de dietrich"
+   "de dietrich",
+   "alpha innotec",
+   "geo wir",
+   "geowir"
   ]
  },
  "linki": [
