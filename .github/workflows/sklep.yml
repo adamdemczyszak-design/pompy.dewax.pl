@@ -4,14 +4,22 @@ name: Sklep (sklep.dewax.pl) - narzedzia FTP
 #   tryb=listuj  - tylko wypisuje zawartosc podanego katalogu (nic nie zmienia)
 #   tryb=wgraj   - wgrywa polskie tlumaczenie WooCommerce (sklep-tlumaczenia/woocommerce-pl_PL.mo)
 #                  do /wp-content/languages/plugins/ (plik mozna usunac, zeby cofnac)
+#   tryb=kosz    - przenosi JEDEN produkt (produkt_id, kontrola nazwy produkt_nazwa) do kosza WooCommerce
+#                  jednorazowym skryptem z tokenem (wgrany, uruchomiony, usuniety). Kosz = odwracalne (panel: Produkty -> Kosz).
 on:
   workflow_dispatch:
     inputs:
       tryb:
-        description: 'listuj albo wgraj'
+        description: 'listuj, wgraj albo kosz'
         type: choice
-        options: [listuj, wgraj]
+        options: [listuj, wgraj, kosz]
         default: listuj
+      produkt_id:
+        description: 'ID produktu do kosza (tryb kosz)'
+        default: ''
+      produkt_nazwa:
+        description: 'fragment nazwy produktu, musi pasowac (tryb kosz)'
+        default: ''
       sciezka:
         description: 'katalog do wypisania (tryb listuj)'
         default: '/migracja/ftp.d1063384-23091.wuti.pl/webspace/httpdocs/sklep.dewax.pl/'
@@ -65,3 +73,36 @@ jobs:
           LFTP
           sleep 3
           curl -s "https://sklep.dewax.pl/produkt/zestaw-dekoracyjny-multilan-na-ok-10-m%c2%b2/" | grep -o -i "Dodaj do koszyka\|Add to cart" | head -1
+      - name: Kosz produktu
+        if: ${{ inputs.tryb == 'kosz' }}
+        env:
+          FTP_HOST: ${{ secrets.FTP_HOST }}
+          FTP_LOGIN: ${{ secrets.FTP_LOGIN }}
+          LFTP_PASSWORD: ${{ secrets.FTP_HASLO }}
+          BAZA: ${{ inputs.baza }}
+          PID: ${{ inputs.produkt_id }}
+          PNAZWA: ${{ inputs.produkt_nazwa }}
+        run: |
+          set -eu
+          [ -n "$PID" ] && [ -n "$PNAZWA" ] || { echo "::error::podaj produkt_id i produkt_nazwa"; exit 1; }
+          TOKEN=$(head -c 48 /dev/urandom | base64 | tr -dc 'a-zA-Z0-9' | head -c 40)
+          sed -e "s|%%TOKEN%%|$TOKEN|" -e "s|%%ID%%|$PID|" -e "s|%%NAZWA%%|$PNAZWA|" sklep-tlumaczenia/dewax-kosz-produktu.php > dewax-kosz-produktu.php
+          lftp --env-password -u "$FTP_LOGIN" "ftp://$FTP_HOST" <<LFTP
+          set ssl:verify-certificate no
+          set ftp:ssl-allow yes
+          set net:timeout 25
+          put -O ${BAZA%/}/wp-content/mu-plugins dewax-kosz-produktu.php
+          bye
+          LFTP
+          sleep 2
+          echo "uruchamiam (produkt $PID, nazwa zawiera: $PNAZWA)"
+          curl -s --max-time 60 "https://sklep.dewax.pl/?dewax-kosz=$TOKEN" | tee wynik.json; echo
+          lftp --env-password -u "$FTP_LOGIN" "ftp://$FTP_HOST" <<LFTP
+          set ssl:verify-certificate no
+          set ftp:ssl-allow yes
+          rm ${BAZA%/}/wp-content/mu-plugins/dewax-kosz-produktu.php
+          cls -l ${BAZA%/}/wp-content/mu-plugins/
+          bye
+          LFTP
+          curl -s -o /dev/null -w "skrypt po usunieciu: %{http_code} (403 lub 200 bez zmian = plik usuniety)\n" "https://sklep.dewax.pl/?dewax-kosz=$TOKEN"
+          grep -q '"ok":true' wynik.json || { echo "::error::produkt NIE zostal przeniesiony do kosza"; exit 1; }
